@@ -1,0 +1,193 @@
+---
+import "../styles/global.css";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  pathname?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+}
+
+const {
+  title = site.name,
+  description = site.description,
+  pathname = "/",
+  ogImage = "/assets/images/Erasmusbrug_zwart.jpg",
+  noIndex = false,
+} = Astro.props;
+
+const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+const canonical = new URL(pathname === "/" ? "/" : pathname, site.url).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/assets/logos/DukeStrategies_logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, site.url).toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, site.url).toString()} />
+    {noIndex && <meta name="robots" content="noindex,nofollow" />}
+    {site.analytics.provider === "plausible" && (
+      <script is:inline defer data-domain={site.analytics.domain} src="https://plausible.io/js/script.js"></script>
+    )}
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      (() => {
+        function initScrollAnimations() {
+          const targets = document.querySelectorAll(".animate, .fade-in, .slide-up, .hero-fade");
+          if (!targets.length) return;
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                if (el.classList.contains("animate")) el.classList.add("animate--visible");
+                if (el.classList.contains("fade-in")) el.classList.add("fade-in--visible");
+                if (el.classList.contains("slide-up")) el.classList.add("slide-up--visible");
+                if (el.classList.contains("hero-fade")) el.classList.add("hero-fade--visible");
+                observer.unobserve(el);
+              });
+            },
+            { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+          );
+
+          targets.forEach((el) => observer.observe(el));
+        }
+
+        function initCounters() {
+          const counters = document.querySelectorAll("[data-count]");
+          if (!counters.length) return;
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+              });
+            },
+            { threshold: 0.5 },
+          );
+
+          counters.forEach((el) => observer.observe(el));
+        }
+
+        function animateCounter(el) {
+          const target = parseInt(el.getAttribute("data-count") || "0", 10);
+          const suffix = el.getAttribute("data-suffix") || "";
+          const duration = 2000;
+          let startTime = null;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(eased * target);
+            el.textContent = `${current}${suffix}`;
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              el.textContent = `${target}${suffix}`;
+            }
+          }
+
+          requestAnimationFrame(step);
+        }
+
+        function initNavScroll() {
+          const nav = document.querySelector(".nav");
+          if (!nav) return;
+
+          const onScroll = () => {
+            nav.classList.toggle("nav--scrolled", window.scrollY > 20);
+          };
+
+          window.addEventListener("scroll", onScroll, { passive: true });
+          onScroll();
+        }
+
+        function initMobileMenu() {
+          const hamburger = document.querySelector(".nav__hamburger");
+          const links = document.querySelector(".nav__links");
+          if (!hamburger || !links) return;
+
+          const closeMenu = () => {
+            hamburger.classList.remove("nav__hamburger--open");
+            links.classList.remove("nav__links--open");
+            document.body.style.overflow = "";
+          };
+
+          hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("nav__hamburger--open");
+            links.classList.toggle("nav__links--open");
+            document.body.style.overflow = links.classList.contains("nav__links--open") ? "hidden" : "";
+          });
+
+          links.querySelectorAll(".nav__link").forEach((link) => {
+            link.addEventListener("click", closeMenu);
+          });
+
+          document.addEventListener("click", (event) => {
+            if (
+              links.classList.contains("nav__links--open") &&
+              !links.contains(event.target) &&
+              !hamburger.contains(event.target)
+            ) {
+              closeMenu();
+            }
+          });
+        }
+
+        function initSmoothScroll() {
+          document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener("click", (event) => {
+              const targetId = anchor.getAttribute("href");
+              if (!targetId || targetId === "#") return;
+              const target = document.querySelector(targetId);
+              if (!target) return;
+              event.preventDefault();
+              const nav = document.querySelector(".nav");
+              const navHeight = nav ? nav.offsetHeight : 0;
+              const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+              window.scrollTo({ top, behavior: "smooth" });
+            });
+          });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          initScrollAnimations();
+          initCounters();
+          initNavScroll();
+          initMobileMenu();
+          initSmoothScroll();
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  class?: string;
+}
+
+const { title, description, icon, class: className = "" } = Astro.props;
+---
+
+<article class:list={["program-card", className]}>
+  <div class="program-card__icon">
+    <Icon name={icon} />
+  </div>
+  <h4 class="program-card__title">{title}</h4>
+  <p class="program-card__text">{description}</p>
+</article>
+
+<style>
+  .program-card {
+    background: var(--surface-page);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    padding: var(--sp-7) var(--sp-6);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-med), box-shadow var(--transition-med);
+    border-left: 4px solid var(--accent);
+  }
+
+  .program-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .program-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 127, 102, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--sp-4);
+    color: var(--accent);
+    font-size: 1.5rem;
+  }
+
+  .program-card__title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-heading);
+    margin-bottom: var(--sp-3);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .program-card__text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+</style>

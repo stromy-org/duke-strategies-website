@@ -1,0 +1,3 @@
+# Codex CLI configuration
+[agent]
+model = "o4-mini"

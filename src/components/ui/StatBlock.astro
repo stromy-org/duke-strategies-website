@@ -1,0 +1,17 @@
+---
+interface Props {
+  value: number;
+  suffix: string;
+  label: string;
+  class?: string;
+}
+
+const { value, suffix, label, class: className = "" } = Astro.props;
+---
+
+<div class:list={["stat", className]}>
+  <div class="stat__number" data-count={String(value)} data-suffix={suffix}>
+    0{suffix}
+  </div>
+  <div class="stat__label">{label}</div>
+</div>

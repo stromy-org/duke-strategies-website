@@ -1,0 +1,20 @@
+---
+import PageLayout from "./PageLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  pathname: string;
+  ogImage?: string;
+}
+
+const { title, description, pathname, ogImage } = Astro.props;
+---
+
+<PageLayout title={title} description={description} pathname={pathname} ogImage={ogImage}>
+  <article class="section">
+    <div class="container">
+      <slot />
+    </div>
+  </article>
+</PageLayout>

@@ -1,0 +1,27 @@
+---
+import Button from "./Button.astro";
+import { site } from "../../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  href?: string;
+  label?: string;
+}
+
+const {
+  title,
+  description,
+  href = "/contact",
+  label = "Contact us",
+} = Astro.props;
+---
+
+<section class="section section--dark">
+  <div class="container cta-band">
+    <h2 class="animate">{title}</h2>
+    <p class="animate stagger-1" style="max-width: 640px; margin: 0 auto var(--sp-6);">{description}</p>
+    <Button href={href} variant="outline" class="animate stagger-2">{label}</Button>
+    <span class="cta-band__phone animate stagger-3">T {site.contact.phoneDisplay}</span>
+  </div>
+</section>

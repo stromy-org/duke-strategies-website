@@ -1,0 +1,72 @@
+---
+interface Props {
+  name: string;
+  title: string;
+  image: string;
+  alt: string;
+  bio: string;
+  class?: string;
+}
+
+const { name, title, image, alt, bio, class: className = "" } = Astro.props;
+---
+
+<div class:list={["team-card", className]}>
+  <img src={image} alt={alt} class="team-card__photo" loading="lazy" />
+  <div class="team-card__body">
+    <h3 class="team-card__name">{name}</h3>
+    <span class="team-card__role">{title}</span>
+    <p class="team-card__bio">{bio}</p>
+  </div>
+</div>
+
+<style>
+  .team-card {
+    background: var(--surface-page);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
+    border-top: 4px solid transparent;
+  }
+
+  .team-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-top-color: var(--accent);
+  }
+
+  .team-card__photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .team-card__body {
+    padding: var(--sp-5) var(--sp-5) var(--sp-6);
+  }
+
+  .team-card__name {
+    font-size: 1.1rem;
+    margin-bottom: var(--sp-1);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .team-card__role {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: var(--sp-4);
+  }
+
+  .team-card__bio {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+</style>

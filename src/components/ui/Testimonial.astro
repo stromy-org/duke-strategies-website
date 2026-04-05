@@ -1,0 +1,72 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  variant?: "featured" | "card";
+  class?: string;
+}
+
+const { quote, author, variant = "featured", class: className = "" } = Astro.props;
+---
+
+{
+  variant === "card" ? (
+    <div class:list={["testimonial-card", className]}>
+      <span class="testimonial-card__quote-mark" aria-hidden="true">&ldquo;</span>
+      <p class="testimonial-card__text">{quote}</p>
+      <cite class="testimonial-card__author">- {author}</cite>
+    </div>
+  ) : (
+    <div class:list={["testimonial", className]}>
+      <span class="testimonial__quote-mark" aria-hidden="true">&ldquo;</span>
+      <p class="testimonial__text">{quote}</p>
+      <cite class="testimonial__author">- {author}</cite>
+    </div>
+  )
+}
+
+<style>
+  .testimonial-card {
+    background: var(--surface-page);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    padding: var(--sp-7) var(--sp-6);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    transition: transform var(--transition-med), box-shadow var(--transition-med);
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .testimonial-card__quote-mark {
+    font-size: 4rem;
+    line-height: 0.5;
+    color: var(--accent);
+    opacity: 0.4;
+    font-family: Georgia, serif;
+    display: block;
+    margin-bottom: var(--sp-4);
+  }
+
+  .testimonial-card__text {
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--text-heading);
+    margin-bottom: var(--sp-5);
+  }
+
+  .testimonial-card__author {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-body);
+    display: block;
+    font-style: normal;
+  }
+</style>

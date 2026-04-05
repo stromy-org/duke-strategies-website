@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duke Strategies — Direction C: Refined</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #FF7F66;
+    --secondary: #DFDFE0;
+    --text: #807F83;
+    --text-dark: #2D2D2D;
+    --bg: #FFFFFF;
+    --bg-alt: #FAFAF8;
+    --bg-dark: #1A1A1A;
+    --font-heading: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Montserrat', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Utility ─── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .label--coral { color: var(--primary); }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--text-dark);
+    font-weight: 400;
+  }
+
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--secondary);
+    margin: 0;
+  }
+
+  .section-divider--coral {
+    background: var(--primary);
+    opacity: 0.3;
+  }
+
+  /* ─── Reveal Animation ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── Navigation ─── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--secondary);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav__logo {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--text-dark);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+
+  .nav__logo span { color: var(--primary); }
+
+  .nav__links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav__links a {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.3s ease;
+  }
+
+  .nav__links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--primary);
+    transition: width 0.35s ease;
+  }
+
+  .nav__links a:hover {
+    color: var(--text-dark);
+  }
+
+  .nav__links a:hover::after {
+    width: 100%;
+  }
+
+  .nav__lang {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+
+  .nav__lang a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .nav__lang a:hover,
+  .nav__lang a.active {
+    color: var(--text-dark);
+  }
+
+  .nav__lang span { opacity: 0.3; margin: 0 6px; }
+
+  /* Mobile nav */
+  .nav__hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav__hamburger span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--text-dark);
+    margin: 4px 0;
+    transition: all 0.3s ease;
+  }
+
+  /* ─── Hero ─── */
+  .hero {
+    padding-top: 136px;
+    padding-bottom: 100px;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero__heading {
+    font-size: clamp(40px, 5vw, 60px);
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin-bottom: 28px;
+  }
+
+  .hero__heading .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: wordFadeIn 0.5s ease forwards;
+  }
+
+  @keyframes wordFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero__body {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 36px;
+    max-width: 520px;
+  }
+
+  .hero__visual {
+    position: relative;
+    height: 460px;
+    background: linear-gradient(135deg, #FF7F66 0%, #ff9e8a 50%, #FAFAF8 100%);
+    overflow: hidden;
+  }
+
+  .hero__visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.06) 40px,
+        rgba(255,255,255,0.06) 41px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.06) 40px,
+        rgba(255,255,255,0.06) 41px
+      );
+  }
+
+  .hero__visual::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(26,26,26,0.15), transparent);
+  }
+
+  .hero__visual-text {
+    position: absolute;
+    bottom: 40px;
+    left: 32px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+  }
+
+  /* Underline CTA */
+  .cta-underline {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--text-dark);
+    text-decoration: none;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 4px;
+  }
+
+  .cta-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--primary);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .cta-underline:hover::after {
+    transform: scaleX(1.05);
+  }
+
+  .cta-underline--light { color: #fff; }
+  .cta-underline--light::after { background: #fff; }
+
+  /* ─── Editorial Intro ─── */
+  .editorial-intro {
+    padding: 100px 0;
+    background: var(--bg-alt);
+  }
+
+  .editorial-intro__inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .pull-quote {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--text-dark);
+    border-left: 2px solid var(--primary);
+    padding-left: 24px;
+    font-style: italic;
+  }
+
+  .editorial-intro__text p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .editorial-intro__text p:first-child {
+    font-size: 18px;
+    color: var(--text-dark);
+  }
+
+  /* ─── Approach ─── */
+  .approach {
+    padding: 100px 0;
+  }
+
+  .approach__header {
+    margin-bottom: 64px;
+  }
+
+  .approach__header h2 {
+    font-size: 38px;
+  }
+
+  .approach__step {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 40px;
+    padding: 48px 0;
+    border-top: 1px solid var(--secondary);
+    align-items: start;
+  }
+
+  .approach__step:last-child {
+    border-bottom: 1px solid var(--secondary);
+  }
+
+  .approach__number {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    color: var(--primary);
+    line-height: 1;
+  }
+
+  .approach__content h3 {
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+
+  .approach__content p {
+    font-size: 16px;
+    max-width: 640px;
+    line-height: 1.8;
+  }
+
+  /* ─── Services ─── */
+  .services {
+    padding: 100px 0;
+    background: var(--bg-alt);
+  }
+
+  .services__header {
+    margin-bottom: 56px;
+  }
+
+  .services__header h2 {
+    font-size: 38px;
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    border: 1px solid var(--primary);
+    padding: 36px 32px;
+    transition: transform 0.35s ease;
+    background: var(--bg);
+  }
+
+  .service-card:hover {
+    transform: scale(1.02);
+  }
+
+  .service-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ─── Case Study (Dark) ─── */
+  .case-study {
+    padding: 100px 0;
+    background: var(--bg-dark);
+    color: rgba(255,255,255,0.7);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .case-study::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .case-study .label { color: var(--primary); }
+
+  .case-study h2 {
+    font-size: 38px;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
+  .case-study__quote {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+    border-left: 2px solid var(--primary);
+    padding-left: 24px;
+    margin-bottom: 56px;
+    max-width: 640px;
+  }
+
+  .case-study__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .metric {
+    text-align: left;
+  }
+
+  .metric__value {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    color: #fff;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .metric__label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+
+  /* ─── Testimonials ─── */
+  .testimonials {
+    padding: 100px 0;
+  }
+
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+
+  .testimonial {
+    border-left: 2px solid var(--primary);
+    padding-left: 32px;
+    position: relative;
+  }
+
+  .testimonial__mark {
+    font-family: var(--font-heading);
+    font-size: 72px;
+    color: var(--primary);
+    line-height: 0.6;
+    margin-bottom: 20px;
+    display: block;
+    opacity: 0.6;
+  }
+
+  .testimonial__text {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+  }
+
+  .testimonial__author {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  /* ─── Academy ─── */
+  .academy {
+    padding: 100px 0;
+    background: var(--bg-alt);
+  }
+
+  .academy__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .academy h2 {
+    font-size: 34px;
+    margin-bottom: 20px;
+  }
+
+  .academy__desc {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .academy__programs {
+    list-style: none;
+  }
+
+  .academy__programs li {
+    padding: 20px 0;
+    border-top: 1px solid var(--secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .academy__programs li:last-child {
+    border-bottom: 1px solid var(--secondary);
+  }
+
+  .academy__program-name {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--text-dark);
+  }
+
+  .academy__program-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* ─── Team ─── */
+  .team {
+    padding: 100px 0;
+  }
+
+  .team__header {
+    margin-bottom: 56px;
+  }
+
+  .team__header h2 {
+    font-size: 38px;
+  }
+
+  .team__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .team-member {
+    padding: 36px 32px;
+    border: 1px solid var(--secondary);
+    transition: border-color 0.3s ease;
+  }
+
+  .team-member:hover {
+    border-color: var(--primary);
+  }
+
+  .team-member__name {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+
+  .team-member__title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .team-member__desc {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ─── CTA Section ─── */
+  .cta-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+
+  .cta-section__inner {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .cta-section h2 {
+    font-size: 38px;
+    margin-bottom: 16px;
+  }
+
+  .cta-section__body {
+    font-size: 16px;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  .cta-section__contact {
+    margin-top: 28px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--text);
+    line-height: 2;
+  }
+
+  .cta-section__contact a {
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .cta-section__contact a:hover { color: var(--primary); }
+
+  /* ─── Footer ─── */
+  .footer {
+    padding: 64px 0 48px;
+    border-top: 1px solid var(--secondary);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 64px;
+  }
+
+  .footer__heading {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .footer__company-name {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+  }
+
+  .footer__text {
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 300px;
+  }
+
+  .footer__links {
+    list-style: none;
+  }
+
+  .footer__links li { margin-bottom: 10px; }
+
+  .footer__links a {
+    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer__links a:hover { color: var(--text-dark); }
+
+  .footer__social-links a {
+    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+  }
+
+  .footer__social-links a:hover { color: var(--primary); }
+
+  .footer__copyright {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--secondary);
+    font-size: 12px;
+    color: var(--text);
+    text-align: center;
+  }
+
+  /* ─── Style Board Badge ─── */
+  .style-badge {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    background: var(--bg-dark);
+    color: #fff;
+    padding: 12px 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .style-badge span { color: var(--primary); }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+
+    .nav__links { display: none; }
+    .nav__hamburger { display: block; }
+
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .hero__visual { height: 280px; }
+
+    .editorial-intro__inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .approach__step {
+      grid-template-columns: 60px 1fr;
+      gap: 24px;
+    }
+
+    .approach__number { font-size: 36px; }
+
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .case-study__metrics {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .academy__inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .team__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer__inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding-top: 100px; padding-bottom: 60px; min-height: auto; }
+    .hero__heading { font-size: 32px; }
+    .case-study__metrics { grid-template-columns: 1fr 1fr; }
+    .approach, .services, .testimonials, .academy, .team,
+    .editorial-intro, .case-study { padding: 64px 0; }
+    .style-badge { bottom: 12px; right: 12px; padding: 8px 14px; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="nav">
+  <div class="container nav__inner">
+    <a href="#" class="nav__logo">Duke<span>.</span> Strategies</a>
+    <ul class="nav__links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">Who We Are</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#academy">Academy</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav__lang">
+      <a href="#" class="active">EN</a>
+      <span>|</span>
+      <a href="#">NL</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <span class="label label--coral">Corporate Strategy &amp; Stakeholder Advisory</span>
+      <h1 class="hero__heading" id="heroHeading">We make business strategies stakeholder proof</h1>
+      <p class="hero__body">Duke Strategies operates on the intersection of corporate strategy and corporate affairs, building bridges between business leaders and their stakeholders.</p>
+      <a href="#about" class="cta-underline">Discover our approach &rarr;</a>
+    </div>
+    <div class="hero__visual">
+      <span class="hero__visual-text">Building Bridges</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ Editorial Intro ═══ -->
+<section class="editorial-intro" id="about">
+  <div class="container editorial-intro__inner">
+    <div class="reveal">
+      <p class="pull-quote">"We believe that by successfully bridging the gap between business realities and diverging stakeholder expectations, corporations can deliver more value for all."</p>
+    </div>
+    <div class="editorial-intro__text reveal reveal-delay-1">
+      <p>Duke Strategies is a corporate advisory firm that helps organisations navigate the complex intersection of business strategy and stakeholder relations. Our multidisciplinary team combines decades of experience in corporate strategy, public affairs, crisis management, and communications.</p>
+      <p>We work with boards, executives, and leadership teams to develop strategies that are not only commercially sound but also resilient to the scrutiny of an increasingly demanding stakeholder landscape — from regulators and investors to media, employees, and the public.</p>
+      <p>Our mission is straightforward: help organisations build lasting legitimacy by aligning what they do with what their stakeholders expect. We call this making strategy stakeholder proof.</p>
+      <p>Whether you are preparing for a major transaction, navigating a crisis, or rethinking your corporate positioning, Duke Strategies provides the intellectual rigour and practical expertise to move forward with confidence.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ The Approach ═══ -->
+<section class="approach">
+  <div class="container">
+    <div class="approach__header reveal">
+      <span class="label">Our Method</span>
+      <h2>The Approach</h2>
+    </div>
+
+    <div class="approach__step reveal">
+      <div class="approach__number">01</div>
+      <div class="approach__content">
+        <h3>Analyse</h3>
+        <p>We map the full stakeholder ecosystem and assess the strategic landscape. Through rigorous analysis of political, regulatory, media, and market dynamics, we identify where risks and opportunities converge — giving leadership a clear picture of the forces that will shape their decisions.</p>
+      </div>
+    </div>
+
+    <div class="approach__step reveal">
+      <div class="approach__number">02</div>
+      <div class="approach__content">
+        <h3>Create</h3>
+        <p>We develop integrated strategies that bridge commercial objectives with stakeholder expectations. This means crafting narratives, positioning frameworks, and engagement plans that are intellectually coherent, politically astute, and commercially viable — strategies that hold up under pressure.</p>
+      </div>
+    </div>
+
+    <div class="approach__step reveal">
+      <div class="approach__number">03</div>
+      <div class="approach__content">
+        <h3>Execute</h3>
+        <p>We stand alongside our clients in execution — managing stakeholder engagement, media relations, and crisis response in real time. Our team operates with discretion and precision, ensuring that strategy translates into measurable outcomes and lasting relationships.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ Services ═══ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services__header reveal">
+      <span class="label">Capabilities</span>
+      <h2>What We Do</h2>
+    </div>
+
+    <div class="services__grid">
+      <div class="service-card reveal">
+        <h3>Strategic Advisory</h3>
+        <p>Board-level counsel on corporate strategy, positioning, and stakeholder alignment. We help leadership teams make decisions that withstand public scrutiny and regulatory challenge.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <h3>Crisis Communications</h3>
+        <p>Rapid-response crisis management combining strategic counsel with hands-on execution. We protect reputations, manage narratives, and restore stakeholder confidence under pressure.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <h3>Stakeholder Mapping &amp; Engagement</h3>
+        <p>Systematic identification and engagement of key stakeholders — investors, regulators, media, employees, and communities — to build coalitions of support.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <h3>M&amp;A Communications</h3>
+        <p>Strategic communications advisory for mergers, acquisitions, and corporate transactions. We manage the narrative from announcement through integration.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <h3>Media Training &amp; Positioning</h3>
+        <p>Executive media preparation combining message development with intensive interview training. We ensure spokespeople communicate with clarity, authority, and discipline.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <h3>Issue Management</h3>
+        <p>Proactive identification and management of emerging issues before they become crises. We monitor, assess, and develop response strategies for complex regulatory and reputational challenges.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Case Study (Dark Section) ═══ -->
+<section class="case-study" id="insights">
+  <div class="container">
+    <span class="label">Case Study</span>
+    <h2 class="reveal">Corporate Reputation Recovery</h2>
+    <p class="case-study__quote reveal reveal-delay-1">A multinational corporation faced coordinated regulatory action across three jurisdictions, triggering a 40% share price decline and sustained negative media coverage. The board needed to stabilise stakeholder confidence while navigating complex legal proceedings.</p>
+
+    <div class="case-study__metrics">
+      <div class="metric reveal">
+        <span class="metric__value" data-target="3">0</span>
+        <span class="metric__label">Weeks to containment</span>
+      </div>
+      <div class="metric reveal reveal-delay-1">
+        <span class="metric__value" data-target="80" data-suffix="%">0</span>
+        <span class="metric__label">Share price recovery</span>
+      </div>
+      <div class="metric reveal reveal-delay-2">
+        <span class="metric__value" data-target="120" data-prefix="">0</span>
+        <span class="metric__label">Stakeholders engaged</span>
+      </div>
+      <div class="metric reveal reveal-delay-3">
+        <span class="metric__value" data-target="0">0</span>
+        <span class="metric__label">Additional sanctions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Testimonials ═══ -->
+<section class="testimonials">
+  <div class="container">
+    <div class="testimonials__grid">
+      <div class="testimonial reveal">
+        <span class="testimonial__mark">&ldquo;</span>
+        <p class="testimonial__text">Duke Strategies brought an exceptional combination of strategic depth and practical urgency to our crisis. They understood the political dynamics before we had finished briefing them, and their stakeholder engagement plan was executed flawlessly. Invaluable partners.</p>
+        <span class="testimonial__author">Chief Executive Officer &mdash; European Industrial Group</span>
+      </div>
+      <div class="testimonial reveal reveal-delay-2">
+        <span class="testimonial__mark">&ldquo;</span>
+        <p class="testimonial__text">What sets Duke apart is their intellectual rigour. They don't just manage communications — they think strategically about how every stakeholder interaction connects to broader corporate objectives. Their advice during our acquisition was instrumental in securing regulatory approval.</p>
+        <span class="testimonial__author">Chairman of the Board &mdash; Global Technology Company</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ Duke Academy ═══ -->
+<section class="academy" id="academy">
+  <div class="container academy__inner">
+    <div class="reveal">
+      <span class="label label--coral">Duke Academy</span>
+      <h2>AI-Powered Executive Training for Impactful Leadership</h2>
+      <p class="academy__desc">Our training programmes combine decades of real-world advisory experience with AI-driven simulation, preparing executives to lead with confidence in high-stakes environments — from boardroom presentations to live media encounters.</p>
+      <a href="#" class="cta-underline">Learn more &rarr;</a>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <ul class="academy__programs">
+        <li>
+          <span class="academy__program-name">Crisis Simulation Lab</span>
+          <span class="academy__program-tag">Immersive</span>
+        </li>
+        <li>
+          <span class="academy__program-name">Executive Media Masterclass</span>
+          <span class="academy__program-tag">Workshop</span>
+        </li>
+        <li>
+          <span class="academy__program-name">Stakeholder Negotiation Intensive</span>
+          <span class="academy__program-tag">Programme</span>
+        </li>
+        <li>
+          <span class="academy__program-name">Board-Level Communications</span>
+          <span class="academy__program-tag">Seminar</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ Team ═══ -->
+<section class="team">
+  <div class="container">
+    <div class="team__header reveal">
+      <span class="label">The Team</span>
+      <h2>Senior Leadership</h2>
+    </div>
+
+    <div class="team__grid">
+      <div class="team-member reveal">
+        <div class="team-member__name">Ingo Heijnen</div>
+        <span class="team-member__title">Managing Partner</span>
+        <p class="team-member__desc">Former senior consultant at a leading global advisory firm with over 20 years of experience in corporate strategy, stakeholder management, and crisis communications across Europe and Asia.</p>
+      </div>
+      <div class="team-member reveal reveal-delay-1">
+        <div class="team-member__name">Ari&euml;n Stuijt</div>
+        <span class="team-member__title">Partner, Strategy</span>
+        <p class="team-member__desc">Specialist in corporate positioning and M&amp;A communications with deep expertise in regulatory affairs, public-private partnerships, and complex multi-stakeholder transactions.</p>
+      </div>
+      <div class="team-member reveal reveal-delay-2">
+        <div class="team-member__name">Bas van 't Wout</div>
+        <span class="team-member__title">Partner, Public Affairs</span>
+        <p class="team-member__desc">Former Dutch Minister of Economic Affairs and Climate Policy. Brings unparalleled government relations expertise and a deep understanding of the intersection between policy and business.</p>
+      </div>
+      <div class="team-member reveal reveal-delay-3">
+        <div class="team-member__name">Pieter Cobelens</div>
+        <span class="team-member__title">Senior Advisor, Intelligence &amp; Security</span>
+        <p class="team-member__desc">Former Director of the Netherlands Military Intelligence and Security Service (MIVD). Expert in geopolitical risk, intelligence analysis, and corporate security strategy.</p>
+      </div>
+    </div>
+
+    <a href="#" class="cta-underline reveal">Meet the full team &rarr;</a>
+  </div>
+</section>
+
+<!-- ═══ CTA Section ═══ -->
+<section class="cta-section" id="contact">
+  <div class="container cta-section__inner">
+    <h2 class="reveal">Ready to build bridges?</h2>
+    <p class="cta-section__body reveal reveal-delay-1">Whether you are navigating a crisis, preparing for a transaction, or rethinking your stakeholder strategy — we would welcome the conversation.</p>
+    <a href="mailto:info@dukestrategies.com" class="cta-underline reveal reveal-delay-2">Get in touch &rarr;</a>
+    <div class="cta-section__contact reveal reveal-delay-3">
+      <a href="tel:+31207183"; >+31 (0)20 718 3000</a><br>
+      <a href="mailto:info@dukestrategies.com">info@dukestrategies.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__company-name">Duke Strategies</div>
+        <p class="footer__text">Corporate strategy and stakeholder advisory. We build bridges between business leaders and their stakeholders — making strategy resilient, credible, and stakeholder proof.</p>
+      </div>
+      <div>
+        <div class="footer__heading">Sitemap</div>
+        <ul class="footer__links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">Who We Are</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#academy">Duke Academy</a></li>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__heading">Connect</div>
+        <div class="footer__social-links">
+          <a href="#">LinkedIn</a>
+          <a href="#">Twitter / X</a>
+        </div>
+        <p class="footer__text" style="margin-top: 20px; font-size: 13px;">Herengracht 450<br>1017 CA Amsterdam<br>The Netherlands</p>
+      </div>
+    </div>
+    <div class="footer__copyright">&copy; 2025 Duke Strategies. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ═══ Style Badge ═══ -->
+<div class="style-badge">Direction C <span>&mdash;</span> Refined</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── Intersection Observer: Reveal on Scroll ───
+  const revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  // ─── Hero Heading: Sequential Word Fade-In ───
+  var heroHeading = document.getElementById('heroHeading');
+  if (heroHeading) {
+    var text = heroHeading.textContent.trim();
+    var words = text.split(/\s+/);
+    heroHeading.innerHTML = '';
+    words.forEach(function(word, i) {
+      var span = document.createElement('span');
+      span.className = 'word';
+      span.textContent = word;
+      span.style.animationDelay = (0.15 + i * 0.1) + 's';
+      heroHeading.appendChild(span);
+      if (i < words.length - 1) {
+        heroHeading.appendChild(document.createTextNode(' '));
+      }
+    });
+  }
+
+  // ─── Counter Animation ───
+  var counterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        var prefix = el.getAttribute('data-prefix') || '';
+        var duration = 1500;
+        var start = performance.now();
+
+        function animate(now) {
+          var progress = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.round(eased * target);
+          el.textContent = prefix + current + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          }
+        }
+
+        requestAnimationFrame(animate);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.metric__value[data-target]').forEach(function(el) {
+    counterObserver.observe(el);
+  });
+
+  // ─── Smooth Scroll for Anchor Links ───
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href === '#') return;
+      var target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

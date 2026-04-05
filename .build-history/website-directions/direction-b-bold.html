@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duke Strategies — Direction B: Bold</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
+:root {
+  --coral: #FF7F66;
+  --silver: #DFDFE0;
+  --text: #807F83;
+  --white: #FFFFFF;
+  --light-bg: #F5F5F5;
+  --navy: #1A1A2E;
+  --dark-blue: #16213E;
+  --deep-blue: #0F3460;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--text);
+  background: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Noise grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: var(--coral);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover { color: var(--white); }
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--white);
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 700;
+}
+
+p {
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.7;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--coral);
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 4rem);
+}
+
+section {
+  position: relative;
+}
+
+.section-dark {
+  background: var(--navy);
+  color: var(--silver);
+}
+
+.section-light {
+  background: var(--light-bg);
+  color: var(--text);
+}
+
+.section-light h2,
+.section-light h3 {
+  color: var(--navy);
+}
+
+.section-coral {
+  background: var(--coral);
+  color: var(--white);
+}
+
+/* ============================================
+   REVEAL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-80px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.clip-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clip-reveal.visible {
+  clip-path: inset(0 0% 0 0);
+}
+
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 1rem 2.5rem;
+  border: 2px solid var(--coral);
+  color: var(--coral);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease;
+  z-index: 1;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: var(--coral);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.btn:hover {
+  color: var(--white);
+}
+
+.btn:hover::after {
+  width: 100%;
+}
+
+.btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-arrow .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.btn-arrow:hover .arrow {
+  transform: translateX(6px);
+}
+
+.btn-solid {
+  background: var(--coral);
+  color: var(--white);
+  border-color: var(--coral);
+}
+
+.btn-solid::after {
+  background: var(--navy);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  transition: background 0.3s ease, padding 0.3s ease;
+}
+
+.nav.scrolled {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.nav-logo span {
+  color: var(--coral);
+}
+
+/* Hamburger */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* Full screen menu */
+.nav-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 999;
+}
+
+.nav-menu.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nav-menu a {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--coral);
+  transition: width 0.3s ease;
+}
+
+.nav-menu a:hover { color: var(--coral); }
+.nav-menu a:hover::after { width: 100%; }
+
+/* Desktop nav links (visible on large screens) */
+.nav-links {
+  display: none;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .nav-links {
+    display: flex;
+  }
+}
+
+.nav-links a {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--silver);
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--coral); }
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--navy);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--navy) 0%,
+    var(--dark-blue) 25%,
+    var(--deep-blue) 50%,
+    #2a1a3e 70%,
+    var(--navy) 100%
+  );
+  background-size: 400% 400%;
+  animation: heroGradient 12s ease infinite;
+}
+
+/* Coral tint overlay */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 60% 50%,
+    rgba(255, 127, 102, 0.08) 0%,
+    transparent 70%
+  );
+}
+
+@keyframes heroGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Geometric accent lines */
+.hero-lines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-lines::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: -10%;
+  width: 120%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,127,102,0.15), transparent);
+  transform: rotate(-5deg);
+}
+
+.hero-lines::after {
+  content: '';
+  position: absolute;
+  bottom: 30%;
+  left: -10%;
+  width: 120%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,127,102,0.1), transparent);
+  transform: rotate(3deg);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 2rem;
+  max-width: 1000px;
+}
+
+.hero-content h1 {
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  color: var(--silver);
+  letter-spacing: 0.12em;
+  margin-bottom: 2.5rem;
+  min-height: 1.5em;
+}
+
+.hero-line {
+  width: 80px;
+  height: 2px;
+  background: var(--coral);
+  margin: 0 auto 2.5rem;
+}
+
+.hero .btn {
+  margin-top: 1rem;
+}
+
+/* ============================================
+   MARQUEE
+   ============================================ */
+.marquee-section {
+  background: var(--dark-blue);
+  padding: 1.25rem 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 127, 102, 0.2);
+  border-bottom: 1px solid rgba(255, 127, 102, 0.2);
+}
+
+.marquee-track {
+  display: flex;
+  animation: marqueeScroll 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-text {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--coral);
+  white-space: nowrap;
+  padding-right: 3rem;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ============================================
+   ABOUT SPLIT
+   ============================================ */
+.about {
+  padding: clamp(5rem, 10vw, 10rem) 0;
+  background: var(--navy);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: start;
+  }
+}
+
+.about-left .section-number {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(5rem, 10vw, 8rem);
+  color: var(--coral);
+  line-height: 0.9;
+  opacity: 0.3;
+}
+
+.about-left h2 {
+  margin-top: 1rem;
+}
+
+.about-right p {
+  margin-bottom: 1.5rem;
+  color: var(--silver);
+}
+
+.about-right p:first-child {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--white);
+}
+
+.coral-border-top {
+  border-top: 2px solid var(--coral);
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+/* ============================================
+   TEAM
+   ============================================ */
+.team {
+  padding: clamp(5rem, 10vw, 10rem) 0;
+  background: var(--dark-blue);
+}
+
+.team h2 {
+  margin-bottom: 4rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .team-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1000px) {
+  .team-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.team-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid var(--coral);
+  padding: 2rem 1.5rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.team-card:hover {
+  background: rgba(255, 127, 102, 0.05);
+  transform: translateY(-4px);
+}
+
+.team-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.team-card .role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--coral);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.team-card p {
+  font-size: 0.9rem;
+  color: var(--silver);
+  line-height: 1.6;
+}
+
+/* ============================================
+   THE MODEL
+   ============================================ */
+.model {
+  padding: clamp(5rem, 10vw, 10rem) 0;
+  background: var(--light-bg);
+}
+
+.model h2 {
+  color: var(--navy);
+  margin-bottom: 4rem;
+}
+
+.model-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .model-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+}
+
+.model-step {
+  padding: 2.5rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .model-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--coral);
+  }
+
+  .model-step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid var(--coral);
+    border-right: 2px solid var(--coral);
+  }
+}
+
+.model-step .step-number {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(3rem, 5vw, 5rem);
+  color: var(--coral);
+  opacity: 0.2;
+  line-height: 1;
+}
+
+.model-step h3 {
+  color: var(--navy);
+  font-size: 1.5rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.model-step p {
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ============================================
+   STATS BAND
+   ============================================ */
+.stats {
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  background: var(--coral);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.stat-item .stat-number {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--white);
+  line-height: 1;
+}
+
+.stat-item .stat-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   CASE STUDIES
+   ============================================ */
+.cases {
+  padding: clamp(5rem, 10vw, 10rem) 0;
+  background: var(--navy);
+}
+
+.cases h2 {
+  margin-bottom: 4rem;
+}
+
+.cases-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .cases-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.case-card {
+  border: 1px solid rgba(255, 127, 102, 0.2);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.case-card:hover {
+  border-color: var(--coral);
+}
+
+.case-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--coral);
+}
+
+.case-card .case-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--coral);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.case-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.case-card p {
+  color: var(--silver);
+  margin-bottom: 1.5rem;
+}
+
+.case-metrics {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-value {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--coral);
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: var(--silver);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   TESTIMONIAL
+   ============================================ */
+.testimonial {
+  padding: clamp(5rem, 10vw, 8rem) 0;
+  background: var(--dark-blue);
+}
+
+.testimonial-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.quote-mark {
+  font-family: var(--font-heading);
+  font-size: 8rem;
+  line-height: 0.5;
+  color: var(--coral);
+  opacity: 0.4;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.testimonial blockquote {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.testimonial cite {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--coral);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   DUKE ACADEMY
+   ============================================ */
+.academy {
+  padding: clamp(5rem, 10vw, 10rem) 0;
+  background: var(--navy);
+}
+
+.academy-content {
+  max-width: 700px;
+}
+
+.academy h2 {
+  margin-bottom: 0.5rem;
+}
+
+.academy-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: var(--silver);
+  margin-bottom: 2.5rem;
+}
+
+.academy-list {
+  list-style: none;
+  margin-bottom: 2.5rem;
+}
+
+.academy-list li {
+  font-size: 1rem;
+  color: var(--silver);
+  padding: 0.75rem 0;
+  padding-left: 2rem;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.academy-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--coral);
+  font-weight: 700;
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+.cta-section {
+  padding: clamp(5rem, 10vw, 8rem) 0;
+  background: var(--dark-blue);
+  text-align: center;
+  position: relative;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: var(--coral);
+}
+
+.cta-section h2 {
+  margin-bottom: 2.5rem;
+}
+
+.cta-section .btn {
+  margin-bottom: 2rem;
+}
+
+.cta-contact {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--silver);
+  letter-spacing: 0.05em;
+}
+
+.cta-contact a {
+  color: var(--coral);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  padding: 4rem 0 2rem;
+  background: var(--navy);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+}
+
+.footer-brand .nav-logo {
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.footer-brand p {
+  color: var(--silver);
+  font-size: 0.9rem;
+  max-width: 300px;
+}
+
+.footer h4 {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  color: var(--coral);
+}
+
+.footer ul {
+  list-style: none;
+}
+
+.footer ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer ul li a {
+  color: var(--silver);
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.footer ul li a:hover { color: var(--coral); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom p {
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social a {
+  color: var(--silver);
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   DIRECTION LABEL
+   ============================================ */
+.direction-label {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--coral);
+  background: var(--navy);
+  border: 1px solid rgba(255, 127, 102, 0.3);
+  padding: 0.6rem 1rem;
+  z-index: 100;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 600px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .case-metrics {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">Duke<span>.</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#team">Team</a>
+      <a href="#model">Model</a>
+      <a href="#cases">Work</a>
+      <a href="#academy">Academy</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="nav-menu" id="navMenu">
+  <a href="#about">About</a>
+  <a href="#team">Team</a>
+  <a href="#model">Model</a>
+  <a href="#cases">Work</a>
+  <a href="#academy">Academy</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <h1 class="clip-reveal">BRIDGING STRATEGY<br>AND IMPACT</h1>
+    <div class="hero-subtitle" id="typewriter"></div>
+    <div class="hero-line reveal stagger-3"></div>
+    <a href="#about" class="btn btn-arrow reveal stagger-4">
+      <span>Explore our work</span>
+      <span class="arrow">&rarr;</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================
+     MARQUEE
+     ============================================ -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-text">STAKEHOLDER ADVISORY &bull; CRISIS COMMUNICATIONS &bull; M&A COMMUNICATIONS &bull; STRATEGIC ADVISORY &bull; MEDIA TRAINING &bull; ISSUE MANAGEMENT &bull;&nbsp;</span>
+    <span class="marquee-text">STAKEHOLDER ADVISORY &bull; CRISIS COMMUNICATIONS &bull; M&A COMMUNICATIONS &bull; STRATEGIC ADVISORY &bull; MEDIA TRAINING &bull; ISSUE MANAGEMENT &bull;&nbsp;</span>
+    <span class="marquee-text">STAKEHOLDER ADVISORY &bull; CRISIS COMMUNICATIONS &bull; M&A COMMUNICATIONS &bull; STRATEGIC ADVISORY &bull; MEDIA TRAINING &bull; ISSUE MANAGEMENT &bull;&nbsp;</span>
+    <span class="marquee-text">STAKEHOLDER ADVISORY &bull; CRISIS COMMUNICATIONS &bull; M&A COMMUNICATIONS &bull; STRATEGIC ADVISORY &bull; MEDIA TRAINING &bull; ISSUE MANAGEMENT &bull;&nbsp;</span>
+  </div>
+</div>
+
+<!-- ============================================
+     ABOUT
+     ============================================ -->
+<section class="about section-dark" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left reveal-left">
+        <div class="section-number">01</div>
+        <h2>WHO<br>WE ARE</h2>
+      </div>
+      <div class="about-right reveal-right stagger-2">
+        <p>Duke Strategies is a consultancy that operates on the intersection of corporate strategy and corporate affairs and helps to build bridges between business leaders and their stakeholders.</p>
+        <p>In an era of unprecedented complexity, the companies that thrive are those that align their strategic ambitions with the expectations of regulators, investors, employees, and the public. We exist to make that alignment happen.</p>
+        <div class="coral-border-top">
+          <p>Our approach is rooted in data-driven analysis, deep stakeholder mapping, and decades of experience navigating high-stakes corporate environments. We don't just advise&thinsp;&mdash;&thinsp;we architect the bridge between where you are and where you need to be.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TEAM
+     ============================================ -->
+<section class="team section-dark" id="team">
+  <div class="container">
+    <div class="mono reveal">Founding Partners &amp; Expert Network</div>
+    <h2 class="reveal stagger-1">THE TEAM</h2>
+    <div class="team-grid">
+      <div class="team-card reveal stagger-1">
+        <h3>Ingo Heijnen</h3>
+        <div class="role">Managing Partner</div>
+        <p>27 years of experience in corporate affairs and strategic communications at the highest levels of international business and politics.</p>
+      </div>
+      <div class="team-card reveal stagger-2">
+        <h3>Arien Stuijt</h3>
+        <div class="role">Managing Partner</div>
+        <p>Former Wall Street Journal correspondent and seasoned media strategist with deep expertise in financial communications and stakeholder relations.</p>
+      </div>
+      <div class="team-card reveal stagger-3">
+        <h3>Bas van 't Wout</h3>
+        <div class="role">Expert Partner</div>
+        <p>Former Dutch Minister of Economic Affairs with unparalleled understanding of the intersection between policy, regulation, and business strategy.</p>
+      </div>
+      <div class="team-card reveal stagger-4">
+        <h3>Pieter Cobelens</h3>
+        <div class="role">Expert Partner</div>
+        <p>Former Director of the Dutch Military Intelligence and Security Service (MIVD). Specialist in geopolitical risk and intelligence-led strategy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     THE MODEL
+     ============================================ -->
+<section class="model section-light" id="model">
+  <div class="container">
+    <div class="mono reveal" style="color: var(--coral);">Our Methodology</div>
+    <h2 class="reveal stagger-1">THE MODEL</h2>
+    <div class="model-grid">
+      <div class="model-step reveal stagger-1">
+        <div class="step-number">01</div>
+        <h3>Analyse</h3>
+        <p>We map the stakeholder landscape, quantify sentiment, and identify the pressure points that matter. Data replaces assumption. Our proprietary framework processes 500+ data points to build a complete picture of your operating environment.</p>
+      </div>
+      <div class="model-step reveal stagger-2">
+        <div class="step-number">02</div>
+        <h3>Create</h3>
+        <p>Strategy without narrative is incomplete. We craft positioning frameworks, messaging architectures, and engagement plans that translate analysis into action. Every recommendation is backed by evidence and calibrated for impact.</p>
+      </div>
+      <div class="model-step reveal stagger-3">
+        <div class="step-number">03</div>
+        <h3>Execute</h3>
+        <p>We don't hand over a report and walk away. Our team works alongside yours to implement strategy across stakeholder engagement, media relations, regulatory affairs, and internal communications. We measure, iterate, and deliver.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     STATS BAND
+     ============================================ -->
+<section class="stats section-coral">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number"><span class="counter" data-target="44">0</span>+</div>
+        <div class="stat-label">Years Combined Experience</div>
+      </div>
+      <div class="stat-item reveal stagger-1">
+        <div class="stat-number"><span class="counter" data-target="120">0</span>+</div>
+        <div class="stat-label">Stakeholders Mapped</div>
+      </div>
+      <div class="stat-item reveal stagger-2">
+        <div class="stat-number"><span class="counter" data-target="500">0</span>+</div>
+        <div class="stat-label">Data Points Analysed</div>
+      </div>
+      <div class="stat-item reveal stagger-3">
+        <div class="stat-number"><span class="counter" data-target="4">0</span></div>
+        <div class="stat-label">Case Studies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CASE STUDIES
+     ============================================ -->
+<section class="cases section-dark" id="cases">
+  <div class="container">
+    <div class="mono reveal">Selected Work</div>
+    <h2 class="reveal stagger-1">CASE STUDIES</h2>
+    <div class="cases-grid">
+      <div class="case-card reveal-left">
+        <div class="case-tag">Crisis &amp; Reputation</div>
+        <h3>Corporate Reputation Recovery</h3>
+        <p>A European industrial leader facing a multi-front reputational crisis. We deployed rapid stakeholder mapping, media strategy realignment, and a structured engagement programme that turned the narrative within weeks.</p>
+        <div class="case-metrics">
+          <div class="metric">
+            <span class="metric-value">3 wks</span>
+            <span class="metric-label">Crisis Contained</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">80%</span>
+            <span class="metric-label">Share Price Recovery</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal-right stagger-2">
+        <div class="case-tag">M&amp;A Communications</div>
+        <h3>Cross-Border Tech Acquisition</h3>
+        <p>Navigating the communications complexity of a major cross-border technology acquisition. From regulatory stakeholders to employee engagement, we managed every narrative thread to ensure deal completion and cultural integration.</p>
+        <div class="case-metrics">
+          <div class="metric">
+            <span class="metric-value">&euro;450M</span>
+            <span class="metric-label">Deal Value</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">92%</span>
+            <span class="metric-label">Employee Retention</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TESTIMONIAL
+     ============================================ -->
+<section class="testimonial section-dark">
+  <div class="container">
+    <div class="testimonial-inner reveal">
+      <span class="quote-mark">&ldquo;</span>
+      <blockquote>Most communications advisors we'd worked with relied on instinct. Duke brought data.</blockquote>
+      <cite>&mdash; Head of External Affairs, European Energy Company</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     DUKE ACADEMY
+     ============================================ -->
+<section class="academy section-dark" id="academy">
+  <div class="container">
+    <div class="academy-content">
+      <div class="mono reveal">Training &amp; Development</div>
+      <h2 class="reveal stagger-1">DUKE ACADEMY</h2>
+      <p class="academy-subtitle reveal stagger-2">AI-Powered Executive Training for Impactful Leadership</p>
+      <ul class="academy-list reveal stagger-3">
+        <li>Stakeholder Simulation &mdash; AI-driven scenario training for high-stakes conversations</li>
+        <li>Media Training 2.0 &mdash; Real-time feedback on messaging, body language, and narrative control</li>
+        <li>Crisis War Room &mdash; Immersive crisis simulation with live stakeholder pressure modelling</li>
+        <li>Board Communication Masterclass &mdash; Data-backed frameworks for executive-level persuasion</li>
+      </ul>
+      <a href="#contact" class="btn btn-arrow reveal stagger-4">
+        <span>Learn more</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CTA SECTION
+     ============================================ -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <h2 class="reveal">READY TO BUILD<br>BRIDGES?</h2>
+    <a href="mailto:info@dukestrategies.com" class="btn btn-solid btn-arrow reveal stagger-2">
+      <span>Get in touch</span>
+      <span class="arrow">&rarr;</span>
+    </a>
+    <div class="cta-contact reveal stagger-3">
+      <p>info@dukestrategies.com &nbsp;&bull;&nbsp; +31 (0)20 000 0000</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">Duke<span>.</span></a>
+        <p>Building bridges between business leaders and their stakeholders through data-driven strategy and corporate affairs.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#model">Methodology</a></li>
+          <li><a href="#cases">Case Studies</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Strategic Advisory</a></li>
+          <li><a href="#">Crisis Communications</a></li>
+          <li><a href="#">M&amp;A Communications</a></li>
+          <li><a href="#">Stakeholder Mapping</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@dukestrategies.com">info@dukestrategies.com</a></li>
+          <li><a href="tel:+31200000000">+31 (0)20 000 0000</a></li>
+          <li><a href="#">Amsterdam, Netherlands</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Duke Strategies. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Direction Label -->
+<div class="direction-label">Direction B &mdash; Bold</div>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ==========================================
+     NAV SCROLL + HAMBURGER
+     ========================================== */
+  const nav = document.getElementById('nav');
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('navMenu');
+
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+  });
+
+  // Close menu on link click
+  navMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ==========================================
+     TYPEWRITER EFFECT
+     ========================================== */
+  const typewriterEl = document.getElementById('typewriter');
+  const typewriterText = 'Corporate strategy \u00B7 Corporate affairs \u00B7 Stakeholder advisory';
+  let charIndex = 0;
+
+  function typeWriter() {
+    if (charIndex < typewriterText.length) {
+      typewriterEl.textContent += typewriterText.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeWriter, 40);
+    }
+  }
+
+  // Start typewriter after clip-reveal
+  setTimeout(typeWriter, 1200);
+
+  /* ==========================================
+     CLIP REVEAL (HERO)
+     ========================================== */
+  setTimeout(function() {
+    document.querySelectorAll('.clip-reveal').forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }, 300);
+
+  /* ==========================================
+     INTERSECTION OBSERVER — SCROLL REVEALS
+     ========================================== */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  /* ==========================================
+     COUNTER ANIMATION
+     ========================================== */
+  function easeOutExpo(t) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+  }
+
+  function animateCounter(el) {
+    var target = parseInt(el.getAttribute('data-target'), 10);
+    var duration = 2000;
+    var startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var easedProgress = easeOutExpo(progress);
+      el.textContent = Math.floor(easedProgress * target);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target;
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  var counterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.counter').forEach(function(el) {
+    counterObserver.observe(el);
+  });
+
+  /* ==========================================
+     MAGNETIC BUTTON EFFECT
+     ========================================== */
+  document.querySelectorAll('.btn').forEach(function(btn) {
+    btn.addEventListener('mousemove', function(e) {
+      var rect = btn.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)';
+    });
+
+    btn.addEventListener('mouseleave', function() {
+      btn.style.transform = 'translate(0, 0)';
+    });
+  });
+
+  /* ==========================================
+     SMOOTH SCROLL
+     ========================================== */
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

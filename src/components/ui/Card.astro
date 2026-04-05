@@ -1,0 +1,30 @@
+---
+interface Props {
+  class?: string;
+  hover?: boolean;
+}
+
+const { class: className = "", hover = true } = Astro.props;
+---
+
+<div class:list={["surface-card", hover && "surface-card--hover", className]}>
+  <slot />
+</div>
+
+<style>
+  .surface-card {
+    background: var(--surface-page);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .surface-card--hover {
+    transition: transform var(--transition-med), box-shadow var(--transition-med);
+  }
+
+  .surface-card--hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+</style>

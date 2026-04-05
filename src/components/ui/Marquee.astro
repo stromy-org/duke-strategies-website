@@ -1,0 +1,15 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+const text = `${items.join(" • ")} •`;
+---
+
+<section class="section--dark marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span class="marquee__text">{text}&nbsp;</span>
+    <span class="marquee__text">{text}&nbsp;</span>
+  </div>
+</section>

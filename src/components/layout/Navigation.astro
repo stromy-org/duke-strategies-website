@@ -1,0 +1,39 @@
+---
+import { navItems } from "../../data/nav";
+
+interface Props {
+  pathname?: string;
+}
+
+const { pathname = "/" } = Astro.props;
+const normalizedPath = pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+---
+
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo" aria-label="Duke Strategies Home">
+      <img src="/assets/logos/DukeStrategies_logo.svg" alt="Duke Strategies" width="180" height="32" />
+    </a>
+
+    <button class="nav__hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav__links">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={["nav__link", normalizedPath === item.href && "nav__link--active"]}
+          aria-current={normalizedPath === item.href ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+      <span class="nav__lang" aria-label="Language selector">
+        <a href="#" class="active" aria-current="true">EN</a> | <a href="#">NL</a>
+      </span>
+    </div>
+  </div>
+</nav>

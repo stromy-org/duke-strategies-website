@@ -1,0 +1,119 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  industries: string[];
+  deliverables: string[];
+  class?: string;
+}
+
+const { name, description, industries, deliverables, class: className = "" } = Astro.props;
+---
+
+<article class:list={["service-card", className]}>
+  <h4 class="service-card__title">{name}</h4>
+  <p class="service-card__desc">{description}</p>
+  <div class="service-card__industries">
+    {industries.map((industry) => (
+      <span class="service-card__tag">{industry}</span>
+    ))}
+  </div>
+  <div class="service-card__deliverables">
+    <span class="service-card__deliverables-label">Deliverables</span>
+    <ul>
+      {deliverables.map((deliverable) => (
+        <li>{deliverable}</li>
+      ))}
+    </ul>
+  </div>
+</article>
+
+<style>
+  .service-card {
+    background: var(--surface-page);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    padding: var(--sp-7) var(--sp-6);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
+    border-top: 4px solid transparent;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-top-color: var(--accent);
+  }
+
+  .service-card__title {
+    font-size: 1.1rem;
+    margin-bottom: var(--sp-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .service-card__desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: var(--sp-5);
+  }
+
+  .service-card__industries {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-4);
+  }
+
+  .service-card__tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: var(--sp-1) var(--sp-3);
+    background: rgba(255, 127, 102, 0.08);
+    color: var(--accent);
+    border-radius: 2px;
+    border: 1px solid rgba(255, 127, 102, 0.2);
+  }
+
+  .service-card__deliverables {
+    padding-top: var(--sp-4);
+    margin-top: var(--sp-4);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .service-card__deliverables-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: var(--sp-2);
+    display: block;
+  }
+
+  .service-card__deliverables ul {
+    list-style: none;
+  }
+
+  .service-card__deliverables li {
+    position: relative;
+    padding-left: var(--sp-5);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  .service-card__deliverables li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+</style>

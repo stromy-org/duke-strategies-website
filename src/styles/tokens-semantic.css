@@ -1,0 +1,87 @@
+/* ============================================================
+   Tier 2 — Semantic tokens
+   Maps Tier 1 brand primitives (brand-tokens.css) onto meaningful
+   roles. Components must consume semantic tokens, never primitives.
+   ============================================================ */
+
+:root {
+  /* ----- Surfaces ----- */
+  --surface-page:        var(--brand-background);        /* #FFFFFF */
+  --surface-alt:         #F7F7F8;                        /* subtle alt (used for section--alt) */
+  --surface-dark:        #1C1C1E;
+  --surface-dark-alt:    #2A2A2E;
+  --surface-inverse-text: #FFFFFF;
+
+  /* ----- Text ----- */
+  --text-heading:        #1A1A1C;
+  --text-body:           #4A4A4D;
+  --text-muted:          #807F83;
+  --text-on-dark:        #FFFFFF;
+  --text-on-dark-muted:  rgba(255, 255, 255, 0.75);
+
+  /* ----- Brand accent ----- */
+  --accent:              var(--brand-primary);
+  --accent-hover:        #E5664D;
+  --accent-soft:         rgba(255, 127, 102, 0.08);
+  --accent-softer:       rgba(255, 127, 102, 0.12);
+  --accent-line:         rgba(255, 127, 102, 0.3);
+
+  --rule:                #DFDFE0;
+  --rule-soft:           rgba(0, 0, 0, 0.06);
+
+  /* ----- Typography ----- */
+  --font-heading:        var(--brand-font-heading);
+  --font-body:           var(--brand-font-body);
+  --font-mono:           var(--brand-font-mono);
+
+  --heading-weight:      600;
+  --heading-tracking:    0.05em;
+  --label-tracking:      0.15em;
+  --ui-tracking:         0.08em;
+  --body-leading:        1.7;
+
+  /* ----- Spacing scale (8px base) ----- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 2.5rem;
+  --sp-8: 3rem;
+  --sp-9: 4rem;
+  --sp-10: 5rem;
+  --sp-11: 6rem;
+  --sp-12: 8rem;
+
+  /* ----- Layout ----- */
+  --container-max:  1200px;
+  --container-wide: 1400px;
+  --nav-height:     80px;
+
+  /* ----- Motion ----- */
+  --ease-out:        cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 0.2s var(--ease-out);
+  --transition-med:  0.4s var(--ease-out);
+  --transition-slow: 0.8s var(--ease-out);
+
+  /* ----- Elevation ----- */
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg:  0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.06);
+
+  /* ----- Component-level (Tier 3) ----- */
+  --nav-bg:           rgba(255, 255, 255, 0.98);
+  --card-bg:          var(--surface-page);
+  --card-border:      var(--rule-soft);
+  --card-radius:      3px;
+  --btn-radius:       2px;
+  --section-gap:      var(--sp-11);
+  --section-gap-sm:   var(--sp-9);
+  --section-gap-lg:   var(--sp-12);
+  --hero-overlay:
+    radial-gradient(ellipse at 20% 80%, rgba(255, 127, 102, 0.15) 0%, transparent 60%),
+    rgba(28, 28, 30, 0.65);
+  --banner-overlay:   rgba(28, 28, 30, 0.7);
+}

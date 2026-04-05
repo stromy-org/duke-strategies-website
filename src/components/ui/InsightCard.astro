@@ -1,0 +1,118 @@
+---
+interface Props {
+  badge: string;
+  date: string;
+  title: string;
+  excerpt: string;
+  href: string;
+  linkLabel: string;
+  class?: string;
+}
+
+const { badge, date, title, excerpt, href, linkLabel, class: className = "" } = Astro.props;
+---
+
+<article class:list={["insight-card", className]}>
+  <div class="insight-card__image">
+    <span class="insight-card__badge">{badge}</span>
+  </div>
+  <div class="insight-card__body">
+    <span class="insight-card__date">{date}</span>
+    <h4 class="insight-card__title">{title}</h4>
+    <p class="insight-card__excerpt">{excerpt}</p>
+    <a href={href} target="_blank" rel="noopener noreferrer" class="insight-card__link">
+      {linkLabel} &rarr;
+    </a>
+  </div>
+</article>
+
+<style>
+  .insight-card {
+    background: var(--surface-page);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-med), box-shadow var(--transition-med);
+  }
+
+  .insight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .insight-card__image {
+    height: 180px;
+    background: linear-gradient(135deg, #1c1c1e 0%, #2d2d30 50%, #8d4738 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .insight-card__image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 70%, rgba(255, 127, 102, 0.22) 0%, transparent 70%);
+  }
+
+  .insight-card__badge {
+    position: absolute;
+    top: var(--sp-3);
+    right: var(--sp-3);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    padding: var(--sp-1) var(--sp-3);
+    border-radius: 2px;
+    z-index: 1;
+  }
+
+  .insight-card__body {
+    padding: var(--sp-5) var(--sp-5) var(--sp-6);
+  }
+
+  .insight-card__date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-body);
+    margin-bottom: var(--sp-3);
+    display: block;
+  }
+
+  .insight-card__title {
+    font-size: 1.05rem;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.4;
+    margin-bottom: var(--sp-3);
+  }
+
+  .insight-card__excerpt {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: var(--sp-4);
+  }
+
+  .insight-card__link {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    transition: color var(--transition-fast);
+  }
+
+  .insight-card__link:hover {
+    color: var(--accent-hover);
+  }
+</style>
