@@ -34,6 +34,9 @@ const { badge, date, title, excerpt, href, linkLabel, class: className = "" } = 
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: transform var(--transition-med), box-shadow var(--transition-med);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .insight-card:hover {
@@ -74,6 +77,9 @@ const { badge, date, title, excerpt, href, linkLabel, class: className = "" } = 
 
   .insight-card__body {
     padding: var(--sp-5) var(--sp-5) var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
   }
 
   .insight-card__date {
@@ -98,6 +104,7 @@ const { badge, date, title, excerpt, href, linkLabel, class: className = "" } = 
     font-size: 0.9rem;
     line-height: 1.7;
     margin-bottom: var(--sp-4);
+    flex-grow: 1;
   }
 
   .insight-card__link {
@@ -110,6 +117,7 @@ const { badge, date, title, excerpt, href, linkLabel, class: className = "" } = 
     align-items: center;
     gap: var(--sp-2);
     transition: color var(--transition-fast);
+    margin-top: auto;
   }
 
   .insight-card__link:hover {

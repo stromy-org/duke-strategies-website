@@ -525,12 +525,18 @@ p:last-child { margin-bottom: 0; }
   position: relative;
   overflow: hidden;
   border-radius: 3px;
+  isolation: isolate;
 }
-.img-cover img {
+.img-cover > img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
+.img-cover--wide { aspect-ratio: 16 / 10; }
+.img-cover--hero { aspect-ratio: 5 / 4; }
 .img-cover--coral::after {
   content: '';
   position: absolute;
@@ -685,6 +691,8 @@ p:last-child { margin-bottom: 0; }
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-med);
   border-top: 4px solid transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -696,11 +704,13 @@ p:last-child { margin-bottom: 0; }
 .card__title {
   font-size: 1.1rem;
   margin-bottom: var(--sp-3);
+  overflow-wrap: break-word;
 }
 
 .card__text {
   font-size: 0.95rem;
   margin-bottom: var(--sp-5);
+  flex-grow: 1;
 }
 
 .card__link {
@@ -713,6 +723,7 @@ p:last-child { margin-bottom: 0; }
   align-items: center;
   gap: var(--sp-2);
   transition: color var(--transition-fast);
+  margin-top: auto;
 }
 
 .card__link:hover { color: var(--accent-hover); }
@@ -725,17 +736,18 @@ p:last-child { margin-bottom: 0; }
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--sp-6);
 }
 
-@media (max-width: 1024px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1024px) { .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px)  { .cards-grid { grid-template-columns: 1fr; } }
 
 /* ----- Case metrics ----- */
 .case-metrics {
-  display: flex;
-  gap: var(--sp-6);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-5) var(--sp-6);
   margin-top: var(--sp-5);
   padding-top: var(--sp-5);
   border-top: 1px solid var(--rule);
@@ -760,7 +772,7 @@ p:last-child { margin-bottom: 0; }
   color: var(--text-heading);
 }
 
-@media (max-width: 600px) { .case-metrics { flex-wrap: wrap; } }
+@media (max-width: 600px) { .case-metrics { grid-template-columns: 1fr; } }
 
 /* ----- Testimonial ----- */
 .testimonial {
