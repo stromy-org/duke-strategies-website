@@ -1,39 +1,47 @@
 ---
 import { navItems } from "../../data/nav";
+import ThemeToggle from "./ThemeToggle.astro";
+import LangSwitcher from "../ui/LangSwitcher.astro";
+import { useTranslations, localizedPath } from "../../i18n/utils";
+import type { SupportedLocale } from "../../i18n/pickLocale";
 
 interface Props {
   pathname?: string;
+  lang?: SupportedLocale;
 }
 
-const { pathname = "/" } = Astro.props;
+const { pathname = "/", lang = "en" } = Astro.props;
+const t = useTranslations(lang);
 const normalizedPath = pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
 ---
 
-<nav class="nav" role="navigation" aria-label="Main navigation">
+<nav class="nav" role="navigation" aria-label={t('aria.mainNav')}>
   <div class="nav__inner">
-    <a href="/" class="nav__logo" aria-label="Duke Strategies Home">
+    <a href={localizedPath('/', lang)} class="nav__logo" aria-label="Duke Strategies Home">
       <img src="/assets/logos/DukeStrategies_logo.svg" alt="Duke Strategies" width="180" height="32" />
     </a>
 
-    <button class="nav__hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
+    <button class="nav__hamburger" type="button" aria-label={t('aria.toggleMenu')} aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
 
     <div class="nav__links">
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class:list={["nav__link", normalizedPath === item.href && "nav__link--active"]}
-          aria-current={normalizedPath === item.href ? "page" : undefined}
-        >
-          {item.label}
-        </a>
-      ))}
-      <span class="nav__lang" aria-label="Language selector">
-        <a href="#" class="active" aria-current="true">EN</a> | <a href="#">NL</a>
-      </span>
+      {navItems.map((item) => {
+        const href = localizedPath(item.href, lang);
+        return (
+          <a
+            href={href}
+            class:list={["nav__link", normalizedPath === href && "nav__link--active"]}
+            aria-current={normalizedPath === href ? "page" : undefined}
+          >
+            {t(item.labelKey)}
+          </a>
+        );
+      })}
+      <ThemeToggle />
+      <LangSwitcher lang={lang} />
     </div>
   </div>
 </nav>

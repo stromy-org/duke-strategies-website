@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 import { site } from "../data/site";
+import { pickLocale, locales, type SupportedLocale } from "../i18n/pickLocale";
+import { stripLocalePrefix } from "../i18n/utils";
 
 interface Props {
   title?: string;
@@ -8,29 +10,43 @@ interface Props {
   pathname?: string;
   ogImage?: string;
   noIndex?: boolean;
+  lang?: SupportedLocale;
 }
 
 const {
   title = site.name,
-  description = site.description,
+  description = pickLocale(site.description, 'en'),
   pathname = "/",
   ogImage = "/assets/images/Erasmusbrug_zwart.jpg",
   noIndex = false,
+  lang = "en",
 } = Astro.props;
 
 const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 const canonical = new URL(pathname === "/" ? "/" : pathname, site.url).toString();
+const pathWithoutLocale = stripLocalePrefix(pathname);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
+    <script is:inline>
+      (function() {
+        var stored = localStorage.getItem('theme');
+        var preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', stored || preferred);
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />
+    {locales.map(l => (
+      <link rel="alternate" hreflang={l} href={new URL(`/${l}${pathWithoutLocale === '/' ? '/' : pathWithoutLocale}`, site.url).toString()} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={new URL(`/en${pathWithoutLocale === '/' ? '/' : pathWithoutLocale}`, site.url).toString()} />
     <link rel="icon" type="image/svg+xml" href="/assets/logos/DukeStrategies_logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -164,6 +180,17 @@ const canonical = new URL(pathname === "/" ? "/" : pathname, site.url).toString(
           });
         }
 
+        function initThemeToggle() {
+          var btn = document.querySelector('.theme-toggle');
+          if (!btn) return;
+          btn.addEventListener('click', function() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+          });
+        }
+
         function initSmoothScroll() {
           document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
             anchor.addEventListener("click", (event) => {
@@ -186,6 +213,7 @@ const canonical = new URL(pathname === "/" ? "/" : pathname, site.url).toString(
           initNavScroll();
           initMobileMenu();
           initSmoothScroll();
+          initThemeToggle();
         });
       })();
     </script>

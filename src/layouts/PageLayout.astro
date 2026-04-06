@@ -2,21 +2,23 @@
 import BaseLayout from "./BaseLayout.astro";
 import Navigation from "../components/layout/Navigation.astro";
 import Footer from "../components/layout/Footer.astro";
+import type { SupportedLocale } from "../i18n/pickLocale";
 
 interface Props {
   title: string;
   description: string;
   pathname: string;
   ogImage?: string;
+  lang?: SupportedLocale;
 }
 
-const { title, description, pathname, ogImage } = Astro.props;
+const { title, description, pathname, ogImage, lang = "en" } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} pathname={pathname} ogImage={ogImage}>
-  <Navigation pathname={pathname} />
+<BaseLayout title={title} description={description} pathname={pathname} ogImage={ogImage} lang={lang}>
+  <Navigation pathname={pathname} lang={lang} />
   <main>
     <slot />
   </main>
-  <Footer />
+  <Footer lang={lang} />
 </BaseLayout>

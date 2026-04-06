@@ -1,13 +1,16 @@
+import type { UIKey } from "../i18n/ui.en";
+
 export type NavItem = {
-  label: string;
+  labelKey: UIKey;
   href: string;
 };
 
+/** Navigation items — hrefs are locale-relative (no prefix). */
 export const navItems: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Who We Are", href: "/who-we-are" },
-  { label: "What We Do", href: "/what-we-do" },
-  { label: "Duke Academy", href: "/duke-academy" },
-  { label: "Insights", href: "/insights" },
-  { label: "Contact", href: "/contact" },
+  { labelKey: "nav.home", href: "/" },
+  { labelKey: "nav.who-we-are", href: "/who-we-are" },
+  { labelKey: "nav.what-we-do", href: "/what-we-do" },
+  { labelKey: "nav.duke-academy", href: "/duke-academy" },
+  { labelKey: "nav.insights", href: "/insights" },
+  { labelKey: "nav.contact", href: "/contact" },
 ];

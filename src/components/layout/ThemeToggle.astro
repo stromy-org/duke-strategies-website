@@ -1,0 +1,104 @@
+---
+/* ThemeToggle — sliding pill: lightbulb (left/light) ↔ star (right/dark) */
+---
+
+<button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+  <span class="theme-toggle__track">
+    <span class="theme-toggle__thumb"></span>
+    <!-- Lightbulb icon (left side) -->
+    <svg class="theme-toggle__icon theme-toggle__icon--light" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18h6" />
+      <path d="M10 22h4" />
+      <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" />
+    </svg>
+    <!-- 4-armed star icon (right side) -->
+    <svg class="theme-toggle__icon theme-toggle__icon--dark" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0 L14 9 L12 7 L10 9 Z" />
+      <path d="M24 12 L15 14 L17 12 L15 10 Z" />
+      <path d="M12 24 L10 15 L12 17 L14 15 Z" />
+      <path d="M0 12 L9 10 L7 12 L9 14 Z" />
+      <circle cx="12" cy="12" r="2" />
+    </svg>
+  </span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .theme-toggle__track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 44px;
+    height: 22px;
+    border-radius: 11px;
+    background: var(--rule-soft);
+    border: 1px solid var(--rule);
+    padding: 0 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .theme-toggle__thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+    z-index: 1;
+  }
+
+  .theme-toggle__icon {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Light mode: lightbulb active (left), star muted (right) */
+  .theme-toggle__icon--light {
+    color: #FFFFFF;
+    opacity: 1;
+  }
+  .theme-toggle__icon--dark {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  /* Dark mode: thumb slides right, star active */
+  :global([data-theme="dark"]) .theme-toggle__thumb {
+    transform: translateX(22px);
+    background: #F0F0F2;
+  }
+
+  :global([data-theme="dark"]) .theme-toggle__track {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  :global([data-theme="dark"]) .theme-toggle__icon--light {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+  :global([data-theme="dark"]) .theme-toggle__icon--dark {
+    color: #FFFFFF;
+    opacity: 1;
+  }
+
+  /* Hover */
+  .theme-toggle:hover .theme-toggle__track {
+    border-color: var(--accent);
+  }
+  :global([data-theme="dark"]) .theme-toggle:hover .theme-toggle__track {
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+</style>

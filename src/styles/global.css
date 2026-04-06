@@ -37,6 +37,35 @@ body {
   padding-top: var(--nav-height);
 }
 
+/* ----- Dark mode smooth transition ----- */
+body,
+.nav,
+.card,
+.section--dark,
+.section--alt,
+.footer,
+.step__number {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark theme: elements using hardcoded colors that need overrides */
+[data-theme="dark"] .btn--outline-dark {
+  border-color: var(--text-heading);
+  color: var(--text-heading);
+}
+[data-theme="dark"] .btn--outline-dark:hover {
+  background: var(--text-heading);
+  color: var(--surface-page);
+}
+
+[data-theme="dark"] .nav__links {
+  background: var(--surface-page);
+}
+
+[data-theme="dark"] .img-cover--dark::after {
+  background: rgba(10, 10, 12, 0.5);
+}
+
 img,
 video {
   display: block;
@@ -253,6 +282,10 @@ p:last-child { margin-bottom: 0; }
 .nav__lang a:hover,
 .nav__lang a.active { color: var(--accent); }
 
+.nav__links > .theme-toggle {
+  margin-left: var(--sp-4);
+}
+
 .nav__hamburger {
   display: none;
   flex-direction: column;
@@ -309,6 +342,11 @@ p:last-child { margin-bottom: 0; }
     padding-top: var(--sp-4);
     border-top: 1px solid var(--rule);
     width: 100%;
+  }
+
+  .theme-toggle {
+    order: 99;
+    margin-top: var(--sp-2);
   }
 }
 

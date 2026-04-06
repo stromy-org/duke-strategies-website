@@ -2,6 +2,15 @@
 import Icon from "../ui/Icon.astro";
 import { navItems } from "../../data/nav";
 import { site } from "../../data/site";
+import { useTranslations, localizedPath } from "../../i18n/utils";
+import { pickLocale, type SupportedLocale } from "../../i18n/pickLocale";
+
+interface Props {
+  lang?: SupportedLocale;
+}
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <footer class="footer">
@@ -9,7 +18,7 @@ import { site } from "../../data/site";
     <div class="footer__grid">
       <div>
         <img src="/assets/logos/DukeStrategies_logo_white.png" alt="Duke Strategies" class="footer__logo" />
-        <p class="footer__desc">{site.footerDescription}</p>
+        <p class="footer__desc">{pickLocale(site.footerDescription, lang)}</p>
       </div>
 
       <div>
@@ -26,7 +35,7 @@ import { site } from "../../data/site";
         <h6 class="footer__heading">Sitemap</h6>
         <div class="footer__links">
           {navItems.map((item) => (
-            <a href={item.href}>{item.label}</a>
+            <a href={localizedPath(item.href, lang)}>{t(item.labelKey)}</a>
           ))}
         </div>
       </div>

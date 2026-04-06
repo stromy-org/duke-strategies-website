@@ -85,3 +85,32 @@
     rgba(28, 28, 30, 0.65);
   --banner-overlay:   rgba(28, 28, 30, 0.7);
 }
+
+/* ----- Dark theme overrides ----- */
+[data-theme="dark"] {
+  --surface-page:        #121214;
+  --surface-alt:         #1C1C1E;
+  --surface-dark:        #0A0A0C;
+  --surface-dark-alt:    #161618;
+
+  --text-heading:        #F0F0F2;
+  --text-body:           #B0B0B4;
+  --text-muted:          #808084;
+
+  --rule:                #2A2A2E;
+  --rule-soft:           rgba(255, 255, 255, 0.06);
+
+  --nav-bg:              rgba(18, 18, 20, 0.98);
+  --card-bg:             #1C1C1E;
+  --card-border:         rgba(255, 255, 255, 0.08);
+
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg:  0 8px 30px rgba(0, 0, 0, 0.4);
+  --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.3);
+
+  --hero-overlay:
+    radial-gradient(ellipse at 20% 80%, rgba(255, 127, 102, 0.2) 0%, transparent 60%),
+    rgba(10, 10, 12, 0.75);
+  --banner-overlay: rgba(10, 10, 12, 0.8);
+}
