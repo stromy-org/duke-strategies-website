@@ -1,0 +1,247 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import Button from "../../components/ui/Button.astro";
+import CTABand from "../../components/ui/CTABand.astro";
+import TeamCard from "../../components/ui/TeamCard.astro";
+import { affiliates, associates, expertPartners, founders } from "../../data/company";
+import { useTranslations } from "../../i18n/utils";
+import { pickLocale } from "../../i18n/pickLocale";
+
+const lang = "nl";
+const t = useTranslations(lang);
+---
+
+<PageLayout
+  title="Who We Are"
+  description="Meet the seasoned experts at Duke Strategies with decades of experience in high-stakes business, political, and communications environments."
+  pathname="/nl/who-we-are"
+  ogImage="/assets/images/Erasmusbrug_zwart.jpg"
+  lang={lang}
+>
+  <section class="hero hero--short">
+    <img src="/assets/images/Erasmusbrug_zwart.jpg" alt="" class="hero__video" style="object-fit: cover;" aria-hidden="true" />
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <h1 class="hero-fade hero-fade-2">{t('whoWeAre.heroTitle')}</h1>
+      <p class="hero__subtitle hero-fade hero-fade-3">
+        {t('whoWeAre.heroSubtitle')}
+      </p>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <line x1="12" y1="6" x2="12" y2="18"></line>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="label animate">{t('whoWeAre.aboutLabel')}</span>
+      <h2 class="section-heading animate stagger-1">{t('whoWeAre.aboutHeading')}</h2>
+
+      <div class="max-w-lg animate stagger-2">
+        <p>
+          {t('whoWeAre.aboutP1')}
+        </p>
+        <p>
+          {t('whoWeAre.aboutP2')}
+        </p>
+        <p>
+          {t('whoWeAre.aboutP3')}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <span class="label animate">{t('whoWeAre.foundingPartners')}</span>
+
+      {founders.map((founder, index) => (
+        <div class:list={["partner", index % 2 === 1 && "partner--reverse", "animate", `stagger-${index + 1}`]}>
+          <div class="partner__photo">
+            <img src={founder.image} alt={founder.alt} />
+          </div>
+          <div class="partner__info">
+            <h3 class="partner__name">{founder.name}</h3>
+            <span class="partner__title">{pickLocale(founder.title, lang)}</span>
+            <p class="partner__bio">{pickLocale(founder.bio, lang)}</p>
+            <a href={`mailto:${founder.email}`} class="partner__email">{founder.email}</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="label animate">{t('whoWeAre.expertPartners')}</span>
+      <div class="cards-grid" style="margin-top: var(--sp-6);">
+        {expertPartners.map((partner, index) => (
+          <TeamCard name={partner.name} title={pickLocale(partner.title, lang)} image={partner.image} alt={partner.alt} bio={pickLocale(partner.bio, lang)} class={`animate stagger-${(index % 3) + 1}`} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <span class="label animate">{t('whoWeAre.associates')}</span>
+      <div class="cards-grid" style="margin-top: var(--sp-6);">
+        {associates.map((associate, index) => (
+          <TeamCard name={associate.name} title={pickLocale(associate.title, lang)} image={associate.image} alt={associate.alt} bio={pickLocale(associate.bio, lang)} class={`animate stagger-${(index % 3) + 1}`} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="label animate">{t('whoWeAre.affiliates')}</span>
+      <h2 class="section-heading animate stagger-1">{t('whoWeAre.affiliates.heading')}</h2>
+      <p class="animate stagger-2 max-w-lg">{t('whoWeAre.affiliates.text')}</p>
+
+      <div class="affiliate">
+        {affiliates.map((affiliate, index) => (
+          <div class={`affiliate__block animate stagger-${index + 3}`}>
+            <h4>{affiliate.name}</h4>
+            <p>{pickLocale(affiliate.description, lang)}</p>
+            <Button href={affiliate.href} variant="text" target="_blank" rel="noopener noreferrer" class="affiliate__link">
+              {pickLocale(affiliate.label, lang)}
+            </Button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABand title={t('whoWeAre.cta.title')} description={t('whoWeAre.cta.description')} href="/nl/contact" label={t('cta.button')} />
+</PageLayout>
+
+<style>
+  .partner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--sp-8);
+    align-items: start;
+    padding: var(--sp-8) 0;
+  }
+
+  .partner + .partner {
+    border-top: 1px solid var(--rule);
+  }
+
+  .partner--reverse {
+    grid-template-columns: 1.5fr 1fr;
+  }
+
+  .partner--reverse .partner__photo {
+    order: 2;
+  }
+
+  .partner--reverse .partner__info {
+    order: 1;
+  }
+
+  .partner__photo img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .partner__name {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    margin-bottom: var(--sp-2);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .partner__title {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: var(--sp-5);
+    display: block;
+  }
+
+  .partner__bio {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: var(--sp-4);
+  }
+
+  .partner__email {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    transition: color var(--transition-fast);
+  }
+
+  .partner__email:hover {
+    color: var(--accent-hover);
+  }
+
+  .affiliate {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-8);
+    margin-top: var(--sp-8);
+  }
+
+  .affiliate__block {
+    padding: var(--sp-6);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    transition: border-color var(--transition-med), box-shadow var(--transition-med);
+  }
+
+  .affiliate__block:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
+  }
+
+  .affiliate__block h4 {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1.2rem;
+    margin-bottom: var(--sp-3);
+  }
+
+  .affiliate__block p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .affiliate__link {
+    margin-top: var(--sp-4);
+  }
+
+  @media (max-width: 768px) {
+    .partner,
+    .partner--reverse,
+    .affiliate {
+      grid-template-columns: 1fr;
+    }
+
+    .partner--reverse .partner__photo,
+    .partner--reverse .partner__info {
+      order: unset;
+    }
+
+    .partner__photo img {
+      max-width: 320px;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+</style>

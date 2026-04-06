@@ -1,0 +1,388 @@
+---
+import PageLayout from "../../../layouts/PageLayout.astro";
+import CTABand from "../../../components/ui/CTABand.astro";
+import ServiceCard from "../../../components/ui/ServiceCard.astro";
+import { services } from "../../../data/company";
+import { useTranslations } from "../../../i18n/utils";
+import { pickLocale } from "../../../i18n/pickLocale";
+
+const lang = "en";
+const t = useTranslations(lang);
+
+export async function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+
+const currentIndex = services.findIndex((s) => s.slug === service.slug);
+const relatedServices = services
+  .filter((_, i) => i !== currentIndex)
+  .slice(0, 3);
+---
+
+<PageLayout
+  title={`${pickLocale(service.name, lang)} — Duke Strategies`}
+  description={pickLocale(service.tagline, lang)}
+  pathname={`/en/services/${service.slug}`}
+  lang={lang}
+>
+  <section class="hero hero--service">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <a href="/en/what-we-do" class="hero__back">&larr; {t('service.backToServices')}</a>
+      <h1 class="hero-fade hero-fade-1">{pickLocale(service.name, lang)}</h1>
+      <p class="hero__tagline hero-fade hero-fade-2">{pickLocale(service.tagline, lang)}</p>
+      <div class="hero__tags hero-fade hero-fade-3">
+        {service.industries.map((tag) => (
+          <span class="hero__tag">{pickLocale(tag, lang)}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container service-layout">
+      <div class="service-body">
+        <div class="service-block">
+          <span class="label">{t('service.overview')}</span>
+          <p class="service-block__text">{pickLocale(service.description, lang)}</p>
+        </div>
+
+        <div class="service-block">
+          <span class="label">{t('service.challenge')}</span>
+          <p class="service-block__text">{pickLocale(service.longform.challenge, lang)}</p>
+        </div>
+
+        <div class="service-block">
+          <span class="label">{t('service.approach')}</span>
+          <ol class="service-approach">
+            {service.longform.approach.map((step) => (
+              <li>{pickLocale(step, lang)}</li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="service-block">
+          <span class="label">{t('service.signals')}</span>
+          <ul class="service-signals">
+            {service.longform.signals.map((signal) => (
+              <li>{pickLocale(signal, lang)}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <aside class="service-sidebar">
+        <div class="sidebar-card">
+          <span class="sidebar-card__label">{t('service.deliverables')}</span>
+          <ul class="sidebar-card__list">
+            {service.deliverables.map((d) => (
+              <li>{pickLocale(d, lang)}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="sidebar-cta">
+          <h4 class="sidebar-cta__title">{t('service.readyToDiscuss')}</h4>
+          <p class="sidebar-cta__text">{t('service.sidebarText')}</p>
+          <a href="/en/contact" class="sidebar-cta__link">{t('service.getInTouch')} &rarr;</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {relatedServices.length > 0 && (
+    <section class="section section--alt">
+      <div class="container">
+        <span class="label">{t('service.relatedServices')}</span>
+        <h2 class="section-heading" style="margin-bottom: var(--sp-8);">{t('service.exploreMore')}</h2>
+        <div class="related-grid">
+          {relatedServices.map((rs) => (
+            <ServiceCard name={pickLocale(rs.name, lang)} tagline={pickLocale(rs.tagline, lang)} description={pickLocale(rs.description, lang)} industries={rs.industries.map((i) => pickLocale(i, lang))} deliverables={rs.deliverables.map((d) => pickLocale(d, lang))} href={'/en/services/' + rs.slug} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CTABand
+    title={t('cta.title')}
+    description={t('cta.description')}
+    href="/en/contact"
+    label={t('cta.button')}
+  />
+</PageLayout>
+
+<style>
+  .hero--service {
+    position: relative;
+    min-height: 380px;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--sp-10) 0 var(--sp-8);
+    background: var(--surface-dark, #1a1a1a);
+    overflow: hidden;
+  }
+
+  .hero--service .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: 1;
+  }
+
+  .hero--service .hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--sp-6);
+    width: 100%;
+  }
+
+  .hero__back {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    margin-bottom: var(--sp-5);
+    transition: color var(--transition-fast);
+  }
+
+  .hero__back:hover {
+    color: var(--accent);
+  }
+
+  .hero--service h1 {
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin-bottom: var(--sp-3);
+  }
+
+  .hero__tagline {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 640px;
+    margin-bottom: var(--sp-5);
+  }
+
+  .hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+
+  .hero__tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: var(--sp-1) var(--sp-3);
+    border: 1px solid rgba(255, 127, 102, 0.4);
+    color: var(--accent);
+    border-radius: 2px;
+  }
+
+  .service-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: var(--sp-10);
+    align-items: start;
+  }
+
+  .service-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-8);
+  }
+
+  .service-block__text {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-body);
+  }
+
+  .service-approach {
+    counter-reset: approach;
+    list-style: none;
+    padding: 0;
+  }
+
+  .service-approach li {
+    position: relative;
+    padding-left: var(--sp-8);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-body);
+    margin-bottom: var(--sp-4);
+    counter-increment: approach;
+  }
+
+  .service-approach li::before {
+    content: counter(approach, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 700;
+    opacity: 0.6;
+  }
+
+  .service-signals {
+    list-style: none;
+    padding: 0;
+  }
+
+  .service-signals li {
+    position: relative;
+    padding-left: var(--sp-6);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-body);
+    margin-bottom: var(--sp-3);
+  }
+
+  .service-signals li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .service-sidebar {
+    position: sticky;
+    top: var(--sp-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+  }
+
+  .sidebar-card {
+    background: var(--surface-alt, #f5f5f5);
+    border-radius: 3px;
+    padding: var(--sp-6);
+    border-top: 3px solid var(--accent);
+  }
+
+  .sidebar-card__label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: var(--sp-4);
+  }
+
+  .sidebar-card__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar-card__list li {
+    position: relative;
+    padding-left: var(--sp-5);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--text-body);
+  }
+
+  .sidebar-card__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .sidebar-cta {
+    background: var(--surface-dark, #1a1a1a);
+    border-radius: 3px;
+    padding: var(--sp-6);
+    color: #fff;
+  }
+
+  .sidebar-cta__title {
+    font-size: 1.1rem;
+    margin-bottom: var(--sp-3);
+    color: #fff;
+  }
+
+  .sidebar-cta__text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--sp-5);
+  }
+
+  .sidebar-cta__link {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .sidebar-cta__link:hover {
+    color: #fff;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-6);
+  }
+
+  @media (max-width: 1024px) {
+    .service-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .service-sidebar {
+      position: static;
+      flex-direction: row;
+    }
+
+    .sidebar-card,
+    .sidebar-cta {
+      flex: 1;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .service-sidebar {
+      flex-direction: column;
+    }
+
+    .hero--service {
+      min-height: 300px;
+    }
+  }
+</style>

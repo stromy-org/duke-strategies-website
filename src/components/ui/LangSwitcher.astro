@@ -1,0 +1,25 @@
+---
+import { locales, type SupportedLocale } from '../../i18n/pickLocale';
+import { stripLocalePrefix } from '../../i18n/utils';
+
+interface Props {
+  lang: SupportedLocale;
+}
+
+const { lang } = Astro.props;
+const stripped = stripLocalePrefix(Astro.url.pathname);
+const labels: Record<SupportedLocale, string> = { en: 'EN', nl: 'NL' };
+---
+
+<span class="nav__lang" aria-label="Language selector">
+  {locales.map((code, i) => (
+    <>
+      {i > 0 && <span aria-hidden="true"> | </span>}
+      {code === lang ? (
+        <span class="active" aria-current="true">{labels[code]}</span>
+      ) : (
+        <a href={`/${code}${stripped === '/' ? '/' : stripped}`}>{labels[code]}</a>
+      )}
+    </>
+  ))}
+</span>

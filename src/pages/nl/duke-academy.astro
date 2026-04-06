@@ -1,0 +1,237 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import CTABand from "../../components/ui/CTABand.astro";
+import Icon from "../../components/ui/Icon.astro";
+import ProgramCard from "../../components/ui/ProgramCard.astro";
+import { academyPrograms } from "../../data/company";
+import { useTranslations } from "../../i18n/utils";
+import { pickLocale } from "../../i18n/pickLocale";
+
+const lang = "nl";
+const t = useTranslations(lang);
+---
+
+<PageLayout
+  title="Duke Academy"
+  description="Duke Academy is Duke Strategies' AI-powered executive training branch for high-stakes communication, stakeholder dialogue, and strategic leadership."
+  pathname="/nl/duke-academy"
+  ogImage="/assets/images/Pythonbrug_Amsterdam_contrast.jpg"
+  lang={lang}
+>
+  <section class="hero hero--academy">
+    <img src="/assets/images/Pythonbrug_Amsterdam_contrast.jpg" alt="" class="hero__bg" aria-hidden="true" />
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <img
+        src="/assets/logos/DukeAcademy_rgb_no_padding.svg"
+        alt="Duke Academy"
+        class="hero__academy-logo hero-fade hero-fade-1"
+      />
+      <h1 class="hero-fade hero-fade-2">{t('dukeAcademy.heroSubtitle')}</h1>
+      <p class="hero__subtitle hero-fade hero-fade-3">
+        {t('dukeAcademy.heroText')}
+      </p>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <line x1="12" y1="6" x2="12" y2="18"></line>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="label animate">{t('dukeAcademy.title')}</span>
+      <h2 class="section-heading animate stagger-1">{t('dukeAcademy.trainingHeading')}</h2>
+
+      <div class="grid grid--7-5 items-start" style="margin-top: var(--sp-6);">
+        <div class="animate stagger-2">
+          <p>
+            {t('dukeAcademy.introP1')}
+          </p>
+          <p>
+            {t('dukeAcademy.introP2')}
+          </p>
+        </div>
+        <div class="img-cover img-cover--coral animate stagger-3" style="min-height: 360px;">
+          <img src="/assets/images/cable-bridge-golden-hour.jpg" alt="Bridge at golden hour" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <span class="label animate">{t('dukeAcademy.approachLabel')}</span>
+      <h2 class="section-heading animate stagger-1">{t('dukeAcademy.approachHeading')}</h2>
+
+      <div class="grid grid--7-5 items-start" style="margin-top: var(--sp-6);">
+        <div class="animate stagger-2">
+          <p>
+            {t('dukeAcademy.approachP1')}
+          </p>
+          <p>
+            {t('dukeAcademy.approachP2')}
+          </p>
+        </div>
+        <div class="img-cover img-cover--coral animate stagger-3" style="min-height: 360px;">
+          <img src="/assets/images/modern-cable-bridge-calm-water.jpg" alt="Modern bridge over calm water" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="label animate">{t('dukeAcademy.programs')}</span>
+      <h2 class="section-heading animate stagger-1">{t('dukeAcademy.programs')}</h2>
+
+      <div class="program-grid">
+        {academyPrograms.map((program, index) => (
+          <ProgramCard title={pickLocale(program.title, lang)} description={pickLocale(program.description, lang)} icon={program.icon} class={`animate stagger-${(index % 4) + 2}`} />
+        ))}
+      </div>
+
+      <div class="program-note animate stagger-6">
+        {t('dukeAcademy.programNote')}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <span class="label animate">{t('dukeAcademy.whyLabel')}</span>
+      <h2 class="section-heading animate stagger-1">{t('dukeAcademy.whyHeading')}</h2>
+
+      <div class="animate stagger-2" style="max-width: 720px;">
+        <ul class="feature-list">
+          <li><Icon name="check" /> {t('dukeAcademy.feature1')}</li>
+          <li><Icon name="check" /> {t('dukeAcademy.feature2')}</li>
+          <li><Icon name="check" /> {t('dukeAcademy.feature3')}</li>
+          <li><Icon name="check" /> {t('dukeAcademy.feature4')}</li>
+          <li><Icon name="check" /> {t('dukeAcademy.feature5')}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="result-banner">
+    <img
+      src="/assets/images/shutterstock_1510566293_RoyalWelshbrug_zwart_1920x1280px_dark.jpg"
+      alt=""
+      class="result-banner__bg"
+      aria-hidden="true"
+    />
+    <div class="result-banner__overlay"></div>
+    <div class="result-banner__content">
+      <span class="label animate" style="color: var(--accent);">{t('dukeAcademy.outcomeLabel')}</span>
+      <h2 class="animate stagger-1">{t('dukeAcademy.resultHeading')}</h2>
+      <p class="animate stagger-2">
+        {t('dukeAcademy.resultText')}
+      </p>
+    </div>
+  </div>
+
+  <CTABand
+    title={t('dukeAcademy.cta.title')}
+    description={t('dukeAcademy.cta.description')}
+    href="/nl/contact"
+    label={t('cta.button')}
+  />
+</PageLayout>
+
+<style>
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-6);
+    margin-top: var(--sp-8);
+  }
+
+  .program-note {
+    margin-top: var(--sp-8);
+    padding: var(--sp-6);
+    background: rgba(255, 127, 102, 0.06);
+    border-left: 4px solid var(--accent);
+    border-radius: 3px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .feature-list {
+    list-style: none;
+    margin: var(--sp-6) 0;
+  }
+
+  .feature-list li {
+    padding: var(--sp-3) 0;
+    display: flex;
+    gap: var(--sp-3);
+    align-items: flex-start;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .feature-list :global(.icon) {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.75rem;
+    margin-top: 0.15rem;
+  }
+
+  .result-banner {
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .result-banner__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .result-banner__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(28, 28, 30, 0.75);
+  }
+
+  .result-banner__content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--sp-10) var(--sp-5);
+  }
+
+  .result-banner__content h2 {
+    color: #fff;
+    margin-bottom: var(--sp-5);
+  }
+
+  .result-banner__content p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  @media (max-width: 768px) {
+    .program-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

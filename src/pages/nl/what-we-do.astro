@@ -1,0 +1,182 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import CTABand from "../../components/ui/CTABand.astro";
+import ServiceCard from "../../components/ui/ServiceCard.astro";
+import { services } from "../../data/company";
+import { useTranslations } from "../../i18n/utils";
+import { pickLocale } from "../../i18n/pickLocale";
+
+const lang = "nl";
+const t = useTranslations(lang);
+---
+
+<PageLayout
+  title="What We Do"
+  description="Duke Strategies uses an Analyse, Create & Execute model to build stakeholder-proof strategy, narrative, and implementation."
+  pathname="/nl/what-we-do"
+  ogImage="/assets/images/Nesciobrug.jpg"
+  lang={lang}
+>
+  <section class="hero hero--page">
+    <img src="/assets/images/Nesciobrug.jpg" alt="" class="hero__bg" aria-hidden="true" />
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <h1 class="hero-fade hero-fade-1">{t('whatWeDo.heroTitle')}</h1>
+      <p class="hero__subtitle hero-fade hero-fade-2">
+        {t('whatWeDo.heroSubtitle')}
+      </p>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <line x1="12" y1="6" x2="12" y2="18"></line>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="label animate">{t('whatWeDo.modelLabel')}</span>
+      <h2 class="section-heading animate stagger-1">{t('whatWeDo.modelHeading')}</h2>
+      <p class="animate stagger-2 max-w-lg" style="margin-bottom: var(--sp-8);">
+        {t('whatWeDo.modelIntro')}
+      </p>
+
+      <div class="ace-steps">
+        <div class="ace-step animate stagger-2">
+          <div class="ace-step__number">01</div>
+          <div class="ace-step__body">
+            <h3>{t('whatWeDo.step1.title')}</h3>
+            <p>
+              {t('whatWeDo.step1.text')}
+            </p>
+          </div>
+        </div>
+
+        <div class="ace-step animate stagger-3">
+          <div class="ace-step__number">02</div>
+          <div class="ace-step__body">
+            <h3>{t('whatWeDo.step2.title')}</h3>
+            <p>
+              {t('whatWeDo.step2.text')}
+            </p>
+            <p>
+              {t('whatWeDo.step2.text2')}
+            </p>
+          </div>
+        </div>
+
+        <div class="ace-step animate stagger-4">
+          <div class="ace-step__number">03</div>
+          <div class="ace-step__body">
+            <h3>{t('whatWeDo.step3.title')}</h3>
+            <p>
+              {t('whatWeDo.step3.text')}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="label animate">{t('whatWeDo.servicesLabel')}</span>
+      <h2 class="section-heading animate stagger-1">{t('whatWeDo.title')}</h2>
+
+      <div class="services-grid">
+        {services.map((service, index) => (
+          <ServiceCard name={pickLocale(service.name, lang)} tagline={pickLocale(service.tagline, lang)} description={pickLocale(service.description, lang)} industries={service.industries.map((i) => pickLocale(i, lang))} deliverables={service.deliverables.map((d) => pickLocale(d, lang))} href={'/nl/services/' + service.slug} class={`animate stagger-${(index % 6) + 1}`} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    title={t('whatWeDo.cta.title')}
+    description={t('whatWeDo.cta.description')}
+    href="/nl/contact"
+    label={t('cta.button')}
+  />
+</PageLayout>
+
+<style>
+  .ace-step {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: var(--sp-6);
+    align-items: start;
+    padding: var(--sp-8) 0;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .ace-step:last-child {
+    border-bottom: none;
+  }
+
+  .ace-step__number {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--accent);
+    line-height: 1;
+    opacity: 0.25;
+  }
+
+  .ace-step__body h3 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--sp-4);
+    color: var(--text-heading);
+  }
+
+  .ace-step__body p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  .ace-steps {
+    position: relative;
+  }
+
+  .ace-steps::before {
+    content: "";
+    position: absolute;
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    opacity: 0.15;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-6);
+    margin-top: var(--sp-8);
+  }
+
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ace-step {
+      grid-template-columns: 60px 1fr;
+      gap: var(--sp-4);
+    }
+
+    .ace-steps::before {
+      left: 30px;
+    }
+  }
+
+</style>

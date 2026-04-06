@@ -1,0 +1,214 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import Button from "../../components/ui/Button.astro";
+import CTABand from "../../components/ui/CTABand.astro";
+import Marquee from "../../components/ui/Marquee.astro";
+import StatBlock from "../../components/ui/StatBlock.astro";
+import Testimonial from "../../components/ui/Testimonial.astro";
+import { academyPrograms, caseStudies, services, testimonials } from "../../data/company";
+import { site } from "../../data/site";
+import { homeStats } from "../../data/stats";
+import { useTranslations } from "../../i18n/utils";
+import { pickLocale } from "../../i18n/pickLocale";
+
+const lang = "en";
+const t = useTranslations(lang);
+const featuredCase = caseStudies[0];
+const featuredServices = services.slice(0, 6);
+---
+
+<PageLayout
+  title="Corporate Strategy & Stakeholder Advisory"
+  description="Duke Strategies helps business leaders build stakeholder-proof strategy at the intersection of corporate strategy, corporate affairs, and communications."
+  pathname="/en/"
+  ogImage="/assets/images/Erasmusbrug_zwart.jpg"
+  lang={lang}
+>
+  <section class="hero">
+    <video class="hero__video" autoplay muted loop playsinline poster="/assets/images/Erasmusbrug_zwart.jpg">
+      <source src="/assets/video/AquaductHarderwijk_1920x1080px.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <img src="/assets/logos/DukeStrategies_logo.svg" alt="" class="hero__logo hero-fade hero-fade-1" aria-hidden="true" />
+      <h1 class="hero-fade hero-fade-2">{pickLocale(site.title, lang)}</h1>
+      <p class="hero__subtitle hero-fade hero-fade-3">
+        {t('hero.subtitle')}
+      </p>
+      <Button href="/en/what-we-do" class="hero-fade hero-fade-4">{t('hero.cta')}</Button>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <line x1="12" y1="6" x2="12" y2="18"></line>
+      </svg>
+    </div>
+  </section>
+
+  <Marquee items={site.marqueeItems} />
+
+  <section id="about" class="section">
+    <div class="container">
+      <span class="label animate">{t('section.about')}</span>
+      <h2 class="section-heading animate stagger-1">{t('section.about.heading')}</h2>
+
+      <div class="grid grid--7-5 items-start" style="margin-top: var(--sp-8);">
+        <div class="animate stagger-2">
+          <img
+            src="/assets/logos/DukeStrategies_logo_grey.svg"
+            alt="Duke Strategies"
+            style="width: 160px; margin-bottom: var(--sp-6);"
+          />
+          <p>{t('section.about.p1')}</p>
+          <p>{t('section.about.p2')}</p>
+          <p>{t('section.about.p3')}</p>
+          <Button href="/en/who-we-are" variant="text" class="mt-6">{t('section.about.cta')}</Button>
+        </div>
+        <div class="img-cover img-cover--coral animate stagger-3" style="min-height: 400px;">
+          <img src="/assets/images/Erasmusbrug_zwart.jpg" alt="Erasmus Bridge, Rotterdam" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="banner">
+    <img src="/assets/images/Nesciobrug.jpg" alt="" class="banner__bg" aria-hidden="true" />
+    <div class="banner__overlay"></div>
+    <div class="banner__content container" style="padding: var(--sp-10) var(--sp-5);">
+      <div style="max-width: 720px;">
+        <span class="label animate">{t('section.philosophy')}</span>
+        <h2 class="animate stagger-1" style="color: #fff;">{t('section.philosophy.heading')}</h2>
+        <p class="animate stagger-2" style="color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.8; margin-top: var(--sp-5);">
+          {t('section.philosophy.text')}
+          <span class="highlight"> {t('section.philosophy.highlight')} </span>
+          {t('section.philosophy.textCont')}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--dark section--sm">
+    <div class="container">
+      <div class="stats">
+        {homeStats.map((stat, index) => (
+          <StatBlock value={stat.value} suffix={stat.suffix} label={pickLocale(stat.label, lang)} class={`animate stagger-${index + 1}`} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container text-center">
+      <span class="label animate">{t('section.approach')}</span>
+      <h2 class="section-heading animate stagger-1">{t('section.approach.heading')}</h2>
+
+      <div class="steps" style="margin-top: var(--sp-9);">
+        <div class="step animate stagger-2">
+          <div class="step__number">1</div>
+          <div class="step__title">{t('section.approach.step1.title')}</div>
+          <p class="step__text">{t('section.approach.step1.text')}</p>
+        </div>
+        <div class="step animate stagger-3">
+          <div class="step__number">2</div>
+          <div class="step__title">{t('section.approach.step2.title')}</div>
+          <p class="step__text">{t('section.approach.step2.text')}</p>
+        </div>
+        <div class="step animate stagger-4">
+          <div class="step__number">3</div>
+          <div class="step__title">{t('section.approach.step3.title')}</div>
+          <p class="step__text">{t('section.approach.step3.text')}</p>
+        </div>
+      </div>
+
+      <Button href="/en/what-we-do" class="mt-8 animate stagger-5">{t('section.approach.cta')}</Button>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <span class="label animate">{t('section.expertise')}</span>
+      <h2 class="section-heading animate stagger-1">{t('section.expertise.heading')}</h2>
+
+      <div class="cards-grid" style="margin-top: var(--sp-8);">
+        {featuredServices.map((service, index) => (
+          <div class={`card animate stagger-${(index % 6) + 1}`}>
+            <h4 class="card__title">{pickLocale(service.name, lang)}</h4>
+            <p class="card__text">{pickLocale(service.tagline, lang)}</p>
+            <a href={`/en/services/${service.slug}`} class="card__link">{t('card.learnMore')}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="label animate">{t('section.caseStudy')}</span>
+
+      <div class="grid grid--7-5 items-center" style="margin-top: var(--sp-6);">
+        <div class="animate stagger-1">
+          <h3 style="text-transform: none; letter-spacing: 0; font-size: 1.5rem; line-height: 1.4;">{pickLocale(featuredCase.title, lang)}</h3>
+          <p style="margin-top: var(--sp-5);">{pickLocale(featuredCase.shortSummary!, lang)}</p>
+
+          <div class="case-metrics">
+            {featuredCase.metrics.map((metric) => (
+              <div class="case-metric">
+                <span class="case-metric__value">{metric.value}</span>
+                <span class="case-metric__label">{pickLocale(metric.label, lang)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="img-cover img-cover--coral animate stagger-2" style="min-height: 360px;">
+          <img src={featuredCase.image} alt={pickLocale(featuredCase.imageAlt, lang)} style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <Testimonial quote={pickLocale(testimonials[0].quote, lang)} author={pickLocale(testimonials[0].author, lang)} class="animate" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--7-5 items-center">
+        <div class="animate stagger-1">
+          <img
+            src="/assets/logos/DukeAcademy_rgb_no_padding.svg"
+            alt="Duke Academy"
+            style="width: 200px; margin-bottom: var(--sp-5);"
+          />
+          <h3 style="text-transform: none; letter-spacing: 0; font-size: 1.4rem; line-height: 1.4;">
+            {t('section.academy.heading')}
+          </h3>
+          <p style="margin-top: var(--sp-4);">
+            {t('section.academy.text')}
+          </p>
+
+          <ul class="academy-programs">
+            {academyPrograms.map((program) => (
+              <li>{pickLocale(program.title, lang)}</li>
+            ))}
+          </ul>
+
+          <Button href="/en/duke-academy" class="mt-6">{t('section.academy.cta')}</Button>
+        </div>
+        <div class="img-cover img-cover--coral animate stagger-2" style="min-height: 400px;">
+          <img src="/assets/images/Pythonbrug_Amsterdam_contrast.jpg" alt="Python Bridge, Amsterdam" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    title={t('cta.title')}
+    description={t('cta.description')}
+    href="/en/contact"
+    label={t('cta.button')}
+  />
+</PageLayout>

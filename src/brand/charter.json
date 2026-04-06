@@ -171,6 +171,17 @@
       "domain": "dukestrategies.com",
       "analytics": "plausible",
       "contactForm": "none"
+    },
+    "i18n": {
+      "enabled": true,
+      "defaultLocale": "en",
+      "locales": ["en", "nl"],
+      "labels": { "en": "English", "nl": "Nederlands" },
+      "routing": "prefix-default",
+      "fallbackLocale": "en",
+      "localeDetection": false,
+      "translationWorkflow": "llm",
+      "translateContentCollections": true
     }
   },
   "formatting": {
