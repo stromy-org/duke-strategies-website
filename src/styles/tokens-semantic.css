@@ -55,7 +55,7 @@
   --sp-12: 8rem;
 
   /* ----- Layout ----- */
-  --container-max:  1200px;
+  --container-max:  1320px;
   --container-wide: 1400px;
   --nav-height:     80px;
 
@@ -77,7 +77,7 @@
   --card-border:      var(--rule-soft);
   --card-radius:      3px;
   --btn-radius:       2px;
-  --section-gap:      var(--sp-11);
+  --section-gap:      var(--sp-10);
   --section-gap-sm:   var(--sp-9);
   --section-gap-lg:   var(--sp-12);
   --hero-overlay:

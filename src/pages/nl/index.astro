@@ -14,7 +14,7 @@ import { pickLocale } from "../../i18n/pickLocale";
 const lang = "nl";
 const t = useTranslations(lang);
 const featuredCase = caseStudies[0];
-const featuredServices = services.slice(0, 6);
+const featuredServices = services;
 ---
 
 <PageLayout
@@ -66,8 +66,8 @@ const featuredServices = services.slice(0, 6);
           <p>{t('section.about.p3')}</p>
           <Button href="/nl/who-we-are" variant="text" class="mt-6">{t('section.about.cta')}</Button>
         </div>
-        <div class="img-cover img-cover--coral animate stagger-3" style="min-height: 400px;">
-          <img src="/assets/images/Erasmusbrug_zwart.jpg" alt="Erasmus Bridge, Rotterdam" style="width: 100%; height: 100%; object-fit: cover;" />
+        <div class="img-cover img-cover--coral img-cover--hero animate stagger-3">
+          <img src="/assets/images/Erasmusbrug_zwart.jpg" alt="Erasmus Bridge, Rotterdam" />
         </div>
       </div>
     </div>
@@ -152,7 +152,7 @@ const featuredServices = services.slice(0, 6);
           <h3 style="text-transform: none; letter-spacing: 0; font-size: 1.5rem; line-height: 1.4;">{pickLocale(featuredCase.title, lang)}</h3>
           <p style="margin-top: var(--sp-5);">{pickLocale(featuredCase.shortSummary!, lang)}</p>
 
-          <div class="case-metrics">
+          <div class={`case-metrics case-metrics--count-${featuredCase.metrics.length}`}>
             {featuredCase.metrics.map((metric) => (
               <div class="case-metric">
                 <span class="case-metric__value">{metric.value}</span>
@@ -161,8 +161,8 @@ const featuredServices = services.slice(0, 6);
             ))}
           </div>
         </div>
-        <div class="img-cover img-cover--coral animate stagger-2" style="min-height: 360px;">
-          <img src={featuredCase.image} alt={pickLocale(featuredCase.imageAlt, lang)} style="width: 100%; height: 100%; object-fit: cover;" />
+        <div class="img-cover img-cover--coral img-cover--wide animate stagger-2">
+          <img src={featuredCase.image} alt={pickLocale(featuredCase.imageAlt, lang)} />
         </div>
       </div>
     </div>
@@ -198,8 +198,8 @@ const featuredServices = services.slice(0, 6);
 
           <Button href="/nl/duke-academy" class="mt-6">{t('section.academy.cta')}</Button>
         </div>
-        <div class="img-cover img-cover--coral animate stagger-2" style="min-height: 400px;">
-          <img src="/assets/images/Pythonbrug_Amsterdam_contrast.jpg" alt="Python Bridge, Amsterdam" style="width: 100%; height: 100%; object-fit: cover;" />
+        <div class="img-cover img-cover--coral img-cover--hero animate stagger-2">
+          <img src="/assets/images/Pythonbrug_Amsterdam_contrast.jpg" alt="Python Bridge, Amsterdam" />
         </div>
       </div>
     </div>

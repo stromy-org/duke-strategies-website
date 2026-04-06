@@ -884,6 +884,52 @@ Never hardcode these values — always reference `var(--brand-*)`.
 
 ---
 
+## Visual Consistency Patterns
+
+These patterns are enforced site-wide. When adding or modifying content, verify
+they still hold.
+
+- **Image containers**: Always use `.img-cover` with `position: absolute; inset: 0`
+  on `<img>`, never inline `width/height/object-fit` styles. Use aspect-ratio
+  variants (`.img-cover--wide`, `.img-cover--hero`) for sizing instead of `min-height`.
+- **Card CTA alignment**: All cards in grids must use `flex-direction: column` with
+  `margin-top: auto` on the bottom link. Verify alignment visually after content changes.
+- **Metric grids**: Use count-aware CSS grid classes (`case-metrics--count-N`), never
+  flex-wrap for metrics. 4 metrics = 2x2 grid.
+- **Theme compatibility**: Any new component or style must work in both light and dark
+  modes. Use semantic tokens (`var(--card-bg)`, `var(--text-heading)`) — never hardcoded
+  colors like `rgba(255, 255, 255, 0.98)`.
+- **Long text handling**: Cards with text content must include `overflow-wrap: break-word`
+  on title elements (especially relevant for Dutch compound words).
+- **Service count**: Currently 6 services. Homepage shows all 6. "What We Do" shows
+  all 6. They must stay aligned — don't add a service to one without the other.
+- **Map embed**: Contact page uses a real OSM iframe embed (not a placeholder).
+  Coordinates in `src/data/site.ts` (`lat`, `lon`, `bbox`).
+- **Grid columns**: Use `minmax(0, 1fr)` instead of `1fr` in grid-template-columns
+  to prevent long words from blowing out column widths.
+
+## Dutch Translation Quality (NL i18n)
+
+When adding or modifying Dutch content, apply these language conventions:
+
+- **Keep English corporate terms that are standard in Dutch business**: stakeholder
+  intelligence, change management, employee engagement, talking points, playbook,
+  framework, messaging matrix, briefing packs, key messages, feedback loops,
+  milestone, regulatory narrative, monitoring dashboard, capability, recovery strategy.
+- **Never create Dutch monster-compounds**: If a translated term exceeds ~20 characters
+  as a single compound word, break it into spaced words using the English term. E.g.,
+  "Verandermanagementcommunicatie" → "Change Management Communicatie".
+- **Keep brand-specific terms in English**: "stakeholder advisory" (Duke's positioning),
+  "thought leadership", "public affairs", "crisis management".
+- **Watch for mistranslations**: "Capability" ≠ "Capaciteit" (that means capacity/volume).
+  When unsure, keep the English term.
+- **Deliverable names are product names**: Keep them in English when the Dutch translation
+  would be an awkward compound. They appear as headings/labels, not prose.
+- **Compound word spacing**: Even when keeping Dutch terms, add spaces between recognizable
+  word boundaries: "Sentimentanalyserapport" → "Sentiment Analysis Report".
+
+---
+
 ## What This Skill Does NOT Cover
 
 - **Major structural refactors** — e.g., migrating content from `src/data/company.ts`

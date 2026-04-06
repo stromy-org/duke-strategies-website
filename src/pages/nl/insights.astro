@@ -39,8 +39,8 @@ const t = useTranslations(lang);
         <div class="case-study">
           <div class:list={["grid", index % 2 === 0 ? "grid--7-5" : "grid--5-7", "items-start", "animate", "stagger-1"]}>
             {index % 2 === 1 && (
-              <div class="img-cover img-cover--coral" style="min-height: 340px;">
-                <img src={study.image} alt={pickLocale(study.imageAlt, lang)} style="width: 100%; height: 100%; object-fit: cover;" />
+              <div class="img-cover img-cover--coral img-cover--wide">
+                <img src={study.image} alt={pickLocale(study.imageAlt, lang)} />
               </div>
             )}
 
@@ -49,7 +49,7 @@ const t = useTranslations(lang);
               <h3 class="case-study__title">{pickLocale(study.title, lang)}</h3>
               <p class="case-study__challenge">{pickLocale(study.challenge, lang)}</p>
 
-              <div class="case-metrics--row">
+              <div class:list={["case-metrics--row", `case-metrics--count-${study.metrics.length}`]}>
                 {study.metrics.map((metric) => (
                   <div class="case-metric">
                     <span class="case-metric__value">{metric.value}</span>
@@ -62,8 +62,8 @@ const t = useTranslations(lang);
             </div>
 
             {index % 2 === 0 && (
-              <div class="img-cover img-cover--coral" style="min-height: 340px;">
-                <img src={study.image} alt={pickLocale(study.imageAlt, lang)} style="width: 100%; height: 100%; object-fit: cover;" />
+              <div class="img-cover img-cover--coral img-cover--wide">
+                <img src={study.image} alt={pickLocale(study.imageAlt, lang)} />
               </div>
             )}
           </div>
@@ -151,20 +151,20 @@ const t = useTranslations(lang);
   }
 
   .case-metrics--row {
-    display: flex;
-    gap: var(--sp-6);
+    display: grid;
+    gap: var(--sp-5) var(--sp-6);
     margin-top: var(--sp-5);
     padding: var(--sp-5) var(--sp-6);
     background: var(--surface-alt);
     border-radius: 3px;
     border-left: 4px solid var(--accent);
-    flex-wrap: wrap;
   }
+  .case-metrics--count-2 { grid-template-columns: repeat(2, 1fr); }
+  .case-metrics--count-3 { grid-template-columns: repeat(3, 1fr); }
+  .case-metrics--count-4 { grid-template-columns: repeat(2, 1fr); }
 
   .case-metrics--row .case-metric {
     text-align: left;
-    flex: 1;
-    min-width: 140px;
   }
 
   .case-metrics--row .case-metric__value {

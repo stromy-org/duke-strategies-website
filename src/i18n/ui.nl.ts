@@ -25,7 +25,7 @@ const nl: Partial<Record<UIKey, string>> = {
   // Philosophy banner
   'section.philosophy': 'Onze filosofie',
   'section.philosophy.heading': 'Stakeholder Advisory',
-  'section.philosophy.text': 'Wij begeleiden bedrijven en hun leiders door het complexe politieke, sociale en bedrijfsmatige landschap van stakeholderpercepties en -opinies. Onze unieke combinatie van interne capaciteiten in bedrijfsstrategie, corporate affairs, stakeholdermanagement, data & AI-analyse en communicatieadvies stelt ons in staat verder te kijken dan het voor de hand liggende en',
+  'section.philosophy.text': 'Wij begeleiden bedrijven en hun leiders door het complexe politieke, sociale en bedrijfsmatige landschap van stakeholderpercepties en -opinies. Onze unieke combinatie van interne capaciteiten in bedrijfsstrategie, corporate affairs, stakeholder management, data & AI-analyse en communicatieadvies stelt ons in staat verder te kijken dan het voor de hand liggende en',
   'section.philosophy.highlight': '"The One Thing"',
   'section.philosophy.textCont': 'te vinden waardoor stakeholders instemmen en de gedefinieerde koers van handelen ondersteunen. Want een strategie die niet wordt gecommuniceerd, is een strategie die niet wordt uitgevoerd.',
 
@@ -37,7 +37,7 @@ const nl: Partial<Record<UIKey, string>> = {
   'section.approach.step2.title': 'Creëren',
   'section.approach.step2.text': 'Wij verkennen één Single Most Important Action die de basis wordt voor strategie, narratief en stakeholderafstemming. Een strategie die niet kan worden gecommuniceerd, zal niet worden uitgevoerd.',
   'section.approach.step3.title': 'Uitvoeren',
-  'section.approach.step3.text': 'Wij helpen cliënten de geïdentificeerde acties uit te voeren, van communicatiestrategie tot mediatraining, stakeholderengagement en AI-gestuurde analyse.',
+  'section.approach.step3.text': 'Wij helpen cliënten de geïdentificeerde acties uit te voeren, van communicatiestrategie tot mediatraining, stakeholder engagement en AI-gestuurde analyse.',
   'section.approach.cta': 'Ontdek onze diensten',
 
   // Expertise
@@ -60,7 +60,7 @@ const nl: Partial<Record<UIKey, string>> = {
   // Who We Are page
   'whoWeAre.title': 'Wie wij zijn',
   'whoWeAre.heroTitle': 'Ervaren professionals met ervaring in omgevingen onder hoge druk',
-  'whoWeAre.heroSubtitle': 'Het team achter Duke Strategies combineert decennia aan ervaring in strategische communicatie, public affairs, crisis management en AI-gestuurde stakeholderintelligentie.',
+  'whoWeAre.heroSubtitle': 'Het team achter Duke Strategies combineert decennia aan ervaring in strategische communicatie, public affairs, crisis management en AI-gestuurde stakeholder intelligence.',
   'whoWeAre.aboutLabel': 'Over Duke Strategies',
   'whoWeAre.aboutHeading': 'Ervaren adviseurs in strategie en stakeholdermanagement',
   'whoWeAre.aboutP1': 'Maak kennis met de ervaren experts van Duke Strategies, met decennia aan top-tier advies- en managementervaring in complexe, zakelijke en politieke omgevingen onder hoge druk.',
@@ -80,14 +80,14 @@ const nl: Partial<Record<UIKey, string>> = {
   // What We Do page
   'whatWeDo.title': 'Wat wij doen',
   'whatWeDo.heroTitle': 'Bedrijfsstrategie, stakeholderanalyse & uitvoering',
-  'whatWeDo.heroSubtitle': 'Duke Strategies combineert strategische communicatie, public affairs en AI-gestuurde stakeholderintelligentie om meetbare impact te leveren in de meest veeleisende bedrijfsomgevingen.',
+  'whatWeDo.heroSubtitle': 'Duke Strategies combineert strategische communicatie, public affairs en AI-gestuurde stakeholder intelligence om meetbare impact te leveren in de meest veeleisende bedrijfsomgevingen.',
   'whatWeDo.modelLabel': 'Ons model',
   'whatWeDo.modelHeading': 'Analyseren, Creëren & Uitvoeren',
   'whatWeDo.modelIntro': 'Duke Strategies hanteert een drietrapsadviesmodel om stakeholderdynamiek te doorgronden, een bedrijfs- en communicatiestrategie te ontwikkelen en impactvolle implementatie te ondersteunen.',
   'whatWeDo.step1.title': 'Analyseren',
   'whatWeDo.step1.text': 'Onze analyses omvatten een diepgaand begrip van de strategische richting van onze cliënten en de verwachtingen van stakeholders. Wij analyseren intentie, capaciteiten en waarschijnlijke reacties op basis van plannen, interviews en geavanceerde AI-tools en definiëren vervolgens de uitdaging die de strategie moet beantwoorden.',
   'whatWeDo.step2.title': 'Creëren',
-  'whatWeDo.step2.p1': 'Wij verkennen een overkoepelende Single Most Important Action die moet inspelen op de geïdentificeerde uitdaging. Die actie wordt de basis voor strategie, narratief, boodschappen en stakeholderengagement.',
+  'whatWeDo.step2.p1': 'Wij verkennen een overkoepelende Single Most Important Action die moet inspelen op de geïdentificeerde uitdaging. Die actie wordt de basis voor strategie, narratief, boodschappen en stakeholder engagement.',
   'whatWeDo.step2.p2': 'Een strategie die niet kan worden gecommuniceerd, is een strategie die niet zal worden uitgevoerd. Wij werken op het snijvlak van bestuurskamerstrategie en het verhaal dat nodig is om mensen in beweging te brengen.',
   'whatWeDo.step3.title': 'Uitvoeren',
   'whatWeDo.step3.text': 'In de uitvoeringsfase helpen wij cliënten het plan werkelijkheid te maken, of het nu gaat om bedrijfsmatige, bestuurlijke, stakeholder-, communicatie- of publieke positioneringsacties.',
@@ -127,7 +127,7 @@ const nl: Partial<Record<UIKey, string>> = {
 
   // Insights page
   'insights.title': 'Inzichten',
-  'insights.heroSubtitle': 'Perspectieven op bedrijfsstrategie, public affairs en stakeholderintelligentie van het team van Duke Strategies.',
+  'insights.heroSubtitle': 'Perspectieven op bedrijfsstrategie, public affairs en stakeholder intelligence van het team van Duke Strategies.',
   'insights.readMore': 'Lees meer',
   'insights.thoughtLeadership': 'Thought Leadership',
   'insights.latestThinking': 'Laatste inzichten',
@@ -189,6 +189,7 @@ const nl: Partial<Record<UIKey, string>> = {
   'contact.location.affiliatesText': 'in Scandinavië, het Verenigd Koninkrijk, de VS en Duitsland — voor wereldwijd bereik met lokale expertise.',
   'contact.globalReach': 'Wereldwijd bereik',
   'contact.mapLoading': 'Kaart wordt geladen...',
+  'contact.viewMap': 'Bekijk op kaart',
 
   // Service detail
   'service.industries': 'Sectoren',
