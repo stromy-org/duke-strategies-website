@@ -186,6 +186,7 @@ export default {
   'contact.location.affiliatesText': 'in Scandinavia, the UK, the US and Germany - ensuring global reach with local expertise.',
   'contact.globalReach': 'Global Reach',
   'contact.mapLoading': 'Map loading...',
+  'contact.viewMap': 'View on map',
 
   // Service detail
   'service.industries': 'Industries',

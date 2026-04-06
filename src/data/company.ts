@@ -91,7 +91,7 @@ export const founders: Founder[] = [
     alt: "Arien Stuijt",
     bio: {
       en: "Arien Stuijt is Managing Partner and co-founder of Duke Strategies with 17 years of experience spanning journalism, strategic communications, and AI-driven stakeholder intelligence. A former Wall Street Journal reporter, he brings investigative rigor to stakeholder strategy, media positioning, and data-backed public affairs advisory.",
-      nl: "Arien Stuijt is Managing Partner en medeoprichter van Duke Strategies met 17 jaar ervaring in journalistiek, strategische communicatie en AI-gestuurde stakeholderintelligentie. Als voormalig verslaggever van de Wall Street Journal brengt hij onderzoeksmatige scherpte in stakeholderstrategie, mediapositionering en datagedreven public affairs-advies.",
+      nl: "Arien Stuijt is Managing Partner en medeoprichter van Duke Strategies met 17 jaar ervaring in journalistiek, strategische communicatie en AI-gestuurde stakeholder intelligence. Als voormalig verslaggever van de Wall Street Journal brengt hij onderzoeksmatige scherpte in stakeholderstrategie, mediapositionering en datagedreven public affairs-advies.",
     },
     email: "arien.stuijt@dukestrategies.eu",
   },
@@ -148,7 +148,7 @@ export const associates: TeamCard[] = [
     alt: "William Masquelier",
     bio: {
       en: "William Masquelier develops Duke Strategies' AI-driven stakeholder intelligence infrastructure, combining analytics, automation, and data pipelines to turn complex stakeholder environments into actionable strategic insight.",
-      nl: "William Masquelier ontwikkelt de AI-gestuurde stakeholderintelligentie-infrastructuur van Duke Strategies en combineert analyse, automatisering en datapipelines om complexe stakeholderomgevingen om te zetten in bruikbaar strategisch inzicht.",
+      nl: "William Masquelier ontwikkelt de AI-gestuurde stakeholder intelligence-infrastructuur van Duke Strategies en combineert analyse, automatisering en datapipelines om complexe stakeholderomgevingen om te zetten in bruikbaar strategisch inzicht.",
     },
   },
   {
@@ -254,11 +254,11 @@ export const services: Service[] = [
       { en: "Healthcare", nl: "Gezondheidszorg" },
     ],
     deliverables: [
-      { en: "Crisis Preparedness Audit", nl: "Crisisparaatheidsaudit" },
+      { en: "Crisis Preparedness Audit", nl: "Crisis Preparedness Audit" },
       { en: "Crisis Communications Plan", nl: "Crisiscommunicatieplan" },
       { en: "Media Response Protocols", nl: "Mediaresponsprotocollen" },
-      { en: "Stakeholder Notification Framework", nl: "Stakeholdernotificatieraamwerk" },
-      { en: "Post-Crisis Recovery Strategy", nl: "Post-crisisherstelstrategie" },
+      { en: "Stakeholder Notification Framework", nl: "Stakeholder Notificatie Framework" },
+      { en: "Post-Crisis Recovery Strategy", nl: "Post-crisis Recovery Strategy" },
     ],
     longform: {
       challenge: {
@@ -268,7 +268,7 @@ export const services: Service[] = [
       approach: [
         { en: "Audit existing crisis preparedness against industry benchmarks", nl: "Bestaande crisisparaatheid toetsen aan benchmarks in de sector" },
         { en: "Design a crisis communications plan with clear escalation paths", nl: "Een crisiscommunicatieplan ontwerpen met duidelijke escalatiepaden" },
-        { en: "Develop media response protocols and stakeholder notification frameworks", nl: "Mediaresponsprotocollen en stakeholdernotificatieraamwerken ontwikkelen" },
+        { en: "Develop media response protocols and stakeholder notification frameworks", nl: "Mediaresponsprotocollen en stakeholder notificatie frameworks ontwikkelen" },
         { en: "Run crisis simulation exercises with leadership teams", nl: "Crisissimulatieoefeningen uitvoeren met leiderschapsteams" },
         { en: "Provide real-time crisis management support during active incidents", nl: "Real-time crisis management-ondersteuning bieden tijdens actieve incidenten" },
         { en: "Execute post-crisis recovery and reputation rebuilding strategies", nl: "Post-crisisherstel- en reputatieopbouwstrategieën uitvoeren" },
@@ -286,7 +286,7 @@ export const services: Service[] = [
     name: { en: "Stakeholder Mapping & Engagement", nl: "Stakeholder Mapping & Engagement" },
     tagline: {
       en: "AI-driven stakeholder intelligence and engagement strategy",
-      nl: "AI-gestuurde stakeholderintelligentie en engagementstrategie",
+      nl: "AI-gestuurde stakeholder intelligence en engagementstrategie",
     },
     description: {
       en: "AI-driven stakeholder identification, mapping, and engagement strategy. We use proprietary analytics to map influence networks, assess sentiment, and design targeted engagement programs that build coalitions and neutralize opposition.",
@@ -301,10 +301,10 @@ export const services: Service[] = [
     ],
     deliverables: [
       { en: "Stakeholder Map & Influence Analysis", nl: "Stakeholderkaart & invloedsanalyse" },
-      { en: "Sentiment Analysis Report", nl: "Sentimentanalyserapport" },
-      { en: "Engagement Strategy & Playbook", nl: "Engagementstrategie & draaiboek" },
+      { en: "Sentiment Analysis Report", nl: "Sentiment Analysis Report" },
+      { en: "Engagement Strategy & Playbook", nl: "Engagement Strategy & Playbook" },
       { en: "Coalition Building Plan", nl: "Coalitievormingsplan" },
-      { en: "Monitoring Dashboard", nl: "Monitoringdashboard" },
+      { en: "Monitoring Dashboard", nl: "Monitoring Dashboard" },
     ],
     longform: {
       challenge: {
@@ -314,10 +314,10 @@ export const services: Service[] = [
       approach: [
         { en: "Deploy AI-driven analysis to identify and map all relevant stakeholders", nl: "AI-gestuurde analyse inzetten om alle relevante stakeholders te identificeren en in kaart te brengen" },
         { en: "Assess influence networks, sentiment, and likely positions on key issues", nl: "Invloedsnetwerken, sentiment en waarschijnlijke posities ten aanzien van kernkwesties beoordelen" },
-        { en: "Segment stakeholders by influence, alignment, and engagement priority", nl: "Stakeholders segmenteren op invloed, afstemming en engagementprioriteit" },
-        { en: "Design targeted engagement playbooks for each segment", nl: "Gerichte engagementdraaiboeken ontwerpen voor elk segment" },
+        { en: "Segment stakeholders by influence, alignment, and engagement priority", nl: "Stakeholders segmenteren op invloed, afstemming en engagement prioriteit" },
+        { en: "Design targeted engagement playbooks for each segment", nl: "Gerichte engagement playbooks ontwerpen voor elk segment" },
         { en: "Build coalition strategies around shared interests", nl: "Coalitiestrategieën bouwen rond gedeelde belangen" },
-        { en: "Establish ongoing monitoring dashboards to track shifts in sentiment and influence", nl: "Doorlopende monitoringdashboards inrichten om verschuivingen in sentiment en invloed te volgen" },
+        { en: "Establish ongoing monitoring dashboards to track shifts in sentiment and influence", nl: "Doorlopende monitoring dashboards inrichten om verschuivingen in sentiment en invloed te volgen" },
       ],
       signals: [
         { en: "You're entering a new market or jurisdiction with unfamiliar stakeholder dynamics", nl: "U betreedt een nieuwe markt of jurisdictie met onbekende stakeholderdynamiek" },
@@ -346,11 +346,11 @@ export const services: Service[] = [
       { en: "Healthcare", nl: "Gezondheidszorg" },
     ],
     deliverables: [
-      { en: "Transaction Communications Strategy", nl: "Transactiecommunicatiestrategie" },
-      { en: "Stakeholder Messaging Matrix", nl: "Stakeholder-berichtenmatrix" },
+      { en: "Transaction Communications Strategy", nl: "Transaction Communications Strategy" },
+      { en: "Stakeholder Messaging Matrix", nl: "Stakeholder Messaging Matrix" },
       { en: "Media Management Plan", nl: "Mediamanagementplan" },
-      { en: "Employee Communications Program", nl: "Medewerkercommunicatieprogramma" },
-      { en: "Regulatory Narrative", nl: "Regelgevingsnarratief" },
+      { en: "Employee Communications Program", nl: "Employee Communications Programma" },
+      { en: "Regulatory Narrative", nl: "Regulatory Narrative" },
     ],
     longform: {
       challenge: {
@@ -358,11 +358,11 @@ export const services: Service[] = [
         nl: "M&A-transacties genereren intensief stakeholdertoezicht. Werknemers vrezen voor hun baan, toezichthouders bevragen de marktimpact, media speculeren en aandeelhouders eisen duidelijkheid. Zonder een gecoördineerde communicatiestrategie versplintert het narratief en erodeert de dealwaarde.",
       },
       approach: [
-        { en: "Develop a transaction communications strategy aligned with deal milestones", nl: "Een transactiecommunicatiestrategie ontwikkelen die aansluit bij dealmijlpalen" },
-        { en: "Create a stakeholder messaging matrix — different messages for different audiences", nl: "Een stakeholder-berichtenmatrix opstellen — verschillende boodschappen voor verschillende doelgroepen" },
+        { en: "Develop a transaction communications strategy aligned with deal milestones", nl: "Een transactiecommunicatiestrategie ontwikkelen die aansluit bij deal milestones" },
+        { en: "Create a stakeholder messaging matrix — different messages for different audiences", nl: "Een stakeholder messaging matrix opstellen — verschillende boodschappen voor verschillende doelgroepen" },
         { en: "Design media management plans for announcement day and beyond", nl: "Mediamanagementplannen ontwerpen voor de aankondigingsdag en daarna" },
-        { en: "Build employee communications programs that maintain morale and retention", nl: "Medewerkercommunicatieprogramma's opzetten die moreel en retentie waarborgen" },
-        { en: "Craft regulatory narratives that support deal approval", nl: "Regelgevingsnarratieven opstellen die dealgoedkeuring ondersteunen" },
+        { en: "Build employee communications programs that maintain morale and retention", nl: "Employee communications programma's opzetten die moreel en retentie waarborgen" },
+        { en: "Craft regulatory narratives that support deal approval", nl: "Regulatory narratives opstellen die dealgoedkeuring ondersteunen" },
         { en: "Manage post-close integration communications", nl: "Communicatie na sluiting en integratie beheren" },
       ],
       signals: [
@@ -389,10 +389,10 @@ export const services: Service[] = [
     ],
     deliverables: [
       { en: "Media Training Sessions", nl: "Mediatrainingssessies" },
-      { en: "Key Message Documents", nl: "Kernboodschappendocumenten" },
-      { en: "Interview Simulation Reports", nl: "Interviewsimulatierapportages" },
+      { en: "Key Message Documents", nl: "Key Message Documents" },
+      { en: "Interview Simulation Reports", nl: "Interview Simulatie Rapportages" },
       { en: "Thought Leadership Strategy", nl: "Thought leadership-strategie" },
-      { en: "Speaker Briefing Packs", nl: "Sprekerbriefingpakketten" },
+      { en: "Speaker Briefing Packs", nl: "Speaker Briefing Packs" },
     ],
     longform: {
       challenge: {
@@ -400,12 +400,12 @@ export const services: Service[] = [
         nl: "Senior leiders zijn vaak het publieke gezicht van hun organisatie maar missen de vaardigheden om te presteren onder mediadruk. Een slecht afgehandeld interview of publiek optreden kan maanden van zorgvuldige strategie ongedaan maken en de geloofwaardigheid bij belangrijke stakeholders schaden.",
       },
       approach: [
-        { en: "Assess each executive's current media presence and communication style", nl: "De huidige mediapresence en communicatiestijl van elke bestuurder beoordelen" },
+        { en: "Assess each executive's current media presence and communication style", nl: "De huidige media presence en communicatiestijl van elke bestuurder beoordelen" },
         { en: "Develop tailored key messages aligned with corporate strategy", nl: "Op maat gemaakte kernboodschappen ontwikkelen die aansluiten bij de bedrijfsstrategie" },
         { en: "Run intensive media training sessions with realistic interview simulations", nl: "Intensieve mediatrainingssessies uitvoeren met realistische interviewsimulaties" },
-        { en: "Provide detailed feedback and coaching on message delivery, body language, and bridging techniques", nl: "Gedetailleerde feedback en coaching bieden over berichtgeving, lichaamstaal en bridgingtechnieken" },
+        { en: "Provide detailed feedback and coaching on message delivery, body language, and bridging techniques", nl: "Gedetailleerde feedback en coaching bieden over berichtgeving, lichaamstaal en bridging technieken" },
         { en: "Design thought leadership positioning strategies for sustained public presence", nl: "Thought leadership-positioneringsstrategieën ontwerpen voor duurzame publieke aanwezigheid" },
-        { en: "Prepare speaker briefing packs for specific events and appearances", nl: "Sprekerbriefingpakketten voorbereiden voor specifieke evenementen en optredens" },
+        { en: "Prepare speaker briefing packs for specific events and appearances", nl: "Speaker briefing packs voorbereiden voor specifieke evenementen en optredens" },
       ],
       signals: [
         { en: "A CEO or board member will face media for the first time or in a new context", nl: "Een CEO of bestuurslid gaat voor het eerst of in een nieuwe context de media tegemoet" },
@@ -417,7 +417,7 @@ export const services: Service[] = [
   },
   {
     slug: "change-management",
-    name: { en: "Change Management Communications", nl: "Verandermanagementcommunicatie" },
+    name: { en: "Change Management Communications", nl: "Change Management Communicatie" },
     tagline: {
       en: "Communications that drive adoption and reduce resistance",
       nl: "Communicatie die adoptie stimuleert en weerstand vermindert",
@@ -434,10 +434,10 @@ export const services: Service[] = [
       { en: "Healthcare", nl: "Gezondheidszorg" },
     ],
     deliverables: [
-      { en: "Change Communications Strategy", nl: "Verandercommunicatiestrategie" },
-      { en: "Internal Messaging Framework", nl: "Intern berichtenraamwerk" },
-      { en: "Leadership Talking Points", nl: "Gespreksnotities voor leiderschap" },
-      { en: "Employee Engagement Plan", nl: "Medewerkerbetrokkenheidsplan" },
+      { en: "Change Communications Strategy", nl: "Change Communications Strategy" },
+      { en: "Internal Messaging Framework", nl: "Internal Messaging Framework" },
+      { en: "Leadership Talking Points", nl: "Leadership Talking Points" },
+      { en: "Employee Engagement Plan", nl: "Employee Engagement Plan" },
       { en: "Progress Communications", nl: "Voortgangscommunicatie" },
     ],
     longform: {
@@ -447,63 +447,17 @@ export const services: Service[] = [
       },
       approach: [
         { en: "Diagnose the change landscape — who is affected, how, and what they need to hear", nl: "Het veranderlandschap diagnosticeren — wie is betrokken, hoe, en wat zij moeten horen" },
-        { en: "Design a change communications strategy integrated with the transformation timeline", nl: "Een verandercommunicatiestrategie ontwerpen die is geïntegreerd met de transformatietijdlijn" },
-        { en: "Create internal messaging frameworks that cascade consistently through leadership levels", nl: "Interne berichtenraamwerken opstellen die consistent doorsijpelen via alle leiderschapsniveaus" },
-        { en: "Develop leadership talking points and equip managers to be change ambassadors", nl: "Gespreksnotities voor leiderschap ontwikkelen en managers uitrusten als veranderambassadeurs" },
-        { en: "Build employee engagement programs with feedback loops", nl: "Medewerkerbetrokkenheidsprogramma's opzetten met feedbackloops" },
+        { en: "Design a change communications strategy integrated with the transformation timeline", nl: "Een change communications strategy ontwerpen die is geïntegreerd met de transformatietijdlijn" },
+        { en: "Create internal messaging frameworks that cascade consistently through leadership levels", nl: "Internal messaging frameworks opstellen die consistent doorsijpelen via alle leiderschapsniveaus" },
+        { en: "Develop leadership talking points and equip managers to be change ambassadors", nl: "Leadership talking points ontwikkelen en managers uitrusten als veranderambassadeurs" },
+        { en: "Build employee engagement programs with feedback loops", nl: "Employee engagement programma's opzetten met feedback loops" },
         { en: "Deliver progress communications that maintain momentum and celebrate milestones", nl: "Voortgangscommunicatie leveren die momentum vasthoudt en mijlpalen viert" },
       ],
       signals: [
         { en: "A major restructuring, merger integration, or digital transformation is planned", nl: "Er is een grote herstructurering, fusie-integratie of digitale transformatie gepland" },
-        { en: "Employee engagement or morale is declining during an ongoing change program", nl: "Medewerkerbetrokkenheid of moreel daalt tijdens een lopend veranderprogramma" },
+        { en: "Employee engagement or morale is declining during an ongoing change program", nl: "Employee engagement of moreel daalt tijdens een lopend veranderprogramma" },
         { en: "Leadership messages are inconsistent or not landing with the workforce", nl: "Leiderschapsboodschappen zijn inconsistent of komen niet aan bij het personeel" },
         { en: "You need a structured communications plan to support a transformation already in progress", nl: "U heeft een gestructureerd communicatieplan nodig ter ondersteuning van een reeds lopende transformatie" },
-      ],
-    },
-  },
-  {
-    slug: "issue-management",
-    name: { en: "Issue Management", nl: "Issue Management" },
-    tagline: {
-      en: "Anticipate, monitor, and shape emerging issues before they escalate",
-      nl: "Anticipeer op, monitor en stuur opkomende issues bij voordat zij escaleren",
-    },
-    description: {
-      en: "Proactive identification, monitoring, and management of emerging issues that could impact organizational reputation or operations. We combine media intelligence, political monitoring, and stakeholder analysis to anticipate and shape the narrative before issues escalate.",
-      nl: "Proactieve identificatie, monitoring en management van opkomende issues die de reputatie of bedrijfsvoering van organisaties kunnen beïnvloeden. Wij combineren media-intelligentie, politieke monitoring en stakeholderanalyse om het narratief te anticiperen en bij te sturen voordat issues escaleren.",
-    },
-    industries: [
-      { en: "Energy", nl: "Energie" },
-      { en: "Technology", nl: "Technologie" },
-      { en: "Financial Services", nl: "Financiële dienstverlening" },
-      { en: "Public Sector", nl: "Publieke sector" },
-      { en: "Industrial", nl: "Industrie" },
-    ],
-    deliverables: [
-      { en: "Issue Landscape Assessment", nl: "Issuelandschapsbeoordeling" },
-      { en: "Early Warning System Design", nl: "Ontwerp van een vroegtijdig waarschuwingssysteem" },
-      { en: "Response Playbooks", nl: "Responsdraaiboeken" },
-      { en: "Narrative Strategy", nl: "Narratiefstrategie" },
-      { en: "Monitoring Reports", nl: "Monitoringrapporten" },
-    ],
-    longform: {
-      challenge: {
-        en: "Issues that blindside organizations were almost always visible in advance — in media trends, political signals, regulatory movements, or stakeholder sentiment shifts. The cost of reacting after an issue has escalated is orders of magnitude higher than proactive management.",
-        nl: "Issues die organisaties overvallen waren vrijwel altijd van tevoren zichtbaar — in mediatrends, politieke signalen, bewegingen van toezichthouders of verschuivingen in stakeholdersentiment. De kosten van reageren nadat een issue is geëscaleerd zijn ordes van grootte hoger dan proactief management.",
-      },
-      approach: [
-        { en: "Conduct an issue landscape assessment across media, political, and stakeholder domains", nl: "Een issuelandschapsbeoordeling uitvoeren over media-, politieke en stakeholderdomeinen" },
-        { en: "Design early warning systems using AI-powered monitoring and analysis", nl: "Vroegtijdige waarschuwingssystemen ontwerpen met AI-gestuurde monitoring en analyse" },
-        { en: "Develop response playbooks for high-probability issue scenarios", nl: "Responsdraaiboeken ontwikkelen voor issuescenario's met hoge waarschijnlijkheid" },
-        { en: "Craft narrative strategies that position the organization ahead of the curve", nl: "Narratiefstrategieën opstellen die de organisatie voorop positioneren" },
-        { en: "Establish regular monitoring and reporting cadences", nl: "Reguliere monitoring- en rapportagecycli inrichten" },
-        { en: "Provide rapid advisory when an emerging issue demands immediate attention", nl: "Snel advies bieden wanneer een opkomend issue onmiddellijke aandacht vereist" },
-      ],
-      signals: [
-        { en: "Your industry faces growing public, regulatory, or political scrutiny", nl: "Uw sector wordt geconfronteerd met toenemend publiek, regelgevend of politiek toezicht" },
-        { en: "You want to get ahead of an issue rather than reacting to it", nl: "U wilt een issue vóór zijn in plaats van erop te reageren" },
-        { en: "Media coverage of your sector or peers is shifting in tone or volume", nl: "Mediaberichtgeving over uw sector of sectorgenoten verschuift in toon of volume" },
-        { en: "A policy or regulatory change could impact your operations or reputation", nl: "Een beleids- of regelgevingswijziging kan gevolgen hebben voor uw bedrijfsvoering of reputatie" },
       ],
     },
   },
@@ -711,12 +665,12 @@ export const insights: InsightItem[] = [
     imageAlt: { en: "M&A Magazine coverage of Duke Strategies launch", nl: "M&A Magazine-berichtgeving over de lancering van Duke Strategies" },
   },
   {
-    badge: { en: "Capability", nl: "Capaciteit" },
+    badge: { en: "Capability", nl: "Capability" },
     date: "Duke Strategies - 2025",
     author: "Duke Strategies",
     title: {
       en: "Where AI meets stakeholder intelligence",
-      nl: "Waar AI stakeholderintelligentie ontmoet",
+      nl: "Waar AI stakeholder intelligence ontmoet",
     },
     excerpt: {
       en: "Duke's data capability turns complex stakeholder ecosystems into actionable maps. AI-driven analytics identify influence networks, assess sentiment, and anticipate opposition coalitions - grounding strategic advice in evidence rather than instinct.",
@@ -771,7 +725,7 @@ export const insights: InsightItem[] = [
     },
     excerpt: {
       en: "Pre-pack restructurings only work when stakeholders believe in the restart. That belief is not earned by press releases; it is built through meticulous stakeholder scenario planning before the filing.",
-      nl: "Pre-pack herstructureringen werken alleen wanneer stakeholders geloven in de herstart. Dat geloof wordt niet verdiend met persberichten; het wordt opgebouwd door zorgvuldige stakeholderscenarioplanning vóór de indiening.",
+      nl: "Pre-pack herstructureringen werken alleen wanneer stakeholders geloven in de herstart. Dat geloof wordt niet verdiend met persberichten; het wordt opgebouwd door zorgvuldige stakeholder scenario planning vóór de indiening.",
     },
     href: "https://mena.nl/artikel/behoud-van-geloofwaardigheid-en-reputatie-centraal-bij-prepack/",
     linkLabel: { en: "Read the archive piece", nl: "Lees het archiefstuk" },
