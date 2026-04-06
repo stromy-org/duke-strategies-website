@@ -23,10 +23,17 @@ export type Affiliate = {
 };
 
 export type Service = {
+  slug: string;
   name: string;
+  tagline: string;
   description: string;
   industries: string[];
   deliverables: string[];
+  longform: {
+    challenge: string;
+    approach: string[];
+    signals: string[];
+  };
 };
 
 export type CaseStudy = {
@@ -48,6 +55,8 @@ export type InsightItem = {
   excerpt: string;
   href: string;
   linkLabel: string;
+  image?: string;
+  imageAlt?: string;
 };
 
 export type AcademyProgram = {
@@ -147,14 +156,34 @@ export const affiliates: Affiliate[] = [
 
 export const services: Service[] = [
   {
+    slug: "strategic-advisory",
     name: "Strategic Advisory",
+    tagline: "Stakeholder-proof strategy for boards and leadership teams",
     description:
       "High-level strategic counsel for boards, executives, and leadership teams navigating complex corporate, political, and societal challenges. We develop stakeholder-proof strategies that align business objectives with external expectations.",
     industries: ["Energy", "Technology", "Financial Services", "Industrial", "Public Sector"],
     deliverables: ["Strategic Assessment", "Stakeholder Strategy", "Position Papers", "Board Advisory Reports"],
+    longform: {
+      challenge: "Leadership teams face increasingly complex stakeholder landscapes where corporate strategy, political dynamics, and societal expectations collide. Without a unified framework, strategic decisions risk blind spots that erode trust and derail execution.",
+      approach: [
+        "Map the full stakeholder landscape using proprietary AI-driven analysis",
+        "Conduct structured interviews with board members and key executives",
+        "Identify strategic vulnerabilities and misalignments between intent and perception",
+        "Develop a stakeholder-proof strategy that integrates business goals with external realities",
+        "Deliver board-ready advisory reports with clear decision points",
+      ],
+      signals: [
+        "Your board is navigating a politically sensitive strategic shift",
+        "External stakeholders are misaligned with your corporate direction",
+        "You need an independent strategic assessment before a major decision",
+        "Internal strategy documents don't account for external stakeholder dynamics",
+      ],
+    },
   },
   {
+    slug: "crisis-communications",
     name: "Crisis Communications",
+    tagline: "Rapid-response crisis management that protects reputation",
     description:
       "Rapid-response crisis management and communications support. From preparation and simulation to real-time crisis management, we help organizations protect their reputation and maintain stakeholder confidence during high-pressure situations.",
     industries: ["Energy", "Technology", "Financial Services", "Industrial", "Healthcare"],
@@ -165,9 +194,28 @@ export const services: Service[] = [
       "Stakeholder Notification Framework",
       "Post-Crisis Recovery Strategy",
     ],
+    longform: {
+      challenge: "Crises are unpredictable, but the damage they cause is not. Organizations that lack preparation lose control of the narrative within hours, face lasting reputational harm, and struggle to regain stakeholder confidence.",
+      approach: [
+        "Audit existing crisis preparedness against industry benchmarks",
+        "Design a crisis communications plan with clear escalation paths",
+        "Develop media response protocols and stakeholder notification frameworks",
+        "Run crisis simulation exercises with leadership teams",
+        "Provide real-time crisis management support during active incidents",
+        "Execute post-crisis recovery and reputation rebuilding strategies",
+      ],
+      signals: [
+        "You have no formal crisis communications plan or it hasn't been tested",
+        "A crisis is unfolding and you need immediate expert support",
+        "Your industry is entering a period of heightened regulatory or public scrutiny",
+        "A previous crisis exposed gaps in your communications response",
+      ],
+    },
   },
   {
+    slug: "stakeholder-mapping",
     name: "Stakeholder Mapping & Engagement",
+    tagline: "AI-driven stakeholder intelligence and engagement strategy",
     description:
       "AI-driven stakeholder identification, mapping, and engagement strategy. We use proprietary analytics to map influence networks, assess sentiment, and design targeted engagement programs that build coalitions and neutralize opposition.",
     industries: ["Energy", "Technology", "Infrastructure", "Public Sector", "Financial Services"],
@@ -178,9 +226,28 @@ export const services: Service[] = [
       "Coalition Building Plan",
       "Monitoring Dashboard",
     ],
+    longform: {
+      challenge: "Traditional stakeholder analysis relies on intuition and outdated lists. In complex regulatory, political, and commercial environments, this approach misses hidden influencers, underestimates opposition, and leads to reactive rather than proactive engagement.",
+      approach: [
+        "Deploy AI-driven analysis to identify and map all relevant stakeholders",
+        "Assess influence networks, sentiment, and likely positions on key issues",
+        "Segment stakeholders by influence, alignment, and engagement priority",
+        "Design targeted engagement playbooks for each segment",
+        "Build coalition strategies around shared interests",
+        "Establish ongoing monitoring dashboards to track shifts in sentiment and influence",
+      ],
+      signals: [
+        "You're entering a new market or jurisdiction with unfamiliar stakeholder dynamics",
+        "A major project requires regulatory or political stakeholder buy-in",
+        "You suspect opposition is forming but can't see the full picture",
+        "Your current stakeholder engagement feels generic and underperforming",
+      ],
+    },
   },
   {
+    slug: "ma-communications",
     name: "M&A Communications",
+    tagline: "Strategic narrative control for transactions and corporate deals",
     description:
       "Strategic communications counsel for mergers, acquisitions, and corporate transactions. We manage the narrative across stakeholder groups, from regulators and media to employees and shareholders.",
     industries: ["Technology", "Financial Services", "Industrial", "Energy", "Healthcare"],
@@ -191,9 +258,28 @@ export const services: Service[] = [
       "Employee Communications Program",
       "Regulatory Narrative",
     ],
+    longform: {
+      challenge: "M&A transactions generate intense stakeholder scrutiny. Employees fear for their jobs, regulators question market impact, media speculate, and shareholders demand clarity. Without a coordinated communications strategy, the narrative fragments and deal value erodes.",
+      approach: [
+        "Develop a transaction communications strategy aligned with deal milestones",
+        "Create a stakeholder messaging matrix — different messages for different audiences",
+        "Design media management plans for announcement day and beyond",
+        "Build employee communications programs that maintain morale and retention",
+        "Craft regulatory narratives that support deal approval",
+        "Manage post-close integration communications",
+      ],
+      signals: [
+        "A merger or acquisition is in planning or due diligence phase",
+        "You need to announce a deal and control the narrative across stakeholder groups",
+        "Employees are anxious about a pending transaction",
+        "Regulatory scrutiny of a deal requires a clear public affairs narrative",
+      ],
+    },
   },
   {
+    slug: "media-training",
     name: "Media Training & Positioning",
+    tagline: "Preparing leaders for high-stakes media and public moments",
     description:
       "Executive media training and public positioning programs. We prepare leaders for high-stakes media interactions, public appearances, and thought leadership campaigns.",
     industries: ["All Sectors"],
@@ -204,9 +290,28 @@ export const services: Service[] = [
       "Thought Leadership Strategy",
       "Speaker Briefing Packs",
     ],
+    longform: {
+      challenge: "Senior leaders are often the public face of their organization but lack the skills to perform under media pressure. A poorly handled interview or public appearance can undo months of careful strategy and damage credibility with key stakeholders.",
+      approach: [
+        "Assess each executive's current media presence and communication style",
+        "Develop tailored key messages aligned with corporate strategy",
+        "Run intensive media training sessions with realistic interview simulations",
+        "Provide detailed feedback and coaching on message delivery, body language, and bridging techniques",
+        "Design thought leadership positioning strategies for sustained public presence",
+        "Prepare speaker briefing packs for specific events and appearances",
+      ],
+      signals: [
+        "A CEO or board member will face media for the first time or in a new context",
+        "An upcoming AGM, investor day, or public hearing requires executive preparation",
+        "Your organization wants to build thought leadership visibility for key leaders",
+        "A previous media interaction went poorly and you need to rebuild confidence",
+      ],
+    },
   },
   {
+    slug: "change-management",
     name: "Change Management Communications",
+    tagline: "Communications that drive adoption and reduce resistance",
     description:
       "Internal and external communications strategy for organizational transformation. We design and execute communication programs that build understanding, reduce resistance, and accelerate adoption.",
     industries: ["Technology", "Financial Services", "Industrial", "Public Sector", "Healthcare"],
@@ -217,9 +322,28 @@ export const services: Service[] = [
       "Employee Engagement Plan",
       "Progress Communications",
     ],
+    longform: {
+      challenge: "Organizational transformations fail when people don't understand, believe in, or feel part of the change. Without deliberate communications, resistance builds quietly and execution stalls — even when the strategy is sound.",
+      approach: [
+        "Diagnose the change landscape — who is affected, how, and what they need to hear",
+        "Design a change communications strategy integrated with the transformation timeline",
+        "Create internal messaging frameworks that cascade consistently through leadership levels",
+        "Develop leadership talking points and equip managers to be change ambassadors",
+        "Build employee engagement programs with feedback loops",
+        "Deliver progress communications that maintain momentum and celebrate milestones",
+      ],
+      signals: [
+        "A major restructuring, merger integration, or digital transformation is planned",
+        "Employee engagement or morale is declining during an ongoing change program",
+        "Leadership messages are inconsistent or not landing with the workforce",
+        "You need a structured communications plan to support a transformation already in progress",
+      ],
+    },
   },
   {
+    slug: "issue-management",
     name: "Issue Management",
+    tagline: "Anticipate, monitor, and shape emerging issues before they escalate",
     description:
       "Proactive identification, monitoring, and management of emerging issues that could impact organizational reputation or operations. We combine media intelligence, political monitoring, and stakeholder analysis to anticipate and shape the narrative before issues escalate.",
     industries: ["Energy", "Technology", "Financial Services", "Public Sector", "Industrial"],
@@ -230,19 +354,29 @@ export const services: Service[] = [
       "Narrative Strategy",
       "Monitoring Reports",
     ],
+    longform: {
+      challenge: "Issues that blindside organizations were almost always visible in advance — in media trends, political signals, regulatory movements, or stakeholder sentiment shifts. The cost of reacting after an issue has escalated is orders of magnitude higher than proactive management.",
+      approach: [
+        "Conduct an issue landscape assessment across media, political, and stakeholder domains",
+        "Design early warning systems using AI-powered monitoring and analysis",
+        "Develop response playbooks for high-probability issue scenarios",
+        "Craft narrative strategies that position the organization ahead of the curve",
+        "Establish regular monitoring and reporting cadences",
+        "Provide rapid advisory when an emerging issue demands immediate attention",
+      ],
+      signals: [
+        "Your industry faces growing public, regulatory, or political scrutiny",
+        "You want to get ahead of an issue rather than reacting to it",
+        "Media coverage of your sector or peers is shifting in tone or volume",
+        "A policy or regulatory change could impact your operations or reputation",
+      ],
+    },
   },
 ];
 
-export const capabilities: Capability[] = [
-  { title: "Communications Strategy", icon: "book" },
-  { title: "Crisis Communications", icon: "alert" },
-  { title: "Issue Management", icon: "info" },
-  { title: "Media Training", icon: "mic" },
-  { title: "Presentation Training", icon: "presentation" },
-  { title: "Change Management & Communications", icon: "arrows" },
-  { title: "Data & Insights Analysis", icon: "chart" },
-  { title: "Social Media Strategies", icon: "broadcast" },
-];
+// Deprecated — capabilities are now consolidated into services.
+// Kept as empty export for backward compatibility with type imports.
+export const capabilities: Capability[] = [];
 
 export const academyPrograms: AcademyProgram[] = [
   {
@@ -366,6 +500,8 @@ export const insights: InsightItem[] = [
       "We scrutinise the motivation behind every strategic choice and advise on the adjustments needed to make those decisions credible and acceptable to internal and external stakeholders - before the communications even begin.",
     href: "https://www.consultancy.nl/nieuws/59605/hill-knowlton-veteranen-ingo-heijnen-en-arien-stuijt-starten-duke-strategies",
     linkLabel: "Read the founding interview",
+    image: "/assets/insights/insight-01-founding.jpg",
+    imageAlt: "Ingo Heijnen and Arien Stuijt launch Duke Strategies",
   },
   {
     badge: "Perspective",
@@ -376,6 +512,8 @@ export const insights: InsightItem[] = [
       "Too many companies still try to promote strategically flawed decisions - problematic acquisitions, disproportionate bonuses, unexplainable product choices - and then scramble to repair the damage. Modern stakeholders will not let that pass.",
     href: "https://mena.nl/artikel/ingo-heijnen-en-arien-stuijt-beginnen-nieuw-adviesbureau/",
     linkLabel: "Read on M&A Magazine",
+    image: "/assets/insights/insight-02-mena-launch.jpg",
+    imageAlt: "M&A Magazine coverage of Duke Strategies launch",
   },
   {
     badge: "Capability",
@@ -386,6 +524,8 @@ export const insights: InsightItem[] = [
       "Duke's data capability turns complex stakeholder ecosystems into actionable maps. AI-driven analytics identify influence networks, assess sentiment, and anticipate opposition coalitions - grounding strategic advice in evidence rather than instinct.",
     href: "https://www.consultancy.nl/nieuws/61667/duke-strategies-breidt-team-uit-met-emma-van-gelder-en-william-masquelier",
     linkLabel: "Read team announcement",
+    image: "/assets/insights/insight-03-team.jpg",
+    imageAlt: "Duke Strategies team expansion announcement",
   },
   {
     badge: "M&A",
@@ -396,6 +536,8 @@ export const insights: InsightItem[] = [
       "In cross-border M&A, Dutch politics, works councils and industry associations increasingly shape the outcome. The lesson from two decades of deal advisory: build the stakeholder coalition long before an unsolicited bid forces your hand.",
     href: "https://mena.nl/artikel/kopers-en-verkopers-ken-uw-stakeholders-voordat-u-ze-nodig-hebt/",
     linkLabel: "Read the article",
+    image: "/assets/insights/insight-04-stakeholders.jpg",
+    imageAlt: "Stakeholder mapping for cross-border M&A",
   },
   {
     badge: "ESG",
@@ -406,6 +548,8 @@ export const insights: InsightItem[] = [
       "Three-quarters of Dutch institutional investors now treat ESG as decisive. ESG stopped being a disclosure exercise and became a strategic filter for boards, investors, and stakeholders.",
     href: "https://mena.nl/artikel/covid19-zet-esg-prominent-op-de-agenda/",
     linkLabel: "Read the perspective",
+    image: "/assets/insights/insight-05-esg.jpg",
+    imageAlt: "ESG moves to the top of the boardroom agenda",
   },
   {
     badge: "Restructuring",
@@ -416,5 +560,7 @@ export const insights: InsightItem[] = [
       "Pre-pack restructurings only work when stakeholders believe in the restart. That belief is not earned by press releases; it is built through meticulous stakeholder scenario planning before the filing.",
     href: "https://mena.nl/artikel/behoud-van-geloofwaardigheid-en-reputatie-centraal-bij-prepack/",
     linkLabel: "Read the archive piece",
+    image: "/assets/insights/insight-06-prepack.jpg",
+    imageAlt: "Credibility and reputation in pre-pack restructurings",
   },
 ];
