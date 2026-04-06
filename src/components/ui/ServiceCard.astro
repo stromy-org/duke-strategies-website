@@ -1,17 +1,20 @@
 ---
 interface Props {
   name: string;
+  tagline?: string;
   description: string;
   industries: string[];
   deliverables: string[];
+  href?: string;
   class?: string;
 }
 
-const { name, description, industries, deliverables, class: className = "" } = Astro.props;
+const { name, tagline, description, industries, deliverables, href, class: className = "" } = Astro.props;
 ---
 
 <article class:list={["service-card", className]}>
   <h4 class="service-card__title">{name}</h4>
+  {tagline && <p class="service-card__tagline">{tagline}</p>}
   <p class="service-card__desc">{description}</p>
   <div class="service-card__industries">
     {industries.map((industry) => (
@@ -26,10 +29,14 @@ const { name, description, industries, deliverables, class: className = "" } = A
       ))}
     </ul>
   </div>
+  {href && <a href={href} class="service-card__link">Learn more &rarr;</a>}
 </article>
 
 <style>
   .service-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     background: var(--surface-page);
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 3px;
@@ -52,10 +59,19 @@ const { name, description, industries, deliverables, class: className = "" } = A
     letter-spacing: 0.05em;
   }
 
+  .service-card__tagline {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: var(--sp-3);
+    line-height: 1.5;
+  }
+
   .service-card__desc {
     font-size: 0.95rem;
     line-height: 1.7;
     margin-bottom: var(--sp-5);
+    flex-grow: 1;
   }
 
   .service-card__industries {
@@ -115,5 +131,23 @@ const { name, description, industries, deliverables, class: className = "" } = A
     border-radius: 50%;
     background: var(--accent);
     opacity: 0.6;
+  }
+
+  .service-card__link {
+    display: inline-block;
+    margin-top: auto;
+    padding-top: var(--sp-5);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .service-card__link:hover {
+    color: var(--text-heading);
   }
 </style>

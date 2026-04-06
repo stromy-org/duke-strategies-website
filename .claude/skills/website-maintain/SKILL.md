@@ -104,6 +104,47 @@ duke-strategies-website/
 6. **Tailwind 4 via Vite plugin**, not PostCSS — `@tailwindcss/vite` in `astro.config.mjs`.
    Global CSS uses the Tailwind 4 `@import "tailwindcss"` syntax.
 
+## Architectural Invariants (enforce on every change)
+
+These are non-negotiable patterns baked into the Duke site. Never regress them.
+
+### Content architecture
+- **Services are the canonical "what we do" list.** They live in
+  `src/data/company.ts` → `services: Service[]` with a `slug` per entry.
+- **Every service has a detail page** at `/services/${slug}` via
+  `src/pages/services/[slug].astro` (dynamic route, `getStaticPaths()`).
+- **Homepage "Our Expertise" and `/what-we-do` both link to `/services/${slug}`**,
+  not to `/what-we-do` itself. Do not reintroduce a "Learn more → /what-we-do"
+  pattern.
+- **`capabilities` is deprecated.** It remains as an empty array in `company.ts`
+  for backward compatibility with the type export, but is not rendered anywhere.
+  Do not add entries to it. New "things we do" go under `services`.
+- **"Our Expertise" = `services.slice(0, 6)` on the homepage.** Featuring a
+  different subset = reorder `services` array, don't create a second array.
+
+### Visual invariants
+- `.img-cover > img` uses `position: absolute; inset: 0` — never percentage
+  height. A `min-height` on the parent + percentage child fails silently and
+  leaks the coral tint through.
+- Case-study image treatments cycle through `img-frame--offset-br / offset-tr /
+  border / offset-bl` × `img-cover--wide / hero / tall` per index. Do not ship
+  identical treatments on every case.
+- Case-study metric rows use `case-metrics--row` + `case-metrics--count-${N}`,
+  never `flex-wrap`. 4 metrics go 2×2 at narrow widths, 1×4 wide.
+- Insight cards are flex-column with `flex-grow: 1` on excerpt and
+  `margin-top: auto` on the link, so the CTA bottom-aligns across a grid row.
+- Contact page uses an OpenStreetMap iframe embed driven by `site.office.bbox`
+  + `site.office.lat/lon` — never a "MAP LOADING…" placeholder.
+- Insight `image` fields reference `/assets/insights/insight-NN-<slug>.jpg` —
+  real og:images downloaded from the referenced URL, never a hot-link to an
+  external host, never a placeholder gradient.
+- Affiliate cards that have a `partners` array render a `.partner-chips` list
+  linking to each sub-agency (Paritee → Geelmuyden Kiese / Brands2Life / LHLK /
+  DVA Studio). Do not reduce that list to only the umbrella's URL.
+
+If a change you're about to make would violate any of these, STOP and surface
+the conflict before editing.
+
 ## Visual QA Defaults
 
 When the user asks for a design review, visual polish pass, layout audit, responsive
@@ -129,6 +170,7 @@ Routes to audit:
 | `/duke-academy` | `src/pages/duke-academy.astro` | Academy programs |
 | `/insights` | `src/pages/insights.astro` | Insights list |
 | `/contact` | `src/pages/contact.astro` | Office details, contact form/info |
+| `/services/<slug>` | `src/pages/services/[slug].astro` | Dynamic service detail pages (one per service) |
 
 Useful capture commands:
 
@@ -176,48 +218,63 @@ Match the user's request to the appropriate workflow below.
 | "refresh brand", "sync brand tokens", "colors changed", "new logo" | [Refresh Brand Tokens](#refresh-brand-tokens) |
 | "add a new image", "swap the hero video" | [Add / Replace Media](#add--replace-media) |
 | "review the design", "visual audit", "check mobile", "use vision", "screenshot the site" | [Visual Audit](#visual-audit) |
+| "toggle dark mode", "change dark mode icons", "adjust dark mode colors", "dark theme" | [Dark Mode](#dark-mode) |
 | "deploy", "build the site", "push to prod" | [Build & Deploy](#build--deploy) |
 
 ---
 
 ## Update Services
 
-Services are defined in `src/data/company.ts` → `export const services: Service[]`.
+Services are the canonical "what we do" list. They live in `src/data/company.ts`
+→ `export const services: Service[]`. Every service automatically gets a detail
+page at `/services/${slug}` via the dynamic route
+`src/pages/services/[slug].astro`.
 
 Schema (see the `Service` type at the top of the file):
 ```ts
 {
-  name: string;           // "Strategic Advisory"
-  description: string;    // One paragraph
-  industries: string[];   // e.g. ["Energy", "Financial Services"]
-  deliverables: string[]; // e.g. ["Stakeholder map", "Risk assessment"]
+  slug: string;              // URL segment, kebab-case ("strategic-advisory")
+  name: string;              // "Strategic Advisory"
+  tagline: string;           // One-liner used on cards
+  description: string;       // One paragraph
+  industries?: string[];     // e.g. ["Energy", "Financial Services"]
+  deliverables?: string[];   // e.g. ["Stakeholder map", "Risk assessment"]
+  longform: {
+    challenge: string;       // "The problem we solve"
+    approach: string[];      // Bulleted process — rendered as ordered list
+    signals: string[];       // "Engage us when…" — rendered as bullet list
+  };
 }
 ```
 
-- **Add**: append a new object to the `services` array.
-- **Update**: edit the relevant object in-place.
-- **Remove**: delete the object.
+- **Add**: append a new object with a unique `slug` and complete `longform` block.
+  The detail page auto-generates on next build.
+- **Update**: edit the object in-place — copy changes propagate to the card, the
+  `/what-we-do` grid, and the detail page in one shot.
+- **Remove**: delete the object. Also grep `src/pages/` for any hardcoded
+  reference to the slug.
 
-The homepage (`src/pages/index.astro`) shows the first 6 via `services.slice(0, 6)`.
-The `/what-we-do` page shows the full list. No other edits required.
+**Do not** duplicate service copy into `what-we-do.astro` or `index.astro`. Both
+pages read from `services` and link to `/services/${slug}`.
 
-Verify: `npm run build`.
+The homepage shows `services.slice(0, 6)` as "Our Expertise" cards. The
+`/what-we-do` page shows the full list. The detail page renders Challenge /
+Approach / Signals with a sticky Deliverables sidebar and related services
+(neighboring slices of the `services` array).
+
+Verify: `npm run build`, then visit `/services/${slug}` in dev.
 
 ---
 
 ## Update Capabilities
 
-Capabilities are in `src/data/company.ts` → `export const capabilities: Capability[]`.
+**`capabilities` is deprecated.** It remains as an empty `Capability[]` export in
+`src/data/company.ts` only so the type signature is preserved; no page renders
+it. New "things we do" belong in `services` — see [Update Services](#update-services).
 
-Schema:
-```ts
-{ title: string; icon: string; }  // icon is a key looked up by Icon.astro
-```
-
-Keep `title` short (1–3 words). The icon string must map to an entry in
-`src/components/ui/Icon.astro` — check the switch statement there before adding a
-new icon name. If the icon doesn't exist, either (a) add it to `Icon.astro` or
-(b) reuse an existing one.
+If a user asks to "add a capability", confirm whether they mean a new service
+(likely) or a finer-grained sub-item inside an existing service's `longform.approach`.
+Do not reintroduce the capabilities grid on `/what-we-do`.
 
 ---
 
@@ -244,7 +301,21 @@ in `public/assets/images/`. If it doesn't, copy it from `src/brand/images/` firs
 (or re-run a sync if the image is new in brand-tokens).
 
 **Metrics:** 2–4 metrics read best in the card layout. Keep values short
-(e.g., `"92%"`, `"500+"`, `"< 4h"`).
+(e.g., `"92%"`, `"500+"`, `"< 4h"`). The case-study block renders metrics via
+`case-metrics--row` + `case-metrics--count-${metrics.length}` — don't replace
+that with a flex-wrap row or a 4-metric case will orphan the 4th into its own
+line.
+
+**Image treatment variation:** `insights.astro` (which also renders the case
+studies) cycles image blocks through `img-frame--offset-br / offset-tr / border
+/ offset-bl` × `img-cover--wide / hero / tall` so each case reads differently
+on the page. When adding a case, it inherits the next slot in the rotation
+automatically — but if you reorder cases or remove mid-array entries, scan the
+`/what-we-do` page to make sure the rotation still reads well visually.
+
+**Image fill pattern:** All case study images sit inside `.img-cover` whose
+`> img` child uses `position: absolute; inset: 0`. Never regress that rule to
+`width/height: 100%` percentages — the coral tint overlay will leak.
 
 The homepage (`src/pages/index.astro`) features `caseStudies[0]`. Reorder the array
 to change which case is featured. The `/what-we-do` page lists all cases.
@@ -306,14 +377,26 @@ Schema:
 ```ts
 {
   name: string;
+  region: string;
   description: string;
-  href: string;       // External URL
-  label: string;      // Link text, e.g. "Visit website"
+  href: string;         // External URL to the affiliate itself (e.g. paritee.com)
+  partners?: Array<{    // Optional — for umbrella networks like Paritee
+    name: string;       // Sub-agency name (e.g. "Geelmuyden Kiese")
+    href: string;       // Sub-agency website
+    region: string;     // e.g. "Scandinavia"
+  }>;
 }
 ```
 
-Affiliates render as link cards on `/who-we-are`. Always verify the URL resolves
-before committing.
+Affiliates render on `/contact` (Global Reach section) and also as link cards on
+`/who-we-are`. When the affiliate is an umbrella (Paritee, etc.), populate the
+`partners` array so the contact page renders a `.partner-chips` list linking
+each sub-agency directly — the user explicitly asked that visitors be able to
+reach the real operational agency, not only the parent brand.
+
+Always verify every URL (top-level `href` AND every `partners[].href`) resolves
+before committing. Stale "Global Reach" links are the most visible kind of rot.
+Prefer the `WebFetch` tool or a quick Playwright MCP navigation to verify.
 
 ---
 
@@ -366,6 +449,8 @@ Schema:
   excerpt: string;
   href: string;       // External or internal URL
   linkLabel: string;  // "Read more"
+  image?: string;     // "/assets/insights/insight-NN-<slug>.jpg"
+  imageAlt?: string;
 }
 ```
 
@@ -373,6 +458,35 @@ Rendered on `/insights` via `InsightCard.astro`. The MDX `insights` collection i
 `src/content/insights/` is scaffolded but currently unused — do **not** add MDX
 files there expecting them to render. Add to the `insights` array in `company.ts`
 instead.
+
+### og:image sourcing workflow (mandatory for new insights)
+
+Never ship an insight card with a placeholder gradient or a hot-linked external
+image. Every entry that points to an external article must have a locally
+downloaded og:image under `public/assets/insights/`.
+
+1. **Fetch the og:image URL** from the referenced article:
+   - Preferred: `WebFetch` or `curl -sL <href> | grep -i 'og:image'` and
+     regex-extract the `content="..."` attribute.
+   - Fallback: Playwright MCP — `browser_navigate` then `browser_evaluate` with
+     `document.querySelector('meta[property="og:image"]').content`.
+2. **Download** the image to
+   `public/assets/insights/insight-NN-<slug>.jpg` where `NN` is the 2-digit
+   insight index in the array and `<slug>` is a short kebab-case identifier
+   (e.g. `insight-07-energy-transition.jpg`). Prefer `.jpg`; convert PNGs/WebPs
+   to JPG when possible to keep the folder uniform.
+3. **Wire the fields** on the new `insights` entry:
+   ```ts
+   image: "/assets/insights/insight-07-energy-transition.jpg",
+   imageAlt: "Wind turbines at dusk — referenced article header image",
+   ```
+4. **Verify** the image loads at `http://localhost:4321/assets/insights/...`
+   and that the card renders the photo instead of the gradient fallback.
+
+If a referenced article has no og:image (or hot-linking is blocked and you can
+only get a low-quality thumbnail), choose a relevant image from
+`src/brand/images/`, copy it under `public/assets/insights/` with the same
+naming scheme, and note the substitution in the commit message.
 
 If you need long-form editorial (full articles, not excerpts), that's a structural
 change — raise it as a task in `BACKLOG.md` before implementing.
@@ -455,7 +569,13 @@ in `src/data/site.ts`:
 export const site = {
   name, legalName, url, title, tagline, description, footerDescription,
   navItems,
-  office: { street, postalCode, city, country },
+  office: {
+    street, postalCode, city, country,
+    lat: 51.7095,      // Latitude — drives OSM marker position
+    lon: 5.2827,       // Longitude — drives OSM marker position
+    bbox: [5.2747, 51.7055, 5.2907, 51.7135] as [number, number, number, number],
+    // bbox = [minLon, minLat, maxLon, maxLat] — drives OSM iframe viewport
+  },
   contact: { email, phoneDisplay, phoneHref, linkedin },
   analytics: { provider, domain },
   marqueeItems: [...],
@@ -464,6 +584,11 @@ export const site = {
 
 **When changing the phone number**, update both `phoneDisplay` (human-readable) and
 `phoneHref` (raw `tel:` link).
+
+**When changing the office address**, also update `lat`, `lon`, and `bbox` — these
+drive the OpenStreetMap iframe embed on `/contact`. The `bbox` is
+`[minLon, minLat, maxLon, maxLat]` and should encompass roughly a 500m radius
+around the office pin. Use <https://www.openstreetmap.org/> to find coordinates.
 
 **Marquee items** are the scrolling capability strip on the homepage — short phrases,
 2–4 words each.
@@ -577,6 +702,36 @@ Visually inspect with `npm run dev` if colors, fonts, or logos changed.
 
 ---
 
+## Dark Mode
+
+The site has an optional dark mode toggle in the nav bar. It uses CSS custom property
+overrides via `[data-theme="dark"]` on `<html>`.
+
+### Key Files
+
+- **Token overrides**: `src/styles/tokens-semantic.css` → `[data-theme="dark"]` block
+- **Toggle component**: `src/components/layout/ThemeToggle.astro` (lightbulb / star icons)
+- **FOUC prevention**: `src/layouts/BaseLayout.astro` → inline `<script>` in `<head>`
+- **Toggle init**: `src/layouts/BaseLayout.astro` → `initThemeToggle()` in DOMContentLoaded
+- **Transitions**: `src/styles/global.css` → smooth transition rules + dark-mode overrides
+
+### Adjusting Dark Theme Colors
+
+Edit the `[data-theme="dark"]` block in `tokens-semantic.css`. Only override semantic
+tokens (Tier 2/3). Brand accent (`--accent`) stays the same — coral works on dark.
+
+### Changing Icons
+
+Edit `ThemeToggle.astro` SVG paths. Light-mode icon is colored `var(--accent)` (coral),
+dark-mode icon is colored `#F0F0F2` (near-white).
+
+### Disabling Dark Mode
+
+Remove `ThemeToggle` import from `Navigation.astro`, remove `[data-theme="dark"]` block
+from `tokens-semantic.css`, remove the FOUC script from `BaseLayout.astro <head>`.
+
+---
+
 ## Visual Audit
 
 Use this workflow when the user asks for: visual review, design critique, layout
@@ -588,8 +743,11 @@ Start the server: `npm run dev`. Do not rely on code inspection alone for visual
 
 ### 2. Use the full route list
 
-Capture all six pages:
+Capture all static pages plus dynamic service detail pages:
 - `/`, `/who-we-are`, `/what-we-do`, `/duke-academy`, `/insights`, `/contact`
+- `/services/<slug>` — one per service entry (currently 7). Get slugs from
+  `services` array in `src/data/company.ts`. At minimum, spot-check the first
+  and last service detail page.
 
 ### 3. Capture desktop + mobile for every page
 
