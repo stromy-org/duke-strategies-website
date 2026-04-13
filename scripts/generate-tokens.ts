@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), '..');
-const charter = JSON.parse(readFileSync(resolve(ROOT, 'src/brand/charter.json'), 'utf-8'));
+const charter = JSON.parse(readFileSync(resolve(ROOT, 'client-data/clients/dukestrategies/charter.json'), 'utf-8'));
 
 // --- CSS custom properties (Tier 1 — brand primitives) ---
 const cssLines: string[] = ['/* Auto-generated from charter.json — do not edit manually */', ':root {'];

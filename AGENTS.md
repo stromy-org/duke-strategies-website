@@ -19,10 +19,6 @@ Netherlands-based strategic communications and public affairs consultancy.
 ```
 duke-strategies-website/
 ├── src/
-│   ├── brand/                    ← Synced from the org's brand-tokens repo
-│   │   ├── charter.json          ← Brand source of truth
-│   │   ├── logos/                ← Brand logos (synced)
-│   │   └── images/               ← Brand imagery catalog (synced)
 │   ├── styles/
 │   │   ├── brand-tokens.css      ← GENERATED — do not edit
 │   │   ├── tokens-semantic.css   ← Hand-written semantic tokens
@@ -49,7 +45,8 @@ duke-strategies-website/
 │   ├── team/                     ← Team member photos (not synced)
 │   └── video/                    ← Hero video
 ├── scripts/
-│   └── generate-tokens.ts        ← charter.json → brand-tokens.css + tokens.ts
+│   └── generate-tokens.ts        ← client-data charter.json → brand-tokens.css + tokens.ts
+├── client-data/                   ← Brand data submodule (charter.json, logos, images)
 ├── astro.config.mjs
 └── package.json
 ```
@@ -60,7 +57,7 @@ duke-strategies-website/
 npm run dev           # Dev server at http://localhost:4321
 npm run build         # Generate tokens + production build → dist/
 npm run preview       # Preview the built site locally
-npm run tokens        # Regenerate brand tokens from src/brand/charter.json
+npm run tokens        # Regenerate brand tokens from client-data charter.json
 npm run check         # Astro TypeScript diagnostics
 ```
 
@@ -90,17 +87,18 @@ pages) are scaffolded but empty. `src/content.config.ts` wires only `insights`,
 `pages`, `authors` — all three collections are currently empty. **Do not add MDX
 files there expecting them to render on existing pages.**
 
-### Asset duplication: `src/brand/` vs `public/assets/`
+### Asset duplication: `client-data/` vs `public/assets/`
 
 Brand images and logos exist in two places:
-- `src/brand/{images,logos}/` — synced from the org's `brand-tokens` repo
+- `client-data/clients/dukestrategies/{images,logos}/` — from the `client-data`
+  git submodule (source of truth)
 - `public/assets/{images,logos}/` — what pages reference via `/assets/...` URLs
 
-After a brand sync, runtime copies must be updated:
+After a submodule update, runtime copies must be updated:
 
 ```bash
-rsync -a --delete src/brand/images/ public/assets/images/
-rsync -a --delete src/brand/logos/  public/assets/logos/
+rsync -a --delete client-data/clients/dukestrategies/images/ public/assets/images/
+rsync -a --delete client-data/clients/dukestrategies/logos/  public/assets/logos/
 ```
 
 Team photos live **only** in `public/assets/team/` — not part of brand sync.
@@ -113,7 +111,7 @@ apply.
 
 ### Brand token pipeline
 
-1. `src/brand/charter.json` is the source of truth
+1. `client-data/clients/dukestrategies/charter.json` is the source of truth (via submodule)
 2. `npm run tokens` → `scripts/generate-tokens.ts` reads charter.json → writes
    `src/styles/brand-tokens.css` and `src/lib/tokens.ts`
 3. `npm run build` runs `tokens` first, then `astro build`
@@ -195,12 +193,12 @@ Pre-deploy checklist:
 1. `npm run build` locally — no errors
 2. `npm run preview` — spot-check changed pages
 3. If brand refreshed, confirm `npm run tokens` ran
-4. If media changed, confirm both `src/brand/` and `public/assets/` are in sync
+4. If media changed, confirm both `client-data/` and `public/assets/` are in sync
 5. Verify `astro.config.mjs` `site:` still matches production domain
 
 ## Known Limitations / Tech Debt
 
 - `src/content/` collections scaffolded but unused
 - Sections inline in page files rather than extracted components
-- Asset duplication between `src/brand/` and `public/assets/` requires manual rsync
+- Asset duplication between `client-data/` and `public/assets/` requires manual rsync
 - Empty `src/components/sections/` and `src/components/content/` directories

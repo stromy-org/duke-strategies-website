@@ -20,7 +20,6 @@ corporate strategy, corporate affairs, and stakeholder advisory.
 ```
 duke-strategies-website/
 ├── src/
-│   ├── brand/                    ← Synced from brand-tokens (charter.json + logos + images)
 │   ├── styles/
 │   │   ├── brand-tokens.css      ← GENERATED from charter.json — do not edit
 │   │   ├── tokens-semantic.css   ← Tier 2/3 semantic tokens (hand-written)
@@ -42,12 +41,12 @@ duke-strategies-website/
 │   ├── layouts/                  ← BaseLayout, PageLayout, ArticleLayout
 │   └── pages/                    ← 6 Astro pages (index, who-we-are, what-we-do, duke-academy, insights, contact)
 ├── public/assets/
-│   ├── images/                   ← Runtime-served images (mirrors src/brand/images/)
+│   ├── images/                   ← Runtime-served images (mirrors client-data/clients/dukestrategies/images/)
 │   ├── logos/                    ← Runtime-served logos
 │   ├── team/                     ← Team member photos (not part of brand sync)
 │   └── video/                    ← Hero video
 ├── scripts/
-│   └── generate-tokens.ts        ← charter.json → brand-tokens.css + tokens.ts
+│   └── generate-tokens.ts        ← client-data charter.json → brand-tokens.css + tokens.ts
 ├── astro.config.mjs              ← MDX + sitemap + @tailwindcss/vite
 ├── .github/workflows/deploy.yml  ← GitHub Pages deploy on push to main
 └── .claude/skills/website-maintain/  ← Site-specific maintenance skill
@@ -59,7 +58,7 @@ duke-strategies-website/
 npm run dev           # Astro dev server (localhost:4321)
 npm run build         # Generate tokens + production build → dist/
 npm run preview       # Preview production build locally
-npm run tokens        # Regenerate brand tokens from src/brand/charter.json
+npm run tokens        # Regenerate brand tokens from client-data charter.json
 npm run check         # Astro TypeScript + template diagnostics
 ```
 
@@ -78,15 +77,15 @@ pages) are scaffolded but empty. `src/content.config.ts` only wires
 `insights`, `pages`, `authors` — and all three collections are empty. Do **not**
 add MDX files there expecting them to render on existing pages.
 
-### Asset duplication: `src/brand/` vs `public/assets/`
+### Asset duplication: `client-data/` vs `public/assets/`
 
 Brand images and logos exist in two places:
-- `src/brand/{images,logos}/` — synced from `brand-tokens` via
-  `scripts/sync-brand-data.sh` at the org root
+- `client-data/clients/dukestrategies/{images,logos}/` — from the `client-data`
+  git submodule (source of truth)
 - `public/assets/{images,logos}/` — what pages actually reference via runtime
   `/assets/...` URLs
 
-After a brand sync, the runtime copies must be updated with rsync (see the
+After a submodule update, the runtime copies must be updated with rsync (see the
 `website-maintain` skill's "Refresh Brand Tokens" workflow).
 
 Team photos live **only** in `public/assets/team/` and are not part of the brand
@@ -100,7 +99,7 @@ Tailwind 4 `@import "tailwindcss"` syntax. Tailwind 3 configuration files
 
 ### Brand token pipeline
 
-1. `src/brand/charter.json` is the source of truth (synced from `brand-tokens`)
+1. `client-data/clients/dukestrategies/charter.json` is the source of truth (via submodule)
 2. `npm run tokens` → `scripts/generate-tokens.ts` reads charter.json → writes
    `src/styles/brand-tokens.css` and `src/lib/tokens.ts`
 3. `npm run build` runs `tokens` first, then `astro build`
@@ -157,5 +156,5 @@ or small UI elements on light backgrounds (fails WCAG AA contrast).
   them up if the insights section needs long-form articles
 - Sections are currently inline inside page files rather than extracted components —
   refactor is tracked in `BACKLOG.md`
-- Asset duplication between `src/brand/` and `public/assets/` requires manual rsync
-  after brand syncs — could be automated in `scripts/generate-tokens.ts` or a new script
+- Asset duplication between `client-data/` and `public/assets/` requires manual rsync
+  after submodule updates — could be automated in `scripts/generate-tokens.ts` or a new script
