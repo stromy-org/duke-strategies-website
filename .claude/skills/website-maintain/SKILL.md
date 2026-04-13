@@ -32,8 +32,8 @@ first thing to understand before editing anything.
 ```
 duke-strategies-website/
 ├── src/
-│   ├── brand/                    ← Synced from brand-tokens (charter.json + logos + images)
-│   │   ├── charter.json          ← Brand source of truth (do not edit here — edit in brand-tokens)
+│   ├── client-data/              ← Git submodule (charter.json + logos + images)
+│   │   └── clients/dukestrategies/  ← Brand source of truth (edit in client-data repo)
 │   │   ├── logos/                ← Brand logos
 │   │   └── images/               ← Brand imagery catalog
 │   ├── styles/
@@ -74,7 +74,7 @@ duke-strategies-website/
 │   ├── team/                     ← Team member photos
 │   └── video/                    ← Hero video (AquaductHarderwijk_1920x1080px.mp4)
 ├── scripts/
-│   └── generate-tokens.ts        ← charter.json → brand-tokens.css + tokens.ts
+│   └── generate-tokens.ts        ← client-data charter.json → brand-tokens.css + tokens.ts
 ├── astro.config.mjs              ← Astro 6 config (MDX + sitemap + Tailwind Vite plugin)
 └── .github/workflows/deploy.yml  ← GitHub Pages deploy on push to main
 ```
@@ -297,8 +297,8 @@ Schema:
 ```
 
 **Image path rule:** Use absolute `/assets/images/<file>.jpg`. The image must exist
-in `public/assets/images/`. If it doesn't, copy it from `src/brand/images/` first
-(or re-run a sync if the image is new in brand-tokens).
+in `public/assets/images/`. If it doesn't, copy it from `client-data/clients/dukestrategies/images/` first
+(or update the submodule if the image is new in client-data).
 
 **Metrics:** 2–4 metrics read best in the card layout. Keep values short
 (e.g., `"92%"`, `"500+"`, `"< 4h"`). The case-study block renders metrics via
@@ -615,18 +615,14 @@ need updating.
 
 ## Refresh Brand Tokens
 
-When brand data changes upstream in `brand-tokens` (colors, fonts, logos, images):
+When brand data changes upstream in `client-data` (colors, fonts, logos, images):
 
-### 1. Sync brand assets from the org root
+### 1. Update the client-data submodule
 
 ```bash
-cd /Users/williammasquelier/Repositories/stromy-org
-bash scripts/sync-brand-data.sh
+cd /Users/williammasquelier/Repositories/stromy-org/clients/duke-strategies/duke-strategies-website
+git submodule update --remote client-data
 ```
-
-This copies the `dukestrategies` entry from `brand-tokens/` into
-`clients/duke-strategies/duke-strategies-website/src/brand/` based on the
-`sync-manifest.json` consumer entry.
 
 ### 2. Regenerate tokens in this repo
 
@@ -634,18 +630,18 @@ This copies the `dukestrategies` entry from `brand-tokens/` into
 npm run tokens
 ```
 
-Reads `src/brand/charter.json` and regenerates:
+Reads `client-data/clients/dukestrategies/charter.json` and regenerates:
 - `src/styles/brand-tokens.css` — CSS custom properties (`--brand-*`)
 - `src/lib/tokens.ts` — typed TS module
 
 ### 3. Re-copy runtime assets if images changed
 
-Because images are duplicated between `src/brand/images/` and `public/assets/images/`,
+Because images are duplicated between `client-data/clients/dukestrategies/images/` and `public/assets/images/`,
 if new images were added or removed:
 
 ```bash
-rsync -a --delete src/brand/images/ public/assets/images/
-rsync -a --delete src/brand/logos/ public/assets/logos/
+rsync -a --delete client-data/clients/dukestrategies/images/ public/assets/images/
+rsync -a --delete client-data/clients/dukestrategies/logos/ public/assets/logos/
 ```
 
 *(Do not sync team photos — those live only in `public/assets/team/` and are not
@@ -663,7 +659,7 @@ Visually inspect with `npm run dev` if colors, fonts, or logos changed.
 
 - Color changes → CSS custom properties → all components using `var(--brand-*)`
 - Font changes → `--brand-font-*` variables → all typography
-- Images added in brand-tokens → available after rsync step
+- Images added in client-data → available after submodule update + rsync step
 
 ### What requires manual updates
 
@@ -938,6 +934,6 @@ When adding or modifying Dutch content, apply these language conventions:
 - **New page creation beyond the existing 6** — possible, but think about IA and
   navigation impact before adding.
 - **Brand redesign** — that's the `brand-builder` skill's job, operating on
-  `brand-tokens/` not this repo.
+  `client-data` repo, not this repo.
 - **Component primitives** — adding new card types, layout components, icon SVGs
   should be planned; this skill is for content and configuration work.
