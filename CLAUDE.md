@@ -80,13 +80,13 @@ add MDX files there expecting them to render on existing pages.
 ### Asset duplication: `client-data/` vs `public/assets/`
 
 Brand images and logos exist in two places:
-- `client-data/clients/dukestrategies/{images,logos}/` — from the `client-data`
-  git submodule (source of truth)
+- `client-data/clients/dukestrategies/{images,logos}/` — committed slice from
+  the central `client-data` repo (source of truth, updated via `dispatch-client-data.sh`)
 - `public/assets/{images,logos}/` — what pages actually reference via runtime
   `/assets/...` URLs
 
-After a submodule update, the runtime copies must be updated with rsync (see the
-`website-maintain` skill's "Refresh Brand Tokens" workflow).
+After a client-data dispatch update, the runtime copies must be updated with rsync
+(see the `website-maintain` skill's "Refresh Brand Tokens" workflow).
 
 Team photos live **only** in `public/assets/team/` and are not part of the brand
 sync.
