@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+  <!-- Repeatable bridge column pattern tile — coral at 15% opacity -->
+  <!-- Vertical column -->
+  <rect x="28" y="0" width="4" height="60" fill="#FF7F66" opacity="0.15"/>
+  <!-- Horizontal beam -->
+  <rect x="0" y="28" width="60" height="2" fill="#FF7F66" opacity="0.10"/>
+  <!-- Small cap detail -->
+  <rect x="26" y="26" width="8" height="2" rx="0.5" fill="#FF7F66" opacity="0.12"/>
+  <rect x="26" y="32" width="8" height="2" rx="0.5" fill="#FF7F66" opacity="0.08"/>
+</svg>

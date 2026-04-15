@@ -1,0 +1,69 @@
+{
+  "spokespersons": [
+    {
+      "id": "spk-001",
+      "personId": "person-001",
+      "name": "Ingo Heijnen",
+      "title": "Managing Partner and Co-founder",
+      "role": "primary",
+      "topics": ["company strategy", "crisis communications", "M&A", "corporate governance", "partnerships", "company milestones", "reputation management"],
+      "quoteStyle": "authoritative-direct",
+      "email": "ingo@dukestrategies.eu",
+      "phone": "+31 73 555 0101",
+      "headshot": "brand/team/ingo-heijnen.jpg",
+      "bio": "Ingo Heijnen is Managing Partner and co-founder of Duke Strategies with nearly 30 years of experience in strategic communications. Former CEO of Hill+Knowlton Strategies Netherlands and Continental Europe. Twice elected Best PR Consultant in M&A in the Netherlands (2010, 2011). Previously PR Officer with the Royal Netherlands Air Force."
+    },
+    {
+      "id": "spk-002",
+      "personId": "person-002",
+      "name": "Arien Stuijt",
+      "title": "Managing Partner and Co-founder",
+      "role": "subject-matter",
+      "topics": ["AI stakeholder intelligence", "data-driven strategy", "media strategy", "stakeholder mapping", "technology", "energy transition", "shareholder activism"],
+      "quoteStyle": "analytical-precise",
+      "email": "arien@dukestrategies.eu",
+      "phone": "+31 73 555 0102",
+      "headshot": "brand/team/arien-stuijt.jpg",
+      "bio": "Arien Stuijt is Managing Partner and co-founder of Duke Strategies. Former financial journalist at Dow Jones Newswires and The Wall Street Journal, and former Strategy Director at Hill+Knowlton Strategies (17 years). Brings journalistic rigor and AI-driven analytics to strategic advisory."
+    },
+    {
+      "id": "spk-003",
+      "personId": "person-005",
+      "name": "Bas van 't Wout",
+      "title": "Expert Partner",
+      "role": "subject-matter",
+      "topics": ["government relations", "economic policy", "energy transition policy", "political landscape", "regulatory strategy", "public affairs"],
+      "quoteStyle": "statesmanlike",
+      "email": "bas@dukestrategies.eu",
+      "phone": "+31 73 555 0103",
+      "headshot": "brand/team/bas-van-t-wout.jpg",
+      "bio": "Bas van 't Wout is Expert Partner at Duke Strategies and former Member of Parliament, State Secretary, and Minister of Economic Affairs and Climate Policy of the Netherlands (VVD). Provides direct insight into government decision-making and political stakeholder dynamics."
+    },
+    {
+      "id": "spk-004",
+      "personId": "person-006",
+      "name": "Pieter Cobelens",
+      "title": "Expert Partner",
+      "role": "subject-matter",
+      "topics": ["geopolitical risk", "security strategy", "defense industry", "intelligence", "cybersecurity", "international operations"],
+      "quoteStyle": "authoritative-measured",
+      "email": "pieter@dukestrategies.eu",
+      "phone": "+31 73 555 0104",
+      "headshot": "brand/team/pieter-cobelens.jpg",
+      "bio": "Major General (ret.) Pieter Cobelens is Expert Partner at Duke Strategies and former Director of the Dutch Military Intelligence and Security Service (MIVD). Advises on geopolitical risk, security-sensitive environments, and defense industry strategy."
+    },
+    {
+      "id": "spk-005",
+      "personId": "person-003",
+      "name": "Emma van Gelder",
+      "title": "Communications Associate",
+      "role": "mediaContact",
+      "topics": [],
+      "quoteStyle": null,
+      "email": "emma@dukestrategies.eu",
+      "phone": "+31 73 555 0110",
+      "headshot": "brand/team/emma-van-gelder.jpg",
+      "bio": null
+    }
+  ]
+}

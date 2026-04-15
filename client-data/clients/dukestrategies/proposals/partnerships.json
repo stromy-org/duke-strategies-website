@@ -1,0 +1,20 @@
+[
+  {
+    "id": "part-001",
+    "partner": "Paritee Group",
+    "level": "Strategic Alliance",
+    "relevantServices": ["svc-001", "svc-002", "svc-004"],
+    "proofPoint": "Provides Duke Strategies clients with on-the-ground strategic communications capabilities in the UK, Germany, and Scandinavia, enabling coordinated cross-border campaigns",
+    "tags": ["international-reach", "uk", "germany", "scandinavia", "strategic-communications"],
+    "lastReviewed": "2026-03"
+  },
+  {
+    "id": "part-002",
+    "partner": "Strait Insights",
+    "level": "Strategic Alliance",
+    "relevantServices": ["svc-001", "svc-004", "svc-007"],
+    "proofPoint": "Extends Duke Strategies' advisory reach into the US market, providing Washington DC-based political intelligence and government affairs capabilities for European clients operating in North America",
+    "tags": ["international-reach", "us-market", "government-affairs", "political-intelligence"],
+    "lastReviewed": "2026-03"
+  }
+]

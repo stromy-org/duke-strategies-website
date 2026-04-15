@@ -1,0 +1,24 @@
+{
+  "boilerplates": [
+    {
+      "id": "bp-standard",
+      "variant": "standard",
+      "text": "Duke Strategies is a strategic advisory consultancy operating at the intersection of corporate strategy and corporate affairs. Founded in 2025 by former Hill+Knowlton Strategies leaders Ingo Heijnen and Arien Stuijt, the firm helps boards and executives make their strategies stakeholder-proof through AI-driven stakeholder intelligence, crisis-tested advisory, and direct political and security expertise. The firm is headquartered in 's-Hertogenbosch, Netherlands. For more information, visit dukestrategies.eu."
+    },
+    {
+      "id": "bp-short",
+      "variant": "short",
+      "text": "Duke Strategies is a Netherlands-based strategic advisory consultancy that helps boards make their strategies stakeholder-proof. Visit dukestrategies.eu."
+    },
+    {
+      "id": "bp-crisis",
+      "variant": "crisis",
+      "text": "Duke Strategies is a strategic advisory consultancy specializing in corporate strategy, crisis communications, and stakeholder advisory. Founded by former Hill+Knowlton Strategies leaders with combined 40+ years of experience managing high-stakes corporate situations, the firm serves European corporations navigating complex stakeholder environments. The firm is headquartered in 's-Hertogenbosch, Netherlands."
+    },
+    {
+      "id": "bp-political",
+      "variant": "political",
+      "text": "Duke Strategies is a strategic advisory consultancy that combines corporate strategy with stakeholder intelligence and political advisory. The firm's Expert Partners include a former Minister of Economic Affairs and Climate Policy and a former Director of the Dutch Military Intelligence and Security Service. Founded in 2025 by former Hill+Knowlton Strategies executives, Duke Strategies is headquartered in 's-Hertogenbosch, Netherlands. For more information, visit dukestrategies.eu."
+    }
+  ]
+}

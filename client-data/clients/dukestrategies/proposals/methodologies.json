@@ -1,0 +1,60 @@
+[
+  {
+    "id": "meth-001",
+    "name": "ANALYSE-CREATE-EXECUTE Framework",
+    "tags": ["strategic-advisory", "crisis-communications", "stakeholder-engagement", "m-and-a-communications"],
+    "summary": "Duke Strategies' core three-phase methodology that transforms complex challenges into stakeholder-proof strategies. Each phase builds on the previous, moving from intelligence gathering through strategy development to hands-on execution and measurement.",
+    "phases": [
+      {
+        "name": "ANALYSE",
+        "description": "Deep-dive intelligence gathering and situation assessment. Map the stakeholder landscape, analyse political and media dynamics, assess risks and opportunities, and establish the factual foundation for strategy development. Combines traditional research with AI-driven analytics to surface hidden patterns and emerging threats."
+      },
+      {
+        "name": "CREATE",
+        "description": "Strategy development and narrative design. Synthesize analysis insights into a coherent strategy with clear objectives, stakeholder-specific messaging, channel selection, and action plans. Develop the narratives, position papers, and communications materials needed for execution. Test key messages through scenario planning and stakeholder simulation."
+      },
+      {
+        "name": "EXECUTE",
+        "description": "Hands-on implementation, stakeholder engagement, and real-time adaptation. Deploy the strategy through coordinated stakeholder outreach, media engagement, and internal communications. Monitor outcomes continuously and adjust tactics based on stakeholder response and emerging developments. Measure impact against defined KPIs."
+      }
+    ],
+    "differentiators": [
+      "Intelligence-led: every strategy is grounded in rigorous analysis, not assumptions",
+      "AI-enhanced analytics in the ANALYSE phase surface patterns invisible to traditional approaches",
+      "Senior partner involvement at every phase — not just the pitch",
+      "Built-in feedback loops between phases enable rapid adaptation"
+    ],
+    "applicableServices": ["svc-001", "svc-002", "svc-003", "svc-004", "svc-005", "svc-006", "svc-007"]
+  },
+  {
+    "id": "meth-002",
+    "name": "AI-Driven Stakeholder Intelligence",
+    "tags": ["stakeholder-mapping", "ai-analytics", "issue-management", "strategic-advisory"],
+    "summary": "A four-phase methodology that uses artificial intelligence and data analytics to map, analyse, engage, and monitor complex stakeholder environments. Goes beyond traditional stakeholder mapping by using NLP, network analysis, and sentiment scoring to reveal hidden influence patterns and emerging coalition risks.",
+    "phases": [
+      {
+        "name": "Map",
+        "description": "Automated identification and categorization of stakeholders from public data sources — media coverage, parliamentary records, regulatory filings, social media, and organizational networks. Natural language processing extracts entities, relationships, and positions to build a comprehensive stakeholder inventory."
+      },
+      {
+        "name": "Analyse",
+        "description": "Apply influence scoring, sentiment analysis, and coalition detection algorithms to the stakeholder network. Identify key influencers, hidden connections, persuadable neutrals, and emerging opposition clusters. Generate risk-scored stakeholder profiles with engagement priority rankings."
+      },
+      {
+        "name": "Engage",
+        "description": "Design data-informed engagement strategies for each stakeholder cluster. Tailor messaging, channel selection, and engagement sequencing based on influence patterns, sentiment, and relationship dynamics. Provide actionable engagement playbooks with specific talking points per stakeholder."
+      },
+      {
+        "name": "Monitor",
+        "description": "Continuous real-time monitoring of stakeholder sentiment, media coverage, and political developments. Automated alerting for significant shifts in stakeholder positions or emerging issues. Regular reporting dashboards that track engagement effectiveness and landscape evolution."
+      }
+    ],
+    "differentiators": [
+      "AI-powered analysis processes thousands of data points that manual approaches miss",
+      "Coalition detection identifies alliance risks before they materialize publicly",
+      "Real-time monitoring enables proactive rather than reactive stakeholder management",
+      "Data-backed engagement strategies replace intuition with evidence"
+    ],
+    "applicableServices": ["svc-003", "svc-001", "svc-007"]
+  }
+]

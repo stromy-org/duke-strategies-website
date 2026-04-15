@@ -1,0 +1,62 @@
+[
+  {
+    "id": "diff-001",
+    "theme": "Stakeholder-Proof Strategies",
+    "headline": "Strategies designed to withstand scrutiny from every stakeholder angle",
+    "evidence": ["CS-001", "CS-003", "CS-004"],
+    "applicableServices": ["svc-001", "svc-003", "svc-007"],
+    "tags": ["strategy", "stakeholder-engagement", "resilience"],
+    "ghostStatement": "Unlike traditional strategy consultancies that focus on business logic alone, we stress-test every recommendation against the full stakeholder landscape — political, regulatory, media, community, and investor. If a strategy can't survive stakeholder pressure, it's not a strategy.",
+    "lastReviewed": "2026-03"
+  },
+  {
+    "id": "diff-002",
+    "theme": "Strategy Meets Communications",
+    "headline": "We don't separate the thinking from the telling — strategy and communications are one discipline",
+    "evidence": ["CS-002", "CS-004"],
+    "applicableServices": ["svc-001", "svc-004", "svc-006"],
+    "tags": ["integrated-advisory", "strategic-communications", "narrative"],
+    "ghostStatement": "Most firms offer either strategy consulting or communications support. We integrate both — because a brilliant strategy with poor communications fails just as often as a well-communicated bad strategy. Our team combines strategic advisory depth with communications craft.",
+    "lastReviewed": "2026-03"
+  },
+  {
+    "id": "diff-003",
+    "theme": "AI-Powered Stakeholder Intelligence",
+    "headline": "Data-driven insights that reveal what traditional analysis misses",
+    "evidence": ["CS-003"],
+    "applicableServices": ["svc-003", "svc-001", "svc-007"],
+    "tags": ["ai-analytics", "data-driven", "stakeholder-mapping", "technology"],
+    "ghostStatement": "We use AI and data analytics to map stakeholder networks, detect emerging coalitions, and track sentiment in real time. This isn't a dashboard on top of manual research — it's a fundamentally different approach that processes thousands of data points to surface patterns invisible to traditional methods.",
+    "lastReviewed": "2026-03"
+  },
+  {
+    "id": "diff-004",
+    "theme": "Crisis-Hardened Leadership",
+    "headline": "Senior partners with decades of crisis management under genuine pressure",
+    "evidence": ["CS-001"],
+    "applicableServices": ["svc-002", "svc-001", "svc-007"],
+    "tags": ["crisis-management", "experience", "senior-leadership"],
+    "ghostStatement": "Our founding partners have managed crises for Fortune 500 companies across industries — not from a playbook, but from the command center. With 27+ years of crisis experience, including environmental incidents, hostile M&A, regulatory investigations, and public controversies, we bring calm authority when it matters most.",
+    "lastReviewed": "2026-03"
+  },
+  {
+    "id": "diff-005",
+    "theme": "Political & Security Intelligence",
+    "headline": "Expert Partners with direct experience in government and intelligence leadership",
+    "evidence": ["CS-004"],
+    "applicableServices": ["svc-001", "svc-007", "svc-003"],
+    "tags": ["government-relations", "political-intelligence", "geopolitical-risk", "security"],
+    "ghostStatement": "Our Expert Partner network includes a former Minister of Economic Affairs and a former Director of Military Intelligence. This isn't advisory from the outside — it's insight from people who sat at the decision-making table. For clients navigating political, regulatory, or security-sensitive environments, this level of access and understanding is unmatched.",
+    "lastReviewed": "2026-03"
+  },
+  {
+    "id": "diff-006",
+    "theme": "Journalistic Rigor",
+    "headline": "Wall Street Journal-trained methodology applied to strategic intelligence",
+    "evidence": ["CS-003", "CS-004"],
+    "applicableServices": ["svc-001", "svc-003", "svc-005", "svc-007"],
+    "tags": ["research", "investigation", "media", "intelligence"],
+    "ghostStatement": "Our Managing Partner's Wall Street Journal background brings investigative-grade research standards to strategic advisory. We verify claims, triangulate sources, and challenge assumptions — ensuring that strategies are built on facts, not narratives that haven't been pressure-tested.",
+    "lastReviewed": "2026-03"
+  }
+]

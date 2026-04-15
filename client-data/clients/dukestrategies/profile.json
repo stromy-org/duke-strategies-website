@@ -1,0 +1,123 @@
+{
+  "company": {
+    "name": "Duke Strategies",
+    "tagline": "Stakeholder-proof strategies",
+    "description": "Duke Strategies is a strategic communications and public affairs consultancy founded by former Hill+Knowlton Strategies executives. The firm combines deep strategic advisory expertise with AI-driven stakeholder intelligence to help organizations navigate complex political, corporate, and societal challenges across Europe and beyond.",
+    "founded": 2025,
+    "headquarters": {
+      "city": "'s-Hertogenbosch",
+      "country": "Netherlands"
+    },
+    "website": "https://dukestrategies.eu",
+    "email": "mail@dukestrategies.eu",
+    "phone": "+31 73 555 0100"
+  },
+  "services": [
+    {
+      "id": "svc-001",
+      "name": "Strategic Advisory",
+      "description": "High-level strategic counsel for boards, executives, and leadership teams navigating complex corporate, political, and societal challenges. We develop stakeholder-proof strategies that align business objectives with external expectations.",
+      "industries": ["Energy", "Technology", "Financial Services", "Industrial", "Public Sector"],
+      "deliverables": ["Strategic Assessment", "Stakeholder Strategy", "Position Papers", "Board Advisory Reports"],
+      "typicalDuration": "Ongoing retainer or 2-4 month projects",
+      "pricingModel": "price-001"
+    },
+    {
+      "id": "svc-002",
+      "name": "Crisis Communications",
+      "description": "Rapid-response crisis management and communications support. From preparation and simulation to real-time crisis management, we help organizations protect their reputation and maintain stakeholder confidence during high-pressure situations.",
+      "industries": ["Energy", "Technology", "Financial Services", "Industrial", "Healthcare"],
+      "deliverables": ["Crisis Preparedness Audit", "Crisis Communications Plan", "Media Response Protocols", "Stakeholder Notification Framework", "Post-Crisis Recovery Strategy"],
+      "typicalDuration": "Retainer + activation or 1-3 month projects",
+      "pricingModel": "price-001"
+    },
+    {
+      "id": "svc-003",
+      "name": "Stakeholder Mapping & Engagement",
+      "description": "AI-driven stakeholder identification, mapping, and engagement strategy. We use proprietary analytics to map influence networks, assess sentiment, and design targeted engagement programs that build coalitions and neutralize opposition.",
+      "industries": ["Energy", "Technology", "Infrastructure", "Public Sector", "Financial Services"],
+      "deliverables": ["Stakeholder Map & Influence Analysis", "Sentiment Analysis Report", "Engagement Strategy & Playbook", "Coalition Building Plan", "Monitoring Dashboard"],
+      "typicalDuration": "1-3 months",
+      "pricingModel": "price-002"
+    },
+    {
+      "id": "svc-004",
+      "name": "M&A Communications",
+      "description": "Strategic communications counsel for mergers, acquisitions, and corporate transactions. We manage the narrative across all stakeholder groups — from regulatory bodies and media to employees and shareholders — ensuring smooth transactions and protected valuations.",
+      "industries": ["Technology", "Financial Services", "Industrial", "Energy", "Healthcare"],
+      "deliverables": ["Transaction Communications Strategy", "Stakeholder Messaging Matrix", "Media Management Plan", "Employee Communications Program", "Regulatory Narrative"],
+      "typicalDuration": "2-6 months (aligned with deal timeline)",
+      "pricingModel": "price-002"
+    },
+    {
+      "id": "svc-005",
+      "name": "Media Training & Positioning",
+      "description": "Executive media training and public positioning programs. We prepare leaders for high-stakes media interactions, public appearances, and thought leadership campaigns through intensive coaching, message development, and simulation exercises.",
+      "industries": ["All sectors"],
+      "deliverables": ["Media Training Sessions", "Key Message Documents", "Interview Simulation Reports", "Thought Leadership Strategy", "Speaker Briefing Packs"],
+      "typicalDuration": "1-4 weeks (training) or ongoing (positioning)",
+      "pricingModel": "price-002"
+    },
+    {
+      "id": "svc-006",
+      "name": "Change Management Communications",
+      "description": "Internal and external communications strategy for organizational transformation. We design and execute communication programs that build understanding, reduce resistance, and accelerate adoption during major change initiatives.",
+      "industries": ["Technology", "Financial Services", "Industrial", "Public Sector", "Healthcare"],
+      "deliverables": ["Change Communications Strategy", "Internal Messaging Framework", "Leadership Talking Points", "Employee Engagement Plan", "Progress Communications"],
+      "typicalDuration": "3-12 months (aligned with transformation timeline)",
+      "pricingModel": "price-001"
+    },
+    {
+      "id": "svc-007",
+      "name": "Issue Management",
+      "description": "Proactive identification, monitoring, and management of emerging issues that could impact organizational reputation or operations. We combine media intelligence, political monitoring, and stakeholder analysis to anticipate and shape the narrative before issues escalate.",
+      "industries": ["Energy", "Technology", "Financial Services", "Public Sector", "Industrial"],
+      "deliverables": ["Issue Landscape Assessment", "Early Warning System Design", "Response Playbooks", "Narrative Strategy", "Monitoring Reports"],
+      "typicalDuration": "Ongoing retainer or 1-2 month projects",
+      "pricingModel": "price-001"
+    }
+  ],
+  "pricing": {
+    "models": [
+      {
+        "id": "price-001",
+        "name": "Retainer",
+        "description": "Monthly retainer engagement with agreed scope and deliverables. Provides ongoing strategic counsel, dedicated team access, and priority response for emerging issues.",
+        "rates": [
+          { "role": "Managing Partner", "amount": 3000, "currency": "EUR", "per": "day" },
+          { "role": "Associate", "amount": 1500, "currency": "EUR", "per": "day" },
+          { "role": "Expert Partner", "amount": 3000, "currency": "EUR", "per": "day" }
+        ]
+      },
+      {
+        "id": "price-002",
+        "name": "Project-based (Fixed Fee)",
+        "description": "Fixed-price engagement based on defined scope, deliverables, and timeline. Pricing determined per project based on complexity, team composition, and duration."
+      }
+    ],
+    "paymentTerms": "Net 14 days from invoice date",
+    "discounts": [
+      { "type": "Multi-phase", "description": "5% discount for engagements spanning 2+ phases" },
+      { "type": "Retainer", "description": "10% discount on annual retainer agreements" }
+    ]
+  },
+  "credentials": {
+    "certifications": [],
+    "awards": [],
+    "memberships": [
+      { "organization": "Logeion (Dutch Association for Communication Professionals)", "status": "Member" }
+    ]
+  },
+  "legal": {
+    "standardTerms": {
+      "ip": "All deliverables created specifically for this engagement become the client's property upon final payment. Pre-existing methodologies, frameworks, tools, and templates remain the intellectual property of Duke Strategies, with a perpetual, non-exclusive license granted to the client for internal use.",
+      "confidentiality": "Both parties agree to maintain strict confidentiality of all proprietary and sensitive information disclosed during the engagement. This obligation survives for 5 years following engagement completion.",
+      "liability": "Duke Strategies' total aggregate liability under this engagement shall not exceed two times (2x) the total fees paid. Neither party shall be liable for indirect, consequential, incidental, or punitive damages.",
+      "termination": "Either party may terminate this engagement with 14 calendar days' written notice. Upon termination, the client shall pay for all work completed to date. Deliverables completed to date shall be transferred to the client."
+    },
+    "insurances": [
+      { "type": "Professional Liability", "coverage": 2500000, "currency": "EUR" },
+      { "type": "General Liability", "coverage": 1000000, "currency": "EUR" }
+    ]
+  }
+}

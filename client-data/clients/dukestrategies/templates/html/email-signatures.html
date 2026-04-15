@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duke Strategies — Email Signatures</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    background: #F0F0F0;
+    padding: 40px;
+    color: #222222;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #807F83;
+    margin-bottom: 40px;
+  }
+
+  .variant-section {
+    margin-bottom: 48px;
+  }
+
+  .variant-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 4px;
+  }
+
+  .variant-desc {
+    font-size: 13px;
+    color: #807F83;
+    margin-bottom: 16px;
+  }
+
+  .sig-preview {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    max-width: 660px;
+  }
+
+  .code-block {
+    margin-top: 12px;
+  }
+
+  .code-toggle {
+    font-size: 12px;
+    color: #807F83;
+    cursor: pointer;
+    border: 1px solid #DFDFE0;
+    background: #F5F5F5;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: 'Montserrat', Arial, sans-serif;
+  }
+
+  .code-toggle:hover { background: #DFDFE0; }
+
+  .code-content {
+    display: none;
+    margin-top: 8px;
+    background: #222222;
+    color: #DFDFE0;
+    padding: 16px;
+    border-radius: 6px;
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    overflow-x: auto;
+    white-space: pre;
+    max-width: 660px;
+  }
+</style>
+<script>
+function toggleCode(id) {
+  var el = document.getElementById(id);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+</head>
+<body>
+
+<h1>Duke Strategies &mdash; Email Signatures</h1>
+<p class="subtitle">3 variants &middot; TABLE-based layout &middot; Inline CSS &middot; Email client compatible</p>
+
+<!-- ==================== VARIANT 1: Standard ==================== -->
+<div class="variant-section">
+  <div class="variant-title">Variant 1 &mdash; Standard</div>
+  <div class="variant-desc">Logo with coral divider, name, title, and contact details. The go-to professional signature.</div>
+
+  <div class="sig-preview">
+    <!-- SIGNATURE START: Standard -->
+    <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.5; color: #222222; max-width: 500px;">
+      <tr>
+        <td style="padding-right: 16px; vertical-align: middle;">
+          <img src="logos/DukeStrategies_logo.svg" alt="Duke Strategies" width="100" style="display: block; width: 100px; height: auto;">
+        </td>
+        <td style="border-left: 3px solid #FF7F66; padding-left: 16px; vertical-align: middle;">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 600; color: #222222; padding-bottom: 2px;">
+                Jane Doe
+              </td>
+            </tr>
+            <tr>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 400; color: #807F83; padding-bottom: 2px;">
+                Senior Strategy Consultant
+              </td>
+            </tr>
+            <tr>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 600; color: #222222; padding-bottom: 8px;">
+                Duke Strategy &amp; Corporate Affairs B.V.
+              </td>
+            </tr>
+            <tr>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83; line-height: 1.7;">
+                <span style="color: #FF7F66; font-weight: 600;">T</span>&nbsp;&nbsp;<a href="tel:+31852129414" style="color: #807F83; text-decoration: none;">+31 85 212 94 14</a><br>
+                <span style="color: #FF7F66; font-weight: 600;">E</span>&nbsp;&nbsp;<a href="mailto:jane@dukestrategies.eu" style="color: #807F83; text-decoration: none;">jane@dukestrategies.eu</a><br>
+                <span style="color: #FF7F66; font-weight: 600;">W</span>&nbsp;&nbsp;<a href="https://dukestrategies.eu" style="color: #807F83; text-decoration: none;">dukestrategies.eu</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- SIGNATURE END: Standard -->
+  </div>
+
+  <div class="code-block">
+    <button class="code-toggle" onclick="toggleCode('code1')">Show HTML code</button>
+    <div class="code-content" id="code1">&lt;table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.5; color: #222222; max-width: 500px;"&gt;
+  &lt;tr&gt;
+    &lt;td style="padding-right: 16px; vertical-align: middle;"&gt;
+      &lt;img src="logos/DukeStrategies_logo.svg" alt="Duke Strategies" width="100" style="display: block; width: 100px; height: auto;"&gt;
+    &lt;/td&gt;
+    &lt;td style="border-left: 3px solid #FF7F66; padding-left: 16px; vertical-align: middle;"&gt;
+      &lt;table cellpadding="0" cellspacing="0" border="0"&gt;
+        &lt;tr&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 600; color: #222222; padding-bottom: 2px;"&gt;
+            Jane Doe
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 400; color: #807F83; padding-bottom: 2px;"&gt;
+            Senior Strategy Consultant
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 600; color: #222222; padding-bottom: 8px;"&gt;
+            Duke Strategy &amp;amp; Corporate Affairs B.V.
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83; line-height: 1.7;"&gt;
+            &lt;span style="color: #FF7F66; font-weight: 600;"&gt;T&lt;/span&gt;&amp;nbsp;&amp;nbsp;&lt;a href="tel:+31852129414" style="color: #807F83; text-decoration: none;"&gt;+31 85 212 94 14&lt;/a&gt;&lt;br&gt;
+            &lt;span style="color: #FF7F66; font-weight: 600;"&gt;E&lt;/span&gt;&amp;nbsp;&amp;nbsp;&lt;a href="mailto:jane@dukestrategies.eu" style="color: #807F83; text-decoration: none;"&gt;jane@dukestrategies.eu&lt;/a&gt;&lt;br&gt;
+            &lt;span style="color: #FF7F66; font-weight: 600;"&gt;W&lt;/span&gt;&amp;nbsp;&amp;nbsp;&lt;a href="https://dukestrategies.eu" style="color: #807F83; text-decoration: none;"&gt;dukestrategies.eu&lt;/a&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</div>
+  </div>
+</div>
+
+<!-- ==================== VARIANT 2: Compact ==================== -->
+<div class="variant-section">
+  <div class="variant-title">Variant 2 &mdash; Compact</div>
+  <div class="variant-desc">Single-line layout with logo. Minimal footprint for high-volume correspondence.</div>
+
+  <div class="sig-preview">
+    <!-- SIGNATURE START: Compact -->
+    <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.5; color: #222222; max-width: 600px;">
+      <tr>
+        <td style="padding-right: 12px; vertical-align: middle;">
+          <img src="logos/DukeStrategies_logo.svg" alt="Duke Strategies" width="60" style="display: block; width: 60px; height: auto;">
+        </td>
+        <td style="vertical-align: middle;">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 12px; color: #222222; padding-bottom: 4px;">
+                <span style="font-weight: 600;">Jane Doe</span>
+                <span style="color: #DFDFE0;">&nbsp;&bull;&nbsp;</span>
+                <span style="color: #807F83;">Senior Strategy Consultant</span>
+                <span style="color: #DFDFE0;">&nbsp;&bull;&nbsp;</span>
+                <span style="font-weight: 600;">Duke Strategies</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83;">
+                <a href="tel:+31852129414" style="color: #807F83; text-decoration: none;">+31 85 212 94 14</a>
+                <span style="color: #DFDFE0;">&nbsp;|&nbsp;</span>
+                <a href="mailto:jane@dukestrategies.eu" style="color: #807F83; text-decoration: none;">jane@dukestrategies.eu</a>
+                <span style="color: #DFDFE0;">&nbsp;|&nbsp;</span>
+                <a href="https://dukestrategies.eu" style="color: #807F83; text-decoration: none;">dukestrategies.eu</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-top: 4px;">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td style="border-bottom: 2px solid #FF7F66; font-size: 1px; line-height: 1px;">&nbsp;</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- SIGNATURE END: Compact -->
+  </div>
+
+  <div class="code-block">
+    <button class="code-toggle" onclick="toggleCode('code2')">Show HTML code</button>
+    <div class="code-content" id="code2">&lt;table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.5; color: #222222; max-width: 600px;"&gt;
+  &lt;tr&gt;
+    &lt;td style="padding-right: 12px; vertical-align: middle;"&gt;
+      &lt;img src="logos/DukeStrategies_logo.svg" alt="Duke Strategies" width="60" style="display: block; width: 60px; height: auto;"&gt;
+    &lt;/td&gt;
+    &lt;td style="vertical-align: middle;"&gt;
+      &lt;table cellpadding="0" cellspacing="0" border="0"&gt;
+        &lt;tr&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 12px; color: #222222; padding-bottom: 4px;"&gt;
+            &lt;span style="font-weight: 600;"&gt;Jane Doe&lt;/span&gt;
+            &lt;span style="color: #DFDFE0;"&gt;&amp;nbsp;&amp;bull;&amp;nbsp;&lt;/span&gt;
+            &lt;span style="color: #807F83;"&gt;Senior Strategy Consultant&lt;/span&gt;
+            &lt;span style="color: #DFDFE0;"&gt;&amp;nbsp;&amp;bull;&amp;nbsp;&lt;/span&gt;
+            &lt;span style="font-weight: 600;"&gt;Duke Strategies&lt;/span&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83;"&gt;
+            &lt;a href="tel:+31852129414" style="color: #807F83; text-decoration: none;"&gt;+31 85 212 94 14&lt;/a&gt;
+            &lt;span style="color: #DFDFE0;"&gt;&amp;nbsp;|&amp;nbsp;&lt;/span&gt;
+            &lt;a href="mailto:jane@dukestrategies.eu" style="color: #807F83; text-decoration: none;"&gt;jane@dukestrategies.eu&lt;/a&gt;
+            &lt;span style="color: #DFDFE0;"&gt;&amp;nbsp;|&amp;nbsp;&lt;/span&gt;
+            &lt;a href="https://dukestrategies.eu" style="color: #807F83; text-decoration: none;"&gt;dukestrategies.eu&lt;/a&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style="padding-top: 4px;"&gt;
+            &lt;table cellpadding="0" cellspacing="0" border="0" width="100%"&gt;
+              &lt;tr&gt;
+                &lt;td style="border-bottom: 2px solid #FF7F66; font-size: 1px; line-height: 1px;"&gt;&amp;nbsp;&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/table&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</div>
+  </div>
+</div>
+
+<!-- ==================== VARIANT 3: Executive ==================== -->
+<div class="variant-section">
+  <div class="variant-title">Variant 3 &mdash; Executive</div>
+  <div class="variant-desc">Larger format with logo, tagline, and full contact row including LinkedIn. For senior leadership.</div>
+
+  <div class="sig-preview">
+    <!-- SIGNATURE START: Executive -->
+    <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.5; color: #222222; max-width: 600px;">
+      <!-- Logo row -->
+      <tr>
+        <td style="padding-bottom: 10px;">
+          <img src="logos/DukeStrategies_logo.svg" alt="Duke Strategies" width="120" style="display: block; width: 120px; height: auto;">
+        </td>
+      </tr>
+      <!-- Coral separator -->
+      <tr>
+        <td style="padding-bottom: 12px;">
+          <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+              <td style="border-bottom: 3px solid #FF7F66; font-size: 1px; line-height: 1px;">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <!-- Name -->
+      <tr>
+        <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 20px; font-weight: 600; color: #222222; padding-bottom: 2px;">
+          Jane Doe
+        </td>
+      </tr>
+      <!-- Title + Company -->
+      <tr>
+        <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 400; color: #807F83; padding-bottom: 4px;">
+          Senior Strategy Consultant
+        </td>
+      </tr>
+      <tr>
+        <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 600; color: #222222; padding-bottom: 14px;">
+          Duke Strategy &amp; Corporate Affairs B.V.
+        </td>
+      </tr>
+      <!-- Contact row -->
+      <tr>
+        <td style="padding-bottom: 14px;">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83; padding-right: 8px;">
+                <a href="tel:+31852129414" style="color: #807F83; text-decoration: none;">
+                  <span style="color: #FF7F66; font-weight: 600;">T</span>&nbsp;&nbsp;+31 85 212 94 14
+                </a>
+              </td>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #DFDFE0; padding-right: 8px;">|</td>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83; padding-right: 8px;">
+                <a href="mailto:jane@dukestrategies.eu" style="color: #807F83; text-decoration: none;">
+                  <span style="color: #FF7F66; font-weight: 600;">E</span>&nbsp;&nbsp;jane@dukestrategies.eu
+                </a>
+              </td>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #DFDFE0; padding-right: 8px;">|</td>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83; padding-right: 8px;">
+                <a href="https://dukestrategies.eu" style="color: #807F83; text-decoration: none;">
+                  <span style="color: #FF7F66; font-weight: 600;">W</span>&nbsp;&nbsp;dukestrategies.eu
+                </a>
+              </td>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #DFDFE0; padding-right: 8px;">|</td>
+              <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83;">
+                <a href="https://linkedin.com/company/duke-strategies" style="color: #807F83; text-decoration: none;">
+                  <span style="color: #FF7F66; font-weight: 600;">in</span>&nbsp;&nbsp;duke-strategies
+                </a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <!-- Thin separator -->
+      <tr>
+        <td style="padding-bottom: 10px;">
+          <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+              <td style="border-bottom: 1px solid #DFDFE0; font-size: 1px; line-height: 1px;">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <!-- Tagline -->
+      <tr>
+        <td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; font-style: italic; color: #807F83;">
+          We make business strategies stakeholder proof
+        </td>
+      </tr>
+    </table>
+    <!-- SIGNATURE END: Executive -->
+  </div>
+
+  <div class="code-block">
+    <button class="code-toggle" onclick="toggleCode('code3')">Show HTML code</button>
+    <div class="code-content" id="code3">&lt;table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.5; color: #222222; max-width: 600px;"&gt;
+  &lt;!-- Logo row --&gt;
+  &lt;tr&gt;
+    &lt;td style="padding-bottom: 10px;"&gt;
+      &lt;img src="logos/DukeStrategies_logo.svg" alt="Duke Strategies" width="120" style="display: block; width: 120px; height: auto;"&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- Coral separator --&gt;
+  &lt;tr&gt;
+    &lt;td style="padding-bottom: 12px;"&gt;
+      &lt;table cellpadding="0" cellspacing="0" border="0" width="100%"&gt;
+        &lt;tr&gt;
+          &lt;td style="border-bottom: 3px solid #FF7F66; font-size: 1px; line-height: 1px;"&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- Name --&gt;
+  &lt;tr&gt;
+    &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 20px; font-weight: 600; color: #222222; padding-bottom: 2px;"&gt;
+      Jane Doe
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- Title + Company --&gt;
+  &lt;tr&gt;
+    &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 400; color: #807F83; padding-bottom: 4px;"&gt;
+      Senior Strategy Consultant
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 600; color: #222222; padding-bottom: 14px;"&gt;
+      Duke Strategy &amp;amp; Corporate Affairs B.V.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- Contact row --&gt;
+  &lt;tr&gt;
+    &lt;td style="padding-bottom: 14px;"&gt;
+      &lt;table cellpadding="0" cellspacing="0" border="0"&gt;
+        &lt;tr&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83; padding-right: 8px;"&gt;
+            &lt;a href="tel:+31852129414" style="color: #807F83; text-decoration: none;"&gt;
+              &lt;span style="color: #FF7F66; font-weight: 600;"&gt;T&lt;/span&gt;&amp;nbsp;&amp;nbsp;+31 85 212 94 14
+            &lt;/a&gt;
+          &lt;/td&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #DFDFE0; padding-right: 8px;"&gt;|&lt;/td&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83; padding-right: 8px;"&gt;
+            &lt;a href="mailto:jane@dukestrategies.eu" style="color: #807F83; text-decoration: none;"&gt;
+              &lt;span style="color: #FF7F66; font-weight: 600;"&gt;E&lt;/span&gt;&amp;nbsp;&amp;nbsp;jane@dukestrategies.eu
+            &lt;/a&gt;
+          &lt;/td&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #DFDFE0; padding-right: 8px;"&gt;|&lt;/td&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83; padding-right: 8px;"&gt;
+            &lt;a href="https://dukestrategies.eu" style="color: #807F83; text-decoration: none;"&gt;
+              &lt;span style="color: #FF7F66; font-weight: 600;"&gt;W&lt;/span&gt;&amp;nbsp;&amp;nbsp;dukestrategies.eu
+            &lt;/a&gt;
+          &lt;/td&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #DFDFE0; padding-right: 8px;"&gt;|&lt;/td&gt;
+          &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; color: #807F83;"&gt;
+            &lt;a href="https://linkedin.com/company/duke-strategies" style="color: #807F83; text-decoration: none;"&gt;
+              &lt;span style="color: #FF7F66; font-weight: 600;"&gt;in&lt;/span&gt;&amp;nbsp;&amp;nbsp;duke-strategies
+            &lt;/a&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- Thin separator --&gt;
+  &lt;tr&gt;
+    &lt;td style="padding-bottom: 10px;"&gt;
+      &lt;table cellpadding="0" cellspacing="0" border="0" width="100%"&gt;
+        &lt;tr&gt;
+          &lt;td style="border-bottom: 1px solid #DFDFE0; font-size: 1px; line-height: 1px;"&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- Tagline --&gt;
+  &lt;tr&gt;
+    &lt;td style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 11px; font-style: italic; color: #807F83;"&gt;
+      We make business strategies stakeholder proof
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</div>
+  </div>
+</div>
+
+<!-- ==================== USAGE NOTES ==================== -->
+<div class="variant-section" style="margin-bottom: 0;">
+  <div class="variant-title">Usage Notes</div>
+  <div class="variant-desc" style="line-height: 1.8;">
+    1. Replace <strong>Jane Doe</strong> and <strong>Senior Strategy Consultant</strong> with the actual name and title.<br>
+    2. Replace <strong>jane@dukestrategies.eu</strong> with the person's email address.<br>
+    3. Logo path <code>logos/DukeStrategies_logo.svg</code> should point to a hosted version (e.g., on the company website) for email clients.<br>
+    4. All styles are inline for maximum email client compatibility (Outlook, Gmail, Apple Mail, Thunderbird).<br>
+    5. Click "Show HTML code" above each variant to copy the raw HTML for pasting into your email client settings.
+  </div>
+</div>
+
+</body>
+</html>

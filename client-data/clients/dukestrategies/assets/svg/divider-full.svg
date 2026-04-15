@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" width="1200" height="40">
+  <!-- Full-width bridge pillar motif divider -->
+  <!-- Left pillar -->
+  <rect x="300" y="4" width="6" height="32" rx="1" fill="#FF7F66"/>
+  <!-- Center pillar (taller) -->
+  <rect x="597" y="0" width="6" height="40" rx="1" fill="#FF7F66"/>
+  <!-- Right pillar -->
+  <rect x="894" y="4" width="6" height="32" rx="1" fill="#FF7F66"/>
+  <!-- Horizontal beam -->
+  <rect x="300" y="17" width="600" height="2.5" fill="#FF7F66"/>
+  <!-- Cable lines from center pillar -->
+  <line x1="600" y1="6" x2="306" y2="17" stroke="#FF7F66" stroke-width="1" opacity="0.5"/>
+  <line x1="600" y1="6" x2="894" y2="17" stroke="#FF7F66" stroke-width="1" opacity="0.5"/>
+  <line x1="600" y1="6" x2="400" y2="17" stroke="#FF7F66" stroke-width="0.75" opacity="0.35"/>
+  <line x1="600" y1="6" x2="500" y2="17" stroke="#FF7F66" stroke-width="0.75" opacity="0.35"/>
+  <line x1="600" y1="6" x2="700" y2="17" stroke="#FF7F66" stroke-width="0.75" opacity="0.35"/>
+  <line x1="600" y1="6" x2="800" y2="17" stroke="#FF7F66" stroke-width="0.75" opacity="0.35"/>
+</svg>

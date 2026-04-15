@@ -1,0 +1,650 @@
+/* ============================================================
+   Duke Strategies Design Tokens
+   Strategic communications. Reimagined.
+
+   Version:  1.0.0
+   Date:     2026-03-29
+   Brand:    Duke Strategies
+   Primary:  Coral (#FF7F66)
+
+   Usage: Import this file at the root of any project.
+   All values derive from the Duke Strategies brand charter.
+   ============================================================ */
+
+/* ============================================================
+   CUSTOM PROPERTIES
+   ============================================================ */
+
+:root {
+
+  /* -- Primary Palette ---------------------------------------- */
+  --brand-dark:          #222222;
+  --brand-primary:       #FF7F66;
+  --brand-accent:        #FF7F66;
+  --brand-text:          #807F83;
+  --brand-text-light:    #DFDFE0;
+  --brand-secondary:     #DFDFE0;
+  --brand-background:    #FFFFFF;
+  --brand-background-alt:#F5F5F5;
+
+  /* -- Coral Scale -------------------------------------------- */
+  --coral-50:            #FFF5F3;
+  --coral-100:           #FFE8E4;
+  --coral-200:           #FFD1C9;
+  --coral-300:           #FFB0A3;
+  --coral-400:           #FF7F66;       /* = --brand-primary */
+  --coral-500:           #F06B52;
+  --coral-600:           #D9543C;
+  --coral-700:           #B84030;
+  --coral-800:           #963328;
+  --coral-900:           #7A2A22;
+
+  /* -- Brand Color Scale (aliases) ---------------------------- */
+  --brand-900:           var(--coral-900);
+  --brand-800:           var(--coral-800);
+  --brand-700:           var(--coral-700);
+  --brand-600:           var(--coral-600);
+  --brand-500:           var(--coral-500);
+  --brand-400:           var(--coral-400);   /* = --brand-primary */
+  --brand-300:           var(--coral-300);
+  --brand-200:           var(--coral-200);
+  --brand-100:           var(--coral-100);
+  --brand-50:            var(--coral-50);
+
+  /* -- Neutral Scale ------------------------------------------ */
+  --neutral-50:          #FAFAFA;
+  --neutral-100:         #F5F5F5;
+  --neutral-200:         #EEEEEE;
+  --neutral-300:         #E0E0E1;
+  --neutral-400:         #BDBDBD;
+  --neutral-500:         #9E9E9E;
+  --neutral-600:         #807F83;
+  --neutral-700:         #616161;
+  --neutral-800:         #424242;
+  --neutral-900:         #222222;
+  --neutral-white:       #FFFFFF;
+
+  /* -- Semantic Colors ---------------------------------------- */
+  --success:             #5B9A6B;
+  --success-light:       #EDF5EF;
+  --warning:             #D4A544;
+  --warning-light:       #FDF6E8;
+  --error:               #C4544A;
+  --error-light:         #FAEDEC;
+  --info:                #6B8FA5;
+  --info-light:          #EDF2F6;
+
+  /* -- Typography --------------------------------------------- */
+  --font-heading:        'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body:           'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:           'Space Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* -- Font Weights ------------------------------------------- */
+  --weight-regular:      400;
+  --weight-medium:       500;
+  --weight-semibold:     600;
+  --weight-bold:         700;
+
+  /* -- Type Scale --------------------------------------------- */
+  --text-display-xl:     3rem;         /* 48px */
+  --text-display:        2.5rem;       /* 40px */
+  --text-h1:             2rem;         /* 32px */
+  --text-h2:             1.75rem;      /* 28px */
+  --text-h3:             1.5rem;       /* 24px */
+  --text-h4:             1.25rem;      /* 20px */
+  --text-body-lg:        1.125rem;     /* 18px */
+  --text-body:           1rem;         /* 16px */
+  --text-body-sm:        0.875rem;     /* 14px */
+  --text-caption:        0.75rem;      /* 12px */
+  --text-overline:       0.6875rem;    /* 11px */
+  --text-micro:          0.625rem;     /* 10px */
+
+  /* -- Line Heights ------------------------------------------- */
+  --leading-display-xl:  1.1;
+  --leading-display:     1.15;
+  --leading-h1:          1.2;
+  --leading-h2:          1.25;
+  --leading-h3:          1.3;
+  --leading-h4:          1.35;
+  --leading-body:        1.6;
+  --leading-body-sm:     1.5;
+  --leading-caption:     1.4;
+  --leading-overline:    1.3;
+  --leading-micro:       1.3;
+
+  /* -- Letter Spacing ----------------------------------------- */
+  --tracking-tight:      -0.02em;
+  --tracking-snug:       -0.01em;
+  --tracking-normal:     0;
+  --tracking-wide:       0.03em;
+  --tracking-wider:      0.06em;
+  --tracking-widest:     0.156em;      /* 2.5px at 16px base — overline */
+
+  /* -- Spacing Scale (4px base) ------------------------------- */
+  --space-1:             0.25rem;      /* 4px */
+  --space-2:             0.5rem;       /* 8px */
+  --space-3:             0.75rem;      /* 12px */
+  --space-4:             1rem;         /* 16px */
+  --space-5:             1.25rem;      /* 20px */
+  --space-6:             1.5rem;       /* 24px */
+  --space-8:             2rem;         /* 32px */
+  --space-10:            2.5rem;       /* 40px */
+  --space-12:            3rem;         /* 48px */
+  --space-16:            4rem;         /* 64px */
+  --space-20:            5rem;         /* 80px */
+  --space-24:            6rem;         /* 96px */
+  --space-32:            8rem;         /* 128px */
+
+  /* -- Border Radius ------------------------------------------ */
+  --radius-sm:           4px;
+  --radius-md:           8px;
+  --radius-lg:           12px;
+  --radius-xl:           16px;
+  --radius-full:         9999px;
+
+  /* -- Shadows ------------------------------------------------ */
+  --shadow-sm:           0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md:           0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg:           0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl:           0 16px 48px rgba(0, 0, 0, 0.16);
+
+  /* -- Transitions -------------------------------------------- */
+  --ease-default:        ease;
+  --ease-out:            cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:         cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:       150ms;
+  --duration-normal:     250ms;
+  --duration-slow:       400ms;
+  --transition-fast:     150ms ease;
+  --transition-normal:   250ms ease;
+  --transition-slow:     400ms ease;
+
+  /* -- Brand Motif -------------------------------------------- */
+  /* Bridge pillar / geometric column — straight coral lines */
+  --motif-line-color:         var(--brand-primary);
+  --motif-line-color-light:   var(--coral-200);
+  --motif-line-color-dark:    var(--coral-700);
+  --motif-line-weight:        2px;
+  --motif-line-weight-thin:   1px;
+  --motif-pillar-width:       4px;
+  --motif-pillar-gap:         12px;
+  --motif-cap-height:         6px;
+
+  /* -- Layout ------------------------------------------------- */
+  --content-max:         1080px;
+  --slide-margin:        40pt;
+  --doc-margin:          1in;
+
+  /* -- Surface & Text (light mode defaults) ------------------- */
+  --surface:             var(--neutral-white);
+  --surface-raised:      var(--neutral-50);
+  --surface-overlay:     var(--neutral-white);
+  --text-primary:        var(--neutral-900);
+  --text-secondary:      var(--neutral-600);
+  --text-tertiary:       var(--neutral-500);
+  --text-inverse:        var(--neutral-white);
+  --border:              var(--neutral-200);
+  --border-subtle:       var(--neutral-100);
+}
+
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface:           var(--neutral-900);
+    --surface-raised:    var(--neutral-800);
+    --surface-overlay:   var(--neutral-800);
+    --text-primary:      var(--neutral-50);
+    --text-secondary:    var(--neutral-400);
+    --text-tertiary:     var(--neutral-500);
+    --text-inverse:      var(--neutral-900);
+    --border:            var(--neutral-700);
+    --border-subtle:     var(--neutral-800);
+  }
+}
+
+
+/* ============================================================
+   GOOGLE FONTS IMPORT
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Mono:wght@400;700&display=swap');
+
+
+/* ============================================================
+   UTILITY CLASSES — Typography
+   ============================================================ */
+
+.text-display-xl {
+  font-family: var(--font-heading);
+  font-size: var(--text-display-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-display-xl);
+  letter-spacing: var(--tracking-tight);
+  color: var(--brand-dark);
+}
+
+.text-display {
+  font-family: var(--font-heading);
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-tight);
+  color: var(--brand-dark);
+}
+
+.text-h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-h1);
+  letter-spacing: var(--tracking-snug);
+  color: var(--brand-dark);
+}
+
+.text-h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-h2);
+  letter-spacing: var(--tracking-snug);
+  color: var(--brand-dark);
+}
+
+.text-h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-h3);
+  color: var(--brand-dark);
+}
+
+.text-h4 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h4);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-h4);
+  color: var(--brand-dark);
+}
+
+.text-body-lg {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  color: var(--brand-text);
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  color: var(--brand-text);
+}
+
+.text-body-sm {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body-sm);
+  color: var(--brand-text);
+}
+
+.text-caption {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-caption);
+  color: var(--text-secondary);
+}
+
+.text-overline {
+  font-family: var(--font-heading);
+  font-size: var(--text-overline);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-overline);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+
+.text-micro {
+  font-family: var(--font-body);
+  font-size: var(--text-micro);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-micro);
+  color: var(--text-tertiary);
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body-sm);
+}
+
+
+/* ============================================================
+   UTILITY CLASSES — Buttons
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--text-body-sm);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  letter-spacing: var(--tracking-wide);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background-color: var(--brand-primary);
+  color: var(--neutral-white);
+  border-color: var(--brand-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--coral-500);
+  border-color: var(--coral-500);
+}
+
+.btn-primary:active {
+  background-color: var(--coral-600);
+  border-color: var(--coral-600);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--coral-50);
+  color: var(--coral-600);
+  border-color: var(--coral-600);
+}
+
+.btn-secondary:active {
+  background-color: var(--coral-100);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--brand-text);
+  border-color: transparent;
+}
+
+.btn-ghost:hover {
+  background-color: var(--neutral-100);
+  color: var(--brand-dark);
+}
+
+.btn-ghost:active {
+  background-color: var(--neutral-200);
+}
+
+.btn-sm {
+  font-size: var(--text-caption);
+  padding: var(--space-2) var(--space-4);
+}
+
+.btn-lg {
+  font-size: var(--text-body);
+  padding: var(--space-4) var(--space-8);
+}
+
+
+/* ============================================================
+   UTILITY CLASSES — Cards
+   ============================================================ */
+
+.card {
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: box-shadow var(--transition-normal);
+}
+
+.card-bordered {
+  border: 1px solid var(--border);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.card-elevated:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.card-footer {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+
+
+/* ============================================================
+   UTILITY CLASSES — Badges
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-heading);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.badge-success {
+  background-color: var(--success-light);
+  color: var(--success);
+}
+
+.badge-warning {
+  background-color: var(--warning-light);
+  color: var(--warning);
+}
+
+.badge-error {
+  background-color: var(--error-light);
+  color: var(--error);
+}
+
+.badge-info {
+  background-color: var(--info-light);
+  color: var(--info);
+}
+
+.badge-brand {
+  background-color: var(--coral-50);
+  color: var(--coral-600);
+}
+
+
+/* ============================================================
+   UTILITY CLASSES — Brand Motif (Bridge Pillar / Geometric Column)
+   ============================================================ */
+
+/*
+ * The Duke Strategies motif is a bridge pillar / geometric column pattern
+ * composed of straight vertical coral lines, evoking structural strength,
+ * strategic foundations, and architectural precision.
+ */
+
+/* Horizontal divider with centered pillar motif */
+.motif-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4) 0;
+}
+
+.motif-divider::before,
+.motif-divider::after {
+  content: '';
+  flex: 1;
+  height: var(--motif-line-weight-thin);
+  background-color: var(--motif-line-color-light);
+}
+
+.motif-divider-pillar {
+  display: flex;
+  gap: var(--motif-pillar-gap);
+  align-items: stretch;
+  height: 24px;
+}
+
+.motif-divider-pillar span {
+  display: block;
+  width: var(--motif-pillar-width);
+  height: 100%;
+  background-color: var(--motif-line-color);
+  border-radius: 1px;
+}
+
+/* Decorative vertical pillar pattern — sidebar or section accent */
+.motif-pattern {
+  display: flex;
+  gap: var(--motif-pillar-gap);
+  align-items: stretch;
+}
+
+.motif-pattern-bar {
+  width: var(--motif-pillar-width);
+  background: linear-gradient(
+    180deg,
+    var(--motif-line-color) 0%,
+    var(--motif-line-color-light) 100%
+  );
+  border-radius: 1px;
+}
+
+/* Slim single-line accent — use as a top/left border replacement */
+.motif-accent-line {
+  width: var(--motif-line-weight);
+  background-color: var(--motif-line-color);
+  min-height: 100%;
+  border-radius: var(--radius-full);
+}
+
+/* Horizontal accent bar — section header underline */
+.motif-accent-bar {
+  height: var(--motif-pillar-width);
+  width: 48px;
+  background-color: var(--brand-primary);
+  border-radius: 2px;
+}
+
+/* Column cap — small geometric detail at top/bottom of pillars */
+.motif-cap {
+  width: calc(var(--motif-pillar-width) + 4px);
+  height: var(--motif-cap-height);
+  background-color: var(--motif-line-color-dark);
+  border-radius: 1px;
+  margin: 0 auto;
+}
+
+/* Full pillar element — vertical bar with top and bottom caps */
+.motif-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.motif-pillar-shaft {
+  width: var(--motif-pillar-width);
+  flex: 1;
+  background-color: var(--motif-line-color);
+  border-radius: 1px;
+  min-height: 40px;
+}
+
+/* Repeating column pattern via CSS background — tileable */
+.motif-columns-bg {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--coral-100) 0px,
+    var(--coral-100) var(--motif-pillar-width),
+    transparent var(--motif-pillar-width),
+    transparent calc(var(--motif-pillar-width) + var(--motif-pillar-gap))
+  );
+  background-size: calc(var(--motif-pillar-width) + var(--motif-pillar-gap)) 100%;
+}
+
+
+/* ============================================================
+   UTILITY CLASSES — Layout Helpers
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+.section {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+.section-sm {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
+}
+
+
+/* ============================================================
+   UTILITY CLASSES — Miscellaneous
+   ============================================================ */
+
+.text-brand    { color: var(--brand-primary); }
+.text-dark     { color: var(--brand-dark); }
+.text-muted    { color: var(--brand-text); }
+.text-light    { color: var(--brand-text-light); }
+.bg-brand      { background-color: var(--brand-primary); }
+.bg-brand-soft { background-color: var(--coral-50); }
+.bg-alt        { background-color: var(--brand-background-alt); }
+.border-brand  { border-color: var(--brand-primary); }
+
+/* Focus ring utility */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}

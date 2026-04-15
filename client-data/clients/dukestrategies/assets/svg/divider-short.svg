@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 30" width="400" height="30">
+  <!-- Short centered bridge pillar divider -->
+  <!-- Left pillar -->
+  <rect x="80" y="3" width="5" height="24" rx="1" fill="#FF7F66"/>
+  <!-- Right pillar -->
+  <rect x="315" y="3" width="5" height="24" rx="1" fill="#FF7F66"/>
+  <!-- Horizontal beam -->
+  <rect x="80" y="13" width="240" height="2" fill="#FF7F66"/>
+  <!-- Cable accents -->
+  <line x1="200" y1="5" x2="85" y2="13" stroke="#FF7F66" stroke-width="0.75" opacity="0.4"/>
+  <line x1="200" y1="5" x2="315" y2="13" stroke="#FF7F66" stroke-width="0.75" opacity="0.4"/>
+</svg>

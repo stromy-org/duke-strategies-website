@@ -1,0 +1,34 @@
+[
+  {
+    "id": "test-001",
+    "quote": "When the crisis hit, Duke Strategies didn't just manage the media — they helped us understand our entire stakeholder landscape and rebuild trust systematically. Their combination of crisis experience and analytical rigour was exactly what we needed under pressure.",
+    "attribution": "CEO, European Industrial Group",
+    "caseStudy": "CS-001",
+    "tags": ["crisis-communications", "corporate-reputation", "industrial"],
+    "year": 2022
+  },
+  {
+    "id": "test-002",
+    "quote": "Most communications advisors we'd worked with relied on instinct. Duke brought data. Their stakeholder mapping showed us alliances and opposition risks we had completely missed, and that intelligence was decisive in getting our project approved ahead of schedule.",
+    "attribution": "Head of External Affairs, European Energy Company",
+    "caseStudy": "CS-003",
+    "tags": ["stakeholder-mapping", "ai-analytics", "energy-transition"],
+    "year": 2025
+  },
+  {
+    "id": "test-003",
+    "quote": "The deal was complex — two jurisdictions, 800 employees at the target, and intense media interest. Duke managed every stakeholder group with precision. The fact that we retained 92% of the target's workforce speaks to the quality of their employee communications.",
+    "attribution": "General Counsel, European Technology Company",
+    "caseStudy": "CS-002",
+    "tags": ["m-and-a-communications", "technology", "cross-border"],
+    "year": 2023
+  },
+  {
+    "id": "test-004",
+    "quote": "We needed to build government relations in the Netherlands from scratch, and we needed it fast. Duke's political insight — especially from their Expert Partners — gave us credibility we couldn't have built on our own. Three of our five key positions made it into the final legislation.",
+    "attribution": "VP Government Affairs, Global Technology Platform",
+    "caseStudy": "CS-004",
+    "tags": ["government-relations", "regulatory-strategy", "technology"],
+    "year": 2025
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "person-001",
+    "name": "Ingo Heijnen",
+    "title": "Managing Partner",
+    "photo": "brand/team/ingo-heijnen.jpg",
+    "expertise": ["crisis-communications", "m-and-a-communications", "corporate-governance", "strategic-advisory", "media-relations"],
+    "certifications": [],
+    "education": [
+      { "degree": "MSc Communication Science", "institution": "University of Amsterdam" }
+    ],
+    "yearsExperience": 27,
+    "executive": "Ingo Heijnen is Managing Partner and co-founder of Duke Strategies with 27 years of experience in strategic communications and public affairs. As former CEO of Hill+Knowlton Strategies Netherlands, he led one of the country's largest communications consultancies, advising boards and C-suites of multinational corporations on crisis management, M&A communications, and corporate governance. Ingo has managed high-profile crisis situations across the industrial, energy, and financial sectors, and brings deep expertise in navigating complex stakeholder landscapes under pressure.",
+    "technical": "Ingo Heijnen specializes in crisis communications architecture, M&A transaction narratives, and corporate governance advisory. With 27 years of hands-on experience — including a decade leading Hill+Knowlton Strategies Netherlands — he has designed and executed crisis response frameworks for Fortune 500 companies, managed media strategies during cross-border transactions valued at over EUR 5B collectively, and advised supervisory boards on reputational risk governance. His approach integrates real-time stakeholder sentiment analysis with structured decision-making protocols.",
+    "short": "Ingo Heijnen — 27 years in strategic communications, former CEO Hill+Knowlton Strategies NL, crisis & M&A specialist"
+  },
+  {
+    "id": "person-002",
+    "name": "Arien Stuijt",
+    "title": "Managing Partner",
+    "photo": "brand/team/arien-stuijt.jpg",
+    "expertise": ["strategic-advisory", "stakeholder-mapping", "ai-analytics", "media-strategy", "public-affairs"],
+    "certifications": [],
+    "education": [
+      { "degree": "MA Journalism", "institution": "Columbia University (via Wall Street Journal fellowship)" }
+    ],
+    "yearsExperience": 17,
+    "executive": "Arien Stuijt is Managing Partner and co-founder of Duke Strategies with 17 years of experience spanning journalism, strategic communications, and AI-driven stakeholder intelligence. A former Wall Street Journal reporter, Arien brings an investigative rigor to strategic advisory that ensures strategies are built on verified intelligence rather than assumptions. At Hill+Knowlton Strategies, he developed the firm's AI-powered stakeholder analytics capabilities, pioneering the use of data science in public affairs and corporate communications.",
+    "technical": "Arien Stuijt combines Wall Street Journal-trained investigative methodology with advanced stakeholder analytics. He has built AI-driven stakeholder mapping platforms that process public data, media coverage, and political intelligence to generate actionable engagement strategies. His 17-year career bridges editorial leadership, strategic advisory, and technology — enabling Duke Strategies to offer data-backed stakeholder intelligence that goes beyond traditional public affairs approaches. He specializes in complex multi-stakeholder environments including energy transition, technology regulation, and cross-border policy.",
+    "short": "Arien Stuijt — 17 years in strategy & media, former WSJ journalist, AI stakeholder analytics pioneer"
+  },
+  {
+    "id": "person-003",
+    "name": "Emma van Gelder",
+    "title": "Associate",
+    "photo": "brand/team/emma-van-gelder.jpg",
+    "expertise": ["brand-narratives", "stakeholder-engagement", "corporate-communications", "content-strategy"],
+    "certifications": [],
+    "education": [
+      { "degree": "MSc Strategic Communication", "institution": "University of Amsterdam" }
+    ],
+    "yearsExperience": 5,
+    "executive": "Emma van Gelder is an Associate at Duke Strategies specializing in brand narratives and stakeholder engagement. With a background at Hill+Knowlton Strategies, she has developed corporate positioning strategies and stakeholder engagement programs for clients across the technology, energy, and financial services sectors. Emma combines strategic thinking with strong editorial capabilities to craft narratives that resonate across diverse audiences.",
+    "technical": "Emma van Gelder specializes in corporate narrative development, stakeholder engagement program design, and integrated communications planning. She has managed multi-channel communications campaigns, developed executive positioning content, and designed stakeholder engagement frameworks for complex corporate transactions. Her work at Hill+Knowlton Strategies included brand repositioning projects and M&A communications support for European technology companies.",
+    "short": "Emma van Gelder — Associate, brand narratives & stakeholder engagement, H&K background"
+  },
+  {
+    "id": "person-004",
+    "name": "William Masquelier",
+    "title": "Associate",
+    "photo": "brand/team/william-masquelier.jpg",
+    "expertise": ["data-analysis", "ai-analytics", "stakeholder-intelligence", "technology", "automation"],
+    "certifications": [],
+    "education": [
+      { "degree": "BSc Business Administration", "institution": "Tilburg University" }
+    ],
+    "yearsExperience": 3,
+    "executive": "William Masquelier is an Associate at Duke Strategies focused on data analysis, AI-driven analytics, and technology integration. He supports the firm's stakeholder intelligence capabilities by developing and maintaining the analytical tools and platforms that power Duke's AI-driven stakeholder mapping service. William brings a technology-first mindset to strategic communications, ensuring that the firm's advisory work is grounded in rigorous data analysis.",
+    "technical": "William Masquelier develops and operates Duke Strategies' AI-powered stakeholder analytics infrastructure. He builds data pipelines for stakeholder mapping, sentiment analysis, and political monitoring — combining public data sources, media intelligence, and network analysis to generate actionable stakeholder insights. His technical stack spans Python, data visualization, and machine learning applications for communications intelligence. William also drives the firm's internal technology strategy and automation initiatives.",
+    "short": "William Masquelier — Associate, AI analytics & data-driven stakeholder intelligence"
+  },
+  {
+    "id": "person-005",
+    "name": "Bas van 't Wout",
+    "title": "Expert Partner",
+    "photo": "brand/team/bas-van-t-wout.jpg",
+    "expertise": ["government-relations", "public-policy", "economic-affairs", "political-strategy", "energy-transition"],
+    "certifications": [],
+    "education": [
+      { "degree": "MSc Political Science", "institution": "Vrije Universiteit Amsterdam" }
+    ],
+    "yearsExperience": 20,
+    "executive": "Bas van 't Wout is an Expert Partner at Duke Strategies and former Minister of Economic Affairs and Climate Policy of the Netherlands. With over 20 years of experience at the intersection of politics, policy, and business, he provides unparalleled insight into government decision-making processes, regulatory landscapes, and political stakeholder dynamics. Bas advises clients on government relations strategy, energy transition policy, and navigating the Dutch and European political landscape.",
+    "technical": "Bas van 't Wout brings direct experience from the highest levels of Dutch government — including cabinet-level decision-making on economic policy, energy transition, and COVID-19 business support programs. He provides Duke Strategies clients with strategic intelligence on legislative processes, coalition dynamics, and regulatory risk assessment. His expertise spans government relations program design, political stakeholder mapping, policy impact analysis, and regulatory strategy for complex sectors including energy, technology, and financial services.",
+    "short": "Bas van 't Wout — Expert Partner, former Minister of Economic Affairs, political strategy & government relations"
+  },
+  {
+    "id": "person-006",
+    "name": "Pieter Cobelens",
+    "title": "Expert Partner",
+    "photo": "brand/team/pieter-cobelens.jpg",
+    "expertise": ["geopolitical-risk", "intelligence-analysis", "security-strategy", "crisis-management", "defense"],
+    "certifications": [],
+    "education": [
+      { "degree": "Military Academy", "institution": "Royal Netherlands Military Academy" }
+    ],
+    "yearsExperience": 35,
+    "executive": "Pieter Cobelens is an Expert Partner at Duke Strategies and a retired Major General of the Royal Netherlands Armed Forces. As former Director of the Dutch Military Intelligence and Security Service (MIVD), he brings 35 years of intelligence, security, and geopolitical risk expertise to the firm. Pieter advises clients on geopolitical risk assessment, security-sensitive stakeholder environments, and strategic intelligence for complex international operations.",
+    "technical": "Pieter Cobelens provides Duke Strategies clients with intelligence-grade geopolitical risk analysis and security-informed strategic counsel. His career leading the Dutch Military Intelligence and Security Service (MIVD) and commanding international military operations gives him unique capabilities in threat assessment, information security governance, and operating in politically sensitive environments. He specializes in geopolitical scenario planning, security risk frameworks for international investments, and crisis management in high-stakes security contexts.",
+    "short": "Pieter Cobelens — Expert Partner, retired Major General, former MIVD Director, geopolitical risk & intelligence"
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "CS-001",
+    "title": "Corporate Reputation Recovery for European Industrial Group",
+    "client": {
+      "name": "Confidential",
+      "industry": "Industrial / Manufacturing",
+      "namePublic": false
+    },
+    "tags": ["crisis-communications", "corporate-reputation", "industrial", "media-management"],
+    "challenge": "A major European industrial group faced a severe reputational crisis following environmental compliance failures at multiple production facilities. Negative media coverage escalated rapidly, regulatory investigations were launched in three jurisdictions, and key institutional investors signaled concerns about governance oversight. The company's share price dropped 15% within two weeks.",
+    "approach": "The founders of Duke Strategies (then at Hill+Knowlton Strategies) deployed a comprehensive crisis response: (1) Immediate Response — established a crisis command center, developed holding statements, and implemented media monitoring across 6 languages, (2) Stakeholder Triage — mapped and prioritized 120+ stakeholders across regulatory, investor, media, employee, and community groups, developing tailored messaging for each, (3) Narrative Reset — designed a proactive recovery narrative anchored in concrete remediation commitments, third-party audits, and governance reforms, (4) Sustained Recovery — executed a 6-month reputation rebuilding program including executive media appearances, stakeholder roundtables, and progress reporting.",
+    "results": {
+      "summary": "Contained the crisis within 3 weeks, recovered 80% of share price within 4 months, and rebuilt stakeholder confidence through transparent remediation. No regulatory sanctions were imposed beyond the initial compliance requirements.",
+      "metrics": [
+        { "measure": "Crisis Containment", "value": 3, "unit": "weeks" },
+        { "measure": "Share Price Recovery", "value": 80, "unit": "% within 4 months" },
+        { "measure": "Stakeholders Engaged", "value": 120, "unit": "+" },
+        { "measure": "Regulatory Sanctions", "value": 0, "unit": "beyond initial compliance" }
+      ]
+    },
+    "timeframe": { "start": "2022-03", "end": "2022-12" },
+    "budget": "EUR 320,000",
+    "team": ["person-001", "person-002"],
+    "services": ["svc-002", "svc-001"],
+    "short": "Managed reputation recovery for a European industrial group after environmental crisis — contained in 3 weeks, 80% share price recovery in 4 months, zero additional regulatory sanctions.",
+    "long": "A major European industrial group engaged the founding partners of Duke Strategies (then at Hill+Knowlton Strategies) to manage a severe reputational crisis following environmental compliance failures across multiple production facilities. The situation had escalated rapidly: negative media coverage dominated European business press, regulatory investigations were active in three jurisdictions, and institutional investors had signaled governance concerns, contributing to a 15% share price decline in two weeks.\n\nThe team established an immediate crisis command center and implemented real-time media monitoring across six languages. Within 48 hours, holding statements were deployed and a stakeholder triage was completed, mapping and prioritizing over 120 stakeholders across regulatory, investor, media, employee, and community groups. Each group received tailored messaging calibrated to their specific concerns and information needs.\n\nThe narrative reset phase designed a proactive recovery story anchored in three pillars: concrete remediation commitments with published timelines, independent third-party environmental audits, and governance reforms including a new board-level sustainability committee. This narrative replaced the defensive posture with a credible transformation story.\n\nThe sustained recovery phase executed over six months included executive media appearances, stakeholder roundtables with community groups, quarterly progress reporting to investors, and internal communications to maintain employee confidence. The crisis was effectively contained within three weeks of engagement. Share price recovered 80% within four months. No regulatory sanctions were imposed beyond the initial compliance requirements, and the company's annual reputation survey showed net positive sentiment within 12 months."
+  },
+  {
+    "id": "CS-002",
+    "title": "Cross-Border Technology Acquisition Communications",
+    "client": {
+      "name": "Confidential",
+      "industry": "Technology",
+      "namePublic": false
+    },
+    "tags": ["m-and-a-communications", "technology", "cross-border", "regulatory"],
+    "challenge": "A European technology company was acquiring a US-based SaaS platform in a EUR 450M transaction that required regulatory approval in both the EU and US. The deal faced potential opposition from employee groups at the target company, scrutiny from technology media, and political sensitivity due to cross-border data transfer implications. The acquirer needed a communications strategy that would protect the deal timeline while maintaining employee retention at the target.",
+    "approach": "The founding partners of Duke Strategies (then at Hill+Knowlton Strategies) designed and executed the transaction communications: (1) Pre-announcement — developed messaging architecture covering 8 stakeholder groups with specific Q&As, prepared regulatory narratives for EU and US authorities, (2) Announcement Day — orchestrated simultaneous communications across 4 time zones including employee town halls, media briefings, analyst calls, and regulatory filings, (3) Integration Period — managed ongoing employee communications, media monitoring, and regulatory engagement throughout the 5-month approval process, (4) Day One Planning — designed the post-close communications and cultural integration narrative.",
+    "results": {
+      "summary": "Deal closed on schedule with regulatory approval in both jurisdictions. Employee retention at the target company exceeded 92% through the first year post-close, and media coverage was 75% neutral-to-positive throughout the transaction.",
+      "metrics": [
+        { "measure": "Deal Timeline", "value": 100, "unit": "% on schedule" },
+        { "measure": "Employee Retention (Target)", "value": 92, "unit": "% at 12 months" },
+        { "measure": "Media Sentiment", "value": 75, "unit": "% neutral-to-positive" },
+        { "measure": "Stakeholder Groups Managed", "value": 8, "unit": "" }
+      ]
+    },
+    "timeframe": { "start": "2023-01", "end": "2023-08" },
+    "budget": "EUR 280,000",
+    "team": ["person-001", "person-003"],
+    "services": ["svc-004"],
+    "short": "Managed communications for EUR 450M cross-border tech acquisition — deal closed on schedule, 92% employee retention, 75% positive media coverage.",
+    "long": "A European technology company engaged the founding partners of Duke Strategies (then at Hill+Knowlton Strategies) to manage communications for a EUR 450M acquisition of a US-based SaaS platform. The transaction required regulatory approval in both the EU and US and faced multiple communications challenges: potential opposition from the target company's 800-person workforce concerned about European ownership, scrutiny from technology media, and political sensitivity around cross-border data transfer implications under evolving EU-US data privacy frameworks.\n\nThe team developed a comprehensive messaging architecture covering eight distinct stakeholder groups — employees (both companies), regulators (EU and US), media, analysts, customers, partners, shareholders, and political stakeholders. Each group received tailored messaging with specific Q&A documents addressing their particular concerns. The regulatory narrative was carefully crafted to address competition and data sovereignty concerns proactively.\n\nAnnouncement day was orchestrated across four time zones with simultaneous employee town halls (in-person and virtual), embargoed media briefings with three key technology publications, analyst conference calls, and coordinated regulatory filings. The team managed real-time social media monitoring and rapid response throughout the day.\n\nDuring the five-month regulatory approval period, the team maintained weekly employee communications at the target company, managed ongoing media inquiries, and supported regulatory engagement in both jurisdictions. A dedicated integration communications workstream designed the Day One experience and cultural integration narrative.\n\nThe deal closed on schedule with clean regulatory approval in both jurisdictions. Employee retention at the target company exceeded 92% through the first year post-close — significantly above the industry average of 70-75% for cross-border technology acquisitions. Media coverage remained 75% neutral-to-positive throughout the transaction period."
+  },
+  {
+    "id": "CS-003",
+    "title": "AI-Driven Stakeholder Mapping for Energy Transition Program",
+    "client": {
+      "name": "Confidential",
+      "industry": "Energy",
+      "namePublic": false
+    },
+    "tags": ["stakeholder-mapping", "ai-analytics", "energy-transition", "public-affairs"],
+    "challenge": "A European energy company was preparing a major renewable energy infrastructure program spanning three provinces, requiring engagement with over 500 stakeholders including local governments, community groups, environmental organizations, landowners, and regulatory bodies. Traditional stakeholder mapping approaches could not capture the complex relationships and shifting alliances in the energy transition debate, and the company had already experienced delays on previous projects due to unexpected community opposition.",
+    "approach": "Duke Strategies deployed its AI-driven stakeholder intelligence methodology: (1) Map — used natural language processing and network analysis to identify and categorize 500+ stakeholders from public data, media coverage, council minutes, and social media, building an influence network map, (2) Analyse — applied sentiment analysis and influence scoring to prioritize stakeholders and identify hidden connections, coalition risks, and persuadable neutrals, (3) Engage — designed targeted engagement strategies for 12 stakeholder clusters, with tailored messaging and channel selection based on influence patterns, (4) Monitor — established a continuous monitoring dashboard tracking stakeholder sentiment, media coverage, and political developments in real time.",
+    "results": {
+      "summary": "Identified 3 previously unknown opposition coalitions before they activated publicly, enabling preemptive engagement. The infrastructure program received provincial approval 4 months ahead of comparable projects, with 78% community support in post-consultation surveys.",
+      "metrics": [
+        { "measure": "Stakeholders Mapped", "value": 500, "unit": "+" },
+        { "measure": "Opposition Coalitions Identified Early", "value": 3, "unit": "" },
+        { "measure": "Approval Timeline", "value": 4, "unit": "months ahead of comparable projects" },
+        { "measure": "Community Support", "value": 78, "unit": "%" }
+      ]
+    },
+    "timeframe": { "start": "2025-04", "end": "2025-09" },
+    "budget": "EUR 175,000",
+    "team": ["person-002", "person-004", "person-005"],
+    "services": ["svc-003", "svc-001"],
+    "short": "AI-driven stakeholder mapping for renewable energy infrastructure — 500+ stakeholders mapped, 3 opposition coalitions identified early, approval 4 months ahead of schedule.",
+    "long": "A European energy company engaged Duke Strategies to develop a comprehensive stakeholder engagement strategy for a major renewable energy infrastructure program spanning three provinces. The program required engagement with an estimated 500+ stakeholders across local governments, community groups, environmental organizations, landowners, and regulatory bodies. The company had experienced significant delays on previous projects due to unexpected community opposition and recognized that traditional stakeholder mapping approaches were insufficient for the complex, rapidly shifting dynamics of the energy transition debate.\n\nDuke Strategies deployed its proprietary AI-driven stakeholder intelligence methodology. The mapping phase used natural language processing and network analysis to identify and categorize stakeholders from public data sources including municipal council minutes, environmental impact responses, local media coverage, and social media discussions. This produced an influence network map revealing not just individual stakeholders but the relationships and alliances between them.\n\nThe analysis phase applied sentiment scoring, influence weighting, and coalition detection algorithms to the stakeholder network. This revealed three previously unknown opposition coalitions that were forming but had not yet activated publicly — including an alliance between a local environmental group and a provincial political party that could have significantly delayed the approval process.\n\nWith these insights, Duke designed targeted engagement strategies for 12 distinct stakeholder clusters, with tailored messaging, channel selection, and engagement sequencing optimized for each group's influence patterns and concerns. Expert Partner Bas van 't Wout provided direct guidance on the political stakeholder engagement strategy, drawing on his experience in government decision-making.\n\nThe continuous monitoring dashboard tracked stakeholder sentiment, media coverage, and political developments in real time, enabling the client to adapt their engagement approach as the landscape evolved. The infrastructure program received provincial approval four months ahead of comparable projects, with 78% community support in post-consultation surveys — a significant achievement in the contested energy transition space."
+  },
+  {
+    "id": "CS-004",
+    "title": "Technology Platform Regulatory & Government Relations Strategy",
+    "client": {
+      "name": "Confidential",
+      "industry": "Technology",
+      "namePublic": false
+    },
+    "tags": ["government-relations", "regulatory-strategy", "technology", "public-affairs", "political-intelligence"],
+    "challenge": "A global technology platform faced increasing regulatory pressure in the Netherlands and EU, with proposed legislation that could significantly impact its business model. The company lacked established government relations capabilities in the Benelux region and needed to quickly build relationships with key political stakeholders while developing a credible regulatory narrative that balanced innovation with societal concerns.",
+    "approach": "Duke Strategies designed and executed a comprehensive government relations program: (1) Political Landscape Assessment — mapped the regulatory environment, identified key decision-makers across Dutch parliament, relevant ministries, and EU institutions, and assessed the political dynamics driving the proposed legislation, (2) Narrative Development — crafted a regulatory narrative positioning the platform as a responsible innovator, backed by economic impact data and societal benefit evidence, (3) Stakeholder Engagement — executed a structured engagement program with 25+ political stakeholders including parliamentarians, ministry officials, and EU representatives, (4) Intelligence & Monitoring — established ongoing political intelligence reporting to anticipate regulatory developments.",
+    "results": {
+      "summary": "Built government relations capability from zero in the Benelux region. The proposed legislation was amended to include innovation safeguards, reflecting 3 of 5 key positions advocated by the client. Established ongoing relationships with 25+ political stakeholders.",
+      "metrics": [
+        { "measure": "Political Stakeholders Engaged", "value": 25, "unit": "+" },
+        { "measure": "Key Positions Reflected in Legislation", "value": 3, "unit": "of 5" },
+        { "measure": "Government Relations Capability", "value": 100, "unit": "% built from zero" },
+        { "measure": "Political Intelligence Reports", "value": 12, "unit": "monthly reports" }
+      ]
+    },
+    "timeframe": { "start": "2025-06", "end": "2025-12" },
+    "budget": "EUR 210,000",
+    "team": ["person-001", "person-005", "person-006"],
+    "services": ["svc-001", "svc-007"],
+    "short": "Built government relations for a global tech platform in the Benelux — 3 of 5 advocacy positions reflected in amended legislation, 25+ political relationships established.",
+    "long": "A global technology platform engaged Duke Strategies to build its government relations capabilities in the Netherlands and broader EU, as proposed legislation threatened to significantly impact its business model. The company had strong government affairs teams in the US and Asia but lacked established relationships and local expertise in the Benelux region — a gap that became critical as the Dutch government took a leading role in EU technology regulation.\n\nDuke Strategies began with a comprehensive political landscape assessment, mapping the regulatory environment across Dutch parliament, three relevant ministries (Economic Affairs, Digital Affairs, and Justice), and key EU institutions. Expert Partner Bas van 't Wout, drawing on his direct experience as Minister of Economic Affairs, provided invaluable insight into government decision-making processes and the political dynamics driving the proposed legislation. Expert Partner Pieter Cobelens contributed intelligence-informed analysis of the geopolitical dimensions of technology regulation.\n\nThe narrative development phase crafted a regulatory positioning that acknowledged societal concerns while making a credible case for innovation-friendly regulation. This narrative was backed by commissioned economic impact research demonstrating the platform's contribution to the Dutch digital economy — including job creation, SME enablement, and digital skills development.\n\nThe structured engagement program reached over 25 political stakeholders through a carefully sequenced series of meetings, roundtable discussions, and written position papers. Each engagement was tailored based on the political stakeholder mapping conducted during the assessment phase.\n\nOngoing political intelligence reporting — delivered monthly — provided the client's global policy team with early warning on regulatory developments, coalition dynamics, and emerging political risks. The proposed legislation was ultimately amended to include innovation safeguards that reflected three of the five key positions advocated by the client. More importantly, the engagement established the client as a credible, constructive participant in the Dutch technology policy debate, with ongoing relationships that continue to provide value."
+  }
+]
