@@ -11,7 +11,7 @@ Netherlands-based strategic communications and public affairs consultancy.
 
 - **Production URL:** https://dukestrategies.com
 - **Hosting:** GitHub Pages (workflow at `.github/workflows/deploy.yml`)
-- **Languages:** English only (no i18n)
+- **Languages:** English (default) + Dutch — prefix-default routing (`/en/*`, `/nl/*`)
 - **Brand archetype:** ruler / luxury
 
 ## Repository Structure
@@ -32,13 +32,29 @@ duke-strategies-website/
 │   │   └── content/              ← (currently empty)
 │   ├── content/                  ← MDX collections — SCAFFOLDED BUT UNUSED
 │   ├── content.config.ts         ← Schemas for insights/pages/authors (empty)
+│   ├── i18n/
+│   │   ├── pickLocale.ts         ← Localized<T> type + pickLocale() resolver
+│   │   ├── utils.ts              ← useTranslations(), getLocaleFromUrl(), localizedPath()
+│   │   ├── ui.en.ts              ← English UI strings (source of truth)
+│   │   ├── ui.nl.ts              ← Dutch UI strings (derived via translation workflow)
+│   │   ├── glossary.md           ← Do-not-translate terms + preferred Dutch equivalents
+│   │   └── brand-voice.md        ← Tone, register, few-shot anchors for NL translation
 │   ├── data/
-│   │   ├── company.ts            ← PRIMARY CONTENT SOURCE
-│   │   ├── site.ts               ← Site metadata, nav, contact
-│   │   ├── nav.ts                ← Top nav items
-│   │   └── stats.ts              ← Homepage stat ribbon
+│   │   ├── company.ts            ← PRIMARY CONTENT SOURCE — uses Localized<string> for all text
+│   │   ├── site.ts               ← Site metadata, contact, office — Localized<string>
+│   │   ├── nav.ts                ← Top nav items (labelKey: UIKey, not label: string)
+│   │   └── stats.ts              ← Homepage stat ribbon — Localized<string> labels
 │   ├── layouts/                  ← BaseLayout, PageLayout, ArticleLayout
-│   └── pages/                    ← index, who-we-are, what-we-do, duke-academy, insights, contact
+│   └── pages/
+│       ├── index.astro           ← Root redirect → /en/
+│       ├── en/                   ← English pages (const lang = "en")
+│       │   ├── index.astro, who-we-are.astro, what-we-do.astro, ...
+│       │   └── services/[slug].astro
+│       └── nl/                   ← Dutch pages (const lang = "nl")
+│           ├── index.astro, who-we-are.astro, what-we-do.astro, ...
+│           └── services/[slug].astro
+├── .i18n/
+│   └── translation-ledger.json   ← Translation cache (git-tracked, source hashes)
 ├── public/assets/
 │   ├── images/                   ← Runtime-served images
 │   ├── logos/                    ← Runtime-served logos
@@ -102,6 +118,23 @@ rsync -a --delete client-data/clients/dukestrategies/logos/  public/assets/logos
 ```
 
 Team photos live **only** in `public/assets/team/` — not part of brand sync.
+
+### i18n Architecture
+
+EN is the source of truth. NL is derived via the translation workflow — never edit NL
+content directly.
+
+- **Routing:** Astro prefix-default (`/en/*`, `/nl/*`). Root paths redirect to `/en/`.
+- **UI strings:** `src/i18n/ui.en.ts` → `ui.nl.ts`. Pages call `useTranslations(lang)`
+  → `t('key')`. Nav uses `labelKey: UIKey` (not `label: string`).
+- **Data strings:** `src/data/company.ts`, `site.ts`, `stats.ts` use `Localized<string>`
+  (`{ en: T; nl?: T }`). Pages resolve via `pickLocale(field, lang)` before passing
+  plain strings to card components.
+- **Translation grounding:** `src/i18n/glossary.md` (do-not-translate terms, preferred
+  NL equivalents) + `src/i18n/brand-voice.md` (tone, register, few-shot anchors).
+- **Ledger:** `.i18n/translation-ledger.json` caches approved translations by EN source
+  hash — prevents drift across re-runs.
+- **Rule:** edit EN → run translate workflow → NL updates. Never edit NL directly.
 
 ### Tailwind 4 via Vite plugin
 
@@ -202,3 +235,4 @@ Pre-deploy checklist:
 - Sections inline in page files rather than extracted components
 - Asset duplication between `client-data/` and `public/assets/` requires manual rsync
 - Empty `src/components/sections/` and `src/components/content/` directories
+- Adding a third locale (FR, DE) — the i18n pipeline supports it but is not enabled
