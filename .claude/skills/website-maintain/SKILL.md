@@ -52,22 +52,36 @@ duke-strategies-website/
 │   ├── content/                  ← MDX collections — SCAFFOLDED BUT UNUSED
 │   │   ├── authors/ blog/ capabilities/ case-studies/ insights/ pages/
 │   ├── content.config.ts         ← Schemas for insights/pages/authors (empty collections)
+│   ├── i18n/
+│   │   ├── pickLocale.ts         ← Localized<T> type + pickLocale() resolver
+│   │   ├── utils.ts              ← useTranslations(), getLocaleFromUrl(), localizedPath()
+│   │   ├── ui.en.ts              ← English UI strings (source of truth)
+│   │   ├── ui.nl.ts              ← Dutch UI strings (derived via translation workflow)
+│   │   ├── glossary.md           ← Do-not-translate terms + preferred Dutch equivalents
+│   │   └── brand-voice.md        ← Tone, register, few-shot anchors for NL translation
 │   ├── data/
-│   │   ├── company.ts            ← PRIMARY CONTENT SOURCE (founders, services, etc.)
-│   │   ├── site.ts               ← Site metadata, nav, contact, office, analytics
-│   │   ├── nav.ts                ← Top nav items
-│   │   └── stats.ts              ← Homepage stat ribbon
+│   │   ├── company.ts            ← PRIMARY CONTENT SOURCE — uses Localized<string>
+│   │   ├── site.ts               ← Site metadata, contact, office — Localized<string>
+│   │   ├── nav.ts                ← Top nav items (labelKey: UIKey, not label: string)
+│   │   └── stats.ts              ← Homepage stat ribbon — Localized<string> labels
 │   ├── layouts/
-│   │   ├── BaseLayout.astro      ← HTML shell, meta, nav, footer
+│   │   ├── BaseLayout.astro      ← HTML shell, meta, nav, footer, hreflang tags
 │   │   ├── PageLayout.astro      ← Wraps BaseLayout for standard pages
 │   │   └── ArticleLayout.astro   ← For long-form articles (unused so far)
-│   └── pages/                    ← File-based routing (all .astro, no MDX)
-│       ├── index.astro           ← Homepage
-│       ├── who-we-are.astro
-│       ├── what-we-do.astro
-│       ├── duke-academy.astro
-│       ├── insights.astro
-│       └── contact.astro
+│   └── pages/
+│       ├── index.astro           ← Root redirect → /en/
+│       ├── who-we-are.astro      ← Redirect stub → /en/who-we-are
+│       ├── what-we-do.astro      ← Redirect stub
+│       ├── duke-academy.astro    ← Redirect stub
+│       ├── insights.astro        ← Redirect stub
+│       ├── contact.astro         ← Redirect stub
+│       ├── services/             ← Redirect stubs for service detail pages
+│       ├── en/                   ← English pages (const lang = "en")
+│       │   ├── index.astro, who-we-are.astro, what-we-do.astro, ...
+│       │   └── services/[slug].astro
+│       └── nl/                   ← Dutch pages (const lang = "nl")
+│           ├── index.astro, who-we-are.astro, what-we-do.astro, ...
+│           └── services/[slug].astro
 ├── public/assets/
 │   ├── images/                   ← Runtime-served images (mirrors src/brand/images/)
 │   ├── logos/                    ← Runtime-served logos (DukeStrategies_logo.svg etc.)
@@ -75,7 +89,9 @@ duke-strategies-website/
 │   └── video/                    ← Hero video (AquaductHarderwijk_1920x1080px.mp4)
 ├── scripts/
 │   └── generate-tokens.ts        ← client-data charter.json → brand-tokens.css + tokens.ts
-├── astro.config.mjs              ← Astro 6 config (MDX + sitemap + Tailwind Vite plugin)
+├── .i18n/
+│   └── translation-ledger.json   ← Translation cache (git-tracked, source hashes)
+├── astro.config.mjs              ← Astro 6 config (MDX + sitemap + i18n + Tailwind Vite plugin)
 └── .github/workflows/deploy.yml  ← GitHub Pages deploy on push to main
 ```
 
@@ -100,7 +116,9 @@ duke-strategies-website/
    `src/data/company.ts` (e.g., `/assets/team/IngoHeijnen_grijs.jpg`).
 4. **Hero video** (`public/assets/video/AquaductHarderwijk_1920x1080px.mp4`) is loaded
    by the homepage hero section. Poster is a still from the bridge image set.
-5. **No i18n** — this is a single-language English site. Do not add locale routing.
+5. **Bilingual EN/NL** — prefix-default routing (`/en/*`, `/nl/*`). EN is source of
+   truth. NL translations managed via the i18n workflow below. Never edit NL content
+   directly — edit EN, then run the Translate Content workflow.
 6. **Tailwind 4 via Vite plugin**, not PostCSS — `@tailwindcss/vite` in `astro.config.mjs`.
    Global CSS uses the Tailwind 4 `@import "tailwindcss"` syntax.
 
@@ -164,13 +182,21 @@ Routes to audit:
 
 | Route | Page file | Notes |
 |---|---|---|
-| `/` | `src/pages/index.astro` | Homepage with hero video, services, stats, featured case, testimonial, CTA |
-| `/who-we-are` | `src/pages/who-we-are.astro` | Founders, associates, expert partners, affiliates |
-| `/what-we-do` | `src/pages/what-we-do.astro` | Services, capabilities, case studies grid |
-| `/duke-academy` | `src/pages/duke-academy.astro` | Academy programs |
-| `/insights` | `src/pages/insights.astro` | Insights list |
-| `/contact` | `src/pages/contact.astro` | Office details, contact form/info |
-| `/services/<slug>` | `src/pages/services/[slug].astro` | Dynamic service detail pages (one per service) |
+| `/` | `src/pages/index.astro` | Redirect → `/en/` |
+| `/en/` | `src/pages/en/index.astro` | Homepage (EN) |
+| `/nl/` | `src/pages/nl/index.astro` | Homepage (NL) |
+| `/en/who-we-are` | `src/pages/en/who-we-are.astro` | Founders, partners, affiliates (EN) |
+| `/nl/wie-wij-zijn` | `src/pages/nl/who-we-are.astro` | Founders, partners, affiliates (NL) |
+| `/en/what-we-do` | `src/pages/en/what-we-do.astro` | Services, case studies (EN) |
+| `/nl/wat-wij-doen` | `src/pages/nl/what-we-do.astro` | Services, case studies (NL) |
+| `/en/duke-academy` | `src/pages/en/duke-academy.astro` | Academy programs (EN) |
+| `/nl/duke-academy` | `src/pages/nl/duke-academy.astro` | Academy programs (NL) |
+| `/en/insights` | `src/pages/en/insights.astro` | Insights list (EN) |
+| `/nl/inzichten` | `src/pages/nl/insights.astro` | Insights list (NL) |
+| `/en/contact` | `src/pages/en/contact.astro` | Contact (EN) |
+| `/nl/contact` | `src/pages/nl/contact.astro` | Contact (NL) |
+| `/en/services/<slug>` | `src/pages/en/services/[slug].astro` | Service detail (EN) |
+| `/nl/services/<slug>` | `src/pages/nl/services/[slug].astro` | Service detail (NL) |
 
 Useful capture commands:
 
@@ -220,6 +246,8 @@ Match the user's request to the appropriate workflow below.
 | "review the design", "visual audit", "check mobile", "use vision", "screenshot the site" | [Visual Audit](#visual-audit) |
 | "toggle dark mode", "change dark mode icons", "adjust dark mode colors", "dark theme" | [Dark Mode](#dark-mode) |
 | "deploy", "build the site", "push to prod" | [Build & Deploy](#build--deploy) |
+| "translate content", "refresh translations", "add NL version", "Dutch copy", "update Dutch" | [Translate Content](#translate-content) |
+| "audit i18n", "check translations", "missing NL" | [i18n Audit](#i18n-audit) |
 
 ---
 
@@ -233,19 +261,21 @@ page at `/services/${slug}` via the dynamic route
 Schema (see the `Service` type at the top of the file):
 ```ts
 {
-  slug: string;              // URL segment, kebab-case ("strategic-advisory")
-  name: string;              // "Strategic Advisory"
-  tagline: string;           // One-liner used on cards
-  description: string;       // One paragraph
-  industries?: string[];     // e.g. ["Energy", "Financial Services"]
-  deliverables?: string[];   // e.g. ["Stakeholder map", "Risk assessment"]
+  slug: string;                        // URL segment, kebab-case ("strategic-advisory")
+  name: Localized<string>;             // { en: "Strategic Advisory", nl: "Strategisch advies" }
+  tagline: Localized<string>;          // One-liner used on cards
+  description: Localized<string>;      // One paragraph
+  industries: Localized<string>[];     // Each element is { en: "...", nl: "..." }
+  deliverables: Localized<string>[];
   longform: {
-    challenge: string;       // "The problem we solve"
-    approach: string[];      // Bulleted process — rendered as ordered list
-    signals: string[];       // "Engage us when…" — rendered as bullet list
+    challenge: Localized<string>;
+    approach: Localized<string>[];
+    signals: Localized<string>[];
   };
 }
 ```
+
+Pages resolve fields via `pickLocale(service.name, lang)` before passing to components.
 
 - **Add**: append a new object with a unique `slug` and complete `longform` block.
   The detail page auto-generates on next build.
@@ -262,7 +292,10 @@ The homepage shows `services.slice(0, 6)` as "Our Expertise" cards. The
 Approach / Signals with a sticky Deliverables sidebar and related services
 (neighboring slices of the `services` array).
 
-Verify: `npm run build`, then visit `/services/${slug}` in dev.
+Verify: `npm run build`, then visit `/en/services/${slug}` and `/nl/services/${slug}`.
+
+**After editing EN content, run the [Translate Content](#translate-content) workflow
+to refresh NL.**
 
 ---
 
@@ -285,16 +318,18 @@ Case studies live in `src/data/company.ts` → `export const caseStudies: CaseSt
 Schema:
 ```ts
 {
-  title: string;
-  industry: string;
-  challenge: string;
-  shortSummary?: string;
-  team?: string;
-  image: string;          // "/assets/images/bridge-fog-water-minimalist.jpg"
-  imageAlt: string;
-  metrics: Array<{ value: string; label: string }>;
+  title: Localized<string>;
+  industry: Localized<string>;
+  challenge: Localized<string>;
+  shortSummary?: Localized<string>;
+  team?: Localized<string>;
+  image: string;                    // "/assets/images/bridge-fog-water-minimalist.jpg"
+  imageAlt: Localized<string>;
+  metrics: Array<{ value: string; label: Localized<string> }>;
 }
 ```
+
+Pages resolve via `pickLocale(cs.title, lang)` etc.
 
 **Image path rule:** Use absolute `/assets/images/<file>.jpg`. The image must exist
 in `public/assets/images/`. If it doesn't, copy it from `client-data/clients/dukestrategies/images/` first
@@ -330,11 +365,11 @@ Schema:
 ```ts
 {
   name: string;
-  title: string;     // "Managing Partner"
-  image: string;     // "/assets/team/FirstLast_grijs.jpg"
+  title: Localized<string>;     // { en: "Managing Partner", nl: "Managing Partner" }
+  image: string;                // "/assets/team/FirstLast_grijs.jpg"
   alt: string;
-  bio: string;       // Long-form paragraph
-  email: string;     // "firstname.lastname@dukestrategies.eu"
+  bio: Localized<string>;      // Long-form paragraph
+  email: string;
 }
 ```
 
@@ -342,7 +377,10 @@ Schema:
 Drop the file in `public/assets/team/` before referencing it. Use the same
 black-and-white treatment as existing photos for visual consistency.
 
-Rendered on `/who-we-are` via `TeamCard.astro`.
+Rendered on `/en/who-we-are` and `/nl/who-we-are` via `TeamCard.astro`.
+
+**After editing EN content, run the [Translate Content](#translate-content) workflow
+to refresh NL.**
 
 ---
 
@@ -357,15 +395,18 @@ Schema (`TeamCard` type):
 ```ts
 {
   name: string;
-  title: string;
+  title: Localized<string>;
   image: string;    // "/assets/team/FirstLast_grijs.jpg"
   alt: string;
-  bio: string;
+  bio: Localized<string>;
 }
 ```
 
 Note: no `email` field on team cards, unlike founders. If a member needs direct
 contact, promote them to `founders` or add an email in their bio.
+
+**After editing EN content, run the [Translate Content](#translate-content) workflow
+to refresh NL.**
 
 ---
 
@@ -398,6 +439,9 @@ Always verify every URL (top-level `href` AND every `partners[].href`) resolves
 before committing. Stale "Global Reach" links are the most visible kind of rot.
 Prefer the `WebFetch` tool or a quick Playwright MCP navigation to verify.
 
+**After editing EN content, run the [Translate Content](#translate-content) workflow
+to refresh NL.**
+
 ---
 
 ## Update Duke Academy
@@ -416,9 +460,11 @@ Schema:
 Rendered on `/duke-academy` via `ProgramCard.astro`. Check `Icon.astro` for valid
 icon keys before adding a new program.
 
-The Duke Academy page also has a hero and intro copy hardcoded in
-`src/pages/duke-academy.astro` — edit that file directly for copy changes outside
-the program cards.
+The Duke Academy page also has hero and intro copy via `t()` keys in
+`src/pages/en/duke-academy.astro` — edit the corresponding keys in `ui.en.ts`.
+
+**After editing EN content, run the [Translate Content](#translate-content) workflow
+to refresh NL.**
 
 ---
 
@@ -432,6 +478,9 @@ mobile.
 
 The homepage displays a single featured testimonial. Reorder to change which one
 is featured. Other pages may display the full list.
+
+**After editing EN content, run the [Translate Content](#translate-content) workflow
+to refresh NL.**
 
 ---
 
@@ -489,7 +538,11 @@ only get a low-quality thumbnail), choose a relevant image from
 naming scheme, and note the substitution in the commit message.
 
 If you need long-form editorial (full articles, not excerpts), that's a structural
-change — raise it as a task in `BACKLOG.md` before implementing.
+change — flag it to the user as out of scope for this skill and stop. Do not add
+backlog items directly; backlog management is handled exclusively via the `/backlog` skill.
+
+**After editing EN content, run the [Translate Content](#translate-content) workflow
+to refresh NL.**
 
 ---
 
@@ -499,18 +552,20 @@ change — raise it as a task in `BACKLOG.md` before implementing.
 
 ```ts
 export const homeStats: HomeStat[] = [
-  { value: 44, suffix: "+", label: "Years Combined Experience" },
-  { value: 120, suffix: "+", label: "Stakeholders Engaged" },
-  { value: 500, suffix: "+", label: "Data Points Analyzed" },
-  { value: 92, suffix: "%", label: "Employee Retention (M&A)" },
+  { value: 44, suffix: "+", label: { en: "Years Combined Experience", nl: "Jaar gecombineerde ervaring" } },
+  { value: 120, suffix: "+", label: { en: "Stakeholders Engaged", nl: "Stakeholders betrokken" } },
+  ...
 ];
 ```
 
 - `value` is a **number** (not a string) — the stat ribbon component may animate it
 - `suffix` is appended after (`+`, `%`, `M+`, etc.)
-- `label` is a short descriptor
+- `label` is `Localized<string>` — resolved via `pickLocale(stat.label, lang)`
 
 Keep 3–5 stats. The ribbon lays them out horizontally on desktop, stacks on mobile.
+
+**After editing EN content, run the [Translate Content](#translate-content) workflow
+to refresh NL.**
 
 ---
 
@@ -520,29 +575,31 @@ Top nav is defined in `src/data/nav.ts`:
 
 ```ts
 export const navItems: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Who We Are", href: "/who-we-are" },
-  { label: "What We Do", href: "/what-we-do" },
-  { label: "Duke Academy", href: "/duke-academy" },
-  { label: "Insights", href: "/insights" },
-  { label: "Contact", href: "/contact" },
+  { labelKey: "nav.home", href: "/" },
+  { labelKey: "nav.who-we-are", href: "/who-we-are" },
+  { labelKey: "nav.what-we-do", href: "/what-we-do" },
+  { labelKey: "nav.duke-academy", href: "/duke-academy" },
+  { labelKey: "nav.insights", href: "/insights" },
+  { labelKey: "nav.contact", href: "/contact" },
 ];
 ```
 
-`src/data/site.ts` re-exports this array as `site.navItems`. `Navigation.astro` and
-`Footer.astro` both read from `site.navItems`, so a single edit to `nav.ts`
-propagates everywhere.
+Nav items use `labelKey: UIKey` — the display label comes from `ui.en.ts` / `ui.nl.ts`
+via `t(item.labelKey)`. `Navigation.astro` and `Footer.astro` both use
+`localizedPath(item.href, lang)` to generate locale-prefixed links.
 
 **Adding a nav link to a new page:**
-1. Create `src/pages/<slug>.astro` using `PageLayout`
-2. Add the `{ label, href }` entry to `navItems`
-3. Verify the link appears in header and footer
+1. Create `src/pages/en/<slug>.astro` and `src/pages/nl/<slug>.astro`
+2. Add a redirect stub at `src/pages/<slug>.astro`
+3. Add the UI key to `ui.en.ts` and `ui.nl.ts` (e.g., `'nav.new-page': '...'`)
+4. Add `{ labelKey: "nav.new-page", href: "/<slug>" }` to `navItems`
+5. Verify the link appears in header and footer in both locales
 
 ---
 
 ## Update Homepage Hero
 
-The hero is hardcoded at the top of `src/pages/index.astro`:
+The hero is in `src/pages/en/index.astro` (and mirrored in `nl/`):
 
 - **Title** — reads `site.title` from `src/data/site.ts` (edit there for consistency)
 - **Subtitle** — hardcoded paragraph inside `index.astro` under `.hero__subtitle`
@@ -706,7 +763,7 @@ overrides via `[data-theme="dark"]` on `<html>`.
 ### Key Files
 
 - **Token overrides**: `src/styles/tokens-semantic.css` → `[data-theme="dark"]` block
-- **Toggle component**: `src/components/layout/ThemeToggle.astro` (lightbulb / star icons)
+- **Toggle component**: `src/components/layout/ThemeToggle.astro` (sliding pill: lightbulb left / star right)
 - **FOUC prevention**: `src/layouts/BaseLayout.astro` → inline `<script>` in `<head>`
 - **Toggle init**: `src/layouts/BaseLayout.astro` → `initThemeToggle()` in DOMContentLoaded
 - **Transitions**: `src/styles/global.css` → smooth transition rules + dark-mode overrides
@@ -718,13 +775,73 @@ tokens (Tier 2/3). Brand accent (`--accent`) stays the same — coral works on d
 
 ### Changing Icons
 
-Edit `ThemeToggle.astro` SVG paths. Light-mode icon is colored `var(--accent)` (coral),
-dark-mode icon is colored `#F0F0F2` (near-white).
+Edit the SVG paths in `ThemeToggle.astro`. The toggle is a sliding pill with the
+lightbulb icon on the left (light mode) and star icon on the right (dark mode). The
+thumb slides left↔right. Thumb color: `var(--accent)` in light mode, `#F0F0F2` in dark.
 
 ### Disabling Dark Mode
 
 Remove `ThemeToggle` import from `Navigation.astro`, remove `[data-theme="dark"]` block
 from `tokens-semantic.css`, remove the FOUC script from `BaseLayout.astro <head>`.
+
+---
+
+## Translate Content
+
+Use this workflow when EN content has changed and NL needs updating, or when adding
+new translatable strings.
+
+### Prerequisites
+
+Load these files before translating:
+- `src/i18n/glossary.md` — do-not-translate terms, preferred NL equivalents
+- `src/i18n/brand-voice.md` — tone, register, sentence rhythm, few-shot anchors
+- `.i18n/translation-ledger.json` — existing translation cache
+
+### Workflow
+
+1. **Identify changed/missing fields** — compare EN source hashes in the ledger to
+   current EN values. New fields or changed hashes need (re-)translation.
+2. **Translate** — apply glossary rules (keep brand names, job titles, industry terms
+   in English), brand voice (formal `u`, `wij`, no exclamation marks, editorial tone),
+   and few-shot anchors.
+3. **Update files:**
+   - `src/i18n/ui.nl.ts` — for UI string keys
+   - `src/data/company.ts` — for data field `nl` values
+   - `src/data/site.ts`, `src/data/stats.ts` — if their Localized fields changed
+4. **Run invariant checks:**
+   - Every `Localized<string>` has both `en` and `nl`
+   - Numbers, emails, URLs, phone numbers identical EN ↔ NL
+   - Every do-not-translate glossary term appears verbatim in NL
+   - `ui.nl.ts` has no missing keys vs `ui.en.ts`
+5. **Build:** `npm run build` — 0 errors
+6. **Show diff** and wait for user approval
+7. **Update ledger:** flip `pending` → `approved`, update timestamps
+
+### Rules
+
+- **Only edit EN content directly.** NL always follows via this workflow.
+- When adding new glossary terms, update `src/i18n/glossary.md` first.
+- NL copy may be ~10% longer than EN — accept this, do not compress meaning.
+
+---
+
+## i18n Audit
+
+Use this workflow to verify translation completeness and correctness.
+
+### Checks
+
+1. **Completeness:** every `Localized<string>` in `company.ts`, `site.ts`, `stats.ts`
+   has both `en` and `nl` values.
+2. **UI strings:** `ui.nl.ts` has every key that `ui.en.ts` has.
+3. **Ledger sync:** every ledger entry is `approved` (no stale `pending` entries).
+4. **Glossary compliance:** do-not-translate terms appear verbatim in NL output.
+5. **Invariants:** numbers, emails, URLs, phones identical EN ↔ NL.
+6. **No hardcoded strings:** scan page templates for user-visible text not going
+   through `t()` or `pickLocale()`.
+7. **Visual:** spot-check `/en/` and `/nl/` homepages + contact at desktop and mobile
+   — no layout breakage from NL text expansion.
 
 ---
 
@@ -739,11 +856,11 @@ Start the server: `npm run dev`. Do not rely on code inspection alone for visual
 
 ### 2. Use the full route list
 
-Capture all static pages plus dynamic service detail pages:
-- `/`, `/who-we-are`, `/what-we-do`, `/duke-academy`, `/insights`, `/contact`
-- `/services/<slug>` — one per service entry (currently 7). Get slugs from
-  `services` array in `src/data/company.ts`. At minimum, spot-check the first
-  and last service detail page.
+Capture all static pages plus dynamic service detail pages in both locales:
+- EN: `/en/`, `/en/who-we-are`, `/en/what-we-do`, `/en/duke-academy`, `/en/insights`, `/en/contact`
+- NL: `/nl/`, `/nl/who-we-are`, `/nl/what-we-do`, `/nl/duke-academy`, `/nl/insights`, `/nl/contact`
+- `/en/services/<slug>` and `/nl/services/<slug>` — spot-check first and last.
+- Root redirects: `/`, `/who-we-are`, etc. — verify they redirect to `/en/...`
 
 ### 3. Capture desktop + mobile for every page
 
@@ -759,6 +876,7 @@ Use `--wait-for-timeout=2000` minimum, `2500` for full-page captures.
 
 ### 5. Check these visual categories
 
+- LangSwitcher visible and functional in nav (EN/NL toggle, preserves path)
 - Logo rendering (especially white vs grey variants on different surfaces)
 - Hero video autoplay and poster fallback
 - Text contrast — Signal Orange (#FF7F66) on white/grey vs on dark
@@ -929,8 +1047,10 @@ When adding or modifying Dutch content, apply these language conventions:
 ## What This Skill Does NOT Cover
 
 - **Major structural refactors** — e.g., migrating content from `src/data/company.ts`
-  to MDX collections, extracting inline sections into components, i18n rollout. These
-  are architectural changes; raise them in `BACKLOG.md` first.
+  to MDX collections, extracting inline sections into components. These
+  are architectural changes; flag them to the user as out of scope.
+- **Adding a third locale (FR, DE)** — the i18n pipeline supports it but is not
+  enabled for Duke.
 - **New page creation beyond the existing 6** — possible, but think about IA and
   navigation impact before adding.
 - **Brand redesign** — that's the `brand-builder` skill's job, operating on
