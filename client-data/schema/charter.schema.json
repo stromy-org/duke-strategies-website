@@ -203,6 +203,35 @@
       },
       "additionalProperties": false
     },
+    "excalidraw": {
+      "type": "object",
+      "description": "Diagram styling defaults for Excalidraw-based diagrams",
+      "properties": {
+        "strokeColor": { "$ref": "#/$defs/hexColor", "description": "Default shape outline color" },
+        "backgroundColor": { "$ref": "#/$defs/hexColor", "description": "Canvas/shape fill background" },
+        "fillColors": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/hexColor" },
+          "description": "Categorical fill palette for shapes (cycled like plotly.categoricalPalette)"
+        },
+        "textColor": { "$ref": "#/$defs/hexColor", "description": "Default text color" },
+        "fontFamily": {
+          "type": "integer",
+          "enum": [1, 2, 3, 4],
+          "description": "Excalidraw font: 1=Virgil (hand), 2=Helvetica, 3=Cascadia (mono), 4=custom"
+        },
+        "fontSize": { "type": "integer", "description": "Default text size in px" },
+        "strokeWidth": { "type": "integer", "description": "Default stroke width" },
+        "roughness": {
+          "type": "integer",
+          "enum": [0, 1, 2],
+          "description": "0=architect (clean), 1=artist (slight), 2=cartoonist (sketchy)"
+        },
+        "arrowColor": { "$ref": "#/$defs/hexColor", "description": "Default arrow/connector color" },
+        "labelFontSize": { "type": "integer", "description": "Font size for labels on arrows/connectors" }
+      },
+      "additionalProperties": false
+    },
     "website": {
       "type": "object",
       "description": "Website builder configuration — archetype, aesthetic, layout, texture, typography, motion, components, color application, pages, deployment",

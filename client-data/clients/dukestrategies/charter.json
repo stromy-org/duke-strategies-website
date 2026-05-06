@@ -200,5 +200,17 @@
     "margins": { "top": 80, "bottom": 70, "left": 60, "right": 50 },
     "gridColor": "#e5e7eb",
     "secondaryTextColor": "#DFDFE0"
+  },
+  "excalidraw": {
+    "strokeColor": "#807F83",
+    "backgroundColor": "#FFFFFF",
+    "fillColors": ["#FF7F66", "#807F83", "#DFDFE0", "#4CAF50", "#FFC107"],
+    "textColor": "#807F83",
+    "fontFamily": 2,
+    "fontSize": 16,
+    "strokeWidth": 2,
+    "roughness": 0,
+    "arrowColor": "#DFDFE0",
+    "labelFontSize": 14
   }
 }
