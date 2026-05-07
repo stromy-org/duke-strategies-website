@@ -21,6 +21,48 @@ This skill guides you through every routine maintenance task on the Duke Strateg
 corporate website. The site is an Astro 6 static site with Tailwind CSS 4 (via Vite
 plugin), MDX support, and a brand token pipeline driven by `src/brand/charter.json`.
 
+---
+
+## Maintenance Log (cross-session handoff)
+
+Every maintenance session must start by reading and end by updating
+`.build-history/MAINTENANCE_LOG.md`. This file captures decisions, preferences,
+and quirks that live outside the code and git history — essential for picking up
+work across sessions without re-asking settled questions.
+
+### First thing in ANY session
+
+1. Check whether `.build-history/MAINTENANCE_LOG.md` exists.
+2. **If it exists**: read it in full before touching anything. Note user
+   aesthetic preferences, locked site decisions, and discovered quirks. Start
+   from `Next action`. Do not re-propose approaches listed as off-limits.
+3. **If it does not exist** (first maintenance session, or inherited site):
+   - Create `.build-history/` if absent
+   - Copy the template from stromy-org's
+     `website-builder/references/maintenance-log-template.md`
+   - Fill the Status Dashboard from the current site state (and build log if
+     present in `.build-history/BUILD_LOG.md`)
+   - Save before doing any content or design work
+
+### When to update the log
+
+| Trigger | What to update |
+|---|---|
+| User confirms a visual preference | Append to User Aesthetic Preferences as `[likes]` |
+| Design approach rejected | Append to User Aesthetic Preferences as `[off-limits]` |
+| Non-obvious site quirk found | Append to Discovered Site Quirks |
+| Architecture or design decision made | Append to Site Decisions |
+| Deferred item resolved | Check it off in Deferred Items |
+| Ending a session | Refresh Status Dashboard + append Work Log entry |
+
+### Handoff quality bar
+
+Before ending a session: *"If a fresh agent read only `MAINTENANCE_LOG.md` and
+`SKILL.md`, could they resume this work without asking the user anything?"* If
+no, add what's missing before closing.
+
+---
+
 **Unlike typical Astro content sites, Duke's content is NOT in MDX collections.**
 Almost all editorial content — services, capabilities, founders, associates, partners,
 case studies, academy programs, testimonials, insights — lives in one TypeScript file:
