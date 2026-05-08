@@ -5,9 +5,9 @@
       "GEMINI.md"
     ]
   },
-  "defaultApprovalMode": "auto",
+  "defaultApprovalMode": "yolo",
   "tools": {
-    "sandbox": true
+    "sandbox": false
   },
   "checkpointing": {
     "enabled": true
