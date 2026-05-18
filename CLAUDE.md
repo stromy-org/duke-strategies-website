@@ -1,19 +1,25 @@
-# CLAUDE.md
+<!--
+  GENERATED FILE — DO NOT EDIT.
+  Source of truth: AGENTS.md (cross-vendor standard).
+  Override file:   .agent-overrides/claude.md (optional, appended below)
+  Regenerate with: scripts/render-agent-md.py
+-->
 
-This file provides guidance to Claude Code when working with this repository.
-Cross-repo standards live in `.claude/rules/` and load automatically.
+# AGENTS.md
+
+Self-contained instructions for Codex and other coding agents working on this
+repository. These instructions stand alone — do not reference external rule files.
 
 ## Project Overview
 
 duke-strategies-website is the **Duke Strategies corporate website** — a static site
-built with Astro 6, Tailwind CSS 4, and MDX support. Duke Strategies is a Netherlands-based
-strategic communications and public affairs consultancy operating at the intersection of
-corporate strategy, corporate affairs, and stakeholder advisory.
+built with Astro 6, Tailwind CSS 4, and MDX support. Duke Strategies is a
+Netherlands-based strategic communications and public affairs consultancy.
 
-**Production URL:** https://dukestrategies.com
-**Hosting:** GitHub Pages (via `.github/workflows/deploy.yml`)
-**Languages:** English (default) + Dutch — prefix-default routing (`/en/*`, `/nl/*`)
-**Brand archetype:** ruler / luxury
+- **Production URL:** https://dukestrategies.com
+- **Hosting:** GitHub Pages (workflow at `.github/workflows/deploy.yml`)
+- **Languages:** English (default) + Dutch — prefix-default routing (`/en/*`, `/nl/*`)
+- **Brand archetype:** ruler / luxury
 
 ## Repository Structure
 
@@ -21,18 +27,18 @@ corporate strategy, corporate affairs, and stakeholder advisory.
 duke-strategies-website/
 ├── src/
 │   ├── styles/
-│   │   ├── brand-tokens.css      ← GENERATED from charter.json — do not edit
-│   │   ├── tokens-semantic.css   ← Tier 2/3 semantic tokens (hand-written)
+│   │   ├── brand-tokens.css      ← GENERATED — do not edit
+│   │   ├── tokens-semantic.css   ← Hand-written semantic tokens
 │   │   └── global.css            ← Tailwind 4 import + base styles
 │   ├── lib/
-│   │   └── tokens.ts             ← GENERATED TS module — do not edit
+│   │   └── tokens.ts             ← GENERATED — do not edit
 │   ├── components/
-│   │   ├── layout/               ← Navigation, Footer
-│   │   ├── ui/                   ← Card primitives (ServiceCard, TeamCard, InsightCard, ProgramCard, Testimonial, CTABand, etc.)
-│   │   ├── sections/             ← (empty — sections currently live inline in pages)
-│   │   └── content/              ← (empty)
+│   │   ├── layout/               ← Navigation.astro, Footer.astro
+│   │   ├── ui/                   ← Card primitives and small UI components
+│   │   ├── sections/             ← (currently empty)
+│   │   └── content/              ← (currently empty)
 │   ├── content/                  ← MDX collections — SCAFFOLDED BUT UNUSED
-│   ├── content.config.ts         ← Declares insights/pages/authors schemas (collections empty)
+│   ├── content.config.ts         ← Schemas for insights/pages/authors (empty)
 │   ├── i18n/
 │   │   ├── pickLocale.ts         ← Localized<T> type + pickLocale() resolver
 │   │   ├── utils.ts              ← useTranslations(), getLocaleFromUrl(), localizedPath()
@@ -42,18 +48,12 @@ duke-strategies-website/
 │   │   └── brand-voice.md        ← Tone, register, few-shot anchors for NL translation
 │   ├── data/
 │   │   ├── company.ts            ← PRIMARY CONTENT SOURCE — uses Localized<string> for all text
-│   │   ├── site.ts               ← Site metadata, contact, office, analytics — Localized<string>
+│   │   ├── site.ts               ← Site metadata, contact, office — Localized<string>
 │   │   ├── nav.ts                ← Top nav items (labelKey: UIKey, not label: string)
 │   │   └── stats.ts              ← Homepage stat ribbon — Localized<string> labels
 │   ├── layouts/                  ← BaseLayout, PageLayout, ArticleLayout
 │   └── pages/
 │       ├── index.astro           ← Root redirect → /en/
-│       ├── who-we-are.astro      ← Redirect stub
-│       ├── what-we-do.astro      ← Redirect stub
-│       ├── duke-academy.astro    ← Redirect stub
-│       ├── insights.astro        ← Redirect stub
-│       ├── contact.astro         ← Redirect stub
-│       ├── services/             ← Redirect stubs for service detail pages
 │       ├── en/                   ← English pages (const lang = "en")
 │       │   ├── index.astro, who-we-are.astro, what-we-do.astro, ...
 │       │   └── services/[slug].astro
@@ -63,55 +63,68 @@ duke-strategies-website/
 ├── .i18n/
 │   └── translation-ledger.json   ← Translation cache (git-tracked, source hashes)
 ├── public/assets/
-│   ├── images/                   ← Runtime-served images (mirrors client-data/clients/dukestrategies/images/)
+│   ├── images/                   ← Runtime-served images
 │   ├── logos/                    ← Runtime-served logos
-│   ├── team/                     ← Team member photos (not part of brand sync)
+│   ├── team/                     ← Team member photos (not synced)
 │   └── video/                    ← Hero video
 ├── scripts/
 │   └── generate-tokens.ts        ← client-data charter.json → brand-tokens.css + tokens.ts
-├── astro.config.mjs              ← MDX + sitemap + @tailwindcss/vite
-├── .github/workflows/deploy.yml  ← GitHub Pages deploy on push to main
-└── .claude/skills/website-maintain/  ← Site-specific maintenance skill
+├── client-data/                   ← Brand data submodule (charter.json, logos, images)
+├── astro.config.mjs
+└── package.json
 ```
 
 ## Commands
 
 ```bash
-npm run dev           # Astro dev server (localhost:4321)
+npm run dev           # Dev server at http://localhost:4321
 npm run build         # Generate tokens + production build → dist/
-npm run preview       # Preview production build locally
+npm run preview       # Preview the built site locally
 npm run tokens        # Regenerate brand tokens from client-data charter.json
-npm run check         # Astro TypeScript + template diagnostics
+npm run check         # Astro TypeScript diagnostics
 ```
 
 ## Critical Architecture Notes
 
-### Editorial content lives in `src/data/company.ts` — NOT in MDX collections
+### Editorial content lives in `src/data/company.ts`
 
-Unlike typical Astro sites, Duke's editorial content is in one TypeScript file:
-`src/data/company.ts` exports typed arrays for `founders`, `expertPartners`,
-`associates`, `affiliates`, `services`, `capabilities`, `academyPrograms`,
-`caseStudies`, `testimonials`, and `insights`. Each page imports from this file
-and renders it via card components in `src/components/ui/`.
+Unlike typical Astro sites, Duke's editorial content is NOT in MDX collections.
+`src/data/company.ts` exports typed TypeScript arrays:
+
+- `founders` — Co-founders with full bios and contact emails
+- `expertPartners` — Senior external experts
+- `associates` — Core associate team
+- `affiliates` — Affiliate organizations
+- `services` — Service offerings (name, description, industries, deliverables)
+- `capabilities` — Capability tags with icons
+- `academyPrograms` — Duke Academy programs
+- `caseStudies` — Case studies with metrics
+- `testimonials` — Client testimonials
+- `insights` — Insight card entries (links to external or stub content)
+
+Each page imports from this file and renders via card components in
+`src/components/ui/`. To edit content, edit this file.
 
 The `src/content/` folders (blog, case-studies, capabilities, insights, authors,
-pages) are scaffolded but empty. `src/content.config.ts` only wires
-`insights`, `pages`, `authors` — and all three collections are empty. Do **not**
-add MDX files there expecting them to render on existing pages.
+pages) are scaffolded but empty. `src/content.config.ts` wires only `insights`,
+`pages`, `authors` — all three collections are currently empty. **Do not add MDX
+files there expecting them to render on existing pages.**
 
 ### Asset duplication: `client-data/` vs `public/assets/`
 
 Brand images and logos exist in two places:
-- `client-data/clients/dukestrategies/{images,logos}/` — committed slice from
-  the central `client-data` repo (source of truth, updated via `dispatch-client-data.sh`)
-- `public/assets/{images,logos}/` — what pages actually reference via runtime
-  `/assets/...` URLs
+- `client-data/clients/dukestrategies/{images,logos}/` — from the `client-data`
+  git submodule (source of truth)
+- `public/assets/{images,logos}/` — what pages reference via `/assets/...` URLs
 
-After a client-data dispatch update, the runtime copies must be updated with rsync
-(see the `website-maintain` skill's "Refresh Brand Tokens" workflow).
+After a submodule update, runtime copies must be updated:
 
-Team photos live **only** in `public/assets/team/` and are not part of the brand
-sync.
+```bash
+rsync -a --delete client-data/clients/dukestrategies/images/ public/assets/images/
+rsync -a --delete client-data/clients/dukestrategies/logos/  public/assets/logos/
+```
+
+Team photos live **only** in `public/assets/team/` — not part of brand sync.
 
 ### i18n Architecture
 
@@ -130,11 +143,11 @@ content directly.
   hash — prevents drift across re-runs.
 - **Rule:** edit EN → run translate workflow → NL updates. Never edit NL directly.
 
-### Tailwind 4 via Vite plugin (not PostCSS)
+### Tailwind 4 via Vite plugin
 
-`astro.config.mjs` uses `@tailwindcss/vite`. `src/styles/global.css` uses the
-Tailwind 4 `@import "tailwindcss"` syntax. Tailwind 3 configuration files
-(`tailwind.config.js`) do not apply here.
+`astro.config.mjs` uses `@tailwindcss/vite`, not PostCSS. `src/styles/global.css`
+uses the Tailwind 4 `@import "tailwindcss"` syntax. Tailwind 3 config files do not
+apply.
 
 ### Brand token pipeline
 
@@ -143,26 +156,21 @@ Tailwind 4 `@import "tailwindcss"` syntax. Tailwind 3 configuration files
    `src/styles/brand-tokens.css` and `src/lib/tokens.ts`
 3. `npm run build` runs `tokens` first, then `astro build`
 4. Components reference `var(--brand-primary)`, `var(--brand-font-heading)`, etc.
-5. **Never edit `brand-tokens.css` or `tokens.ts` directly** — regenerated on every build
+5. **Never edit `brand-tokens.css` or `tokens.ts` directly.**
 
-## Skill Workflow
+## Conventions
 
-Use the `website-maintain` skill for all routine maintenance on this site. It has
-site-specific task routing for services, capabilities, case studies, founders, team,
-affiliates, Duke Academy, testimonials, insights, stats, navigation, homepage hero,
-site info, SEO, brand refresh, media, visual audits, and deploys.
+- **Content edits** → `src/data/company.ts`, `src/data/site.ts`, `src/data/stats.ts`,
+  `src/data/nav.ts`
+- **Image references** → absolute paths like `/assets/images/<file>.jpg` (not
+  MDX-relative imports — this site doesn't use them)
+- **Card components** → one component per card type in `src/components/ui/`
+- **New sections** → extract into `src/components/sections/` (currently empty —
+  be the first)
+- **Colors and fonts** → always `var(--brand-*)` — never hardcode hex values
+- **Team photo filenames** → desaturated, `_grijs.jpg` suffix (Dutch for "grey")
 
-Global skills inherited from `~/.claude/skills/`:
-- `conventional-commit` — all commits go through this skill (see `.claude/rules/commit-enforcement.md`)
-- `skill-creator` — when creating or modifying skills
-
-## MCP Servers (recommended)
-
-- **`playwright`** — Visual QA, screenshot-based layout audits, responsive review.
-  Use via `npx playwright screenshot` commands documented in the `website-maintain`
-  skill's Visual Audit section.
-
-## Design System Quick Reference
+## Design System Reference
 
 | Token | Value | Use |
 |---|---|---|
@@ -177,24 +185,61 @@ Global skills inherited from `~/.claude/skills/`:
 
 Brand feel: premium, confident, editorial, architectural, bridge-metaphor-rich,
 high-contrast. Signal Orange is a single-accent rule — avoid using it as body text
-or small UI elements on light backgrounds (fails WCAG AA contrast).
+on light backgrounds (fails WCAG AA contrast).
 
-## Conventions
+## Commit Standards
 
-- **Editorial content** → `src/data/company.ts`, `src/data/site.ts`, `src/data/stats.ts`
-- **Images in content** → absolute paths like `/assets/images/<file>.jpg` (not
-  relative paths — this site doesn't use MDX image imports)
-- **Component cards** → `src/components/ui/` — one component per card type
-- **New sections** → start extracting into `src/components/sections/` (currently empty)
-- **No hardcoded colors / fonts** → always `var(--brand-*)`
-- **No direct `git commit`** → always through the `conventional-commit` skill
+This repo uses **Conventional Commits 1.0.0 with gitmoji**.
+
+Format: `<type>(<scope>): <emoji> <subject>`
+
+- **Type** (deterministic priority): `feat` > `fix` > `perf` > `refactor` >
+  `build`/`ci`/`chore` > `docs`/`test`/`style`
+- **Subject**: imperative mood, starts with uppercase, no trailing period,
+  ≤72 chars
+- **Body**: explain *why*, not *what*; wrap at 72 chars
+- **Footer**: include `Co-Authored-By: Codex <noreply@openai.com>` (or the
+  appropriate agent identity) for AI-assisted commits
+
+Common types and emoji:
+
+| Type | Emoji | When |
+|---|---|---|
+| feat | ✨ | New feature or page |
+| fix | 🐛 | Bug fix |
+| perf | ⚡ | Performance improvement |
+| refactor | ♻️ | Code restructure (no behaviour change) |
+| style | 💄 | Visual / CSS change |
+| docs | 📝 | Documentation |
+| build | 🏗️ | Build config / dependencies |
+| ci | 👷 | CI workflow changes |
+| chore | 🔧 | Maintenance, tooling |
+
+**Main branch protection:** never commit directly to `main`. Create a feature
+branch, commit there, then merge with `--no-ff`.
+
+## Build & Deploy
+
+Production deploys automatically on push to `main` via `.github/workflows/deploy.yml`:
+1. Checkout
+2. `npm ci`
+3. `npm run build`
+4. Upload `dist/` as GitHub Pages artifact
+5. Deploy to GitHub Pages environment
+
+Node version: 22. Custom domain `dukestrategies.com` configured in repo settings.
+
+Pre-deploy checklist:
+1. `npm run build` locally — no errors
+2. `npm run preview` — spot-check changed pages
+3. If brand refreshed, confirm `npm run tokens` ran
+4. If media changed, confirm both `client-data/` and `public/assets/` are in sync
+5. Verify `astro.config.mjs` `site:` still matches production domain
 
 ## Known Limitations / Tech Debt
 
-- `src/content/` collections are scaffolded but unused — consider removing or wiring
-  them up if the insights section needs long-form articles
-- Sections are currently inline inside page files rather than extracted components —
-  refactor is tracked in `BACKLOG.md`
+- `src/content/` collections scaffolded but unused
+- Sections inline in page files rather than extracted components
 - Asset duplication between `client-data/` and `public/assets/` requires manual rsync
-  after submodule updates — could be automated in `scripts/generate-tokens.ts` or a new script
+- Empty `src/components/sections/` and `src/components/content/` directories
 - Adding a third locale (FR, DE) — the i18n pipeline supports it but is not enabled

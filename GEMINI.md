@@ -1,16 +1,245 @@
-# GEMINI.md
+<!--
+  GENERATED FILE — DO NOT EDIT.
+  Source of truth: AGENTS.md (cross-vendor standard).
+  Override file:   .agent-overrides/gemini.md (optional, appended below)
+  Regenerate with: scripts/render-agent-md.py
+-->
 
-Gemini CLI loads this file alongside AGENTS.md (see `.gemini/settings.json` →
-`context.fileName`). AGENTS.md holds the canonical, self-contained instructions
-for any AI agent working in this repo. Read it first.
+# AGENTS.md
 
-This file is for **Gemini-specific addenda only** — config quirks, tool
-availability differences, or workflow notes that do not apply to Claude Code or
-Codex CLI. Keep it short. If a note applies to all agents, put it in AGENTS.md.
+Self-contained instructions for Codex and other coding agents working on this
+repository. These instructions stand alone — do not reference external rule files.
 
-## Discovery paths Gemini uses in this repo
+## Project Overview
 
-- Repo skills: `.agents/skills/` (Gemini reads it as a built-in alias — `.gemini/skills` is intentionally NOT created to avoid duplicate-skill warnings)
-- MCP servers: declared in `.gemini/settings.json` `mcpServers`
-  (generated from `.agents/mcp.json` — never hand-edit)
-- Custom slash commands: `.gemini/commands/` (TOML files; subdirs become namespaces)
+duke-strategies-website is the **Duke Strategies corporate website** — a static site
+built with Astro 6, Tailwind CSS 4, and MDX support. Duke Strategies is a
+Netherlands-based strategic communications and public affairs consultancy.
+
+- **Production URL:** https://dukestrategies.com
+- **Hosting:** GitHub Pages (workflow at `.github/workflows/deploy.yml`)
+- **Languages:** English (default) + Dutch — prefix-default routing (`/en/*`, `/nl/*`)
+- **Brand archetype:** ruler / luxury
+
+## Repository Structure
+
+```
+duke-strategies-website/
+├── src/
+│   ├── styles/
+│   │   ├── brand-tokens.css      ← GENERATED — do not edit
+│   │   ├── tokens-semantic.css   ← Hand-written semantic tokens
+│   │   └── global.css            ← Tailwind 4 import + base styles
+│   ├── lib/
+│   │   └── tokens.ts             ← GENERATED — do not edit
+│   ├── components/
+│   │   ├── layout/               ← Navigation.astro, Footer.astro
+│   │   ├── ui/                   ← Card primitives and small UI components
+│   │   ├── sections/             ← (currently empty)
+│   │   └── content/              ← (currently empty)
+│   ├── content/                  ← MDX collections — SCAFFOLDED BUT UNUSED
+│   ├── content.config.ts         ← Schemas for insights/pages/authors (empty)
+│   ├── i18n/
+│   │   ├── pickLocale.ts         ← Localized<T> type + pickLocale() resolver
+│   │   ├── utils.ts              ← useTranslations(), getLocaleFromUrl(), localizedPath()
+│   │   ├── ui.en.ts              ← English UI strings (source of truth)
+│   │   ├── ui.nl.ts              ← Dutch UI strings (derived via translation workflow)
+│   │   ├── glossary.md           ← Do-not-translate terms + preferred Dutch equivalents
+│   │   └── brand-voice.md        ← Tone, register, few-shot anchors for NL translation
+│   ├── data/
+│   │   ├── company.ts            ← PRIMARY CONTENT SOURCE — uses Localized<string> for all text
+│   │   ├── site.ts               ← Site metadata, contact, office — Localized<string>
+│   │   ├── nav.ts                ← Top nav items (labelKey: UIKey, not label: string)
+│   │   └── stats.ts              ← Homepage stat ribbon — Localized<string> labels
+│   ├── layouts/                  ← BaseLayout, PageLayout, ArticleLayout
+│   └── pages/
+│       ├── index.astro           ← Root redirect → /en/
+│       ├── en/                   ← English pages (const lang = "en")
+│       │   ├── index.astro, who-we-are.astro, what-we-do.astro, ...
+│       │   └── services/[slug].astro
+│       └── nl/                   ← Dutch pages (const lang = "nl")
+│           ├── index.astro, who-we-are.astro, what-we-do.astro, ...
+│           └── services/[slug].astro
+├── .i18n/
+│   └── translation-ledger.json   ← Translation cache (git-tracked, source hashes)
+├── public/assets/
+│   ├── images/                   ← Runtime-served images
+│   ├── logos/                    ← Runtime-served logos
+│   ├── team/                     ← Team member photos (not synced)
+│   └── video/                    ← Hero video
+├── scripts/
+│   └── generate-tokens.ts        ← client-data charter.json → brand-tokens.css + tokens.ts
+├── client-data/                   ← Brand data submodule (charter.json, logos, images)
+├── astro.config.mjs
+└── package.json
+```
+
+## Commands
+
+```bash
+npm run dev           # Dev server at http://localhost:4321
+npm run build         # Generate tokens + production build → dist/
+npm run preview       # Preview the built site locally
+npm run tokens        # Regenerate brand tokens from client-data charter.json
+npm run check         # Astro TypeScript diagnostics
+```
+
+## Critical Architecture Notes
+
+### Editorial content lives in `src/data/company.ts`
+
+Unlike typical Astro sites, Duke's editorial content is NOT in MDX collections.
+`src/data/company.ts` exports typed TypeScript arrays:
+
+- `founders` — Co-founders with full bios and contact emails
+- `expertPartners` — Senior external experts
+- `associates` — Core associate team
+- `affiliates` — Affiliate organizations
+- `services` — Service offerings (name, description, industries, deliverables)
+- `capabilities` — Capability tags with icons
+- `academyPrograms` — Duke Academy programs
+- `caseStudies` — Case studies with metrics
+- `testimonials` — Client testimonials
+- `insights` — Insight card entries (links to external or stub content)
+
+Each page imports from this file and renders via card components in
+`src/components/ui/`. To edit content, edit this file.
+
+The `src/content/` folders (blog, case-studies, capabilities, insights, authors,
+pages) are scaffolded but empty. `src/content.config.ts` wires only `insights`,
+`pages`, `authors` — all three collections are currently empty. **Do not add MDX
+files there expecting them to render on existing pages.**
+
+### Asset duplication: `client-data/` vs `public/assets/`
+
+Brand images and logos exist in two places:
+- `client-data/clients/dukestrategies/{images,logos}/` — from the `client-data`
+  git submodule (source of truth)
+- `public/assets/{images,logos}/` — what pages reference via `/assets/...` URLs
+
+After a submodule update, runtime copies must be updated:
+
+```bash
+rsync -a --delete client-data/clients/dukestrategies/images/ public/assets/images/
+rsync -a --delete client-data/clients/dukestrategies/logos/  public/assets/logos/
+```
+
+Team photos live **only** in `public/assets/team/` — not part of brand sync.
+
+### i18n Architecture
+
+EN is the source of truth. NL is derived via the translation workflow — never edit NL
+content directly.
+
+- **Routing:** Astro prefix-default (`/en/*`, `/nl/*`). Root paths redirect to `/en/`.
+- **UI strings:** `src/i18n/ui.en.ts` → `ui.nl.ts`. Pages call `useTranslations(lang)`
+  → `t('key')`. Nav uses `labelKey: UIKey` (not `label: string`).
+- **Data strings:** `src/data/company.ts`, `site.ts`, `stats.ts` use `Localized<string>`
+  (`{ en: T; nl?: T }`). Pages resolve via `pickLocale(field, lang)` before passing
+  plain strings to card components.
+- **Translation grounding:** `src/i18n/glossary.md` (do-not-translate terms, preferred
+  NL equivalents) + `src/i18n/brand-voice.md` (tone, register, few-shot anchors).
+- **Ledger:** `.i18n/translation-ledger.json` caches approved translations by EN source
+  hash — prevents drift across re-runs.
+- **Rule:** edit EN → run translate workflow → NL updates. Never edit NL directly.
+
+### Tailwind 4 via Vite plugin
+
+`astro.config.mjs` uses `@tailwindcss/vite`, not PostCSS. `src/styles/global.css`
+uses the Tailwind 4 `@import "tailwindcss"` syntax. Tailwind 3 config files do not
+apply.
+
+### Brand token pipeline
+
+1. `client-data/clients/dukestrategies/charter.json` is the source of truth (via submodule)
+2. `npm run tokens` → `scripts/generate-tokens.ts` reads charter.json → writes
+   `src/styles/brand-tokens.css` and `src/lib/tokens.ts`
+3. `npm run build` runs `tokens` first, then `astro build`
+4. Components reference `var(--brand-primary)`, `var(--brand-font-heading)`, etc.
+5. **Never edit `brand-tokens.css` or `tokens.ts` directly.**
+
+## Conventions
+
+- **Content edits** → `src/data/company.ts`, `src/data/site.ts`, `src/data/stats.ts`,
+  `src/data/nav.ts`
+- **Image references** → absolute paths like `/assets/images/<file>.jpg` (not
+  MDX-relative imports — this site doesn't use them)
+- **Card components** → one component per card type in `src/components/ui/`
+- **New sections** → extract into `src/components/sections/` (currently empty —
+  be the first)
+- **Colors and fonts** → always `var(--brand-*)` — never hardcode hex values
+- **Team photo filenames** → desaturated, `_grijs.jpg` suffix (Dutch for "grey")
+
+## Design System Reference
+
+| Token | Value | Use |
+|---|---|---|
+| `--brand-primary` | `#FF7F66` | Signal Orange — accents, CTAs (use sparingly) |
+| `--brand-secondary` | `#DFDFE0` | Light grey |
+| `--brand-background` | `#FFFFFF` | Page background |
+| `--brand-background-alt` | `#F5F5F5` | Alt section background |
+| `--brand-text` | `#807F83` | Body text |
+| `--brand-font-heading` | Montserrat 600 | Headings |
+| `--brand-font-body` | Montserrat | Body |
+| `--brand-font-mono` | Space Mono | Metrics, code |
+
+Brand feel: premium, confident, editorial, architectural, bridge-metaphor-rich,
+high-contrast. Signal Orange is a single-accent rule — avoid using it as body text
+on light backgrounds (fails WCAG AA contrast).
+
+## Commit Standards
+
+This repo uses **Conventional Commits 1.0.0 with gitmoji**.
+
+Format: `<type>(<scope>): <emoji> <subject>`
+
+- **Type** (deterministic priority): `feat` > `fix` > `perf` > `refactor` >
+  `build`/`ci`/`chore` > `docs`/`test`/`style`
+- **Subject**: imperative mood, starts with uppercase, no trailing period,
+  ≤72 chars
+- **Body**: explain *why*, not *what*; wrap at 72 chars
+- **Footer**: include `Co-Authored-By: Codex <noreply@openai.com>` (or the
+  appropriate agent identity) for AI-assisted commits
+
+Common types and emoji:
+
+| Type | Emoji | When |
+|---|---|---|
+| feat | ✨ | New feature or page |
+| fix | 🐛 | Bug fix |
+| perf | ⚡ | Performance improvement |
+| refactor | ♻️ | Code restructure (no behaviour change) |
+| style | 💄 | Visual / CSS change |
+| docs | 📝 | Documentation |
+| build | 🏗️ | Build config / dependencies |
+| ci | 👷 | CI workflow changes |
+| chore | 🔧 | Maintenance, tooling |
+
+**Main branch protection:** never commit directly to `main`. Create a feature
+branch, commit there, then merge with `--no-ff`.
+
+## Build & Deploy
+
+Production deploys automatically on push to `main` via `.github/workflows/deploy.yml`:
+1. Checkout
+2. `npm ci`
+3. `npm run build`
+4. Upload `dist/` as GitHub Pages artifact
+5. Deploy to GitHub Pages environment
+
+Node version: 22. Custom domain `dukestrategies.com` configured in repo settings.
+
+Pre-deploy checklist:
+1. `npm run build` locally — no errors
+2. `npm run preview` — spot-check changed pages
+3. If brand refreshed, confirm `npm run tokens` ran
+4. If media changed, confirm both `client-data/` and `public/assets/` are in sync
+5. Verify `astro.config.mjs` `site:` still matches production domain
+
+## Known Limitations / Tech Debt
+
+- `src/content/` collections scaffolded but unused
+- Sections inline in page files rather than extracted components
+- Asset duplication between `client-data/` and `public/assets/` requires manual rsync
+- Empty `src/components/sections/` and `src/components/content/` directories
+- Adding a third locale (FR, DE) — the i18n pipeline supports it but is not enabled

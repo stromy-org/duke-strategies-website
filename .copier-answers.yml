@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier; DO NOT edit manually.
+_commit: 1709439
+_src_path: gh:stromy-org/astro-website-template
+author_email: william.masquelier@stromy.com.au
+author_name: William Masquelier
+azure_region: westeurope
+azure_resource_group: rg-duke-strategies-website
+client_slug: dukestrategies
+default_locale: en
+deploy_target: azure-swa
+description: Duke Strategies corporate website
+github_owner: stromy-org
+github_repo: duke-strategies-website
+package_slug: duke-strategies-website
+setup_azure: false
+site_name: Duke Strategies
+site_url: https://stromy.nl
+token_prefix: brand
+tsx_runner: tsx
