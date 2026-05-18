@@ -21,7 +21,5 @@ web_search = "cached"
 model = "o4-mini"
 
 # ── MCP Servers ────────────────────────────────────────────
-# Generated from .agents/mcp.json by scripts/render-mcp-config.py.
-# Do not hand-edit the [mcp_servers.*] blocks below; edit .agents/mcp.json.
-# BEGIN:GENERATED-MCP
-# END:GENERATED-MCP
+# Declare [mcp_servers.*] entries here directly. Keep in sync with
+# .mcp.json / .gemini/settings.json / .agents/mcp.json by hand.
