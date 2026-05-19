@@ -23,3 +23,7 @@ model = "o4-mini"
 # ── MCP Servers ────────────────────────────────────────────
 # Declare [mcp_servers.*] entries here directly. Keep in sync with
 # .mcp.json / .gemini/settings.json / .agents/mcp.json by hand.
+
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = ["-y", "chrome-devtools-mcp@latest"]
