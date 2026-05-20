@@ -1,7 +1,7 @@
 <!--
   GENERATED FILE — DO NOT EDIT.
   Source of truth: AGENTS.md (cross-vendor standard).
-  Override file:   .agent-overrides/gemini.md (optional, appended below)
+  Override file:   .agent-overrides/copilot.md (optional, appended below)
   Regenerate with: scripts/render-agent-md.py
 -->
 
