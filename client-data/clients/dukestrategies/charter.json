@@ -5,12 +5,15 @@
     "tagline": "Bridging Strategy and Impact",
     "industry": "Public Affairs / Consulting",
     "archetype": "sage",
-    "domain": "dukestrategies.eu"
+    "domain": "dukestrategies.eu",
+    "protection_class": "protected",
+    "protected_assets": { "heading_font": true, "body_font": false, "primary_color": true, "accent_color": true, "motif_family": true }
   },
   "colors": {
     "primary": "#FF7F66",
     "secondary": "#DFDFE0",
-    "accent": "#FF7F66",
+    "accent": "#F47E6C",
+    "accentHover": "#EE5536",
     "background": "#FFFFFF",
     "backgroundAlt": "#F5F5F5",
     "text": "#807F83",
@@ -37,11 +40,17 @@
     }
   },
   "logo": {
-    "primary": "logos/logo.png",
+    "primary": "logos/logo.svg",
+    "grey": "logos/logo_grey.svg",
     "white": "logos/logo_white.png",
     "maxWidth": "120pt",
     "maxHeight": "50pt",
     "sizing": "contain"
+  },
+  "favicons": {
+    "32": "logos/favicon-32.png",
+    "192": "logos/favicon-192.png",
+    "appleTouch180": "logos/apple-touch-icon-180.png"
   },
   "images": {
     "catalog": [
@@ -115,7 +124,7 @@
     "typography": {
       "headingStyle": "tight-sans",
       "headingScale": 1.2,
-      "bodyLineHeight": 1.6,
+      "bodyLineHeight": 1.7,
       "letterSpacing": "wide",
       "textTransform": "uppercase-headings",
       "pullQuoteStyle": "bordered-left",
@@ -170,7 +179,7 @@
     },
     "deployment": {
       "platform": "github-pages",
-      "domain": "dukestrategies.com",
+      "domain": "dukestrategies.eu",
       "analytics": "plausible",
       "contactForm": "none"
     },
