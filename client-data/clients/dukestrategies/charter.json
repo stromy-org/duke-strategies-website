@@ -20,9 +20,9 @@
     "textLight": "#807F83",
     "success": "#5B9A6B",
     "warning": "#D4A544",
-    "error": "#C4544A",
-    "_roles": "primary = structural dark (headings, table headers, overlays, dark sections); accent = coral brand signature, used sparingly (CTAs, accent lines, motif, chart highlights). Coral must never be a large background fill or full-image wash — see guidelines.md Color System."
+    "error": "#C4544A"
   },
+  "_colorRoles": "colors must hold hex values only (website token generator emits every key as a CSS custom property). Roles: primary = structural dark (headings, table headers, overlays, dark sections); accent = coral brand signature, used sparingly (CTAs, accent lines, motif, chart highlights). Coral must never be a large background fill or full-image wash — see guidelines.md Color System.",
   "fonts": {
     "heading": {
       "family": "Montserrat",

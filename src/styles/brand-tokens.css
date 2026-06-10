@@ -1,15 +1,16 @@
 /* Auto-generated from charter.json — do not edit manually */
 :root {
-  --brand-primary: #FF7F66;
-  --brand-secondary: #DFDFE0;
+  --brand-primary: #222222;
+  --brand-secondary: #5A595C;
   --brand-accent: #FF7F66;
+  --brand-accent-hover: #E86B54;
   --brand-background: #FFFFFF;
   --brand-background-alt: #F5F5F5;
-  --brand-text: #807F83;
-  --brand-text-light: #DFDFE0;
-  --brand-success: #4CAF50;
-  --brand-warning: #FFC107;
-  --brand-error: #DC3545;
+  --brand-text: #3A393C;
+  --brand-text-light: #807F83;
+  --brand-success: #5B9A6B;
+  --brand-warning: #D4A544;
+  --brand-error: #C4544A;
   --brand-font-heading: 'Montserrat', Arial, Helvetica, sans-serif;
   --brand-font-heading-weight: 600;
   --brand-font-body: 'Montserrat', Arial, Helvetica, sans-serif;
