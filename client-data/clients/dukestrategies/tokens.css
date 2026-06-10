@@ -2,10 +2,11 @@
    Duke Strategies Design Tokens
    Strategic communications. Reimagined.
 
-   Version:  1.0.0
-   Date:     2026-03-29
+   Version:  1.1.0
+   Date:     2026-06-10
    Brand:    Duke Strategies
-   Primary:  Coral (#FF7F66)
+   Primary:  Dark (#222222) — structural color
+   Accent:   Coral (#FF7F66) — brand signature, used sparingly
 
    Usage: Import this file at the root of any project.
    All values derive from the Duke Strategies brand charter.
@@ -18,26 +19,27 @@
 :root {
 
   /* -- Primary Palette ---------------------------------------- */
+  /* primary = structural dark; accent = coral signature (charter v1.1) */
   --brand-dark:          #222222;
-  --brand-primary:       #FF7F66;
-  --brand-accent:        #F47E6C;
-  --brand-accent-hover:  #EE5536;
-  --brand-text:          #807F83;
-  --brand-text-light:    #DFDFE0;
-  --brand-secondary:     #DFDFE0;
+  --brand-primary:       #222222;
+  --brand-accent:        #FF7F66;
+  --brand-accent-hover:  #E86B54;
+  --brand-text:          #3A393C;
+  --brand-text-light:    #807F83;
+  --brand-secondary:     #5A595C;
   --brand-background:    #FFFFFF;
   --brand-background-alt:#F5F5F5;
 
   /* -- Coral Scale -------------------------------------------- */
   --coral-50:            #FFF5F3;
-  --coral-100:           #FFE8E4;
-  --coral-200:           #FFD1C9;
-  --coral-300:           #FFB0A3;
-  --coral-400:           #FF7F66;       /* = --brand-primary */
-  --coral-500:           #F06B52;
-  --coral-600:           #D9543C;
-  --coral-700:           #B84030;
-  --coral-800:           #963328;
+  --coral-100:           #FFE8E3;
+  --coral-200:           #FFD0C7;
+  --coral-300:           #FFB3A5;
+  --coral-400:           #FF7F66;       /* = --brand-accent */
+  --coral-500:           #E86B54;
+  --coral-600:           #D15A45;
+  --coral-700:           #B04837;
+  --coral-800:           #8F3A2D;
   --coral-900:           #7A2A22;
 
   /* -- Brand Color Scale (aliases) ---------------------------- */
@@ -46,7 +48,7 @@
   --brand-700:           var(--coral-700);
   --brand-600:           var(--coral-600);
   --brand-500:           var(--coral-500);
-  --brand-400:           var(--coral-400);   /* = --brand-primary */
+  --brand-400:           var(--coral-400);   /* = --brand-accent */
   --brand-300:           var(--coral-300);
   --brand-200:           var(--coral-200);
   --brand-100:           var(--coral-100);
@@ -162,7 +164,7 @@
 
   /* -- Brand Motif -------------------------------------------- */
   /* Bridge pillar / geometric column — straight coral lines */
-  --motif-line-color:         var(--brand-primary);
+  --motif-line-color:         var(--brand-accent);
   --motif-line-color-light:   var(--coral-200);
   --motif-line-color-dark:    var(--coral-700);
   --motif-line-weight:        2px;
@@ -310,7 +312,7 @@
   line-height: var(--leading-overline);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--brand-primary);
+  color: var(--brand-accent);
 }
 
 .text-micro {
@@ -353,14 +355,14 @@
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--brand-primary);
+  outline: 2px solid var(--brand-accent);
   outline-offset: 2px;
 }
 
 .btn-primary {
-  background-color: var(--brand-primary);
+  background-color: var(--brand-accent);
   color: var(--neutral-white);
-  border-color: var(--brand-primary);
+  border-color: var(--brand-accent);
 }
 
 .btn-primary:hover {
@@ -375,8 +377,8 @@
 
 .btn-secondary {
   background-color: transparent;
-  color: var(--brand-primary);
-  border-color: var(--brand-primary);
+  color: var(--brand-accent);
+  border-color: var(--brand-accent);
 }
 
 .btn-secondary:hover {
@@ -565,7 +567,7 @@
 .motif-accent-bar {
   height: var(--motif-pillar-width);
   width: 48px;
-  background-color: var(--brand-primary);
+  background-color: var(--brand-accent);
   border-radius: 2px;
 }
 
@@ -635,17 +637,17 @@
    UTILITY CLASSES — Miscellaneous
    ============================================================ */
 
-.text-brand    { color: var(--brand-primary); }
+.text-brand    { color: var(--brand-accent); }
 .text-dark     { color: var(--brand-dark); }
 .text-muted    { color: var(--brand-text); }
 .text-light    { color: var(--brand-text-light); }
-.bg-brand      { background-color: var(--brand-primary); }
+.bg-brand      { background-color: var(--brand-accent); }
 .bg-brand-soft { background-color: var(--coral-50); }
 .bg-alt        { background-color: var(--brand-background-alt); }
-.border-brand  { border-color: var(--brand-primary); }
+.border-brand  { border-color: var(--brand-accent); }
 
 /* Focus ring utility */
 .focus-ring:focus-visible {
-  outline: 2px solid var(--brand-primary);
+  outline: 2px solid var(--brand-accent);
   outline-offset: 2px;
 }

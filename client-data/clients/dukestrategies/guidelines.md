@@ -1,7 +1,9 @@
 # Duke Strategies Brand Guidelines
 
-**Version 1.0 | March 2026**
+**Version 1.1 | June 2026**
 **Duke Strategy & Corporate Affairs B.V.**
+
+> **v1.1 (June 2026):** photography overlay changed from 55% coral to 50% dark (`#222222`); coral repositioned strictly as the accent signature. Document/deck color roles clarified: dark carries structure (headings, table headers, overlays), coral carries emphasis. Body text darkened to Neutral 800 for print/document legibility.
 
 ---
 
@@ -108,12 +110,16 @@ Maintain a minimum clear space of **0.5x the logo height** on all sides. No text
 
 | Role | Hex | RGB | Usage |
 |------|-----|-----|-------|
-| **Dark** | `#222222` | 34, 34, 34 | Hero backgrounds, dark sections, primary headings on light |
-| **Brand / Coral** | `#FF7F66` | 255, 127, 102 | Accent color, CTAs, highlights, brand moments |
-| **Text** | `#807F83` | 128, 127, 131 | Body text, secondary headings on light backgrounds |
-| **Secondary** | `#DFDFE0` | 223, 223, 224 | Borders, dividers, subtle backgrounds |
+| **Dark (primary)** | `#222222` | 34, 34, 34 | THE structural color: headings, table headers, hero backgrounds, dark sections, photo overlays |
+| **Brand / Coral (accent)** | `#FF7F66` | 255, 127, 102 | The brand signature, used sparingly: CTAs, accent lines, motif, highlights, chart emphasis |
+| **Text** | `#3A393C` | 58, 57, 60 | Body text in documents and decks (Neutral 800) |
+| **Text Light** | `#807F83` | 128, 127, 131 | Captions, secondary text, metadata (Neutral 600) |
+| **Secondary** | `#5A595C` | 90, 89, 92 | Emphasized mid-tone, tertiary accents (Neutral 700) |
+| **Borders** | `#DFDFE0` | 223, 223, 224 | Borders, dividers, subtle backgrounds (Neutral 300) |
 | **Background** | `#FFFFFF` | 255, 255, 255 | Page background, content areas |
 | **Background Alt** | `#F5F5F5` | 245, 245, 245 | Alternating sections, cards, sidebars |
+
+In documents and presentations, the dark (`#222222`) does the structural work — coral never carries headings, table headers, or full-bleed fills. Coral on white fails WCAG contrast for text; it is a graphic accent, not a text color.
 
 ### Coral Scale
 
@@ -140,9 +146,9 @@ Maintain a minimum clear space of **0.5x the logo height** on all sides. No text
 | Neutral 300 | `#DFDFE0` | Dividers, secondary borders |
 | Neutral 400 | `#B0B0B2` | Disabled text, placeholders |
 | Neutral 500 | `#9A999C` | Caption text |
-| Neutral 600 | `#807F83` | **Body text** |
-| Neutral 700 | `#5A595C` | Emphasized body text |
-| Neutral 800 | `#3A393C` | Subheadings |
+| Neutral 600 | `#807F83` | Captions, secondary text |
+| Neutral 700 | `#5A595C` | Emphasized mid-tone, tertiary accents |
+| Neutral 800 | `#3A393C` | **Body text** (documents/decks), subheadings |
 | Neutral 900 | `#222222` | **Headings, dark backgrounds** |
 
 ### Semantic Colors
@@ -154,18 +160,23 @@ Maintain a minimum clear space of **0.5x the logo height** on all sides. No text
 | **Error** | `#C4544A` | Error states, critical alerts |
 | **Info** | `#6B8FA5` | Informational callouts, neutral status |
 
+### Chart Palette
+
+Categorical data series, in order: Coral `#FF7F66`, Dark `#222222`, Coral 700 `#B04837`, Neutral 600 `#807F83`, Success `#5B9A6B`, Warning `#D4A544`. Bars and lines default to Dark; coral marks the emphasized series or data points.
+
 ### Color Do's and Don'ts
 
 **Do:**
 - Use coral (`#FF7F66`) sparingly as an accent -- it is the brand signature
 - Pair dark (`#222222`) backgrounds with white or coral text
 - Use the neutral scale for text hierarchy
-- Apply the 55% opacity coral overlay on all brand photography
+- Apply the 50% opacity dark (`#222222`) overlay on brand photography; let coral appear on imagery only as thin accent elements (motif bar, rule lines)
 
 **Don't:**
-- Use coral as a large background fill (reserve for accents and CTAs)
+- Use coral as a large background fill or full-image wash (reserve for accents and CTAs)
+- Set headings, table headers, or body text in coral -- structure is dark, coral is emphasis
 - Mix semantic colors with brand coral in the same visual element
-- Use text color (`#807F83`) on dark backgrounds -- switch to white
+- Use caption grey (`#807F83`) on dark backgrounds -- switch to white
 - Introduce off-palette colors without brand team approval
 
 ---
@@ -271,7 +282,8 @@ All brand photography uses **black-and-white bridge imagery** exclusively. This 
 |-----------|--------------|
 | **Subject matter** | Dutch bridges, infrastructure, architecture |
 | **Color treatment** | Black-and-white (desaturated) |
-| **Overlay** | 55% opacity coral (`#FF7F66`) applied over images |
+| **Overlay** | Dark (`#222222`) at ~50% opacity, tuned per image for text legibility (darker photos need less, lighter photos need more -- see `images/manifest.json` per-image `overlayPolicy`) |
+| **Coral on imagery** | Thin accent elements only: motif bar, rule lines, small graphic marks. Never a full-image wash |
 | **Logo on images** | White variant only |
 | **Mood** | Moody, high-contrast, geometric |
 | **Keywords** | Bridges, infrastructure, geometric, moody, high-contrast |
@@ -280,14 +292,15 @@ All brand photography uses **black-and-white bridge imagery** exclusively. This 
 
 **Do:**
 - Source bridge and infrastructure photography with strong geometric lines
-- Convert all photography to black-and-white before applying the coral overlay
+- Convert all photography to black-and-white before applying the dark overlay
 - Use the white logo variant on all overlaid images
-- Maintain the 55% coral opacity consistently across all materials
+- Tune overlay opacity per image so white text stays legible (WCAG-large minimum)
+- Pair overlaid imagery with a coral motif element to keep the brand signature present
 
 **Don't:**
-- Use colour photography in brand materials
+- Use colour photography in brand materials (colour originals stay in the library as `reserve` -- never given layout roles)
 - Use stock photography of people, offices, or generic business imagery
-- Apply the coral overlay at anything other than 55% opacity
+- Apply a coral wash over photography -- the overlay is dark; coral is an accent, not a tint
 - Use the primary (coral) or grey logo on image overlays -- white only
 - Crop bridge imagery to remove architectural context
 
@@ -340,7 +353,7 @@ The Duke Strategies brand motif is derived from bridge pillar and geometric colu
 
 | Category | Description |
 |----------|-------------|
-| **Title slides** | Hero layouts with bridge photography and coral overlay |
+| **Title slides** | Hero layouts with bridge photography, dark overlay, and coral motif accent |
 | **Content slides** | Text-heavy layouts with heading hierarchy |
 | **Data slides** | Charts, tables, and metric displays |
 | **Image slides** | Full-bleed photography with text overlay |
@@ -383,4 +396,4 @@ For brand-related enquiries, template requests, or usage approvals:
 
 ---
 
-*Duke Strategies Brand Guidelines v1.0 -- Duke Strategy & Corporate Affairs B.V. -- 2026*
+*Duke Strategies Brand Guidelines v1.1 -- Duke Strategy & Corporate Affairs B.V. -- 2026*

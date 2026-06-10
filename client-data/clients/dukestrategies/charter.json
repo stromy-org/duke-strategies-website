@@ -10,17 +10,18 @@
     "protected_assets": { "heading_font": true, "body_font": false, "primary_color": true, "accent_color": true, "motif_family": true }
   },
   "colors": {
-    "primary": "#FF7F66",
-    "secondary": "#DFDFE0",
-    "accent": "#F47E6C",
-    "accentHover": "#EE5536",
+    "primary": "#222222",
+    "secondary": "#5A595C",
+    "accent": "#FF7F66",
+    "accentHover": "#E86B54",
     "background": "#FFFFFF",
     "backgroundAlt": "#F5F5F5",
-    "text": "#807F83",
-    "textLight": "#DFDFE0",
-    "success": "#4CAF50",
-    "warning": "#FFC107",
-    "error": "#DC3545"
+    "text": "#3A393C",
+    "textLight": "#807F83",
+    "success": "#5B9A6B",
+    "warning": "#D4A544",
+    "error": "#C4544A",
+    "_roles": "primary = structural dark (headings, table headers, overlays, dark sections); accent = coral brand signature, used sparingly (CTAs, accent lines, motif, chart highlights). Coral must never be a large background fill or full-image wash — see guidelines.md Color System."
   },
   "fonts": {
     "heading": {
@@ -73,13 +74,39 @@
         "file": "images/shutterstock_1510566293_RoyalWelshbrug_zwart_1920x1280px_dark.jpg",
         "description": "Royal Welsh Bridge — dark moody bridge photography",
         "roles": ["cover", "closing"]
+      },
+      {
+        "file": "images/erasmus-bridge-rotterdam-grayscale.jpg",
+        "description": "Erasmus Bridge at night — near-monochrome skyline, illuminated cables",
+        "roles": ["cover", "closing"]
+      },
+      {
+        "file": "images/cable-bridge-grayscale-dramatic.jpg",
+        "description": "Cable-stayed bridge — dramatic grayscale, low vantage point",
+        "roles": ["cover", "divider"]
+      },
+      {
+        "file": "images/modern-bridge-bw-dramatic.jpg",
+        "description": "Modern bridge — dramatic black and white, strong diagonals",
+        "roles": ["cover", "divider"]
+      },
+      {
+        "file": "images/bridge-fog-water-minimalist.jpg",
+        "description": "Bridge in fog over calm water — minimalist, contemplative",
+        "roles": ["divider", "closing"]
+      },
+      {
+        "file": "images/modern-cable-bridge-calm-water.jpg",
+        "description": "Modern cable bridge over calm water — light, airy geometry",
+        "roles": ["divider", "background"]
       }
     ],
     "overlay": {
       "color": "primary",
-      "opacity": 0.55
+      "opacity": 0.5
     },
-    "logoVariantOnImage": "white"
+    "logoVariantOnImage": "white",
+    "_note": "Overlay is the structural dark (#222222), not coral — coral appears on imagery only as thin accent elements (motif bar, rule lines). See images/manifest.json for per-image overlayPolicy and text-safe zones; prefer it over this global default."
   },
   "document": {
     "margins": { "top": "1in", "bottom": "1in", "left": "1in", "right": "1in" },
@@ -197,29 +224,57 @@
   },
   "formatting": {
     "headingThreshold": 24,
-    "accentCycleColors": ["accent", "secondary", "primary"],
+    "accentCycleColors": ["accent", "primary", "secondary"],
     "autoContrastText": true
   },
   "plotly": {
-    "categoricalPalette": ["#FF7F66", "#DFDFE0", "#807F83", "#4CAF50", "#FFC107"],
+    "categoricalPalette": ["#FF7F66", "#222222", "#B04837", "#807F83", "#5B9A6B", "#D4A544"],
     "defaultHeight": 500,
     "titleFontSize": 18,
     "axisFontSize": 12,
     "legendFontSize": 11,
     "margins": { "top": 80, "bottom": 70, "left": 60, "right": 50 },
-    "gridColor": "#e5e7eb",
-    "secondaryTextColor": "#DFDFE0"
+    "baseTemplate": "plotly_white",
+    "gridColor": "#EBEBEB",
+    "secondaryTextColor": "#807F83",
+    "bar": {
+      "markerColor": "#222222",
+      "markerLineColor": "#161616",
+      "markerLineWidth": 1
+    },
+    "line": {
+      "color": "#222222",
+      "width": 2.5,
+      "markerColor": "#FF7F66",
+      "markerSize": 7
+    },
+    "scatter": {
+      "markerColor": "#222222",
+      "markerSize": 8,
+      "markerLineWidth": 0
+    },
+    "pie": {
+      "hole": 0.4,
+      "textfontSize": 13,
+      "markerLineColor": "#FFFFFF",
+      "markerLineWidth": 2
+    },
+    "sentiment": {
+      "positiveColor": "#5B9A6B",
+      "neutralColor": "#9A999C",
+      "negativeColor": "#C4544A"
+    }
   },
   "excalidraw": {
-    "strokeColor": "#807F83",
+    "strokeColor": "#222222",
     "backgroundColor": "#FFFFFF",
-    "fillColors": ["#FF7F66", "#807F83", "#DFDFE0", "#4CAF50", "#FFC107"],
-    "textColor": "#807F83",
+    "fillColors": ["#FF7F66", "#222222", "#807F83", "#5B9A6B", "#D4A544"],
+    "textColor": "#3A393C",
     "fontFamily": 2,
     "fontSize": 16,
     "strokeWidth": 2,
     "roughness": 0,
-    "arrowColor": "#DFDFE0",
+    "arrowColor": "#807F83",
     "labelFontSize": 14
   }
 }

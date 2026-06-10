@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-10T08:48:25Z",
+  "scope": "Full image library — 20 bridge images (13 on-canon B&W with roles, 7 colour originals reserved) with slide crops",
+  "overlayContract": "overlayPolicy dark-NN = #222222 at NN% opacity over the image (charter v1.1 — overlays are structural dark, never coral). Tuned per image from measured luminance.",
+  "library": [
+    {
+      "id": "erasmusbrug-zwart",
+      "source": "images/Erasmusbrug_zwart.jpg",
+      "theme": "bridges-night",
+      "roles": [
+        "cover",
+        "divider"
+      ],
+      "hero": true,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-32",
+      "textSafeZone": "lower-third",
+      "altText": "Erasmus Bridge, Rotterdam — dramatic black and white night view",
+      "printSafe": true,
+      "dimensions": {
+        "width": 1920,
+        "height": 1280
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/Erasmusbrug_zwart-16x9.jpg",
+        "hero-2x1": "images/slides/Erasmusbrug_zwart-2x1.jpg",
+        "square-1x1": "images/slides/Erasmusbrug_zwart-1x1.jpg"
+      }
+    },
+    {
+      "id": "shutterstock-1510566293-royalwelshbrug-zwart-1920x1280px-dark",
+      "source": "images/shutterstock_1510566293_RoyalWelshbrug_zwart_1920x1280px_dark.jpg",
+      "theme": "bridges-night",
+      "roles": [
+        "cover",
+        "closing"
+      ],
+      "hero": true,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-32",
+      "textSafeZone": "lower-third",
+      "altText": "Royal Welsh Bridge — dark moody bridge photography",
+      "printSafe": true,
+      "dimensions": {
+        "width": 1920,
+        "height": 1280
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/shutterstock_1510566293_RoyalWelshbrug_zwart_1920x1280px_dark-16x9.jpg",
+        "hero-2x1": "images/slides/shutterstock_1510566293_RoyalWelshbrug_zwart_1920x1280px_dark-2x1.jpg",
+        "square-1x1": "images/slides/shutterstock_1510566293_RoyalWelshbrug_zwart_1920x1280px_dark-1x1.jpg"
+      }
+    },
+    {
+      "id": "erasmus-bridge-rotterdam-grayscale",
+      "source": "images/erasmus-bridge-rotterdam-grayscale.jpg",
+      "theme": "bridges-night",
+      "roles": [
+        "cover",
+        "closing"
+      ],
+      "hero": true,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-32",
+      "textSafeZone": "center-safe",
+      "altText": "Erasmus Bridge at night — near-monochrome skyline, illuminated cables",
+      "printSafe": true,
+      "dimensions": {
+        "width": 5184,
+        "height": 3888
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/erasmus-bridge-rotterdam-grayscale-16x9.jpg",
+        "hero-2x1": "images/slides/erasmus-bridge-rotterdam-grayscale-2x1.jpg",
+        "square-1x1": "images/slides/erasmus-bridge-rotterdam-grayscale-1x1.jpg"
+      }
+    },
+    {
+      "id": "cable-bridge-grayscale-dramatic",
+      "source": "images/cable-bridge-grayscale-dramatic.jpg",
+      "theme": "bridges-dramatic",
+      "roles": [
+        "cover",
+        "divider"
+      ],
+      "hero": true,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-40",
+      "textSafeZone": "lower-third",
+      "altText": "Cable-stayed bridge — dramatic grayscale, low vantage point",
+      "printSafe": true,
+      "dimensions": {
+        "width": 5629,
+        "height": 3745
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/cable-bridge-grayscale-dramatic-16x9.jpg",
+        "hero-2x1": "images/slides/cable-bridge-grayscale-dramatic-2x1.jpg",
+        "square-1x1": "images/slides/cable-bridge-grayscale-dramatic-1x1.jpg"
+      }
+    },
+    {
+      "id": "modern-bridge-bw-dramatic",
+      "source": "images/modern-bridge-bw-dramatic.jpg",
+      "theme": "bridges-dramatic",
+      "roles": [
+        "cover",
+        "divider"
+      ],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-40",
+      "textSafeZone": "lower-third",
+      "altText": "Modern bridge — dramatic black and white, strong diagonals",
+      "printSafe": true,
+      "dimensions": {
+        "width": 6240,
+        "height": 4160
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/modern-bridge-bw-dramatic-16x9.jpg",
+        "hero-2x1": "images/slides/modern-bridge-bw-dramatic-2x1.jpg",
+        "square-1x1": "images/slides/modern-bridge-bw-dramatic-1x1.jpg"
+      }
+    },
+    {
+      "id": "nesciobrug",
+      "source": "images/Nesciobrug.jpg",
+      "theme": "bridges-minimal",
+      "roles": [
+        "divider",
+        "closing"
+      ],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-40",
+      "textSafeZone": "lower-third",
+      "altText": "Nesciobrug, Amsterdam — moody pedestrian/cyclist bridge",
+      "printSafe": true,
+      "dimensions": {
+        "width": 1920,
+        "height": 1280
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/Nesciobrug-16x9.jpg",
+        "hero-2x1": "images/slides/Nesciobrug-2x1.jpg",
+        "square-1x1": "images/slides/Nesciobrug-1x1.jpg"
+      }
+    },
+    {
+      "id": "bridge-fog-water-minimalist",
+      "source": "images/bridge-fog-water-minimalist.jpg",
+      "theme": "bridges-minimal",
+      "roles": [
+        "divider",
+        "closing"
+      ],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Bridge in fog over calm water — minimalist, contemplative",
+      "printSafe": true,
+      "dimensions": {
+        "width": 4160,
+        "height": 5200
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/bridge-fog-water-minimalist-16x9.jpg",
+        "hero-2x1": "images/slides/bridge-fog-water-minimalist-2x1.jpg",
+        "square-1x1": "images/slides/bridge-fog-water-minimalist-1x1.jpg"
+      }
+    },
+    {
+      "id": "modern-cable-bridge-calm-water",
+      "source": "images/modern-cable-bridge-calm-water.jpg",
+      "theme": "bridges-minimal",
+      "roles": [
+        "divider",
+        "background"
+      ],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-60",
+      "textSafeZone": "lower-third",
+      "altText": "Modern cable bridge over calm water — light, airy geometry",
+      "printSafe": true,
+      "dimensions": {
+        "width": 7284,
+        "height": 4995
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/modern-cable-bridge-calm-water-16x9.jpg",
+        "hero-2x1": "images/slides/modern-cable-bridge-calm-water-2x1.jpg",
+        "square-1x1": "images/slides/modern-cable-bridge-calm-water-1x1.jpg"
+      }
+    },
+    {
+      "id": "pythonbrug-amsterdam-contrast",
+      "source": "images/Pythonbrug_Amsterdam_contrast.jpg",
+      "theme": "bridges-structural",
+      "roles": [
+        "divider"
+      ],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-40",
+      "textSafeZone": "lower-third",
+      "altText": "Python Bridge, Amsterdam — high-contrast architectural shot",
+      "printSafe": true,
+      "dimensions": {
+        "width": 1440,
+        "height": 1080
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/Pythonbrug_Amsterdam_contrast-16x9.jpg",
+        "hero-2x1": "images/slides/Pythonbrug_Amsterdam_contrast-2x1.jpg",
+        "square-1x1": "images/slides/Pythonbrug_Amsterdam_contrast-1x1.jpg"
+      }
+    },
+    {
+      "id": "bridge-architecture-bw-lines",
+      "source": "images/bridge-architecture-bw-lines.jpg",
+      "theme": "bridges-structural",
+      "roles": [
+        "divider",
+        "background"
+      ],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Bridge architecture — black and white rhythmic lines",
+      "printSafe": true,
+      "dimensions": {
+        "width": 3072,
+        "height": 2048
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/bridge-architecture-bw-lines-16x9.jpg",
+        "hero-2x1": "images/slides/bridge-architecture-bw-lines-2x1.jpg",
+        "square-1x1": "images/slides/bridge-architecture-bw-lines-1x1.jpg"
+      }
+    },
+    {
+      "id": "brooklyn-bridge-bw",
+      "source": "images/brooklyn-bridge-bw.jpg",
+      "theme": "bridges-structural",
+      "roles": [
+        "divider"
+      ],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Brooklyn Bridge — black and white cable geometry",
+      "printSafe": true,
+      "dimensions": {
+        "width": 7772,
+        "height": 4372
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/brooklyn-bridge-bw-16x9.jpg",
+        "hero-2x1": "images/slides/brooklyn-bridge-bw-2x1.jpg",
+        "square-1x1": "images/slides/brooklyn-bridge-bw-1x1.jpg"
+      }
+    },
+    {
+      "id": "cable-bridge-geometric-perspective",
+      "source": "images/cable-bridge-geometric-perspective.jpg",
+      "theme": "bridges-structural",
+      "roles": [
+        "divider",
+        "background"
+      ],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-60",
+      "textSafeZone": "lower-third",
+      "altText": "Cable bridge — bright geometric perspective from deck level",
+      "printSafe": true,
+      "dimensions": {
+        "width": 3008,
+        "height": 4016
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/cable-bridge-geometric-perspective-16x9.jpg",
+        "hero-2x1": "images/slides/cable-bridge-geometric-perspective-2x1.jpg",
+        "square-1x1": "images/slides/cable-bridge-geometric-perspective-1x1.jpg"
+      }
+    },
+    {
+      "id": "pedestrian-bridge-bw-modern",
+      "source": "images/pedestrian-bridge-bw-modern.jpg",
+      "theme": "bridges-structural",
+      "roles": [
+        "divider"
+      ],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Modern pedestrian bridge — black and white sweeping curve",
+      "printSafe": true,
+      "dimensions": {
+        "width": 6000,
+        "height": 4000
+      },
+      "motifAffinity": [
+        "bridge-pillar"
+      ],
+      "crops": {
+        "hero-16x9": "images/slides/pedestrian-bridge-bw-modern-16x9.jpg",
+        "hero-2x1": "images/slides/pedestrian-bridge-bw-modern-2x1.jpg",
+        "square-1x1": "images/slides/pedestrian-bridge-bw-modern-1x1.jpg"
+      }
+    },
+    {
+      "id": "cable-bridge-dark-sky-dramatic",
+      "source": "images/cable-bridge-dark-sky-dramatic.jpg",
+      "theme": "colour-archive",
+      "roles": [],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Suspension bridge at sunset — colour original",
+      "printSafe": true,
+      "dimensions": {
+        "width": 4032,
+        "height": 2268
+      },
+      "motifAffinity": [],
+      "crops": {
+        "hero-16x9": "images/slides/cable-bridge-dark-sky-dramatic-16x9.jpg",
+        "hero-2x1": "images/slides/cable-bridge-dark-sky-dramatic-2x1.jpg",
+        "square-1x1": "images/slides/cable-bridge-dark-sky-dramatic-1x1.jpg"
+      },
+      "reserve": true,
+      "_note": "Colour original — off-canon (imagery canon is black-and-white). Never assign layout roles; retained for reference only."
+    },
+    {
+      "id": "cable-bridge-golden-hour",
+      "source": "images/cable-bridge-golden-hour.jpg",
+      "theme": "colour-archive",
+      "roles": [],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Cable bridge at golden hour — colour original",
+      "printSafe": true,
+      "dimensions": {
+        "width": 3992,
+        "height": 2242
+      },
+      "motifAffinity": [],
+      "crops": {
+        "hero-16x9": "images/slides/cable-bridge-golden-hour-16x9.jpg",
+        "hero-2x1": "images/slides/cable-bridge-golden-hour-2x1.jpg",
+        "square-1x1": "images/slides/cable-bridge-golden-hour-1x1.jpg"
+      },
+      "reserve": true,
+      "_note": "Colour original — off-canon (imagery canon is black-and-white). Never assign layout roles; retained for reference only."
+    },
+    {
+      "id": "cable-stayed-bridge-night-illuminated",
+      "source": "images/cable-stayed-bridge-night-illuminated.jpg",
+      "theme": "colour-archive",
+      "roles": [],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Cable-stayed bridge illuminated at night — colour original",
+      "printSafe": true,
+      "dimensions": {
+        "width": 6002,
+        "height": 3993
+      },
+      "motifAffinity": [],
+      "crops": {
+        "hero-16x9": "images/slides/cable-stayed-bridge-night-illuminated-16x9.jpg",
+        "hero-2x1": "images/slides/cable-stayed-bridge-night-illuminated-2x1.jpg",
+        "square-1x1": "images/slides/cable-stayed-bridge-night-illuminated-1x1.jpg"
+      },
+      "reserve": true,
+      "_note": "Colour original — off-canon (imagery canon is black-and-white). Never assign layout roles; retained for reference only."
+    },
+    {
+      "id": "erasmus-bridge-rotterdam-abstract",
+      "source": "images/erasmus-bridge-rotterdam-abstract.jpg",
+      "theme": "colour-archive",
+      "roles": [],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Erasmus Bridge abstract — toned colour original",
+      "printSafe": true,
+      "dimensions": {
+        "width": 5104,
+        "height": 3828
+      },
+      "motifAffinity": [],
+      "crops": {
+        "hero-16x9": "images/slides/erasmus-bridge-rotterdam-abstract-16x9.jpg",
+        "hero-2x1": "images/slides/erasmus-bridge-rotterdam-abstract-2x1.jpg",
+        "square-1x1": "images/slides/erasmus-bridge-rotterdam-abstract-1x1.jpg"
+      },
+      "reserve": true,
+      "_note": "Colour original — off-canon (imagery canon is black-and-white). Never assign layout roles; retained for reference only."
+    },
+    {
+      "id": "erasmus-bridge-rotterdam-daytime",
+      "source": "images/erasmus-bridge-rotterdam-daytime.jpg",
+      "theme": "colour-archive",
+      "roles": [],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Erasmus Bridge daytime — colour original",
+      "printSafe": true,
+      "dimensions": {
+        "width": 3774,
+        "height": 5672
+      },
+      "motifAffinity": [],
+      "crops": {
+        "hero-16x9": "images/slides/erasmus-bridge-rotterdam-daytime-16x9.jpg",
+        "hero-2x1": "images/slides/erasmus-bridge-rotterdam-daytime-2x1.jpg",
+        "square-1x1": "images/slides/erasmus-bridge-rotterdam-daytime-1x1.jpg"
+      },
+      "reserve": true,
+      "_note": "Colour original — off-canon (imagery canon is black-and-white). Never assign layout roles; retained for reference only."
+    },
+    {
+      "id": "long-bridge-sunset-dramatic",
+      "source": "images/long-bridge-sunset-dramatic.jpg",
+      "theme": "colour-archive",
+      "roles": [],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Long bridge at sunset — colour original",
+      "printSafe": true,
+      "dimensions": {
+        "width": 5120,
+        "height": 2880
+      },
+      "motifAffinity": [],
+      "crops": {
+        "hero-16x9": "images/slides/long-bridge-sunset-dramatic-16x9.jpg",
+        "hero-2x1": "images/slides/long-bridge-sunset-dramatic-2x1.jpg",
+        "square-1x1": "images/slides/long-bridge-sunset-dramatic-1x1.jpg"
+      },
+      "reserve": true,
+      "_note": "Colour original — off-canon (imagery canon is black-and-white). Never assign layout roles; retained for reference only."
+    },
+    {
+      "id": "rotterdam-bridge-cityscape",
+      "source": "images/rotterdam-bridge-cityscape.jpg",
+      "theme": "colour-archive",
+      "roles": [],
+      "hero": false,
+      "preferredCrop": "hero-16x9",
+      "overlayPolicy": "dark-52",
+      "textSafeZone": "lower-third",
+      "altText": "Rotterdam bridge cityscape — colour original",
+      "printSafe": true,
+      "dimensions": {
+        "width": 6000,
+        "height": 4000
+      },
+      "motifAffinity": [],
+      "crops": {
+        "hero-16x9": "images/slides/rotterdam-bridge-cityscape-16x9.jpg",
+        "hero-2x1": "images/slides/rotterdam-bridge-cityscape-2x1.jpg",
+        "square-1x1": "images/slides/rotterdam-bridge-cityscape-1x1.jpg"
+      },
+      "reserve": true,
+      "_note": "Colour original — off-canon (imagery canon is black-and-white). Never assign layout roles; retained for reference only."
+    }
+  ]
+}
