@@ -276,5 +276,122 @@
     "roughness": 0,
     "arrowColor": "#807F83",
     "labelFontSize": 14
+  },
+  "identity": {
+    "archetype": {
+      "primary": "sage",
+      "status": "approved",
+      "rationale": "Strategic identity is Sage — knowledge, truth, analysis; the visual and surface realization is Ruler/luxury (see expression). meta.archetype=sage; website.archetype=ruler, website.aesthetic=luxury. The model preserves both: Sage governs who Duke Strategies is and how it thinks; Ruler/luxury governs how that identity is expressed visually."
+    },
+    "essence": "Bridging corporate strategy, corporate affairs and stakeholder advisory through The One Thing — the single transformative action that cuts through complexity and creates clarity.",
+    "positioning": "For boards and executives navigating complex stakeholder environments, Duke Strategies is the strategic advisory firm that makes business strategies stakeholder-proof, by combining corporate strategy depth with communications craft, AI-driven stakeholder intelligence, and direct government and security expertise.",
+    "personalityTraits": [
+      "Authoritative — senior counsel tone, not corporate stiffness",
+      "Bold — challenger mindset; tells it like it is",
+      "Analytical — data and insights first, then judgment",
+      "Progressive — AI-forward, grounded in decades of experience",
+      "Decisive — The One Thing; cuts through complexity"
+    ],
+    "personalityAxes": {
+      "authoritative_collaborative": 0.75,
+      "analytical_intuitive": 0.8,
+      "bold_measured": 0.7,
+      "progressive_grounded": 0.6,
+      "decisive_exploratory": 0.8
+    }
+  },
+  "expression": {
+    "source": "co_created",
+    "confidence": "approved",
+    "status": "approved",
+    "_splitNote": "The visual expression realizes a Ruler/luxury surface archetype (website.archetype=ruler, website.aesthetic=luxury; dark structural primary, controlled high contrast, architectural motif). The strategic identity remains Sage. These are not a conflict — the expression is how the Sage identity is presented to the world: with authority, structure, and controlled elegance.",
+    "principles": [
+      "Structure first: dark (#222222) carries all structural weight — headings, table headers, hero backgrounds, overlays. Coral is a brand signature, never a structural color.",
+      "Controlled restraint: coral (#FF7F66) appears sparingly as accent — CTAs, motif elements, accent lines, chart emphasis. Never large fills or full-image washes.",
+      "Architectural grounding: all imagery draws from Dutch bridge and infrastructure photography, black-and-white treated, with 50% dark overlay. Bridges are a literal expression of the brand promise.",
+      "Editorial authority: Montserrat SemiBold/Bold for all headings; generous letter-spacing on overlines; uppercase headings on web. Space Mono reserved for data and overlines only.",
+      "Geometric precision: the bridge pillar motif (vertical lines with horizontal beam connectors) is the sole recurring graphic element — structural, not decorative.",
+      "Ruler/luxury surface realization: airy spacing, symmetric layout, full-bleed heroes, mega-footer, shadow cards, square buttons, and controlled high contrast enact Ruler authority. The Sage strategic identity is what informs and fills that structure — not a competing signal."
+    ],
+    "visualAxes": {
+      "density": "spacious",
+      "contrast": "high",
+      "symmetry": "symmetric",
+      "geometry": "rectilinear",
+      "typeExpression": "editorial",
+      "imageTreatment": "documentary-muted",
+      "motifProminence": "accent",
+      "colorRhythm": "dark-light-indexed",
+      "ornament": "restrained"
+    },
+    "signatureElements": [
+      "Bridge pillar / geometric column motif in coral on dark, dark on light, white on coral",
+      "Black-and-white Dutch bridge photography with 50% dark (#222222) overlay",
+      "Coral (#FF7F66) accent line / bar used as section divider or card left-edge element",
+      "Montserrat SemiBold headings in near-black (#222222); uppercase on web with wide tracking",
+      "Space Mono for overlines and data labels (uppercase, tracking-widest)",
+      "White logo variant on all photography and dark backgrounds; coral/primary logo on light"
+    ],
+    "antiPatterns": [
+      "Coral as a large background fill, full-image wash, or heading color",
+      "Non-Montserrat typefaces in brand materials (including Arial/Helvetica substitutes)",
+      "Color photography in brand layouts (all photography must be desaturated/B&W before overlay)",
+      "Rotating, skewing, or adding effects to the bridge pillar motif",
+      "Placing the coral or grey logo on image overlays (white variant only on dark/photo surfaces)",
+      "Introducing off-palette colors without brand team approval",
+      "Hedging language, passive voice, or jargon — voice discipline mirrors visual restraint"
+    ],
+    "requiredMotifs": [
+      "Bridge / infrastructure photography (Dutch focus; geometric, moody, high-contrast)",
+      "Bridge pillar pattern as section divider, card accent, or background at low opacity",
+      "Coral accent bar (48px wide, 4px tall) as section header underline"
+    ],
+    "evidence": [
+      {
+        "path": "clients/dukestrategies/guidelines.md",
+        "kind": "brand_guidelines",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "all",
+        "freshness": "current",
+        "note": "v1.1 June 2026 — primary source for archetype (Sage primary, Ruler secondary), personality traits, color roles, typography, imagery rules, motif spec, voice principles"
+      },
+      {
+        "path": "clients/dukestrategies/charter.json#website",
+        "kind": "website",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "web",
+        "freshness": "current",
+        "note": "website.archetype=ruler, website.aesthetic=luxury; layout (airy, symmetric, full-bleed hero, generous spacing, mega-footer), components (shadow cards, square buttons), colorApplication (darkSections, accent sparingly), motion (subtle fade, lift hover) — all Ruler/luxury realization"
+      },
+      {
+        "path": "clients/dukestrategies/tokens.css",
+        "kind": "design_tokens",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "all",
+        "freshness": "current",
+        "note": "v1.1.0 2026-06-10 — confirms dark/coral split, motif token set (pillar width, gap, cap height, coral line colors), spacing scale, shadow depths, transition speeds"
+      },
+      {
+        "path": "clients/dukestrategies/messaging/narratives.json",
+        "kind": "brand_guidelines",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "all",
+        "freshness": "current",
+        "note": "Positioning statement, core message, voice attributes (bold/direct/confident/experienced/no-nonsense), words to use vs. avoid — grounds identity.positioning and personality"
+      },
+      {
+        "path": "clients/dukestrategies/messaging/pillars.json",
+        "kind": "brand_guidelines",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "all",
+        "freshness": "current",
+        "note": "Four brand pillars (Stakeholder-Proof Strategy, Intelligence-Led Advisory, Strategy Meets Communications, Crisis-Tested Government-Connected) — grounds Sage identity: knowledge-led, analytical, evidence-grounded"
+      }
+    ]
   }
 }
