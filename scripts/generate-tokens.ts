@@ -9,6 +9,17 @@ const cssLines: string[] = ['/* Auto-generated from charter.json — do not edit
 
 // Colors
 for (const [key, value] of Object.entries(charter.colors as Record<string, string>)) {
+  // Skip annotation/role keys (e.g. "_roles") — metadata, not emittable colors.
+  if (key.startsWith('_')) continue;
+  // Reject non-color values so prose/annotations in charter.colors FAIL the build
+  // loudly instead of silently emitting invalid CSS that breaks the Tailwind build.
+  // Allow hex, rgb()/hsl()/oklch() functional notation, and var() refs.
+  if (!/^#[0-9a-fA-F]{3,8}$|^(rgb|hsl|oklch|var)\(/.test(value)) {
+    throw new Error(
+      `charter.colors.${key} is not a color value (got ${JSON.stringify(value)}) — ` +
+      `move annotations/prose out of charter.colors, or use hex / rgb() / hsl() / oklch() / var() notation.`
+    );
+  }
   cssLines.push(`  --brand-${kebab(key)}: ${value};`);
 }
 
