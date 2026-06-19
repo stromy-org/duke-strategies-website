@@ -40,6 +40,11 @@
   "identity": {
     "essence": "Bridging corporate strategy, corporate affairs and stakeholder advisory through The One Thing — the single transformative action that cuts through complexity and creates clarity.",
     "positioning": "For boards and executives navigating complex stakeholder environments, Duke Strategies is the strategic advisory firm that makes business strategies stakeholder-proof, by combining corporate strategy depth with communications craft, AI-driven stakeholder intelligence, and direct government and security expertise.",
+    "archetype": {
+      "primary": "sage",
+      "status": "approved",
+      "rationale": "Strategic identity is Sage — knowledge, truth, analysis; the visual and surface realization is Ruler/luxury (see expression). meta.archetype=sage; website.archetype=ruler, website.aesthetic=luxury. The model preserves both: Sage governs who Duke Strategies is and how it thinks; Ruler/luxury governs how that identity is expressed visually."
+    },
     "personalityTraits": [
       "Authoritative — senior counsel tone, not corporate stiffness",
       "Bold — challenger mindset; tells it like it is",
@@ -206,6 +211,56 @@
   },
   "expression": {
     "sourceLevel": "expression",
+    "status": "approved",
+    "confidence": "approved",
+    "source": "co_created",
+    "evidence": [
+      {
+        "path": "clients/dukestrategies/guidelines.md",
+        "kind": "brand_guidelines",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "all",
+        "freshness": "current",
+        "note": "v1.1 June 2026 — primary source for archetype (Sage primary, Ruler secondary), personality traits, color roles, typography, imagery rules, motif spec, voice principles"
+      },
+      {
+        "path": "clients/dukestrategies/charter.json#website",
+        "kind": "website",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "web",
+        "freshness": "current",
+        "note": "website.archetype=ruler, website.aesthetic=luxury; layout (airy, symmetric, full-bleed hero, generous spacing, mega-footer), components (shadow cards, square buttons), colorApplication (darkSections, accent sparingly), motion (subtle fade, lift hover) — all Ruler/luxury realization"
+      },
+      {
+        "path": "clients/dukestrategies/tokens.css",
+        "kind": "design_tokens",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "all",
+        "freshness": "current",
+        "note": "v1.1.0 2026-06-10 — confirms dark/coral split, motif token set (pillar width, gap, cap height, coral line colors), spacing scale, shadow depths, transition speeds"
+      },
+      {
+        "path": "clients/dukestrategies/messaging/narratives.json",
+        "kind": "brand_guidelines",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "all",
+        "freshness": "current",
+        "note": "Positioning statement, core message, voice attributes (bold/direct/confident/experienced/no-nonsense), words to use vs. avoid — grounds identity.positioning and personality"
+      },
+      {
+        "path": "clients/dukestrategies/messaging/pillars.json",
+        "kind": "brand_guidelines",
+        "sourceAuthority": "co_created",
+        "confidence": "approved",
+        "surface": "all",
+        "freshness": "current",
+        "note": "Four brand pillars (Stakeholder-Proof Strategy, Intelligence-Led Advisory, Strategy Meets Communications, Crisis-Tested Government-Connected) — grounds Sage identity: knowledge-led, analytical, evidence-grounded"
+      }
+    ],
     "principles": [
       "Structure first: dark (#222222) carries all structural weight — headings, table headers, hero backgrounds, overlays. Coral is a brand signature, never a structural color.",
       "Controlled restraint: coral (#FF7F66) appears sparingly as accent — CTAs, motif elements, accent lines, chart emphasis. Never large fills or full-image washes.",
@@ -419,6 +474,10 @@
     "maxWidth": "120pt",
     "maxHeight": "50pt",
     "sizing": "contain"
+  },
+  "video": {
+    "resolution": "1920x1080",
+    "fps": 30
   },
   "fallbacksUsed": [],
   "warnings": []
