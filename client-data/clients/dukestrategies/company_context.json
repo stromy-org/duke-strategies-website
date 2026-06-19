@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "generatedFrom": {
-    "profileSha": "0a062395b878e0de831c69355be4832a93d5fa646c4fc7ab863418117e71e89c",
-    "peopleSha": "16550e78cb47f47c691646124675cf63e8eaf27ab2a77950f6781677f31e0217",
+    "profileSha": "1b0e3ceb82b08f0d8381e9e7789bb25f9f7265f3d54e3ef62d59cca19616c01d",
+    "peopleSha": "0e619fbdaa67a31c5c0c7370833da3b215f4d5714587af190b71765513dcb9f4",
     "compiler": "1.0"
   },
   "company": {
@@ -272,6 +272,13 @@
       "name": "Pieter Cobelens",
       "title": "Expert Partner",
       "publicRole": "spokesperson"
+    },
+    {
+      "id": "person-007",
+      "name": "Wilgert Hart",
+      "title": "Finance Associate",
+      "publicRole": "author",
+      "quoteStyle": "Warm, steady senior-finance register; practical and people-oriented; writes in Dutch and English."
     }
   ],
   "redactions": [

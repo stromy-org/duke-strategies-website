@@ -209,6 +209,19 @@
       ]
     }
   },
+  "boilerplate": {
+    "footer": "Duke Strategies · {{confidentiality.deck}} · {{page}} / {{pages}}",
+    "confidentiality": "Confidential",
+    "copyright": "© {{year}} Duke Strategy & Corporate Affairs B.V. All rights reserved.",
+    "sign_off": {
+      "default_en": "Yours sincerely,",
+      "warm_en": "Kind regards,",
+      "default_nl": "Met vriendelijke groet,"
+    },
+    "contact_block": {
+      "default_en": "Duke Strategies\nHambakenwetering 1, 5231 DD 's-Hertogenbosch, Netherlands\nmail@dukestrategies.eu · +31 85 212 94 14 · dukestrategies.eu"
+    }
+  },
   "expression": {
     "sourceLevel": "expression",
     "status": "approved",

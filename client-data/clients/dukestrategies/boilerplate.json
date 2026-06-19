@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schema/boilerplate.schema.json",
+  "$comment": "Duke Strategies fixed cross-deliverable strings. Edit once to update every newly-rendered deck/doc/PDF footer, letter sign-off, and contact block. Company facts live in profile.json, not here.",
+  "version": "1.0",
+  "footer": {
+    "deck": "Duke Strategies · {{confidentiality.deck}} · {{page}} / {{pages}}",
+    "doc": "Duke Strategies · {{document.title}} · {{date}}",
+    "showLogo": true,
+    "logoVariant": "grey"
+  },
+  "confidentiality": {
+    "public": "",
+    "internal": "Internal — Duke Strategies",
+    "confidential": "Strictly confidential — do not distribute",
+    "draft": "DRAFT — not for circulation",
+    "deck": "Confidential",
+    "doc": "Confidential"
+  },
+  "watermark": {
+    "draft": { "text": "DRAFT", "opacity": 0.08, "rotation": -30, "color": "textLight" }
+  },
+  "legal": {
+    "copyright": "© {{year}} Duke Strategy & Corporate Affairs B.V. All rights reserved.",
+    "trademark": "Duke Strategies and the Duke Strategies mark are trademarks of Duke Strategy & Corporate Affairs B.V."
+  },
+  "sign_off": {
+    "default_en": "Yours sincerely,",
+    "warm_en": "Kind regards,",
+    "default_nl": "Met vriendelijke groet,"
+  },
+  "contact_block": {
+    "default_en": "Duke Strategies\nHambakenwetering 1, 5231 DD 's-Hertogenbosch, Netherlands\nmail@dukestrategies.eu · +31 85 212 94 14 · dukestrategies.eu"
+  }
+}

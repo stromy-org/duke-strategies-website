@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "additional_banned_phrases": [
+    "leverage synergies",
+    "optimise stakeholder ecosystems",
+    "optimize stakeholder ecosystems",
+    "best-in-class",
+    "world-class",
+    "move the needle"
+  ],
+  "additional_banned_substrings": [],
+  "notes": "Duke L2: additive-only jargon-soup bans on top of the L1 baseline. Mirrors the 'jargon soup' don't in guidelines.md Voice & Tone. Hedging and American spellings are governed by voice-profile.md, not banned as fixed substrings (too many false positives)."
+}
