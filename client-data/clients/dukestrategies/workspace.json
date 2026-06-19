@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "destination": { "tenant": "stromy" },
+  "taxonomy": [
+    { "key": "client", "label": "Client", "naming": "title" },
+    { "key": "project", "label": "Project", "naming": "kebab" }
+  ],
+  "context_bundle": ["brand_context.json", "company_context.json"],
+  "manifest": { "enabled": true, "filename": "WORKSPACE.md" }
+}
