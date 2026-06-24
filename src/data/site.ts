@@ -33,6 +33,19 @@ export const site = {
     provider: "plausible",
     domain: "dukestrategies.com",
   },
+  // SEO kit (ORG-PLAN-049). description/title stay Localized — BaseLayout
+  // resolves them per-locale before handing strings to the Seo component.
+  locale: "en_US",
+  entityType: "Organization" as
+    | "Organization"
+    | "ProfessionalService"
+    | "LocalBusiness"
+    | "Person",
+  logo: "/assets/logos/DukeStrategies_logo.svg",
+  defaultOgImage: "/assets/images/Erasmusbrug_zwart.jpg",
+  twitterHandle: "",
+  social: { linkedin: "https://www.linkedin.com/company/duke-strategies/" },
+  features: { search: false, dynamicOg: false },
   marqueeItems: [
     "Strategic Advisory",
     "Crisis Communications",

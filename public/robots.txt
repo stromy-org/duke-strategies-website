@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Search / user-directed retrieval agents (verified 2026-06-24).
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Model-development / training-use agents (allowed for Duke Strategies).
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://dukestrategies.com/sitemap-index.xml
