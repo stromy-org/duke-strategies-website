@@ -21,8 +21,8 @@ const inquiryOptions = [
     description: t('contact.inquiry.general.description'),
     href: createMailto(
       site.contact.email,
-      "[Website] General Enquiry",
-      `${t('contact.mailto.greeting')}\n\n${t('contact.mailto.discuss')}\n\n${t('contact.mailto.company')}\n${t('contact.mailto.timeline')}\n\n${t('contact.mailto.regards')}`
+      t('contact.inquiry.general.subject'),
+      t('contact.inquiry.general.body')
     ),
     label: t('contact.inquiry.general.label'),
   },
@@ -31,8 +31,8 @@ const inquiryOptions = [
     description: t('contact.inquiry.advisory.description'),
     href: createMailto(
       site.contact.email,
-      "[Website] Strategic Advisory",
-      `${t('contact.mailto.greeting')}\n\n${t('contact.mailto.advisorySupport')}\n\n${t('contact.mailto.organization')}\n${t('contact.mailto.context')}\n${t('contact.mailto.timeline')}\n\n${t('contact.mailto.regards')}`
+      t('contact.inquiry.advisory.subject'),
+      t('contact.inquiry.advisory.body')
     ),
     label: t('contact.inquiry.advisory.label'),
   },
@@ -41,8 +41,8 @@ const inquiryOptions = [
     description: t('contact.inquiry.crisis.description'),
     href: createMailto(
       founders[0].email,
-      "[Urgent] Crisis or Media Support",
-      `${t('contact.mailto.greetingIngo')}\n\n${t('contact.mailto.urgentSupport')}\n\n${t('contact.mailto.organization')}\n${t('contact.mailto.immediateIssue')}\n${t('contact.mailto.urgency')}\n${t('contact.mailto.phone')}\n\n${t('contact.mailto.regards')}`
+      t('contact.inquiry.crisis.subject'),
+      t('contact.inquiry.crisis.body')
     ),
     label: t('contact.inquiry.crisis.label'),
   },
@@ -51,8 +51,8 @@ const inquiryOptions = [
     description: t('contact.inquiry.academy.description'),
     href: createMailto(
       site.contact.email,
-      "[Website] Duke Academy",
-      `${t('contact.mailto.greeting')}\n\n${t('contact.mailto.academyInterest')}\n\n${t('contact.mailto.teamOrg')}\n${t('contact.mailto.preferredProgram')}\n${t('contact.mailto.expectedParticipants')}\n\n${t('contact.mailto.regards')}`
+      t('contact.inquiry.academy.subject'),
+      t('contact.inquiry.academy.body')
     ),
     label: t('contact.inquiry.academy.label'),
   },
