@@ -1,4 +1,4 @@
-import type { UIKey } from "../i18n/ui.en";
+import type { UIKey } from "../i18n/content/ui.en";
 
 export type NavItem = {
   labelKey: UIKey;

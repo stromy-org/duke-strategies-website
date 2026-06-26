@@ -18,8 +18,8 @@ const featuredServices = services;
 ---
 
 <PageLayout
-  title="Corporate Strategy & Stakeholder Advisory"
-  description="Duke Strategies helps business leaders build stakeholder-proof strategy at the intersection of corporate strategy, corporate affairs, and communications."
+  title={t('seo.home.title')}
+  description={t('seo.home.desc')}
   pathname="/nl/"
   ogImage="/assets/images/Erasmusbrug_zwart.jpg"
   lang={lang}
@@ -58,7 +58,7 @@ const featuredServices = services;
         <div class="animate stagger-2">
           <img
             src="/assets/logos/DukeStrategies_logo_grey.svg"
-            alt="Duke Strategies"
+            alt={t('brand.logoAlt')}
             style="width: 160px; margin-bottom: var(--sp-6);"
           />
           <p>{t('section.about.p1')}</p>
@@ -67,7 +67,7 @@ const featuredServices = services;
           <Button href="/nl/who-we-are" variant="text" class="mt-6">{t('section.about.cta')}</Button>
         </div>
         <div class="img-cover img-cover--coral img-cover--hero animate stagger-3">
-          <img src="/assets/images/Erasmusbrug_zwart.jpg" alt="Erasmus Bridge, Rotterdam" />
+          <img src="/assets/images/Erasmusbrug_zwart.jpg" alt={t('img.erasmusBridge')} />
         </div>
       </div>
     </div>
@@ -180,7 +180,7 @@ const featuredServices = services;
         <div class="animate stagger-1">
           <img
             src="/assets/logos/DukeAcademy_rgb_no_padding.svg"
-            alt="Duke Academy"
+            alt={t('brand.academyAlt')}
             style="width: 200px; margin-bottom: var(--sp-5);"
           />
           <h3 style="text-transform: none; letter-spacing: 0; font-size: 1.4rem; line-height: 1.4;">
@@ -199,7 +199,7 @@ const featuredServices = services;
           <Button href="/nl/duke-academy" class="mt-6">{t('section.academy.cta')}</Button>
         </div>
         <div class="img-cover img-cover--coral img-cover--hero animate stagger-2">
-          <img src="/assets/images/Pythonbrug_Amsterdam_contrast.jpg" alt="Python Bridge, Amsterdam" />
+          <img src="/assets/images/Pythonbrug_Amsterdam_contrast.jpg" alt={t('img.pythonBridge')} />
         </div>
       </div>
     </div>

@@ -224,6 +224,9 @@ const nl: Partial<Record<UIKey, string>> = {
   'aria.langSwitch': 'Schakel naar Engels',
   'aria.mainNav': 'Hoofdnavigatie',
   'aria.toggleMenu': 'Menu openen/sluiten',
+
+  // Map embed title (locale-specific override)
+  'contact.mapTitle': 'Duke Strategies kantoorlocatie',
 };
 
 export default nl;

@@ -1,4 +1,4 @@
-export default {
+const en = {
   // Navigation
   'nav.home': 'Home',
   'nav.who-we-are': 'Who We Are',
@@ -221,6 +221,33 @@ export default {
   'aria.langSwitch': 'Switch to Dutch',
   'aria.mainNav': 'Main navigation',
   'aria.toggleMenu': 'Toggle menu',
+
+  // SEO — page <title> + <meta description> (editable; nl inherits en unless overridden)
+  'seo.home.title': 'Corporate Strategy & Stakeholder Advisory',
+  'seo.home.desc': 'Duke Strategies helps business leaders build stakeholder-proof strategy at the intersection of corporate strategy, corporate affairs, and communications.',
+  'seo.whoWeAre.title': 'Who We Are',
+  'seo.whoWeAre.desc': 'Meet the seasoned experts at Duke Strategies with decades of experience in high-stakes business, political, and communications environments.',
+  'seo.whatWeDo.title': 'What We Do',
+  'seo.whatWeDo.desc': 'Duke Strategies uses an Analyse, Create & Execute model to build stakeholder-proof strategy, narrative, and implementation.',
+  'seo.dukeAcademy.title': 'Duke Academy',
+  'seo.dukeAcademy.desc': 'Duke Academy is Duke Strategies\' AI-powered executive training branch for high-stakes communication, stakeholder dialogue, and strategic leadership.',
+  'seo.insights.title': 'Insights & Case Studies',
+  'seo.insights.desc': 'Real thinking from real engagements: Duke Strategies case studies, client outcomes, and thought leadership.',
+  'seo.contact.title': 'Contact',
+  'seo.contact.desc': 'Contact Duke Strategies in \'s-Hertogenbosch to discuss stakeholder strategy, corporate affairs, crisis communications, or Duke Academy.',
+
+  // Image + logo alt text (editable)
+  'brand.logoAlt': 'Duke Strategies',
+  'brand.academyAlt': 'Duke Academy',
+  'img.erasmusBridge': 'Erasmus Bridge, Rotterdam',
+  'img.pythonBridge': 'Python Bridge, Amsterdam',
+  'img.bridgeGoldenHour': 'Bridge at golden hour',
+  'img.modernBridge': 'Modern bridge over calm water',
+
+  // Map embed title (locale-specific; nl overrides)
+  'contact.mapTitle': 'Duke Strategies office location',
 } as const;
 
-export type UIKey = keyof typeof import('./ui.en').default;
+export default en;
+
+export type UIKey = keyof typeof en;

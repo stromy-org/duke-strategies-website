@@ -1,0 +1,24 @@
+{
+  "exceptions": [
+    {
+      "path": "src/components/layout/Navigation.astro",
+      "locator": "aria-label:Duke Strategies Home",
+      "reason": "Accessible name for the logo home-link affordance — a screen-reader navigation mechanic, not standalone client-editable copy; stays review-gated in the structural component."
+    },
+    {
+      "path": "src/components/layout/Footer.astro",
+      "locator": "aria-label:LinkedIn",
+      "reason": "Accessible name for the icon-only LinkedIn social link — an a11y affordance, not client-editable marketing copy; stays review-gated."
+    },
+    {
+      "path": "src/components/ui/LangSwitcher.astro",
+      "locator": "aria-label:Language selector",
+      "reason": "ARIA label for the locale-switch control region — an a11y mechanic, not client copy; stays review-gated."
+    },
+    {
+      "path": "src/components/layout/ThemeToggle.astro",
+      "locator": "aria-label:Toggle dark mode",
+      "reason": "ARIA label for the theme-toggle control in a lang-less leaf component — an a11y mechanic, not client copy; stays review-gated."
+    }
+  ]
+}
