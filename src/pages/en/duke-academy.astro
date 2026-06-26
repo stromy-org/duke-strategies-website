@@ -12,8 +12,8 @@ const t = useTranslations(lang);
 ---
 
 <PageLayout
-  title="Duke Academy"
-  description="Duke Academy is Duke Strategies' AI-powered executive training branch for high-stakes communication, stakeholder dialogue, and strategic leadership."
+  title={t('seo.dukeAcademy.title')}
+  description={t('seo.dukeAcademy.desc')}
   pathname="/en/duke-academy"
   ogImage="/assets/images/Pythonbrug_Amsterdam_contrast.jpg"
   lang={lang}
@@ -25,7 +25,7 @@ const t = useTranslations(lang);
     <div class="hero__content">
       <img
         src="/assets/logos/DukeAcademy_rgb_no_padding.svg"
-        alt="Duke Academy"
+        alt={t('brand.academyAlt')}
         class="hero__academy-logo hero-fade hero-fade-1"
       />
       <h1 class="hero-fade hero-fade-2">{t('dukeAcademy.heroSubtitle')}</h1>
@@ -57,7 +57,7 @@ const t = useTranslations(lang);
           </p>
         </div>
         <div class="img-cover img-cover--coral animate stagger-3" style="min-height: 360px;">
-          <img src="/assets/images/cable-bridge-golden-hour.jpg" alt="Bridge at golden hour" style="width: 100%; height: 100%; object-fit: cover;" />
+          <img src="/assets/images/cable-bridge-golden-hour.jpg" alt={t('img.bridgeGoldenHour')} style="width: 100%; height: 100%; object-fit: cover;" />
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@ const t = useTranslations(lang);
           </p>
         </div>
         <div class="img-cover img-cover--coral animate stagger-3" style="min-height: 360px;">
-          <img src="/assets/images/modern-cable-bridge-calm-water.jpg" alt="Modern bridge over calm water" style="width: 100%; height: 100%; object-fit: cover;" />
+          <img src="/assets/images/modern-cable-bridge-calm-water.jpg" alt={t('img.modernBridge')} style="width: 100%; height: 100%; object-fit: cover;" />
         </div>
       </div>
     </div>

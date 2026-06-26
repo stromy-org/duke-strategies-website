@@ -1,6 +1,6 @@
-import en from './ui.en';
-import nl from './ui.nl';
-import type { UIKey } from './ui.en';
+import en from './content/ui.en';
+import nl from './content/ui.nl';
+import type { UIKey } from './content/ui.en';
 import { defaultLocale, type SupportedLocale } from './pickLocale';
 
 const ui: Record<SupportedLocale, Record<string, string>> = {

@@ -18,7 +18,7 @@ const normalizedPath = pathname.endsWith("/") && pathname !== "/" ? pathname.sli
 <nav class="nav" role="navigation" aria-label={t('aria.mainNav')}>
   <div class="nav__inner">
     <a href={localizedPath('/', lang)} class="nav__logo" aria-label="Duke Strategies Home">
-      <img src="/assets/logos/DukeStrategies_logo.svg" alt="Duke Strategies" width="180" height="32" />
+      <img src="/assets/logos/DukeStrategies_logo.svg" alt={t('brand.logoAlt')} width="180" height="32" />
     </a>
 
     <button class="nav__hamburger" type="button" aria-label={t('aria.toggleMenu')} aria-expanded="false">

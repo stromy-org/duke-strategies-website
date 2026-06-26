@@ -63,8 +63,8 @@ const specializedInquiries = inquiryOptions.slice(1);
 ---
 
 <PageLayout
-  title="Contact"
-  description="Contact Duke Strategies in 's-Hertogenbosch to discuss stakeholder strategy, corporate affairs, crisis communications, or Duke Academy."
+  title={t('seo.contact.title')}
+  description={t('seo.contact.desc')}
   pathname="/en/contact"
   ogImage="/assets/images/bridge-fog-water-minimalist.jpg"
   lang={lang}
@@ -198,7 +198,7 @@ const specializedInquiries = inquiryOptions.slice(1);
       <div class="map-embed animate stagger-2">
         <iframe
           src={osmEmbedUrl}
-          title="Duke Strategies office location"
+          title={t('contact.mapTitle')}
           loading="lazy"
           referrerpolicy="no-referrer"
         ></iframe>

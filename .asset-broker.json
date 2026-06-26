@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "owner_client_slug": "dukestrategies",
+  "build": {
+    "install": "npm ci",
+    "command": "npm run build",
+    "output_dir": "dist",
+    "node_version": "22",
+    "serve": "static"
+  },
+  "lanes": {
+    "content": {
+      "editable_globs": [
+        "src/content/**",
+        "src/data/content/**",
+        "src/i18n/content/**",
+        "src/assets/content/**",
+        "public/content/**"
+      ],
+      "self_publish": true,
+      "required_check": "astro-check"
+    },
+    "structural": {
+      "editable_globs": [
+        "src/components/**",
+        "src/layouts/**",
+        "src/pages/**",
+        "src/styles/**",
+        "src/lib/**",
+        "src/data/**",
+        "src/i18n/**",
+        "src/assets/**",
+        "astro.config.mjs"
+      ],
+      "self_publish": false
+    }
+  },
+  "preview_route_map": {
+    "src/i18n/content/": ["/en/", "/en/who-we-are", "/en/what-we-do", "/en/insights", "/en/duke-academy", "/en/contact"]
+  }
+}
