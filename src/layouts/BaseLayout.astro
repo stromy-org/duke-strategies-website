@@ -3,6 +3,8 @@ import "../styles/global.css";
 import { site } from "../data/site";
 import { pickLocale, locales, type SupportedLocale } from "../i18n/pickLocale";
 import { stripLocalePrefix } from "../i18n/utils";
+import Seo from "../components/seo/Seo.astro";
+import { absoluteUrl, identitySchema, webSiteSchema } from "../lib/seo";
 
 interface Props {
   title?: string;
@@ -14,17 +16,49 @@ interface Props {
 }
 
 const {
-  title = site.name,
-  description = pickLocale(site.description, 'en'),
+  title,
+  description,
   pathname = "/",
-  ogImage = "/assets/images/Erasmusbrug_zwart.jpg",
+  ogImage,
   noIndex = false,
   lang = "en",
 } = Astro.props;
 
-const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
-const canonical = new URL(pathname === "/" ? "/" : pathname, site.url).toString();
+// Resolve the Localized description to a plain string for the Seo component and
+// the schema helpers (which expect strings, not Localized objects).
+const resolvedDescription = description ?? pickLocale(site.description, lang);
 const pathWithoutLocale = stripLocalePrefix(pathname);
+const ogLocale = lang === "nl" ? "nl_NL" : "en_US";
+
+// Reciprocal en/nl hreflang + x-default, normalized through absoluteUrl so the
+// hrefs match the canonical.
+const seoAlternates = [
+  ...locales.map((l) => ({
+    hreflang: l,
+    href: absoluteUrl(
+      `/${l}${pathWithoutLocale === "/" ? "/" : pathWithoutLocale}`,
+      site.url,
+    ),
+  })),
+  {
+    hreflang: "x-default",
+    href: absoluteUrl(
+      `/en${pathWithoutLocale === "/" ? "/" : pathWithoutLocale}`,
+      site.url,
+    ),
+  },
+];
+
+// Organization identity + WebSite emitted once, on each locale home. Built from
+// a string-resolved view of `site` so the Localized description doesn't leak in.
+const seoSite = { ...site, description: resolvedDescription };
+const isHome = pathWithoutLocale === "/";
+const homeJsonLd = isHome
+  ? [
+      { ...identitySchema(seoSite), legalName: site.legalName },
+      webSiteSchema(seoSite),
+    ]
+  : [];
 ---
 
 <!doctype html>
@@ -39,14 +73,7 @@ const pathWithoutLocale = stripLocalePrefix(pathname);
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href={canonical} />
-    {locales.map(l => (
-      <link rel="alternate" hreflang={l} href={new URL(`/${l}${pathWithoutLocale === '/' ? '/' : pathWithoutLocale}`, site.url).toString()} />
-    ))}
-    <link rel="alternate" hreflang="x-default" href={new URL(`/en${pathWithoutLocale === '/' ? '/' : pathWithoutLocale}`, site.url).toString()} />
     <link rel="icon" type="image/svg+xml" href="/assets/logos/DukeStrategies_logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -54,17 +81,18 @@ const pathWithoutLocale = stripLocalePrefix(pathname);
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Space+Mono&display=swap"
       rel="stylesheet"
     />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={site.name} />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(ogImage, site.url).toString()} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(ogImage, site.url).toString()} />
-    {noIndex && <meta name="robots" content="noindex,nofollow" />}
+
+    <Seo
+      title={title}
+      description={resolvedDescription}
+      image={ogImage}
+      canonical={pathname}
+      locale={ogLocale}
+      noindex={noIndex}
+      alternates={seoAlternates}
+      jsonLd={homeJsonLd}
+    />
+
     {site.analytics.provider === "plausible" && (
       <script is:inline defer data-domain={site.analytics.domain} src="https://plausible.io/js/script.js"></script>
     )}

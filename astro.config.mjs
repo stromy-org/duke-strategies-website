@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://stromy.nl',
+  site: 'https://dukestrategies.com',
   integrations: [mdx(), sitemap()],
   i18n: {
     defaultLocale: 'en',

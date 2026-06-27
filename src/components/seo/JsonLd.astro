@@ -1,0 +1,16 @@
+---
+/**
+ * Safe JSON-LD injector. The `<`→unicode escaping (in serializeJsonLd) is
+ * REQUIRED: a raw `</script>` inside any content-derived schema string (an
+ * article title or excerpt) would otherwise break out of the tag → broken
+ * JSON-LD / injection.
+ */
+import { serializeJsonLd } from "../../lib/seo";
+
+interface Props {
+  schema: object | object[];
+}
+const { schema } = Astro.props;
+const json = serializeJsonLd(schema);
+---
+<script is:inline type="application/ld+json" set:html={json} />
