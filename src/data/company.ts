@@ -85,13 +85,13 @@ export const founders: Founder[] = [
     email: "ingo.heijnen@dukestrategies.eu",
   },
   {
-    name: "Arien Stuijt",
+    name: "Ariën Stuijt",
     title: { en: "Managing Partner", nl: "Managing Partner" },
     image: "/assets/team/ArienStuijt_grijs.jpg",
-    alt: "Arien Stuijt",
+    alt: "Ariën Stuijt",
     bio: {
-      en: "Arien Stuijt is Managing Partner and co-founder of Duke Strategies with 17 years of experience spanning journalism, strategic communications, and AI-driven stakeholder intelligence. A former Wall Street Journal reporter, he brings investigative rigor to stakeholder strategy, media positioning, and data-backed public affairs advisory.",
-      nl: "Arien Stuijt is Managing Partner en medeoprichter van Duke Strategies met 17 jaar ervaring in journalistiek, strategische communicatie en AI-gestuurde stakeholder intelligence. Als voormalig verslaggever van de Wall Street Journal brengt hij onderzoeksmatige scherpte in stakeholderstrategie, mediapositionering en datagedreven public affairs-advies.",
+      en: "Ariën Stuijt is Managing Partner and co-founder of Duke Strategies with 17 years of experience spanning journalism, strategic communications, and AI-driven stakeholder intelligence. A former Wall Street Journal reporter, he brings investigative rigor to stakeholder strategy, media positioning, and data-backed public affairs advisory.",
+      nl: "Ariën Stuijt is Managing Partner en medeoprichter van Duke Strategies met 17 jaar ervaring in journalistiek, strategische communicatie en AI-gestuurde stakeholder intelligence. Als voormalig verslaggever van de Wall Street Journal brengt hij onderzoeksmatige scherpte in stakeholderstrategie, mediapositionering en datagedreven public affairs-advies.",
     },
     email: "arien.stuijt@dukestrategies.eu",
   },
@@ -529,7 +529,7 @@ export const caseStudies: CaseStudy[] = [
       en: "When a major European industrial group faced a multi-front reputational crisis involving regulatory scrutiny, media pressure and stakeholder erosion, Duke Strategies was brought in to map the full stakeholder landscape, develop a unified narrative and execute a structured recovery plan across all fronts simultaneously.",
       nl: "Toen een grote Europese industriële groep werd geconfronteerd met een reputatiecrisis op meerdere fronten — inclusief toezicht van toezichthouders, mediadruk en stakeholder-erosie — werd Duke Strategies ingeschakeld om het volledige stakeholderlandschap in kaart te brengen, een samenhangend narratief te ontwikkelen en een gestructureerd herstelplan op alle fronten tegelijk uit te voeren.",
     },
-    team: { en: "Ingo Heijnen, Arien Stuijt", nl: "Ingo Heijnen, Arien Stuijt" },
+    team: { en: "Ingo Heijnen, Ariën Stuijt", nl: "Ingo Heijnen, Ariën Stuijt" },
     image: "/assets/images/cable-bridge-dark-sky-dramatic.jpg",
     imageAlt: { en: "Bridge architecture against a dark sky", nl: "Brugarchitectuur tegen een donkere lucht" },
     metrics: [
@@ -645,12 +645,12 @@ export const insights: InsightItem[] = [
     href: "https://www.consultancy.nl/nieuws/59605/hill-knowlton-veteranen-ingo-heijnen-en-arien-stuijt-starten-duke-strategies",
     linkLabel: { en: "Read the founding interview", nl: "Lees het oprichtingsinterview" },
     image: "/assets/insights/insight-01-founding.jpg",
-    imageAlt: { en: "Ingo Heijnen and Arien Stuijt launch Duke Strategies", nl: "Ingo Heijnen en Arien Stuijt lanceren Duke Strategies" },
+    imageAlt: { en: "Ingo Heijnen and Ariën Stuijt launch Duke Strategies", nl: "Ingo Heijnen en Ariën Stuijt lanceren Duke Strategies" },
   },
   {
     badge: { en: "Perspective", nl: "Perspectief" },
-    date: "Arien Stuijt - March 2025",
-    author: "Arien Stuijt",
+    date: "Ariën Stuijt - March 2025",
+    author: "Ariën Stuijt",
     title: {
       en: "Stakeholders see through the nonsense",
       nl: "Stakeholders prikken door de onzin heen",
