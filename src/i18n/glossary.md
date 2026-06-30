@@ -10,7 +10,7 @@
 - Signal Orange
 
 ### People
-- Ingo Heijnen, Arien Stuijt (founders)
+- Ingo Heijnen, Ariën Stuijt (founders)
 - Pieter Cobelens, Thomas Tindemans, Bas van 't Wout (expert partners)
 - Wilgert Hart, William Masquelier, Emma van Gelder (associates)
 
