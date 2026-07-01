@@ -7,7 +7,13 @@
     "archetype": "sage",
     "domain": "dukestrategies.eu",
     "protection_class": "protected",
-    "protected_assets": { "heading_font": true, "body_font": false, "primary_color": true, "accent_color": true, "motif_family": true }
+    "protected_assets": {
+      "heading_font": true,
+      "body_font": false,
+      "primary_color": true,
+      "accent_color": true,
+      "motif_family": true
+    }
   },
   "colors": {
     "primary": "#222222",
@@ -58,47 +64,73 @@
       {
         "file": "images/Erasmusbrug_zwart.jpg",
         "description": "Erasmus Bridge, Rotterdam — dramatic black and white night view",
-        "roles": ["cover", "divider"]
+        "roles": [
+          "cover",
+          "divider"
+        ]
       },
       {
         "file": "images/Nesciobrug.jpg",
         "description": "Nesciobrug, Amsterdam — moody pedestrian/cyclist bridge",
-        "roles": ["divider", "closing"]
+        "roles": [
+          "divider",
+          "closing"
+        ]
       },
       {
         "file": "images/Pythonbrug_Amsterdam_contrast.jpg",
         "description": "Python Bridge, Amsterdam — high-contrast architectural shot",
-        "roles": ["divider"]
+        "roles": [
+          "divider"
+        ]
       },
       {
         "file": "images/shutterstock_1510566293_RoyalWelshbrug_zwart_1920x1280px_dark.jpg",
         "description": "Royal Welsh Bridge — dark moody bridge photography",
-        "roles": ["cover", "closing"]
+        "roles": [
+          "cover",
+          "closing"
+        ]
       },
       {
         "file": "images/erasmus-bridge-rotterdam-grayscale.jpg",
         "description": "Erasmus Bridge at night — near-monochrome skyline, illuminated cables",
-        "roles": ["cover", "closing"]
+        "roles": [
+          "cover",
+          "closing"
+        ]
       },
       {
         "file": "images/cable-bridge-grayscale-dramatic.jpg",
         "description": "Cable-stayed bridge — dramatic grayscale, low vantage point",
-        "roles": ["cover", "divider"]
+        "roles": [
+          "cover",
+          "divider"
+        ]
       },
       {
         "file": "images/modern-bridge-bw-dramatic.jpg",
         "description": "Modern bridge — dramatic black and white, strong diagonals",
-        "roles": ["cover", "divider"]
+        "roles": [
+          "cover",
+          "divider"
+        ]
       },
       {
         "file": "images/bridge-fog-water-minimalist.jpg",
         "description": "Bridge in fog over calm water — minimalist, contemplative",
-        "roles": ["divider", "closing"]
+        "roles": [
+          "divider",
+          "closing"
+        ]
       },
       {
         "file": "images/modern-cable-bridge-calm-water.jpg",
         "description": "Modern cable bridge over calm water — light, airy geometry",
-        "roles": ["divider", "background"]
+        "roles": [
+          "divider",
+          "background"
+        ]
       }
     ],
     "overlay": {
@@ -109,9 +141,20 @@
     "_note": "Overlay is the structural dark (#222222), not coral — coral appears on imagery only as thin accent elements (motif bar, rule lines). See images/manifest.json for per-image overlayPolicy and text-safe zones; prefer it over this global default."
   },
   "document": {
-    "margins": { "top": "1in", "bottom": "1in", "left": "1in", "right": "1in" },
-    "header": { "content": "{{company.name}}", "logo": true },
-    "footer": { "content": "Confidential", "pageNumbers": true },
+    "margins": {
+      "top": "1in",
+      "bottom": "1in",
+      "left": "1in",
+      "right": "1in"
+    },
+    "header": {
+      "content": "{{company.name}}",
+      "logo": true
+    },
+    "footer": {
+      "content": "Confidential",
+      "pageNumbers": true
+    },
     "headingColor": "primary",
     "tableHeaderColor": "primary"
   },
@@ -189,20 +232,51 @@
       "home": {
         "enabled": true,
         "sections": [
-          { "type": "hero", "variant": "full-bleed" },
-          { "type": "social-proof", "variant": "logo-strip" },
-          { "type": "service", "variant": "icon-grid" },
-          { "type": "case-study", "variant": "featured-card" },
-          { "type": "stats", "variant": "counter-band" },
-          { "type": "testimonial", "variant": "card-with-photo" },
-          { "type": "cta", "variant": "full-width-band" }
+          {
+            "type": "hero",
+            "variant": "full-bleed"
+          },
+          {
+            "type": "social-proof",
+            "variant": "logo-strip"
+          },
+          {
+            "type": "service",
+            "variant": "icon-grid"
+          },
+          {
+            "type": "case-study",
+            "variant": "featured-card"
+          },
+          {
+            "type": "stats",
+            "variant": "counter-band"
+          },
+          {
+            "type": "testimonial",
+            "variant": "card-with-photo"
+          },
+          {
+            "type": "cta",
+            "variant": "full-width-band"
+          }
         ]
       },
-      "who-we-are": { "enabled": true },
-      "what-we-do": { "enabled": true },
-      "duke-academy": { "enabled": true },
-      "insights": { "enabled": true },
-      "contact": { "enabled": true }
+      "who-we-are": {
+        "enabled": true
+      },
+      "what-we-do": {
+        "enabled": true
+      },
+      "duke-academy": {
+        "enabled": true
+      },
+      "insights": {
+        "enabled": true
+      },
+      "contact": {
+        "enabled": true
+      }
     },
     "deployment": {
       "platform": "github-pages",
@@ -213,8 +287,14 @@
     "i18n": {
       "enabled": true,
       "defaultLocale": "en",
-      "locales": ["en", "nl"],
-      "labels": { "en": "English", "nl": "Nederlands" },
+      "locales": [
+        "en",
+        "nl"
+      ],
+      "labels": {
+        "en": "English",
+        "nl": "Nederlands"
+      },
       "routing": "prefix-default",
       "fallbackLocale": "en",
       "localeDetection": false,
@@ -224,16 +304,32 @@
   },
   "formatting": {
     "headingThreshold": 24,
-    "accentCycleColors": ["accent", "primary", "secondary"],
+    "accentCycleColors": [
+      "accent",
+      "primary",
+      "secondary"
+    ],
     "autoContrastText": true
   },
   "plotly": {
-    "categoricalPalette": ["#FF7F66", "#222222", "#B04837", "#807F83", "#5B9A6B", "#D4A544"],
+    "categoricalPalette": [
+      "#FF7F66",
+      "#222222",
+      "#B04837",
+      "#807F83",
+      "#5B9A6B",
+      "#D4A544"
+    ],
     "defaultHeight": 500,
     "titleFontSize": 18,
     "axisFontSize": 12,
     "legendFontSize": 11,
-    "margins": { "top": 80, "bottom": 70, "left": 60, "right": 50 },
+    "margins": {
+      "top": 80,
+      "bottom": 70,
+      "left": 60,
+      "right": 50
+    },
     "baseTemplate": "plotly_white",
     "gridColor": "#EBEBEB",
     "secondaryTextColor": "#807F83",
@@ -268,7 +364,13 @@
   "excalidraw": {
     "strokeColor": "#222222",
     "backgroundColor": "#FFFFFF",
-    "fillColors": ["#FF7F66", "#222222", "#807F83", "#5B9A6B", "#D4A544"],
+    "fillColors": [
+      "#FF7F66",
+      "#222222",
+      "#807F83",
+      "#5B9A6B",
+      "#D4A544"
+    ],
     "textColor": "#3A393C",
     "fontFamily": 2,
     "fontSize": 16,
@@ -392,6 +494,507 @@
         "freshness": "current",
         "note": "Four brand pillars (Stakeholder-Proof Strategy, Intelligence-Led Advisory, Strategy Meets Communications, Crisis-Tested Government-Connected) — grounds Sage identity: knowledge-led, analytical, evidence-grounded"
       }
-    ]
+    ],
+    "visual_grammar": {
+      "motifs": {
+        "status": "approved",
+        "required": false,
+        "evidence": {
+          "tier": "live-site",
+          "source": "20-image bridge library + manifest motifAffinity 'bridge-pillar' + pre-built divider/pattern marks"
+        },
+        "selected": "cable-span",
+        "candidates": [
+          {
+            "id": "cable-span",
+            "label": "Cable-span",
+            "spec": {
+              "name": "Bridge / cable-span family",
+              "geometry": "rectilinear",
+              "meaning": "spanning the gap, engineered connection, strategic structure",
+              "marks": [
+                {
+                  "name": "cable-span",
+                  "role": "identity",
+                  "asset": "assets/svg/motif-cable-span.svg",
+                  "desc": "pylon + radiating coral cable fan"
+                },
+                {
+                  "name": "pillar-divider",
+                  "role": "divider",
+                  "asset": "assets/svg/divider-full.svg",
+                  "desc": "full-width bridge-pillar divider (pre-existing)"
+                },
+                {
+                  "name": "pillar-divider-min",
+                  "role": "divider-min",
+                  "asset": "assets/svg/divider-minimal.svg"
+                }
+              ]
+            },
+            "assets": [
+              "assets/svg/motif-cable-span.svg",
+              "assets/svg/divider-full.svg",
+              "assets/svg/divider-minimal.svg",
+              "assets/svg/divider-short.svg"
+            ],
+            "evidence": {
+              "tier": "live-site"
+            }
+          },
+          {
+            "id": "catenary",
+            "label": "Catenary arc",
+            "spec": {
+              "name": "Catenary suspension arc",
+              "geometry": "curvilinear",
+              "marks": [
+                {
+                  "name": "catenary",
+                  "role": "identity",
+                  "asset": "assets/svg/_candidates/motif-catenary.svg"
+                }
+              ]
+            },
+            "assets": [
+              "assets/svg/_candidates/motif-catenary.svg"
+            ],
+            "evidence": {
+              "tier": "proposed"
+            }
+          },
+          {
+            "id": "deck-lattice",
+            "label": "Deck-lattice",
+            "spec": {
+              "name": "Structural deck truss",
+              "geometry": "rectilinear-lattice",
+              "marks": [
+                {
+                  "name": "deck-lattice",
+                  "role": "identity",
+                  "asset": "assets/svg/_candidates/motif-deck-lattice.svg"
+                }
+              ]
+            },
+            "assets": [
+              "assets/svg/_candidates/motif-deck-lattice.svg"
+            ],
+            "evidence": {
+              "tier": "proposed"
+            }
+          }
+        ]
+      },
+      "backgrounds": {
+        "status": "approved",
+        "required": false,
+        "evidence": {
+          "tier": "live-site",
+          "source": "website capture (darkSectionFrequency 3) + image overlay policy (structural dark #222 at N%, never coral)"
+        },
+        "selected": "ink-paper",
+        "candidates": [
+          {
+            "id": "ink-paper",
+            "label": "Ink & paper",
+            "spec": {
+              "canvases": [
+                {
+                  "name": "ink",
+                  "role": "primary-dark",
+                  "css": "#222222"
+                },
+                {
+                  "name": "paper",
+                  "role": "primary-light",
+                  "css": "#FFFFFF"
+                },
+                {
+                  "name": "paper-alt",
+                  "role": "surface-light",
+                  "css": "#F5F5F5"
+                }
+              ],
+              "rhythm": "dark-light-indexed",
+              "darkFrequency": 3,
+              "photo": {
+                "treatment": "documentary-muted, full-bleed hero",
+                "overlay": "structural dark #222 at NN%, never coral"
+              }
+            },
+            "tokens": [
+              "--canvas-ink",
+              "--canvas-paper",
+              "--canvas-paper-alt"
+            ],
+            "evidence": {
+              "tier": "live-site"
+            }
+          },
+          {
+            "id": "graphite-panel",
+            "label": "Graphite panel",
+            "spec": {
+              "canvases": [
+                {
+                  "name": "graphite",
+                  "role": "primary-dark",
+                  "css": "linear-gradient(160deg,#222222,#2C2C2E)"
+                }
+              ]
+            },
+            "tokens": [
+              "--canvas-graphite"
+            ],
+            "evidence": {
+              "tier": "proposed"
+            }
+          },
+          {
+            "id": "coral-edge",
+            "label": "Coral-edge light",
+            "spec": {
+              "canvases": [
+                {
+                  "name": "coral-edge",
+                  "role": "primary-light",
+                  "css": "#F5F5F5",
+                  "accent": "top-rule 5px #FF7F66"
+                }
+              ]
+            },
+            "evidence": {
+              "tier": "proposed"
+            }
+          }
+        ]
+      },
+      "gradients": {
+        "status": "approved",
+        "required": false,
+        "evidence": {
+          "tier": "proposed",
+          "source": "restrained ornament axis; depth via photo + hairline (strongest divergence from stromy stage-light glow)"
+        },
+        "selected": "structural-none",
+        "candidates": [
+          {
+            "id": "structural-none",
+            "label": "Structural / none",
+            "spec": {
+              "policy": "restrained — no decorative canvas gradients; depth via photo + hairline",
+              "canvasGradients": "none"
+            },
+            "evidence": {
+              "tier": "proposed"
+            }
+          },
+          {
+            "id": "graphite-sheen",
+            "label": "Graphite sheen",
+            "spec": {
+              "policy": "one subtle linear sheen on dark hero panels only",
+              "css": "linear-gradient(120deg,#222222,#33333A 55%,#222222)"
+            },
+            "tokens": [
+              "--gradient-graphite-sheen"
+            ],
+            "evidence": {
+              "tier": "proposed"
+            }
+          },
+          {
+            "id": "coral-dusk",
+            "label": "Coral dusk (edge only)",
+            "spec": {
+              "policy": "coral->transparent on CTAs/edges only, never canvas",
+              "css": "linear-gradient(90deg,#222222 60%,#FF7F66 140%)"
+            },
+            "tokens": [
+              "--gradient-coral-dusk"
+            ],
+            "evidence": {
+              "tier": "proposed"
+            }
+          }
+        ]
+      },
+      "elevation": {
+        "status": "approved",
+        "required": false,
+        "evidence": {
+          "tier": "live-site",
+          "source": "website texture: glossy surfaceFinish + medium shadowDepth + slight cornerRadius (Duke has depth; stromy is flat)"
+        },
+        "selected": "soft-luxury-lift",
+        "candidates": [
+          {
+            "id": "soft-luxury-lift",
+            "label": "Soft luxury lift",
+            "spec": {
+              "shadows": [
+                "--elev-card medium soft on cards",
+                "--elev-sm subtle"
+              ],
+              "radius": "slight (8px cards)",
+              "hover": "lift",
+              "surface": "glossy",
+              "borders": "hairline 1px in ink at low opacity"
+            },
+            "tokens": [
+              "--elev-card",
+              "--elev-sm"
+            ],
+            "evidence": {
+              "tier": "live-site"
+            }
+          },
+          {
+            "id": "hairline-minimal",
+            "label": "Hairline + minimal shadow",
+            "spec": {
+              "shadows": [
+                "--elev-sm very subtle"
+              ],
+              "borders": "hairline-dominant",
+              "radius": "4px"
+            },
+            "tokens": [
+              "--elev-sm"
+            ],
+            "evidence": {
+              "tier": "proposed"
+            }
+          }
+        ]
+      },
+      "grid": {
+        "status": "approved",
+        "required": false,
+        "evidence": {
+          "tier": "proposed",
+          "source": "website layout: 12col-centered, spacious, symmetric, wide margins, thin-line dividers"
+        },
+        "selected": "centered-12col",
+        "candidates": [
+          {
+            "id": "centered-12col",
+            "label": "Centered 12-col ruler",
+            "spec": {
+              "columns": "12-col centered",
+              "gutter": "generous",
+              "maxWidth": "measured editorial",
+              "margins": "wide",
+              "symmetry": "symmetric",
+              "dividers": "thin-line rules"
+            },
+            "evidence": {
+              "tier": "live-site"
+            }
+          },
+          {
+            "id": "span-grid",
+            "label": "Span-grid",
+            "spec": {
+              "columns": "12-col whose vertical rhythm echoes cable spacing (ties grid to motif)"
+            },
+            "evidence": {
+              "tier": "proposed"
+            }
+          }
+        ]
+      },
+      "iconography": {
+        "status": "approved",
+        "required": false,
+        "evidence": {
+          "tier": "proposed",
+          "source": "stroke-led geometric, rectilinear; OPEN/extensible set — not brand-bound (operator note 2026-07-01)"
+        },
+        "selected": "hairline-rectilinear",
+        "candidates": [
+          {
+            "id": "hairline-rectilinear",
+            "label": "Hairline rectilinear",
+            "spec": {
+              "style": "stroke-led geometric, rectilinear",
+              "strokeWeight": "1.5-2px",
+              "caps": "square",
+              "joins": "miter",
+              "fillVsLine": "line-dominant, no fills, no dot terminals",
+              "extensible": true,
+              "setPolicy": "OPEN set — icons are drawn to this STYLE on demand per slide need. The sample is representative, not a closed brand-bound set; the agent may add/select as many icons as a deck requires, keeping the style.",
+              "sample": [
+                "target-check",
+                "gauge",
+                "arrow-up-right"
+              ]
+            },
+            "tokens": [
+              "--icon-stroke"
+            ],
+            "evidence": {
+              "tier": "proposed"
+            }
+          },
+          {
+            "id": "span-line",
+            "label": "Span-line icons",
+            "spec": {
+              "style": "glyphs built from bridge-cable diagonals; thematic but busier",
+              "caps": "square",
+              "extensible": true
+            },
+            "evidence": {
+              "tier": "proposed"
+            }
+          }
+        ]
+      },
+      "motion": {
+        "status": "approved",
+        "required": false,
+        "evidence": {
+          "tier": "proposed",
+          "source": "website motion: subtle fade + lift-on-hover, cinematic-relaxed"
+        },
+        "selected": "span-draw",
+        "candidates": [
+          {
+            "id": "span-draw",
+            "label": "Span-draw",
+            "spec": {
+              "behaviors": [
+                {
+                  "name": "span-draw",
+                  "trigger": "cover/hero entrance",
+                  "desc": "cables draw pylon->deck ('the bridge builds'), then settle; content fades up"
+                },
+                {
+                  "name": "lift",
+                  "trigger": "card hover",
+                  "desc": "soft lift"
+                }
+              ],
+              "intensity": "subtle",
+              "speed": "cinematic-relaxed"
+            },
+            "evidence": {
+              "tier": "proposed"
+            }
+          },
+          {
+            "id": "quiet-fade",
+            "label": "Quiet fade",
+            "spec": {
+              "behaviors": [
+                {
+                  "name": "fade-lift",
+                  "trigger": "entrance",
+                  "desc": "pure fade-up + lift, no signature draw"
+                }
+              ],
+              "intensity": "minimal"
+            },
+            "evidence": {
+              "tier": "proposed"
+            }
+          }
+        ]
+      },
+      "patterns": {
+        "status": "approved",
+        "required": false,
+        "evidence": {
+          "tier": "source-artifact",
+          "source": "pre-built pattern-tile.svg (bridge-column pattern at low opacity)"
+        },
+        "selected": "bridge-column",
+        "candidates": [
+          {
+            "id": "bridge-column",
+            "label": "Bridge-column pattern",
+            "spec": {
+              "name": "Bridge-column repeat",
+              "usage": "low-opacity texture panels only (<=15%)",
+              "tile": "assets/svg/pattern-tile.svg"
+            },
+            "assets": [
+              "assets/svg/pattern-tile.svg"
+            ],
+            "evidence": {
+              "tier": "source-artifact"
+            }
+          }
+        ]
+      },
+      "photo": {
+        "status": "n-a",
+        "required": false,
+        "evidence": {
+          "tier": "derived",
+          "source": "redundant with images.manifest + overlay policy"
+        },
+        "spec": {
+          "note": "derived — photo treatment lives in images.manifest (documentary-muted, dark-NN overlay)"
+        }
+      }
+    },
+    "treatments": {
+      "default": "documentary-noir",
+      "note": "Named brand 'house looks' applied to photography DOWNSTREAM (format-MCP render + website CSS) — never pre-baked into the shipped library. Restrained, palette-derived; one clean base image x the treatment = flexible reuse. Overlays (structural dark #222 at N%, never coral) are separate text-safety layers, not treatments. ORG-PLAN-045.",
+      "looks": {
+        "documentary-noir": {
+          "label": "Documentary Noir",
+          "usage": "Editorial black-and-white + fine grain — the timeless default for dividers, content backgrounds, and dense sections. Duke's documentary bridge register.",
+          "css_filter": "grayscale(1) contrast(1.08)",
+          "grain": {
+            "opacity": 0.08,
+            "blend": "overlay"
+          }
+        },
+        "ink-duotone": {
+          "label": "Ink Duotone",
+          "usage": "Signature structural ink wash for covers + hero moments — deep ink shadows through graphite mids to paper highlights, applied transparently so the photo breathes. The engineered-luxury signature.",
+          "css_filter": "grayscale(1) contrast(1.05)",
+          "duotone": {
+            "shadows": "#141414",
+            "mid": "#3A393C",
+            "highlights": "#F5F5F5",
+            "strength": 0.42
+          },
+          "grain": {
+            "opacity": 0.07,
+            "blend": "overlay"
+          }
+        },
+        "coral-graded": {
+          "label": "Coral Graded",
+          "usage": "Restrained cinematic grade for section imagery — mostly neutral, a whisper of coral in the shadows and warm coral-tint in the highlights. Golden-hour nod, kept subtle.",
+          "css_filter": "saturate(0.45) contrast(1.05)",
+          "duotone": {
+            "shadows": "#2A1512",
+            "mid": "#5A595C",
+            "highlights": "#FFE8E3",
+            "strength": 0.3
+          },
+          "grain": {
+            "opacity": 0.08,
+            "blend": "overlay"
+          }
+        },
+        "steel-vignette": {
+          "label": "Steel Vignette",
+          "usage": "Dramatic monochrome + vignette for a single hero moment — draws the eye to the span. Use sparingly.",
+          "css_filter": "grayscale(1) contrast(1.10)",
+          "vignette": 0.5,
+          "grain": {
+            "opacity": 0.1,
+            "blend": "overlay"
+          }
+        }
+      }
+    }
   }
 }

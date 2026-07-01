@@ -651,3 +651,38 @@
   outline: 2px solid var(--brand-accent);
   outline-offset: 2px;
 }
+
+/* --- visual grammar tokens (GATE A approved 2026-07-01) --- */
+:root {
+  --canvas-ink:        #222222;
+  --canvas-paper:      #FFFFFF;
+  --canvas-paper-alt:  #F5F5F5;
+  --canvas-graphite:   linear-gradient(160deg,#222222,#2C2C2E);
+  --elev-card:         0 8px 24px rgba(34,34,34,0.14);
+  --elev-sm:           0 2px 8px rgba(34,34,34,0.08);
+  --icon-stroke:       1.75px;
+}
+
+/* --- image treatment system (Component T; ORG-PLAN-045) ---
+   Definition of record: charter.expression.treatments. Applied downstream
+   (format-MCP render + website .img-treatment), never pre-baked. --- */
+:root {
+  --treatment-default: documentary-noir;
+  --treatment-documentary-noir-filter:    grayscale(1) contrast(1.08);
+  --treatment-documentary-noir-grain:     0.08;
+  --treatment-ink-duotone-filter:         grayscale(1) contrast(1.05);
+  --treatment-ink-duotone-shadow:         #141414;
+  --treatment-ink-duotone-mid:            #3A393C;
+  --treatment-ink-duotone-highlight:      #F5F5F5;
+  --treatment-ink-duotone-strength:       0.42;
+  --treatment-ink-duotone-grain:          0.07;
+  --treatment-coral-graded-filter:        saturate(0.45) contrast(1.05);
+  --treatment-coral-graded-shadow:        #2A1512;
+  --treatment-coral-graded-mid:           #5A595C;
+  --treatment-coral-graded-highlight:     #FFE8E3;
+  --treatment-coral-graded-strength:      0.30;
+  --treatment-coral-graded-grain:         0.08;
+  --treatment-steel-vignette-filter:      grayscale(1) contrast(1.10);
+  --treatment-steel-vignette-vignette:    0.5;
+  --treatment-steel-vignette-grain:       0.10;
+}

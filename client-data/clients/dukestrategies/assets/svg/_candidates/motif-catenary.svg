@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" width="200" height="120">
+  <!-- Alternate: catenary suspension arc -->
+  <rect x="34" y="18" width="5" height="90" rx="1" fill="#FF7F66"/>
+  <rect x="161" y="18" width="5" height="90" rx="1" fill="#FF7F66"/>
+  <rect x="14" y="106" width="172" height="3" fill="#FF7F66"/>
+  <path d="M36 26 Q100 118 164 26" fill="none" stroke="#FF7F66" stroke-width="2.2"/>
+</svg>

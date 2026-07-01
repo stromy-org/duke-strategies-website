@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" width="200" height="160">
+  <!-- Cable-span identity mark (coral-mono; works on ink or paper) -->
+  <rect x="97" y="16" width="6" height="126" rx="1" fill="#FF7F66"/>
+  <rect x="16" y="138" width="168" height="3" fill="#FF7F66"/>
+  <g stroke="#FF7F66" stroke-width="1.4">
+    <line x1="100" y1="22" x2="24" y2="138" opacity="0.85"/>
+    <line x1="100" y1="22" x2="52" y2="138" opacity="0.70"/>
+    <line x1="100" y1="22" x2="78" y2="138" opacity="0.55"/>
+    <line x1="100" y1="22" x2="122" y2="138" opacity="0.55"/>
+    <line x1="100" y1="22" x2="148" y2="138" opacity="0.70"/>
+    <line x1="100" y1="22" x2="176" y2="138" opacity="0.85"/>
+  </g>
+</svg>
