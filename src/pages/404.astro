@@ -1,14 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { notFound } from "../data/content/notFound";
 ---
 
-<BaseLayout title="Page not found" pathname="/404" noIndex={true}>
+<BaseLayout title={notFound.title} pathname="/404" noIndex={true}>
   <main style="padding: 6rem 1.5rem; max-width: 48rem; margin: 0 auto;">
     <h1>404</h1>
-    <p>The page you requested could not be found.</p>
-    <p>Deze pagina bestaat niet (meer).</p>
+    <p>{notFound.bodyEn}</p>
+    <p>{notFound.bodyNl}</p>
     <p>
-      <a href="/en/">Return home</a> · <a href="/nl/">Terug naar home</a>
+      <a href="/en/">{notFound.homeEn}</a> · <a href="/nl/">{notFound.homeNl}</a>
     </p>
   </main>
 </BaseLayout>

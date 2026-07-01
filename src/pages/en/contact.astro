@@ -21,8 +21,8 @@ const inquiryOptions = [
     description: t('contact.inquiry.general.description'),
     href: createMailto(
       site.contact.email,
-      "[Website] General Enquiry",
-      `${t('contact.mailto.greeting')}\n\n${t('contact.mailto.discuss')}\n\n${t('contact.mailto.company')}\n${t('contact.mailto.timeline')}\n\n${t('contact.mailto.regards')}`
+      t('contact.inquiry.general.subject'),
+      t('contact.inquiry.general.body')
     ),
     label: t('contact.inquiry.general.label'),
   },
@@ -31,8 +31,8 @@ const inquiryOptions = [
     description: t('contact.inquiry.advisory.description'),
     href: createMailto(
       site.contact.email,
-      "[Website] Strategic Advisory",
-      `${t('contact.mailto.greeting')}\n\n${t('contact.mailto.advisory')}\n\n${t('contact.mailto.organization')}\n${t('contact.mailto.context')}\n${t('contact.mailto.timeline')}\n\n${t('contact.mailto.regards')}`
+      t('contact.inquiry.advisory.subject'),
+      t('contact.inquiry.advisory.body')
     ),
     label: t('contact.inquiry.advisory.label'),
   },
@@ -41,8 +41,8 @@ const inquiryOptions = [
     description: t('contact.inquiry.crisis.description'),
     href: createMailto(
       founders[0].email,
-      "[Urgent] Crisis or Media Support",
-      `${t('contact.mailto.greetingIngo')}\n\n${t('contact.mailto.urgent')}\n\n${t('contact.mailto.organization')}\n${t('contact.mailto.immediateIssue')}\n${t('contact.mailto.urgency')}\n${t('contact.mailto.phone')}\n\n${t('contact.mailto.regards')}`
+      t('contact.inquiry.crisis.subject'),
+      t('contact.inquiry.crisis.body')
     ),
     label: t('contact.inquiry.crisis.label'),
   },
@@ -51,8 +51,8 @@ const inquiryOptions = [
     description: t('contact.inquiry.academy.description'),
     href: createMailto(
       site.contact.email,
-      "[Website] Duke Academy",
-      `${t('contact.mailto.greeting')}\n\n${t('contact.mailto.academy')}\n\n${t('contact.mailto.team')}\n${t('contact.mailto.program')}\n${t('contact.mailto.participants')}\n\n${t('contact.mailto.regards')}`
+      t('contact.inquiry.academy.subject'),
+      t('contact.inquiry.academy.body')
     ),
     label: t('contact.inquiry.academy.label'),
   },
@@ -63,8 +63,8 @@ const specializedInquiries = inquiryOptions.slice(1);
 ---
 
 <PageLayout
-  title="Contact"
-  description="Contact Duke Strategies in 's-Hertogenbosch to discuss stakeholder strategy, corporate affairs, crisis communications, or Duke Academy."
+  title={t('seo.contact.title')}
+  description={t('seo.contact.desc')}
   pathname="/en/contact"
   ogImage="/assets/images/bridge-fog-water-minimalist.jpg"
   lang={lang}
@@ -198,7 +198,7 @@ const specializedInquiries = inquiryOptions.slice(1);
       <div class="map-embed animate stagger-2">
         <iframe
           src={osmEmbedUrl}
-          title="Duke Strategies office location"
+          title={t('contact.mapTitle')}
           loading="lazy"
           referrerpolicy="no-referrer"
         ></iframe>

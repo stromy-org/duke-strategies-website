@@ -17,8 +17,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run tokens
-      - run: npx astro check
+      - run: npm run check
       - run: npm run build
+      - name: Internal-link + asset integrity (WS3.1)
+        run: npm run check:links
+      - name: i18n key integrity (WS3.2)
+        run: npm run check:i18n
       - name: Smoke test built site
         run: |
           npx --yes serve -s dist -l 4321 &

@@ -1,4 +1,4 @@
-export default {
+const en = {
   // Navigation
   'nav.home': 'Home',
   'nav.who-we-are': 'Who We Are',
@@ -162,6 +162,14 @@ export default {
   'contact.inquiry.academy.title': 'Duke Academy',
   'contact.inquiry.academy.description': 'Contact Duke Strategies about executive training, stakeholder dialogue, media preparation, or a tailored academy program.',
   'contact.inquiry.academy.label': 'Open Academy Email',
+  'contact.inquiry.general.subject': '[Website] General Enquiry',
+  'contact.inquiry.general.body': 'Hello Duke Strategies,\n\nI would like to discuss:\n\nCompany:\nTimeline:\n\nBest regards,',
+  'contact.inquiry.advisory.subject': '[Website] Strategic Advisory',
+  'contact.inquiry.advisory.body': 'Hello Duke Strategies,\n\nWe would like support with strategic advisory on:\n\nOrganization:\nContext:\nTimeline:\n\nBest regards,',
+  'contact.inquiry.crisis.subject': '[Urgent] Crisis or Media Support',
+  'contact.inquiry.crisis.body': 'Hello Ingo,\n\nWe need urgent support regarding:\n\nOrganization:\nImmediate issue:\nUrgency / deadline:\nPhone number:\n\nBest regards,',
+  'contact.inquiry.academy.subject': '[Website] Duke Academy',
+  'contact.inquiry.academy.body': 'Hello Duke Strategies,\n\nWe are interested in Duke Academy support for:\n\nTeam / organization:\nPreferred program:\nExpected participants:\n\nBest regards,',
   'contact.mailto.greeting': 'Hello Duke Strategies,',
   'contact.mailto.greetingIngo': 'Hello Ingo,',
   'contact.mailto.discuss': 'I would like to discuss:',
@@ -213,6 +221,33 @@ export default {
   'aria.langSwitch': 'Switch to Dutch',
   'aria.mainNav': 'Main navigation',
   'aria.toggleMenu': 'Toggle menu',
+
+  // SEO — page <title> + <meta description> (editable; nl inherits en unless overridden)
+  'seo.home.title': 'Corporate Strategy & Stakeholder Advisory',
+  'seo.home.desc': 'Duke Strategies helps business leaders build stakeholder-proof strategy at the intersection of corporate strategy, corporate affairs, and communications.',
+  'seo.whoWeAre.title': 'Who We Are',
+  'seo.whoWeAre.desc': 'Meet the seasoned experts at Duke Strategies with decades of experience in high-stakes business, political, and communications environments.',
+  'seo.whatWeDo.title': 'What We Do',
+  'seo.whatWeDo.desc': 'Duke Strategies uses an Analyse, Create & Execute model to build stakeholder-proof strategy, narrative, and implementation.',
+  'seo.dukeAcademy.title': 'Duke Academy',
+  'seo.dukeAcademy.desc': 'Duke Academy is Duke Strategies\' AI-powered executive training branch for high-stakes communication, stakeholder dialogue, and strategic leadership.',
+  'seo.insights.title': 'Insights & Case Studies',
+  'seo.insights.desc': 'Real thinking from real engagements: Duke Strategies case studies, client outcomes, and thought leadership.',
+  'seo.contact.title': 'Contact',
+  'seo.contact.desc': 'Contact Duke Strategies in \'s-Hertogenbosch to discuss stakeholder strategy, corporate affairs, crisis communications, or Duke Academy.',
+
+  // Image + logo alt text (editable)
+  'brand.logoAlt': 'Duke Strategies',
+  'brand.academyAlt': 'Duke Academy',
+  'img.erasmusBridge': 'Erasmus Bridge, Rotterdam',
+  'img.pythonBridge': 'Python Bridge, Amsterdam',
+  'img.bridgeGoldenHour': 'Bridge at golden hour',
+  'img.modernBridge': 'Modern bridge over calm water',
+
+  // Map embed title (locale-specific; nl overrides)
+  'contact.mapTitle': 'Duke Strategies office location',
 } as const;
 
-export type UIKey = keyof typeof import('./ui.en').default;
+export default en;
+
+export type UIKey = keyof typeof en;
