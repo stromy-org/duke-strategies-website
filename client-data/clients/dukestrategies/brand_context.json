@@ -3,7 +3,7 @@
   "schemaVersion": 1,
   "version": "1.0",
   "generatedFrom": {
-    "charterSha": "c6f3313dc38481dbdc7a640e28fd82c5b422a5511ba8c22ff68c543df2daf3cf",
+    "charterSha": "f1834940458410b3922a9cdc3c2a39f75356cbf822c93ae28b9bf7065b11f6ba",
     "compiler": "1.0"
   },
   "tier": "producer",
@@ -376,6 +376,11 @@
           "tier": "live-site"
         },
         "selected": "ink-paper",
+        "cssTokens": {
+          "--bg-ink": "#222222",
+          "--bg-paper": "#FFFFFF",
+          "--bg-paper-alt": "#F5F5F5"
+        },
         "spec": {
           "canvases": [
             {
@@ -426,6 +431,12 @@
           "tier": "live-site"
         },
         "selected": "soft-luxury-lift",
+        "cssTokens": {
+          "--elev-sm": "0 1px 2px rgba(34,34,34,0.06)",
+          "--elev-card": "0 6px 20px rgba(34,34,34,0.10)",
+          "--radius-card": "8px",
+          "--border-hairline": "1px solid rgba(34,34,34,0.12)"
+        },
         "spec": {
           "shadows": [
             "--elev-card medium soft on cards",
@@ -448,6 +459,12 @@
           "tier": "live-site"
         },
         "selected": "centered-12col",
+        "cssTokens": {
+          "--grid-max": "72rem",
+          "--grid-gutter": "2rem",
+          "--grid-margin": "6vw",
+          "--rule-divider": "1px solid rgba(34,34,34,0.12)"
+        },
         "spec": {
           "columns": "12-col centered",
           "gutter": "generous",
@@ -489,6 +506,10 @@
           "tier": "proposed"
         },
         "selected": "span-draw",
+        "cssTokens": {
+          "--motion-duration": "480ms",
+          "--motion-ease": "cubic-bezier(0.22, 1, 0.36, 1)"
+        },
         "spec": {
           "behaviors": [
             {
