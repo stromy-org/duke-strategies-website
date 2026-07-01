@@ -1,47 +1,143 @@
 ---
 name: website-maintain
 description: >
-  Maintain and update the Duke Strategies corporate website (duke-strategies-website).
-  Handles all routine content and configuration changes via natural language: updating
-  services, capabilities, case studies, founders and team, Duke Academy programs,
-  insights, testimonials, homepage stats, navigation, office contact details, brand
-  tokens, and visual/responsive reviews. Use this skill whenever the user wants to
-  add, edit, or remove content on the Duke Strategies website — even if they don't
-  say "website" explicitly. Trigger on phrases like "update the team", "add a case
-  study", "change the tagline", "update services", "add an academy program", "refresh
-  brand tokens", "add a testimonial", "update the homepage", "change the office
-  address", "update navigation", "review the design", "audit the layout", "check
-  mobile", "use vision", "screenshot the Duke site", or any request that implies
-  modifying or visually reviewing the Duke Strategies website.
+  Maintain and update the Duke Strategies Astro website. Handles all routine content
+  and configuration changes via natural language: adding blog posts or insights,
+  updating services, case studies, team, stats, navigation, brand tokens, dark mode,
+  and SEO. Use this skill whenever the user wants to add, edit, or remove website
+  content, refresh the brand, or make any structural change — even if they don't say
+  "website" explicitly. Trigger on phrases like "add a blog post", "new case study",
+  "update the team", "refresh brand tokens", "update the homepage", "change the
+  tagline", "add a nav item", "update SEO", "review the design", "audit the layout",
+  "check responsiveness", "use vision", "screenshot the pages", or any request that
+  implies modifying or visually reviewing the Duke Strategies website.
 ---
 
-# Website Maintain — Duke Strategies
+# Website Maintain
 
-This skill guides you through every routine maintenance task on the Duke Strategies
-corporate website. The site is an Astro 6 static site with Tailwind CSS 4 (via Vite
-plugin), MDX support, and a brand token pipeline driven by `src/brand/charter.json`.
+Guides every routine maintenance task on the **Duke Strategies** website — an Astro
+static site with Tailwind CSS 4 and a brand token pipeline. All content lives in
+the repo; there is no CMS, no database, no external API.
+
+## Content model — corporate vs Cargo-style
+
+This template serves two content models. **Detect which one this site uses before
+routing any task:**
+
+- **Cargo-style editorial portfolio** (artists, photographers, designers) — signalled
+  by `charter.json` `meta.style: "cargo"`, **or** a `src/data/content.ts` exporting
+  `series`/`works`, **or** a fixed-index `SiteLayout.astro`. If so, **ignore the
+  corporate sections below** (blog, case studies, services, team, stats, dark mode)
+  and use the Cargo router just below. Full pattern + skeleton:
+  `astro-website-template/references/cargo-style-recipe.md`.
+- **Corporate / marketing site** (default) — MDX collections + `src/data/*`. Use the
+  Task Router and Content Operations sections further down.
+
+### Cargo-style content operations
+
+All edits live in `src/data/content.ts`; artwork images in `public/works/`. Adding a
+series auto-creates its `/<id>` page **and** its index entry (both generated from
+`series[]`), so no routing/nav edits are needed.
+
+| User says… | Do |
+|---|---|
+| add a work to a collection | append `{ title, meta, image?, ratio }` to that series' `works[]` — `ratio` ∈ portrait/square/landscape/wide |
+| add a collection | append `{ id, title, blurb, meta, works[] }` to `series[]` (`id` = URL slug) |
+| edit a collection's text | edit its `title` / `blurb` / `meta` |
+| reorder | reorder `works[]` (within a series) or `series[]` (collections + their `0N` numbering) |
+| add artwork images | web-size (~2000px long edge, < 500 KB), drop in `public/works/`, set `image: "/works/<file>"` (omit `image` → placeholder) |
+| update About / CV / Contact | edit `about.paragraphs` / `cv[]` / `contact` |
+
+Preview with `npm run dev`; deploy by pushing to `main`. Brand/visual-QA/deploy
+sections below apply to both models.
+
+## Content-only homes — the broker ownership boundary (directive)
+
+This site's `.asset-broker.json` lets the client **self-publish edits to their own
+words and pictures** only when those live in a *content-only home*. When you add or
+edit content, you MUST keep it inside one of these five homes so the client keeps
+ownership of it — and keep route/config/behaviour/brand out:
+
+| Home | Put here | Never here |
+|---|---|---|
+| `src/content/**` | Astro/MDX collection entries | `src/content.config.ts` (schema — structural) |
+| `src/data/content/**` | typed displayed copy, people/services/case-study **values**, contact text | routes, hrefs, shared types, analytics IDs, behaviour flags |
+| `src/i18n/content/**` | localized displayed **values** (nav/section labels, 404 text) | `languages`/`defaultLang` config, `ui.keys.json`, `utils.ts`/`pickLocale.ts`, `glossary.md`/`brand-voice.md` |
+| `src/assets/content/**` | imported/optimized **content** imagery | logos, design-system/brand assets |
+| `public/content/**` | static content images/video/downloads | `staticwebapp.config.json`, JS, `CNAME`, robots, favicons, canonical logos |
+
+**Three hard rules when you touch content:**
+
+1. **Use a home.** New copy/data/media goes into the matching home above — never a
+   mixed parent (`src/data/`, `src/i18n/`, `src/assets/`, `public/` root).
+2. **Split values from structure.** When a module mixes displayed copy with routes,
+   types, hrefs, or config, move only the **values** into a `content/` home and keep
+   the structural fields in the original (review-gated) module, composing them back
+   together. Never inline client-facing text directly into a `.astro`
+   component/page/layout — drive page `title`/`description` from data/i18n values.
+3. **Localized labels are content.** A "rename the menu/section label" or "change the
+   404 text" request edits the **value** under `src/i18n/content/**` (self-publishing);
+   only the *key/shape* (`ui.keys.json`) and brand-voice files stay gated.
+
+The meta-repo audit (`scripts/audit-asset-broker-coverage.py`) fails CI if content
+escapes a home or a protected file lands in the self-publishing lane, so this is a
+mechanical boundary, not a style preference. Full model:
+`references/agent-surface-contract.md` → "Broker content-ownership".
+
+## Table of Contents
+
+1. [Quick Orientation](#quick-orientation)
+2. [Maintenance Log](#maintenance-log)
+3. [Task Router](#task-router)
+4. [Content Operations](#content-operations)
+5. [Site Data](#site-data)
+6. [Refresh Brand Tokens](#refresh-brand-tokens)
+7. [Dark Mode](#dark-mode)
+8. [Update Navigation](#update-navigation)
+9. [Update SEO](#update-seo)
+10. [Visual QA Protocol](#visual-qa-protocol)
+11. [Build & Deploy](#build--deploy)
+12. [Common Patterns Reference](#common-patterns-reference)
+13. [Site Configuration](#site-configuration)
 
 ---
 
-## Maintenance Log (cross-session handoff)
+## Quick Orientation
 
-Every maintenance session must start by reading and end by updating
+<!-- SITE-SPECIFIC: repo-structure -->
+See the repo's CLAUDE.md for the full directory tree. Key landmarks:
+
+- **Content source** — MDX collections in `src/content/` OR TypeScript data files
+  in `src/data/` (site-specific; check CLAUDE.md)
+- **Brand data** — `client-data/clients/dukestrategies/` (charter.json, logos,
+  images) — committed slice, do not edit charter.json directly
+- **Generated files (never edit directly)**:
+  - `src/styles/brand-tokens.css` (or `client-data.css`) — regenerate with
+    `npm run tokens`
+  - `src/lib/tokens.ts` — regenerate with `npm run tokens`
+- **Dev server**: `npm run dev` (localhost:)
+- **Build**: `npm run build` (runs token generation + Astro build)
+<!-- /SITE-SPECIFIC -->
+
+---
+
+## Maintenance Log
+
+Every session must start by reading and end by updating
 `.build-history/MAINTENANCE_LOG.md`. This file captures decisions, preferences,
-and quirks that live outside the code and git history — essential for picking up
-work across sessions without re-asking settled questions.
+and quirks that live outside code and git history.
 
 ### First thing in ANY session
 
 1. Check whether `.build-history/MAINTENANCE_LOG.md` exists.
-2. **If it exists**: read it in full before touching anything. Note user
-   aesthetic preferences, locked site decisions, and discovered quirks. Start
-   from `Next action`. Do not re-propose approaches listed as off-limits.
-3. **If it does not exist** (first maintenance session, or inherited site):
+2. **If it exists**: read it in full before touching anything. Note aesthetic
+   preferences, locked decisions, and discovered quirks. Start from `Next action`.
+   Do not re-propose approaches listed as off-limits.
+3. **If it does not exist** (first session or inherited site):
    - Create `.build-history/` if absent
    - Copy the template from stromy-org's
-     `website-builder/references/maintenance-log-template.md`
-   - Fill the Status Dashboard from the current site state (and build log if
-     present in `.build-history/BUILD_LOG.md`)
+     `astro-website-template/references/maintenance-log-template.md`
+   - Fill the Status Dashboard from current site state
    - Save before doing any content or design work
 
 ### When to update the log
@@ -58,643 +154,290 @@ work across sessions without re-asking settled questions.
 ### Handoff quality bar
 
 Before ending a session: *"If a fresh agent read only `MAINTENANCE_LOG.md` and
-`SKILL.md`, could they resume this work without asking the user anything?"* If
-no, add what's missing before closing.
-
----
-
-**Unlike typical Astro content sites, Duke's content is NOT in MDX collections.**
-Almost all editorial content — services, capabilities, founders, associates, partners,
-case studies, academy programs, testimonials, insights — lives in one TypeScript file:
-`src/data/company.ts`. Each page imports from this file and renders it. This is the
-first thing to understand before editing anything.
-
-## Quick Orientation
-
-```
-duke-strategies-website/
-├── src/
-│   ├── client-data/              ← Git submodule (charter.json + logos + images)
-│   │   └── clients/dukestrategies/  ← Brand source of truth (edit in client-data repo)
-│   │   ├── logos/                ← Brand logos
-│   │   └── images/               ← Brand imagery catalog
-│   ├── styles/
-│   │   ├── brand-tokens.css      ← GENERATED from charter.json — do not edit
-│   │   ├── tokens-semantic.css   ← Tier 2/3 semantic tokens (hand-written)
-│   │   └── global.css            ← Base styles, utilities
-│   ├── lib/
-│   │   └── tokens.ts             ← GENERATED TS module — do not edit
-│   ├── components/
-│   │   ├── layout/               ← Navigation.astro, Footer.astro
-│   │   ├── ui/                   ← Button, Card, Badge, Icon, Marquee, StatBlock,
-│   │   │                           InsightCard, ProgramCard, ServiceCard, TeamCard,
-│   │   │                           Testimonial, CTABand
-│   │   ├── sections/             ← (currently empty — sections live inline in pages)
-│   │   └── content/              ← (currently empty)
-│   ├── content/                  ← MDX collections — SCAFFOLDED BUT UNUSED
-│   │   ├── authors/ blog/ capabilities/ case-studies/ insights/ pages/
-│   ├── content.config.ts         ← Schemas for insights/pages/authors (empty collections)
-│   ├── i18n/
-│   │   ├── pickLocale.ts         ← Localized<T> type + pickLocale() resolver
-│   │   ├── utils.ts              ← useTranslations(), getLocaleFromUrl(), localizedPath()
-│   │   ├── ui.en.ts              ← English UI strings (source of truth)
-│   │   ├── ui.nl.ts              ← Dutch UI strings (derived via translation workflow)
-│   │   ├── glossary.md           ← Do-not-translate terms + preferred Dutch equivalents
-│   │   └── brand-voice.md        ← Tone, register, few-shot anchors for NL translation
-│   ├── data/
-│   │   ├── company.ts            ← PRIMARY CONTENT SOURCE — uses Localized<string>
-│   │   ├── site.ts               ← Site metadata, contact, office — Localized<string>
-│   │   ├── nav.ts                ← Top nav items (labelKey: UIKey, not label: string)
-│   │   └── stats.ts              ← Homepage stat ribbon — Localized<string> labels
-│   ├── layouts/
-│   │   ├── BaseLayout.astro      ← HTML shell, meta, nav, footer, hreflang tags
-│   │   ├── PageLayout.astro      ← Wraps BaseLayout for standard pages
-│   │   └── ArticleLayout.astro   ← For long-form articles (unused so far)
-│   └── pages/
-│       ├── index.astro           ← Root redirect → /en/
-│       ├── who-we-are.astro      ← Redirect stub → /en/who-we-are
-│       ├── what-we-do.astro      ← Redirect stub
-│       ├── duke-academy.astro    ← Redirect stub
-│       ├── insights.astro        ← Redirect stub
-│       ├── contact.astro         ← Redirect stub
-│       ├── services/             ← Redirect stubs for service detail pages
-│       ├── en/                   ← English pages (const lang = "en")
-│       │   ├── index.astro, who-we-are.astro, what-we-do.astro, ...
-│       │   └── services/[slug].astro
-│       └── nl/                   ← Dutch pages (const lang = "nl")
-│           ├── index.astro, who-we-are.astro, what-we-do.astro, ...
-│           └── services/[slug].astro
-├── public/assets/
-│   ├── images/                   ← Runtime-served images (mirrors src/brand/images/)
-│   ├── logos/                    ← Runtime-served logos (DukeStrategies_logo.svg etc.)
-│   ├── team/                     ← Team member photos
-│   └── video/                    ← Hero video (AquaductHarderwijk_1920x1080px.mp4)
-├── scripts/
-│   └── generate-tokens.ts        ← client-data charter.json → brand-tokens.css + tokens.ts
-├── .i18n/
-│   └── translation-ledger.json   ← Translation cache (git-tracked, source hashes)
-├── astro.config.mjs              ← Astro 6 config (MDX + sitemap + i18n + Tailwind Vite plugin)
-└── .github/workflows/deploy.yml  ← GitHub Pages deploy on push to main
-```
-
-**Generated files — never edit directly:**
-- `src/styles/brand-tokens.css` — regenerate with `npm run tokens`
-- `src/lib/tokens.ts` — regenerate with `npm run tokens`
-
-**Build commands:**
-- `npm run dev` — Dev server at `localhost:4321`
-- `npm run build` — Runs `tokens` then `astro build` → `dist/`
-- `npm run tokens` — Regenerate brand tokens from `src/brand/charter.json`
-- `npm run check` — Astro TypeScript diagnostics
-- `npm run preview` — Preview built site from `dist/`
-
-**Critical architecture notes:**
-1. **Editorial content lives in `src/data/company.ts`**, not in `src/content/`. The
-   `src/content/` folders exist from scaffolding but are empty and largely unwired.
-2. **Assets are duplicated**: `src/brand/images/` is the synced source; `public/assets/images/`
-   is what pages actually reference via runtime `/assets/images/*` URLs. If an image
-   changes, it must exist in both places (or be re-copied from `src/brand/` to `public/assets/`).
-3. **Team photos live in `public/assets/team/`** — referenced by absolute URL in
-   `src/data/company.ts` (e.g., `/assets/team/IngoHeijnen_grijs.jpg`).
-4. **Hero video** (`public/assets/video/AquaductHarderwijk_1920x1080px.mp4`) is loaded
-   by the homepage hero section. Poster is a still from the bridge image set.
-5. **Bilingual EN/NL** — prefix-default routing (`/en/*`, `/nl/*`). EN is source of
-   truth. NL translations managed via the i18n workflow below. Never edit NL content
-   directly — edit EN, then run the Translate Content workflow.
-6. **Tailwind 4 via Vite plugin**, not PostCSS — `@tailwindcss/vite` in `astro.config.mjs`.
-   Global CSS uses the Tailwind 4 `@import "tailwindcss"` syntax.
-
-## Architectural Invariants (enforce on every change)
-
-These are non-negotiable patterns baked into the Duke site. Never regress them.
-
-### Content architecture
-- **Services are the canonical "what we do" list.** They live in
-  `src/data/company.ts` → `services: Service[]` with a `slug` per entry.
-- **Every service has a detail page** at `/services/${slug}` via
-  `src/pages/services/[slug].astro` (dynamic route, `getStaticPaths()`).
-- **Homepage "Our Expertise" and `/what-we-do` both link to `/services/${slug}`**,
-  not to `/what-we-do` itself. Do not reintroduce a "Learn more → /what-we-do"
-  pattern.
-- **`capabilities` is deprecated.** It remains as an empty array in `company.ts`
-  for backward compatibility with the type export, but is not rendered anywhere.
-  Do not add entries to it. New "things we do" go under `services`.
-- **"Our Expertise" = `services.slice(0, 6)` on the homepage.** Featuring a
-  different subset = reorder `services` array, don't create a second array.
-
-### Visual invariants
-- `.img-cover > img` uses `position: absolute; inset: 0` — never percentage
-  height. A `min-height` on the parent + percentage child fails silently and
-  leaks the coral tint through.
-- Case-study image treatments cycle through `img-frame--offset-br / offset-tr /
-  border / offset-bl` × `img-cover--wide / hero / tall` per index. Do not ship
-  identical treatments on every case.
-- Case-study metric rows use `case-metrics--row` + `case-metrics--count-${N}`,
-  never `flex-wrap`. 4 metrics go 2×2 at narrow widths, 1×4 wide.
-- Insight cards are flex-column with `flex-grow: 1` on excerpt and
-  `margin-top: auto` on the link, so the CTA bottom-aligns across a grid row.
-- Contact page uses an OpenStreetMap iframe embed driven by `site.office.bbox`
-  + `site.office.lat/lon` — never a "MAP LOADING…" placeholder.
-- Insight `image` fields reference `/assets/insights/insight-NN-<slug>.jpg` —
-  real og:images downloaded from the referenced URL, never a hot-link to an
-  external host, never a placeholder gradient.
-- Affiliate cards that have a `partners` array render a `.partner-chips` list
-  linking to each sub-agency (Paritee → Geelmuyden Kiese / Brands2Life / LHLK /
-  DVA Studio). Do not reduce that list to only the umbrella's URL.
-
-If a change you're about to make would violate any of these, STOP and surface
-the conflict before editing.
-
-## Visual QA Defaults
-
-When the user asks for a design review, visual polish pass, layout audit, responsive
-check, screenshot-based verification, or explicitly asks to "use vision", do not stop
-at code inspection. Capture and inspect rendered pages.
-
-Default visual workflow:
-
-1. Start the local server: `npm run dev`
-2. Capture each route below at both desktop (1440×1100) and mobile (390×844)
-3. For long pages (homepage, what-we-do), also capture full-page screenshots
-4. Wait 1800–2500ms before capturing — pages have fade-in animations and a hero video
-5. Inspect screenshots, trace issues back to pages/components/tokens
-6. Run `npm run build` before finalizing findings
-
-Routes to audit:
-
-| Route | Page file | Notes |
-|---|---|---|
-| `/` | `src/pages/index.astro` | Redirect → `/en/` |
-| `/en/` | `src/pages/en/index.astro` | Homepage (EN) |
-| `/nl/` | `src/pages/nl/index.astro` | Homepage (NL) |
-| `/en/who-we-are` | `src/pages/en/who-we-are.astro` | Founders, partners, affiliates (EN) |
-| `/nl/wie-wij-zijn` | `src/pages/nl/who-we-are.astro` | Founders, partners, affiliates (NL) |
-| `/en/what-we-do` | `src/pages/en/what-we-do.astro` | Services, case studies (EN) |
-| `/nl/wat-wij-doen` | `src/pages/nl/what-we-do.astro` | Services, case studies (NL) |
-| `/en/duke-academy` | `src/pages/en/duke-academy.astro` | Academy programs (EN) |
-| `/nl/duke-academy` | `src/pages/nl/duke-academy.astro` | Academy programs (NL) |
-| `/en/insights` | `src/pages/en/insights.astro` | Insights list (EN) |
-| `/nl/inzichten` | `src/pages/nl/insights.astro` | Insights list (NL) |
-| `/en/contact` | `src/pages/en/contact.astro` | Contact (EN) |
-| `/nl/contact` | `src/pages/nl/contact.astro` | Contact (NL) |
-| `/en/services/<slug>` | `src/pages/en/services/[slug].astro` | Service detail (EN) |
-| `/nl/services/<slug>` | `src/pages/nl/services/[slug].astro` | Service detail (NL) |
-
-Useful capture commands:
-
-```bash
-npx --yes playwright@latest screenshot --browser=chromium \
-  --viewport-size=1440,1100 --wait-for-timeout=2000 \
-  http://127.0.0.1:4321/ /tmp/duke-home-desktop.png
-
-npx --yes playwright@latest screenshot --browser=chromium \
-  --viewport-size=390,844 --wait-for-timeout=2000 \
-  http://127.0.0.1:4321/ /tmp/duke-home-mobile.png
-
-npx --yes playwright@latest screenshot --browser=chromium --full-page \
-  --viewport-size=1440,1100 --wait-for-timeout=2500 \
-  http://127.0.0.1:4321/ /tmp/duke-home-full.png
-```
-
-**Brand feel** — Duke is `ruler`/`luxury` archetype. The site should feel: premium,
-confident, editorial, architectural, high-contrast, bridge-metaphor-rich. Signal
-Orange (#FF7F66) is the single accent — use sparingly. Greys dominate body copy.
-Montserrat throughout (headings 600, body normal).
+`SKILL.md`, could they resume this work without asking the user anything?"*
+If no, add what's missing before closing.
 
 ---
 
 ## Task Router
 
-Match the user's request to the appropriate workflow below.
-
+<!-- SITE-SPECIFIC: task-router -->
 | User says something like... | Go to |
 |---|---|
-| "add a service", "update the services list", "change a service description" | [Update Services](#update-services) |
-| "add a capability", "update capabilities" | [Update Capabilities](#update-capabilities) |
-| "add a case study", "update a case study", "change metrics on case" | [Update Case Studies](#update-case-studies) |
-| "add a founder", "update founder bio", "change founder email" | [Update Founders](#update-founders) |
-| "add a team member", "update associates", "update expert partners" | [Update Team](#update-team) |
-| "add an affiliate", "update affiliates" | [Update Affiliates](#update-affiliates) |
-| "add an academy program", "update Duke Academy", "change academy content" | [Update Duke Academy](#update-duke-academy) |
-| "add a testimonial" | [Update Testimonials](#update-testimonials) |
-| "add an insight", "update insights list" | [Update Insights](#update-insights) |
-| "update stats", "change the numbers on the homepage" | [Update Homepage Stats](#update-homepage-stats) |
+| "add a blog post / insight / article" | [Add Blog Post or Insight](#add-blog-post-or-insight) |
+| "add a case study / use case" | [Add Case Study](#add-case-study) |
+| "update services / capabilities" | [Update Services or Capabilities](#update-services-or-capabilities) |
+| "update the team", "add a team member", "change bio" | [Update Team](#update-team) |
+| "update stats", "change the metrics" | [Update Stats](#update-stats) |
+| "refresh brand", "sync brand tokens", "colors changed" | [Refresh Brand Tokens](#refresh-brand-tokens) |
+| "toggle dark mode", "fix theme", "dark mode issue" | [Dark Mode](#dark-mode) |
 | "update navigation", "add a nav link" | [Update Navigation](#update-navigation) |
-| "change the tagline", "update the homepage copy", "change the hero" | [Update Homepage Hero](#update-homepage-hero) |
-| "update the office address", "change the phone number", "update contact email", "update LinkedIn" | [Update Site / Contact Info](#update-site--contact-info) |
-| "update SEO", "change meta tags", "change OG image" | [Update SEO](#update-seo) |
+| "update SEO", "meta tags", "OG image", "structured data", "JSON-LD", "hreflang" | [Update SEO](#update-seo) |
 | "SEO audit", "SEO score", "Lighthouse SEO", "validate structured data", "rich results" | [SEO audit](#seo-audit) |
-| "refresh brand", "sync brand tokens", "colors changed", "new logo" | [Refresh Brand Tokens](#refresh-brand-tokens) |
-| "add a new image", "swap the hero video" | [Add / Replace Media](#add--replace-media) |
-| "review the design", "visual audit", "check mobile", "use vision", "screenshot the site" | [Visual Audit](#visual-audit) |
-| "toggle dark mode", "change dark mode icons", "adjust dark mode colors", "dark theme" | [Dark Mode](#dark-mode) |
-| "deploy", "build the site", "push to prod" | [Build & Deploy](#build--deploy) |
-| "translate content", "refresh translations", "add NL version", "Dutch copy", "update Dutch" | [Translate Content](#translate-content) |
-| "audit i18n", "check translations", "missing NL" | [i18n Audit](#i18n-audit) |
+| "update the homepage", "change the tagline" | [Update Homepage](#update-homepage) |
+| "review the design", "visual audit", "check mobile", "use vision" | [Visual QA Protocol](#visual-qa-protocol) |
+| "deploy", "build the site" | [Build & Deploy](#build--deploy) |
+<!-- /SITE-SPECIFIC -->
 
 ---
 
-## Update Services
+## Content Operations
 
-Services are the canonical "what we do" list. They live in `src/data/company.ts`
-→ `export const services: Service[]`. Every service automatically gets a detail
-page at `/services/${slug}` via the dynamic route
-`src/pages/services/[slug].astro`.
+### Add Blog Post or Insight
 
-Schema (see the `Service` type at the top of the file):
-```ts
-{
-  slug: string;                        // URL segment, kebab-case ("strategic-advisory")
-  name: Localized<string>;             // { en: "Strategic Advisory", nl: "Strategisch advies" }
-  tagline: Localized<string>;          // One-liner used on cards
-  description: Localized<string>;      // One paragraph
-  industries: Localized<string>[];     // Each element is { en: "...", nl: "..." }
-  deliverables: Localized<string>[];
-  longform: {
-    challenge: Localized<string>;
-    approach: Localized<string>[];
-    signals: Localized<string>[];
-  };
-}
+<!-- SITE-SPECIFIC: content-arch-blog -->
+Check the site's CLAUDE.md to confirm whether blog/insight content lives in
+MDX collections (`src/content/blog/`) or in a TypeScript data file.
+<!-- /SITE-SPECIFIC -->
+
+#### If content lives in MDX collections
+
+Create a new `.mdx` file in the appropriate collection directory.
+
+Required frontmatter (minimum — check `src/content.config.ts` for the full schema):
+
+```mdx
+---
+title: "[title]"
+description: "[description]"
+date: YYYY-MM-DD
+author: "[author]"
+tags: ["tag1", "tag2"]
+image: ../../brand/images/[filename].jpg
+featured: false
+---
+
+[MDX body content here]
 ```
 
-Pages resolve fields via `pickLocale(service.name, lang)` before passing to components.
+**Filename convention:** kebab-case slug — the filename (without `.mdx`) becomes
+the URL slug.
 
-- **Add**: append a new object with a unique `slug` and complete `longform` block.
-  The detail page auto-generates on next build.
-- **Update**: edit the object in-place — copy changes propagate to the card, the
-  `/what-we-do` grid, and the detail page in one shot.
-- **Remove**: delete the object. Also grep `src/pages/` for any hardcoded
-  reference to the slug.
+After creating, run `npm run build` to validate. Astro catches missing required
+fields, invalid values, and broken image paths.
 
-**Do not** duplicate service copy into `what-we-do.astro` or `index.astro`. Both
-pages read from `services` and link to `/services/${slug}`.
+#### If content lives in a TypeScript data file
 
-The homepage shows `services.slice(0, 6)` as "Our Expertise" cards. The
-`/what-we-do` page shows the full list. The detail page renders Challenge /
-Approach / Signals with a sticky Deliverables sidebar and related services
-(neighboring slices of the `services` array).
+Append a new entry to the array in the relevant data file, following the existing
+object shape exactly.
 
-Verify: `npm run build`, then visit `/en/services/${slug}` and `/nl/services/${slug}`.
-
-**After editing EN content, run the [Translate Content](#translate-content) workflow
-to refresh NL.**
+**Mandatory: og:image for external links.** Never ship an insight card pointing to
+an external article without a locally downloaded og:image. Workflow:
+1. Fetch the og:image URL from the article head (use WebFetch or Playwright MCP)
+2. Download it to `public/assets/insights/insight-NN-<slug>.jpg`
+3. Wire `image` and `imageAlt` fields on the new entry
+4. Verify the image loads at `http://localhost:/assets/insights/...`
 
 ---
 
-## Update Capabilities
+### Add Case Study
 
-**`capabilities` is deprecated.** It remains as an empty `Capability[]` export in
-`src/data/company.ts` only so the type signature is preserved; no page renders
-it. New "things we do" belong in `services` — see [Update Services](#update-services).
+<!-- SITE-SPECIFIC: content-arch-casestudy -->
+Check the site's CLAUDE.md to confirm whether case studies live in MDX collections
+(`src/content/case-studies/`) or in a TypeScript data file.
+<!-- /SITE-SPECIFIC -->
 
-If a user asks to "add a capability", confirm whether they mean a new service
-(likely) or a finer-grained sub-item inside an existing service's `longform.approach`.
-Do not reintroduce the capabilities grid on `/what-we-do`.
+**Filename convention:** `[region]-[client-slug].mdx`
 
+Minimum frontmatter:
+```mdx
 ---
-
-## Update Case Studies
-
-Case studies live in `src/data/company.ts` → `export const caseStudies: CaseStudy[]`.
-
-Schema:
-```ts
-{
-  title: Localized<string>;
-  industry: Localized<string>;
-  challenge: Localized<string>;
-  shortSummary?: Localized<string>;
-  team?: Localized<string>;
-  image: string;                    // "/assets/images/bridge-fog-water-minimalist.jpg"
-  imageAlt: Localized<string>;
-  metrics: Array<{ value: string; label: Localized<string> }>;
-}
+title: "[title]"
+description: "[description]"
+client: "[client name]"
+region: "[au|nl|global]"
+metrics:
+  - label: "[label]"
+    value: "[value]"
+image: ../../brand/images/[filename].jpg
+---
 ```
 
-Pages resolve via `pickLocale(cs.title, lang)` etc.
+Once created, the case study auto-appears on the case studies index and any page
+that queries the collection dynamically — no manual updates needed.
 
-**Image path rule:** Use absolute `/assets/images/<file>.jpg`. The image must exist
-in `public/assets/images/`. If it doesn't, copy it from `client-data/clients/dukestrategies/images/` first
-(or update the submodule if the image is new in client-data).
-
-**Metrics:** 2–4 metrics read best in the card layout. Keep values short
-(e.g., `"92%"`, `"500+"`, `"< 4h"`). The case-study block renders metrics via
-`case-metrics--row` + `case-metrics--count-${metrics.length}` — don't replace
-that with a flex-wrap row or a 4-metric case will orphan the 4th into its own
-line.
-
-**Image treatment variation:** `insights.astro` (which also renders the case
-studies) cycles image blocks through `img-frame--offset-br / offset-tr / border
-/ offset-bl` × `img-cover--wide / hero / tall` so each case reads differently
-on the page. When adding a case, it inherits the next slot in the rotation
-automatically — but if you reorder cases or remove mid-array entries, scan the
-`/what-we-do` page to make sure the rotation still reads well visually.
-
-**Image fill pattern:** All case study images sit inside `.img-cover` whose
-`> img` child uses `position: absolute; inset: 0`. Never regress that rule to
-`width/height: 100%` percentages — the coral tint overlay will leak.
-
-The homepage (`src/pages/index.astro`) features `caseStudies[0]`. Reorder the array
-to change which case is featured. The `/what-we-do` page lists all cases.
+After adding, run `npm run build` and visually check the case studies page.
 
 ---
 
-## Update Founders
+### Update Services or Capabilities
 
-Founders live in `src/data/company.ts` → `export const founders: Founder[]`.
+<!-- SITE-SPECIFIC: content-arch-services -->
+Services/capabilities may live in `src/data/` (TypeScript array) or in MDX
+collection files in `src/content/capabilities/`. Check CLAUDE.md.
+<!-- /SITE-SPECIFIC -->
 
-Schema:
-```ts
-{
-  name: string;
-  title: Localized<string>;     // { en: "Managing Partner", nl: "Managing Partner" }
-  image: string;                // "/assets/team/FirstLast_grijs.jpg"
-  alt: string;
-  bio: Localized<string>;      // Long-form paragraph
-  email: string;
-}
+When adding a new service/capability:
+- For data-file sites: append to the array with a unique `slug`
+- For collection sites: create a new `.mdx` file and set `order` to the next available number
+
+Run `npm run build` and verify the detail page renders at its expected URL.
+
+---
+
+### Update Team
+
+Team data lives in a TypeScript data file. Common locations:
+- `src/data/team.ts` — array exported as `team`
+- `src/data/company.ts` — arrays exported as `founders`, `associates`, `expertPartners`
+
+Fields: `name`, `role` or `title`, `bio`, and optionally `image`, `email`.
+
+To add a member: append to the array. To remove: delete the entry.
+
+<!-- SITE-SPECIFIC: team-photo-convention -->
+Check CLAUDE.md for the team photo naming convention and storage location.
+<!-- /SITE-SPECIFIC -->
+
+---
+
+### Update Stats
+
+Stats live in `src/data/stats.ts`. Each entry has:
+- `value` — the number or string shown prominently
+- `label` — descriptor text
+- `suffix` — appended after value (e.g., `"M+"`, `"%"`, `"hrs"`)
+
+Keep to 3–5 stats for visual balance.
+
+<!-- SITE-SPECIFIC: stats-localized -->
+For bilingual sites (Duke Strategies), `label` is `Localized<string>` —
+`{ en: "...", nl: "..." }`. After editing EN, run the Translate Content workflow.
+<!-- /SITE-SPECIFIC -->
+
+---
+
+### Update Homepage
+
+The homepage assembles section components sequentially. To change content:
+
+- **Tagline / hero copy** — edit `src/data/site.ts` (`site.tagline`) and any
+  component that renders it inline
+- **Featured case studies** — reorder the `caseStudies` array, or for
+  collection-based sites add/edit MDX files; set `featured: true` to surface in homepage showcase
+- **Capability/service preview** — edit the data array or MDX collection
+- **Stats** — edit `src/data/stats.ts`
+- **Hero image** — edit the Hero component's media reference directly
+- **Section transitions** — the SectionDivider component between sections in `index.astro`
+  takes `from` and `to` CSS color values to control gradient bleed
+
+---
+
+## Site Data
+
+### `src/data/site.ts`
+
+Contains: site name, URL, tagline, description, nav items, footer nav groups,
+contact details, Calendly URL, email routing config.
+
+When changing a **phone number**, update both the display string and the `tel:`
+href. When changing an **office address**, also update any map embed config.
+
+---
+
+## Refresh Brand Tokens
+
+When brand data changes upstream (colors, fonts, logos, images in `client-data`):
+
+### 1. Update the client-data source
+
+```bash
+git submodule update --remote client-data
 ```
 
-**Photo convention:** Duke team photos are desaturated ("_grijs" suffix in Dutch).
-Drop the file in `public/assets/team/` before referencing it. Use the same
-black-and-white treatment as existing photos for visual consistency.
+### 2. Regenerate tokens
 
-Rendered on `/en/who-we-are` and `/nl/who-we-are` via `TeamCard.astro`.
-
-**After editing EN content, run the [Translate Content](#translate-content) workflow
-to refresh NL.**
-
----
-
-## Update Team
-
-Two arrays in `src/data/company.ts`:
-
-- `expertPartners: TeamCard[]` — senior external experts
-- `associates: TeamCard[]` — core associates
-
-Schema (`TeamCard` type):
-```ts
-{
-  name: string;
-  title: Localized<string>;
-  image: string;    // "/assets/team/FirstLast_grijs.jpg"
-  alt: string;
-  bio: Localized<string>;
-}
+```bash
+npm run tokens
 ```
 
-Note: no `email` field on team cards, unlike founders. If a member needs direct
-contact, promote them to `founders` or add an email in their bio.
+Reads `client-data/clients/dukestrategies/charter.json` and regenerates:
+- `src/styles/brand-tokens.css` (or `client-data.css`)
+- `src/lib/tokens.ts`
 
-**After editing EN content, run the [Translate Content](#translate-content) workflow
-to refresh NL.**
+### 3. Re-copy runtime assets if images or logos changed
 
----
-
-## Update Affiliates
-
-`src/data/company.ts` → `export const affiliates: Affiliate[]`.
-
-Schema:
-```ts
-{
-  name: string;
-  region: string;
-  description: string;
-  href: string;         // External URL to the affiliate itself (e.g. paritee.com)
-  partners?: Array<{    // Optional — for umbrella networks like Paritee
-    name: string;       // Sub-agency name (e.g. "Geelmuyden Kiese")
-    href: string;       // Sub-agency website
-    region: string;     // e.g. "Scandinavia"
-  }>;
-}
+```bash
+rsync -a --delete client-data/clients/dukestrategies/images/ public/assets/images/
+rsync -a --delete client-data/clients/dukestrategies/logos/  public/assets/logos/
 ```
 
-Affiliates render on `/contact` (Global Reach section) and also as link cards on
-`/who-we-are`. When the affiliate is an umbrella (Paritee, etc.), populate the
-`partners` array so the contact page renders a `.partner-chips` list linking
-each sub-agency directly — the user explicitly asked that visitors be able to
-reach the real operational agency, not only the parent brand.
+### 4. Build and verify
 
-Always verify every URL (top-level `href` AND every `partners[].href`) resolves
-before committing. Stale "Global Reach" links are the most visible kind of rot.
-Prefer the `WebFetch` tool or a quick Playwright MCP navigation to verify.
-
-**After editing EN content, run the [Translate Content](#translate-content) workflow
-to refresh NL.**
-
----
-
-## Update Duke Academy
-
-`src/data/company.ts` → `export const academyPrograms: AcademyProgram[]`.
-
-Schema:
-```ts
-{
-  title: string;
-  description: string;
-  icon: string;     // Key for Icon.astro
-}
+```bash
+npm run build
+npm run dev   # inspect visually if colors, fonts, or logos changed
 ```
 
-Rendered on `/duke-academy` via `ProgramCard.astro`. Check `Icon.astro` for valid
-icon keys before adding a new program.
+### What propagates automatically
 
-The Duke Academy page also has hero and intro copy via `t()` keys in
-`src/pages/en/duke-academy.astro` — edit the corresponding keys in `ui.en.ts`.
+- Color changes → CSS custom properties → all components
+- Font changes → font family variables → all typography
 
-**After editing EN content, run the [Translate Content](#translate-content) workflow
-to refresh NL.**
+### What requires manual updates
 
----
-
-## Update Testimonials
-
-`src/data/company.ts` → `export const testimonials = [...]`.
-
-Check the existing entries for the exact shape (quote, attribution, role, company).
-Keep quotes tight — 2–3 sentences maximum. Long quotes break the card layout on
-mobile.
-
-The homepage displays a single featured testimonial. Reorder to change which one
-is featured. Other pages may display the full list.
-
-**After editing EN content, run the [Translate Content](#translate-content) workflow
-to refresh NL.**
+- Removed images → check all `image:` references in MDX frontmatter and data files
+- Logo filename changes → update any component that imports the logo by name
+- New fonts → add `@import url(...)` to `global.css`
 
 ---
 
-## Update Insights
+## Dark Mode
 
-`src/data/company.ts` → `export const insights: InsightItem[]`.
+The site uses `data-theme` attribute on `<html>` to toggle light/dark mode.
 
-Schema:
-```ts
-{
-  badge: string;      // e.g. "Article", "Report"
-  date: string;       // "2026-03-12" or display-friendly
-  author: string;
-  title: string;
-  excerpt: string;
-  href: string;       // External or internal URL
-  linkLabel: string;  // "Read more"
-  image?: string;     // "/assets/insights/insight-NN-<slug>.jpg"
-  imageAlt?: string;
-}
-```
+### How it works
 
-Rendered on `/insights` via `InsightCard.astro`. The MDX `insights` collection in
-`src/content/insights/` is scaffolded but currently unused — do **not** add MDX
-files there expecting them to render. Add to the `insights` array in `company.ts`
-instead.
+1. **FOUC prevention** — inline `<script>` in `<head>` (BaseLayout.astro) reads
+   `localStorage('dukestrategies-theme')` and `prefers-color-scheme` before
+   first paint
+2. **Toggle** — `ThemeToggle.astro` queries `[data-theme-toggle]` via
+   `querySelectorAll` (may render in both desktop and mobile nav)
+3. **CSS overrides** — `[data-theme="dark"]` block in global.css overrides
+   Tier 2/3 semantic tokens
+4. **Persistence** — choice saved to `localStorage`
+5. **System preference** — falls back to `prefers-color-scheme`
 
-### og:image sourcing workflow (mandatory for new insights)
+### Adjusting dark theme colors
 
-Never ship an insight card with a placeholder gradient or a hot-linked external
-image. Every entry that points to an external article must have a locally
-downloaded og:image under `public/assets/insights/`.
+Edit the `[data-theme="dark"]` block in `src/styles/global.css`. Only override
+semantic tokens — brand primitives in `@theme` stay the same.
 
-1. **Fetch the og:image URL** from the referenced article:
-   - Preferred: `WebFetch` or `curl -sL <href> | grep -i 'og:image'` and
-     regex-extract the `content="..."` attribute.
-   - Fallback: Playwright MCP — `browser_navigate` then `browser_evaluate` with
-     `document.querySelector('meta[property="og:image"]').content`.
-2. **Download** the image to
-   `public/assets/insights/insight-NN-<slug>.jpg` where `NN` is the 2-digit
-   insight index in the array and `<slug>` is a short kebab-case identifier
-   (e.g. `insight-07-energy-transition.jpg`). Prefer `.jpg`; convert PNGs/WebPs
-   to JPG when possible to keep the folder uniform.
-3. **Wire the fields** on the new `insights` entry:
-   ```ts
-   image: "/assets/insights/insight-07-energy-transition.jpg",
-   imageAlt: "Wind turbines at dusk — referenced article header image",
-   ```
-4. **Verify** the image loads at `http://localhost:4321/assets/insights/...`
-   and that the card renders the photo instead of the gradient fallback.
+Key tokens to check:
+- `--surface-primary`, `--surface-elevated`, `--surface-sunken`
+- `--text-heading`, `--text-body`, `--text-muted`
+- `--border-default`, `--border-subtle`, `--border-strong`
+- `--card-bg`, `--card-shadow`, `--nav-bg`
 
-If a referenced article has no og:image (or hot-linking is blocked and you can
-only get a low-quality thumbnail), choose a relevant image from
-`src/brand/images/`, copy it under `public/assets/insights/` with the same
-naming scheme, and note the substitution in the commit message.
+### Troubleshooting
 
-If you need long-form editorial (full articles, not excerpts), that's a structural
-change — flag it to the user as out of scope for this skill and stop. Do not add
-backlog items directly; backlog management is handled exclusively via the `/backlog` skill.
-
-**After editing EN content, run the [Translate Content](#translate-content) workflow
-to refresh NL.**
-
----
-
-## Update Homepage Stats
-
-`src/data/stats.ts`:
-
-```ts
-export const homeStats: HomeStat[] = [
-  { value: 44, suffix: "+", label: { en: "Years Combined Experience", nl: "Jaar gecombineerde ervaring" } },
-  { value: 120, suffix: "+", label: { en: "Stakeholders Engaged", nl: "Stakeholders betrokken" } },
-  ...
-];
-```
-
-- `value` is a **number** (not a string) — the stat ribbon component may animate it
-- `suffix` is appended after (`+`, `%`, `M+`, etc.)
-- `label` is `Localized<string>` — resolved via `pickLocale(stat.label, lang)`
-
-Keep 3–5 stats. The ribbon lays them out horizontally on desktop, stacks on mobile.
-
-**After editing EN content, run the [Translate Content](#translate-content) workflow
-to refresh NL.**
+- **Toggle not working after navigation** — verify `initThemeToggle()` is called
+  on `astro:after-swap` and re-queries the DOM with `querySelectorAll`
+- **FOUC on page load** — verify the inline `<script>` in BaseLayout `<head>` runs
+  before any CSS loads
+- **Form inputs wrong color in dark mode** — add `color: var(--text-body)` and
+  `background-color: var(--surface-sunken)` to the `[data-theme="dark"]` form block
 
 ---
 
 ## Update Navigation
 
-Top nav is defined in `src/data/nav.ts`:
+### Main navigation
 
-```ts
-export const navItems: NavItem[] = [
-  { labelKey: "nav.home", href: "/" },
-  { labelKey: "nav.who-we-are", href: "/who-we-are" },
-  { labelKey: "nav.what-we-do", href: "/what-we-do" },
-  { labelKey: "nav.duke-academy", href: "/duke-academy" },
-  { labelKey: "nav.insights", href: "/insights" },
-  { labelKey: "nav.contact", href: "/contact" },
-];
-```
+For simple `site.ts` nav arrays: edit the `nav` array in `src/data/site.ts`.
 
-Nav items use `labelKey: UIKey` — the display label comes from `ui.en.ts` / `ui.nl.ts`
-via `t(item.labelKey)`. `Navigation.astro` and `Footer.astro` both use
-`localizedPath(item.href, lang)` to generate locale-prefixed links.
+For bilingual sites with a dedicated `src/data/nav.ts`:
+- Nav items use `labelKey: UIKey` — the label resolves via `t(item.labelKey)`
+- Add new keys to `ui.en.ts` and `ui.nl.ts` simultaneously
 
-**Adding a nav link to a new page:**
-1. Create `src/pages/en/<slug>.astro` and `src/pages/nl/<slug>.astro`
-2. Add a redirect stub at `src/pages/<slug>.astro`
-3. Add the UI key to `ui.en.ts` and `ui.nl.ts` (e.g., `'nav.new-page': '...'`)
-4. Add `{ labelKey: "nav.new-page", href: "/<slug>" }` to `navItems`
-5. Verify the link appears in header and footer in both locales
+Adding a new page to the nav:
+1. Create the page file in `src/pages/`
+2. Add the nav item to the relevant config (with `group` field for grouped navs)
+3. Verify the link appears in both header and footer
 
----
+### Footer navigation
 
-## Update Homepage Hero
-
-The hero is in `src/pages/en/index.astro` (and mirrored in `nl/`):
-
-- **Title** — reads `site.title` from `src/data/site.ts` (edit there for consistency)
-- **Subtitle** — hardcoded paragraph inside `index.astro` under `.hero__subtitle`
-- **CTA button** — `Button href="/what-we-do"` — change label/href in `index.astro`
-- **Background video** — `<video>` element references
-  `/assets/video/AquaductHarderwijk_1920x1080px.mp4`. To swap:
-  1. Drop the new MP4 in `public/assets/video/`
-  2. Update the `<source src="...">` attribute
-  3. Keep the poster (`/assets/images/Erasmusbrug_zwart.jpg` or similar) in sync
-- **Logo overlay** — `<img src="/assets/logos/DukeStrategies_logo.svg">` — swap via
-  `public/assets/logos/`
-
-**Tagline** — `site.tagline` ("Bridging Strategy and Impact") in `src/data/site.ts`.
-Search the codebase before changing it; it may appear in the footer and elsewhere.
-
----
-
-## Update Site / Contact Info
-
-All site-wide metadata, contact details, office address, and analytics config live
-in `src/data/site.ts`:
-
-```ts
-export const site = {
-  name, legalName, url, title, tagline, description, footerDescription,
-  navItems,
-  office: {
-    street, postalCode, city, country,
-    lat: 51.7095,      // Latitude — drives OSM marker position
-    lon: 5.2827,       // Longitude — drives OSM marker position
-    bbox: [5.2747, 51.7055, 5.2907, 51.7135] as [number, number, number, number],
-    // bbox = [minLon, minLat, maxLon, maxLat] — drives OSM iframe viewport
-  },
-  contact: { email, phoneDisplay, phoneHref, linkedin },
-  analytics: { provider, domain },
-  marqueeItems: [...],
-};
-```
-
-**When changing the phone number**, update both `phoneDisplay` (human-readable) and
-`phoneHref` (raw `tel:` link).
-
-**When changing the office address**, also update `lat`, `lon`, and `bbox` — these
-drive the OpenStreetMap iframe embed on `/contact`. The `bbox` is
-`[minLon, minLat, maxLon, maxLat]` and should encompass roughly a 500m radius
-around the office pin. Use <https://www.openstreetmap.org/> to find coordinates.
-
-**Marquee items** are the scrolling capability strip on the homepage — short phrases,
-2–4 words each.
-
-The `Footer.astro` and `contact.astro` both read from this object. No other files
-need updating.
+Footer nav groups live in `src/data/site.ts` (`footerNav` or equivalent).
 
 ---
 
@@ -711,30 +454,35 @@ playbook (2026 checklist, structured-data catalog, crawler policy, hreflang):
 > and never promise GEO outcomes to a client.
 
 - **Per-page title & description** — pass `title` / `description` to `BaseLayout`
-  (which forwards them to `Seo.astro`). Duke is bilingual: `title`/`description`
-  stay Localized and `BaseLayout` resolves them per-locale before handing strings
-  to the Seo component. `Seo.astro` appends ` | <site>`; do not double-suffix.
+  (which forwards them to `Seo.astro`). For content collections, edit `title` /
+  `description` in the entry frontmatter. `Seo.astro` appends ` | <site>`; do not
+  double-suffix.
 - **Structured data** — pass page-specific JSON-LD via the `jsonLd` prop using the
   `src/lib/seo.ts` builders: `articleSchema` + `breadcrumbSchema` on
-  insight/case-study pages; `localBusinessSchema`/`personSchema` on the relevant
-  identity page. Identity + `WebSite` are emitted once on the homepage (`isHome`) —
-  never duplicate them per page.
+  blog/insight/case-study pages; `localBusinessSchema`/`personSchema` on the
+  relevant identity page. Identity + `WebSite` are emitted once on the homepage
+  (`isHome`) — never duplicate them per page.
 - **`noindex`** — pass `noindex={true}` to `BaseLayout`/`Seo` for thank-you,
   search, and staging pages (the `404` already sets it). A `noindex` page still
   self-canonicals.
 - **OG image** — `Seo.astro` always resolves `og:image` (page `image` prop →
-  `site.defaultOgImage`, currently `/assets/images/Erasmusbrug_zwart.jpg`), so no
-  page ships a blank card.
+  `site.defaultOgImage`), so no page ships a blank card. With `enable_dynamic_og`,
+  register a page in `src/pages/og/[...route].ts`'s `pages` map to get a generated
+  branded 1200×630 card, then point that page's `image` at `/og/<route>.png`.
 - **Sitemap & robots** — `@astrojs/sitemap` generates `/sitemap-index.xml`;
   `public/robots.txt` references it and carries the AI-crawler policy. Keep
-  `astro.config.mjs` `site:` equal to `src/data/site.ts` `url`
-  (`https://dukestrategies.com`) — a mismatch ships wrong canonicals.
-- **hreflang** (bilingual) — pass reciprocal `alternates` from the site's i18n
-  source; every language version lists itself + alternates.
-- **Analytics (Plausible)** — `site.analytics.provider='plausible'` +
-  `domain: 'dukestrategies.com'`; a `plausibleScriptSrc` (per-site URL from the
-  Plausible installation screen) is required for `BaseLayout` to inject a script —
-  a domain alone emits none.
+  `astro.config.mjs` `site:` equal to `src/data/site.ts` `url` — a mismatch ships
+  wrong canonicals.
+- **hreflang** (bilingual sites) — pass reciprocal `alternates` from the site's
+  i18n source; every language version lists itself + alternates.
+- **RSS** — set `rss_collection` (Copier) / `site.features.rssCollection` to a real
+  collection key to emit `/rss.xml`; omitted otherwise.
+- **Pagefind search** — `enable_site_search` adds `/search` + a
+  `pagefind --site dist` postbuild; mark the content root `data-pagefind-body` and
+  exclude chrome/`/404`/`/search`.
+- **Analytics (Plausible)** — set `site.analytics.provider='plausible'` **and**
+  `plausibleScriptSrc` to the per-site URL from the Plausible installation screen
+  (a domain alone emits no script); `BaseLayout` injects it conditionally.
 
 ---
 
@@ -748,7 +496,7 @@ data on a page or the whole site.
    page(s); target score ≥ 95. (Fallback: the playwright capture snippets below.)
 3. Inspect the rendered `<head>`: one `<title>`/canonical/description, full
    OG/Twitter set, one `application/ld+json` graph, correct `noindex` where
-   intended, and reciprocal hreflang on both locales.
+   intended.
 4. Validate the JSON-LD with the Schema Markup Validator (whole graph) and
    Google's Rich Results Test (Google-supported types only — Article, Breadcrumb,
    Organization/LocalBusiness).
@@ -757,246 +505,79 @@ data on a page or the whole site.
 
 ---
 
-## Refresh Brand Tokens
-
-When brand data changes upstream in `client-data` (colors, fonts, logos, images):
-
-### 1. Update the client-data submodule
-
-```bash
-cd /Users/williammasquelier/Repositories/stromy-org/clients/duke-strategies/duke-strategies-website
-git submodule update --remote client-data
-```
-
-### 2. Regenerate tokens in this repo
-
-```bash
-npm run tokens
-```
-
-Reads `client-data/clients/dukestrategies/charter.json` and regenerates:
-- `src/styles/brand-tokens.css` — CSS custom properties (`--brand-*`)
-- `src/lib/tokens.ts` — typed TS module
-
-### 3. Re-copy runtime assets if images changed
-
-Because images are duplicated between `client-data/clients/dukestrategies/images/` and `public/assets/images/`,
-if new images were added or removed:
-
-```bash
-rsync -a --delete client-data/clients/dukestrategies/images/ public/assets/images/
-rsync -a --delete client-data/clients/dukestrategies/logos/ public/assets/logos/
-```
-
-*(Do not sync team photos — those live only in `public/assets/team/` and are not
-part of the brand sync.)*
-
-### 4. Build and verify
-
-```bash
-npm run build
-```
-
-Visually inspect with `npm run dev` if colors, fonts, or logos changed.
-
-### What propagates automatically
-
-- Color changes → CSS custom properties → all components using `var(--brand-*)`
-- Font changes → `--brand-font-*` variables → all typography
-- Images added in client-data → available after submodule update + rsync step
-
-### What requires manual updates
-
-- Removed images → check all `image:` references in `src/data/company.ts` and
-  `src/pages/index.astro` (hero poster), then clean up orphaned references
-- Logo filename changes → update `src/pages/index.astro` hero logo `src`, plus
-  `Navigation.astro` and `Footer.astro`
-- New fonts → add the `@import url(...)` to `src/styles/global.css` and update
-  `charter.json` fallback chain
-
----
-
-## Add / Replace Media
-
-### Images
-- Brand photography catalog source: `src/brand/images/` (synced)
-- Runtime-served copies: `public/assets/images/`
-- Both must contain the file. Prefer rsync from `src/brand/images/` after sync.
-
-### Team photos
-- Live only in `public/assets/team/` — not part of brand sync
-- Convention: desaturated / black-and-white, filename ends in `_grijs.jpg` (Dutch for "grey")
-- Keep crops consistent (shoulders up, eye line at upper third)
-
-### Logos
-- `public/assets/logos/DukeStrategies_logo.svg` — primary
-- `public/assets/logos/DukeStrategies_logo_white.png` — on dark backgrounds
-- `public/assets/logos/DukeStrategies_logo_grey.svg` — muted contexts
-- `public/assets/logos/DukeAcademy_rgb_no_padding.svg` — Duke Academy sub-brand
-
-### Video
-- `public/assets/video/*.mp4` — MP4 H.264 for broad compatibility
-- Keep hero videos under ~8 MB for fast first paint; short loop (10–20 s); no audio
-  (hero uses `muted autoplay loop playsinline`)
-- Provide a poster image (still frame or a complementary bridge photo)
-
----
-
-## Dark Mode
-
-The site has an optional dark mode toggle in the nav bar. It uses CSS custom property
-overrides via `[data-theme="dark"]` on `<html>`.
-
-### Key Files
-
-- **Token overrides**: `src/styles/tokens-semantic.css` → `[data-theme="dark"]` block
-- **Toggle component**: `src/components/layout/ThemeToggle.astro` (sliding pill: lightbulb left / star right)
-- **FOUC prevention**: `src/layouts/BaseLayout.astro` → inline `<script>` in `<head>`
-- **Toggle init**: `src/layouts/BaseLayout.astro` → `initThemeToggle()` in DOMContentLoaded
-- **Transitions**: `src/styles/global.css` → smooth transition rules + dark-mode overrides
-
-### Adjusting Dark Theme Colors
-
-Edit the `[data-theme="dark"]` block in `tokens-semantic.css`. Only override semantic
-tokens (Tier 2/3). Brand accent (`--accent`) stays the same — coral works on dark.
-
-### Changing Icons
-
-Edit the SVG paths in `ThemeToggle.astro`. The toggle is a sliding pill with the
-lightbulb icon on the left (light mode) and star icon on the right (dark mode). The
-thumb slides left↔right. Thumb color: `var(--accent)` in light mode, `#F0F0F2` in dark.
-
-### Disabling Dark Mode
-
-Remove `ThemeToggle` import from `Navigation.astro`, remove `[data-theme="dark"]` block
-from `tokens-semantic.css`, remove the FOUC script from `BaseLayout.astro <head>`.
-
----
-
-## Translate Content
-
-Use this workflow when EN content has changed and NL needs updating, or when adding
-new translatable strings.
-
-### Prerequisites
-
-Load these files before translating:
-- `src/i18n/glossary.md` — do-not-translate terms, preferred NL equivalents
-- `src/i18n/brand-voice.md` — tone, register, sentence rhythm, few-shot anchors
-- `.i18n/translation-ledger.json` — existing translation cache
-
-### Workflow
-
-1. **Identify changed/missing fields** — compare EN source hashes in the ledger to
-   current EN values. New fields or changed hashes need (re-)translation.
-2. **Translate** — apply glossary rules (keep brand names, job titles, industry terms
-   in English), brand voice (formal `u`, `wij`, no exclamation marks, editorial tone),
-   and few-shot anchors.
-3. **Update files:**
-   - `src/i18n/ui.nl.ts` — for UI string keys
-   - `src/data/company.ts` — for data field `nl` values
-   - `src/data/site.ts`, `src/data/stats.ts` — if their Localized fields changed
-4. **Run invariant checks:**
-   - Every `Localized<string>` has both `en` and `nl`
-   - Numbers, emails, URLs, phone numbers identical EN ↔ NL
-   - Every do-not-translate glossary term appears verbatim in NL
-   - `ui.nl.ts` has no missing keys vs `ui.en.ts`
-5. **Build:** `npm run build` — 0 errors
-6. **Show diff** and wait for user approval
-7. **Update ledger:** flip `pending` → `approved`, update timestamps
-
-### Rules
-
-- **Only edit EN content directly.** NL always follows via this workflow.
-- When adding new glossary terms, update `src/i18n/glossary.md` first.
-- NL copy may be ~10% longer than EN — accept this, do not compress meaning.
-
----
-
-## i18n Audit
-
-Use this workflow to verify translation completeness and correctness.
-
-### Checks
-
-1. **Completeness:** every `Localized<string>` in `company.ts`, `site.ts`, `stats.ts`
-   has both `en` and `nl` values.
-2. **UI strings:** `ui.nl.ts` has every key that `ui.en.ts` has.
-3. **Ledger sync:** every ledger entry is `approved` (no stale `pending` entries).
-4. **Glossary compliance:** do-not-translate terms appear verbatim in NL output.
-5. **Invariants:** numbers, emails, URLs, phones identical EN ↔ NL.
-6. **No hardcoded strings:** scan page templates for user-visible text not going
-   through `t()` or `pickLocale()`.
-7. **Visual:** spot-check `/en/` and `/nl/` homepages + contact at desktop and mobile
-   — no layout breakage from NL text expansion.
-
----
-
-## Visual Audit
+## Visual QA Protocol
 
 Use this workflow when the user asks for: visual review, design critique, layout
-polish, responsive review, screenshot-based QA, contrast review, or says "use vision".
+polish, responsive check, screenshot-based QA, or says "use vision" or "check it yourself".
 
-### 1. Audit the rendered site, not just the source
+### Rule: always inspect the rendered site, not just source
 
-Start the server: `npm run dev`. Do not rely on code inspection alone for visual work.
+```bash
+npm run dev
+```
 
-### 2. Use the full route list
+### Tooling preference
 
-Capture all static pages plus dynamic service detail pages in both locales:
-- EN: `/en/`, `/en/who-we-are`, `/en/what-we-do`, `/en/duke-academy`, `/en/insights`, `/en/contact`
-- NL: `/nl/`, `/nl/who-we-are`, `/nl/what-we-do`, `/nl/duke-academy`, `/nl/insights`, `/nl/contact`
-- `/en/services/<slug>` and `/nl/services/<slug>` — spot-check first and last.
-- Root redirects: `/`, `/who-we-are`, etc. — verify they redirect to `/en/...`
+When the `chrome-devtools` MCP is available, prefer it over the `playwright` CLI
+snippets below for any audit work: it bundles screenshot, computed-style
+inspection, network panel, and **Lighthouse a11y / performance audits** into a
+single CDP session. The CLI snippets below remain the fallback for raw screenshot
+capture without a running MCP browser.
 
-### 3. Capture desktop + mobile for every page
+### Capture set
 
-Minimum capture set:
-- Desktop viewport (1440×1100)
-- Mobile viewport (390×844)
-- Full-page desktop for `/`, `/who-we-are`, `/what-we-do` (long pages)
+```bash
+# Desktop
+npx --yes playwright@latest screenshot --browser=chromium \
+  --viewport-size=1440,1100 --wait-for-timeout=2000 \
+  http://127.0.0.1:/ /tmp/home-desktop.png
 
-### 4. Wait for animations
+# Mobile
+npx --yes playwright@latest screenshot --browser=chromium \
+  --viewport-size=390,844 --wait-for-timeout=2000 \
+  http://127.0.0.1:/ /tmp/home-mobile.png
 
-The homepage hero uses a `hero-fade` sequence (4 stages) and a background video.
-Use `--wait-for-timeout=2000` minimum, `2500` for full-page captures.
+# Full-page
+npx --yes playwright@latest screenshot --browser=chromium --full-page \
+  --viewport-size=1440,1100 --wait-for-timeout=2000 \
+  http://127.0.0.1:/ /tmp/home-full.png
+```
 
-### 5. Check these visual categories
+### Before capturing: control state
 
-- LangSwitcher visible and functional in nav (EN/NL toggle, preserves path)
-- Logo rendering (especially white vs grey variants on different surfaces)
-- Hero video autoplay and poster fallback
-- Text contrast — Signal Orange (#FF7F66) on white/grey vs on dark
-- Heading hierarchy — Montserrat 600 at all display sizes
-- Card consistency across ServiceCard, TeamCard, InsightCard, ProgramCard
-- Team photo treatment — all desaturated, consistent crop
-- Footer legibility and nav link validity
-- Mobile navigation toggle and menu behaviour
-- Marquee animation smoothness and content overflow
-- CTABand contrast and link affordance
-- Whether implementation still matches `src/brand/charter.json` — run
-  `npm run tokens` if in doubt
+- Confirm whether dark mode is active in localStorage
+- Confirm mobile menu is in default (closed) state
 
-### 6. Common failure patterns to watch for
+### Route list
 
-- Orange (#FF7F66) used as small text on light grey — fails contrast (AA needs 4.5:1)
-- Team photos with inconsistent grayscale treatment
-- Empty sections when a data array has < 4 items (grid collapses)
-- Missing icons (Icon.astro silently renders nothing for unknown keys)
-- Broken asset paths after a brand refresh (image exists in `src/brand/` but not
-  `public/assets/`)
-- Hero video failing to autoplay on mobile (must be `muted` + `playsinline`)
+<!-- SITE-SPECIFIC: routes -->
+Build the route list from:
+- Static files in `src/pages/`
+- Content-driven routes from `src/content/` collections: 
+- Dynamic routes discovered from the running homepage
+<!-- /SITE-SPECIFIC -->
 
-### 7. Report format
+### Visual checklist (every page)
 
-1. Systemic issues first (tokens, global CSS, shared components)
-2. Template-level issues (layouts, repeated sections)
-3. Page-by-page findings
+- Logo rendering and asset imports
+- Text contrast on light and dark surfaces
+- Heading hierarchy and scanability
+- Spacing rhythm and section transitions
+- Card consistency and visual hierarchy
+- Image quality, crop, and overlay treatment
+- Navigation clarity and active-state visibility
+- Footer legibility and route validity
+- Mobile layout, tap-target spacing, and menu behavior
 
-### 8. Re-capture after fixes
+### Brand feel heuristics
 
-Always re-screenshot the changed pages at desktop and mobile to confirm fixes
-landed visually, not just in code.
+<!-- SITE-SPECIFIC: brand-heuristics -->
+- **Colors**: primary ``, accent ``,
+  background ``
+- **Fonts**: headings ``, body ``,
+  mono ``
+- Confirm the site still matches `client-data/clients/dukestrategies/charter.json`
+<!-- /SITE-SPECIFIC -->
 
 ---
 
@@ -1006,141 +587,150 @@ landed visually, not just in code.
 
 ```bash
 npm run build    # Generate tokens + Astro build → dist/
-npm run preview  # Serve dist/ at localhost:4321
+npm run preview  # Serve dist/ locally for inspection
 ```
-
-### CI/CD — GitHub Pages
-
-Deploy is automatic on push to `main` via `.github/workflows/deploy.yml`:
-1. Checkout
-2. `npm ci`
-3. `npm run build`
-4. Upload `dist/` as Pages artifact
-5. Deploy to GitHub Pages environment
-
-Node version: 22. No other CI checks yet (add linting later if needed).
 
 ### Pre-deploy checklist
 
-Before pushing changes that will trigger deployment:
-1. `npm run build` locally — verify no errors and no missing images
+1. `npm run build` locally — zero errors, no missing images
 2. `npm run preview` — spot-check changed pages at desktop and mobile
-3. If brand was refreshed, confirm `npm run tokens` was run
-4. If media was added, confirm files exist in both `src/brand/` and `public/assets/`
-   (where applicable)
-5. If team photos were added, confirm they're committed in `public/assets/team/`
-6. Verify `astro.config.mjs` `site:` value still matches the production domain
-   (`https://dukestrategies.com`)
+3. New content has correct region/locale tags
+4. Image paths resolve (build catches broken paths)
+5. If brand was refreshed, confirm `npm run tokens` was run
+6. `astro.config.mjs` `site:` value matches the production domain **and**
+   `src/data/site.ts` `url` (reconcile both — a mismatch ships wrong canonicals)
+7. New/edited pages: title + description set, structured data via `jsonLd` where
+   applicable, `og:image` resolves (default fallback or a `/og/*.png` card)
+8. Bilingual sites: reciprocal `hreflang` on changed route pairs
+9. If search is enabled, `dist/pagefind/` exists after build (postbuild ran)
 
-### Custom domain
+### CI/CD — Azure Static Web Apps
 
-`dukestrategies.com` is the production domain. GitHub Pages custom domain
-configuration is in repo Settings → Pages. If DNS needs changing, coordinate with
-whoever holds the registrar credentials — do not touch DNS without confirmation.
+Deploy triggers automatically on push to `main` via `.github/workflows/deploy.yml`:
+1. `npm ci`
+2. `npm run tokens`
+3. `npm run build`
+4. `Azure/static-web-apps-deploy` uploads `dist/` using the repo secret
+   `AZURE_STATIC_WEB_APPS_API_TOKEN`.
+
+**No Azure action is needed for content** — the deploy token, custom domain, and
+managed TLS cert are bound once at setup (see `azure_swa/README.md`).
+
+### Custom Domain Setup
+
+Azure SWA needs an ALIAS/ANAME for an **apex** domain. If the registrar doesn't
+support that (e.g. GoDaddy), make `www` canonical and forward the apex:
+1. DNS: `CNAME www → <app>.azurestaticapps.net`; apex → 301 forward to `https://www.<domain>`.
+2. `az staticwebapp hostname set -n <app> -g <rg> --hostname www.<domain>` (validates once the CNAME resolves; auto-provisions TLS).
+Record the chosen records in `infra-docs/domains/<registrar>.md`.
 
 ---
 
 ## Common Patterns Reference
 
-### Importing from company data
+### Content collection access (Astro 5+/6)
 
-```ts
-import { services, caseStudies, founders, capabilities } from "../data/company";
-import { site } from "../data/site";
-import { homeStats } from "../data/stats";
+```typescript
+import { getCollection, render } from 'astro:content';
+const posts = await getCollection('blog');
+const { Content } = await render(entry);  // NOT entry.render() — that's Astro 4
 ```
 
-### Rendering a card grid
+### Region filtering
 
-Look at `src/pages/index.astro` or `src/pages/what-we-do.astro` for the established
-pattern — each page destructures the relevant array from `company.ts` and maps it
-to the appropriate card component from `src/components/ui/`.
+```typescript
+const filtered = posts.filter(
+  (p) => p.data.region === region || p.data.region === 'global'
+);
+```
 
-### Adding a new section to an existing page
+### Adding a new section to a page
 
-1. Find the existing `<section>` elements in the target page file
-2. Copy the structure of a similar existing section
-3. Use semantic tokens from `src/styles/tokens-semantic.css` — do not hardcode colors
-4. For repeated patterns, consider extracting into `src/components/sections/`
-   (currently empty — be the first)
+1. Find existing `<section>` elements in the target page
+2. Use semantic tokens (`var(--card-bg)`, `var(--text-heading)`) — never hardcode colors
+3. New components that recur in multiple pages go in `src/components/sections/`
+4. Add `SectionDivider` between sections with contrasting backgrounds
 
-### Typography rules (from charter.json)
+### Theme compatibility
 
-- **All fonts** — Montserrat (heading 600, body normal, mono Space Mono)
-- Use `--brand-font-heading`, `--brand-font-body`, `--brand-font-mono` CSS vars
-- Display sizes and line heights live in `src/styles/tokens-semantic.css`
+Every new component must work in both light and dark modes. Use semantic tokens —
+never raw color values.
 
-### Color tokens (from charter.json)
+### Greenfield design craft (building new pages/sections from scratch)
 
-| Token | Value | Use |
-|---|---|---|
-| `--brand-primary` | `#FF7F66` | Signal Orange — accents, CTAs |
-| `--brand-secondary` | `#DFDFE0` | Light grey — dividers, muted |
-| `--brand-background` | `#FFFFFF` | Page background |
-| `--brand-background-alt` | `#F5F5F5` | Section alt background |
-| `--brand-text` | `#807F83` | Body text |
-| `--brand-text-light` | `#DFDFE0` | Muted text |
+For substantial build work — composing a brand-new page, designing a section variant,
+or interpreting a charter into a fresh layout — load the design-craft references that
+ship with the template (in stromy-org at `astro-website-template/references/`):
 
-Never hardcode these values — always reference `var(--brand-*)`.
+| Need | Reference |
+|---|---|
+| Avoid AI-generic look; variance rules | `anti-convergence.md` |
+| Section variant catalog | `section-catalog.md` |
+| Hard-won build patterns (img-cover, metric grids, contact page, og:images) | `refinement-patterns.md` |
+| Archetype → design-default map | `archetype-design-map.md` |
+| CSS token architecture | `three-tier-tokens.md` |
+| Example homepage compositions per archetype | `page-composition-templates.md` |
+| Charter `website` schema | `charter-website-schema.md` |
+| Astro/Tailwind implementation patterns | `astro-patterns.md` |
+| Proven baseline patterns | `stromy-website-patterns.md` |
+| Bilingual / i18n (`Localized<string>`, lang switcher) | `i18n-patterns.md`, `llm-translation-workflow.md` |
+| Optional decorative motion | `motion-interaction-patterns.md` |
+| Contact page layout/forms | `contact-page-patterns.md` |
+| Cross-site variance tracking | `generated-sites-registry.md` |
+
+These were consolidated here when the deprecated `website-builder` skill was retired
+(see `infra-docs/ai/website-azure-deploy.md`). Site **creation** is scaffolded via the
+Copier `astro-website-template` (`/repo-scaffold`); this skill owns build-out + edits.
 
 ---
 
-## Visual Consistency Patterns
+## Site Configuration
 
-These patterns are enforced site-wide. When adding or modifying content, verify
-they still hold.
+<!-- SITE-SPECIFIC: site-info -->
+- **Site name**: Duke Strategies
+- **Site URL**: https://dukestrategies.com
+- **Client slug** (charter path and localStorage key): dukestrategies
+- **Dev port**: 
+<!-- /SITE-SPECIFIC -->
 
-- **Image containers**: Always use `.img-cover` with `position: absolute; inset: 0`
-  on `<img>`, never inline `width/height/object-fit` styles. Use aspect-ratio
-  variants (`.img-cover--wide`, `.img-cover--hero`) for sizing instead of `min-height`.
-- **Card CTA alignment**: All cards in grids must use `flex-direction: column` with
-  `margin-top: auto` on the bottom link. Verify alignment visually after content changes.
-- **Metric grids**: Use count-aware CSS grid classes (`case-metrics--count-N`), never
-  flex-wrap for metrics. 4 metrics = 2x2 grid.
-- **Theme compatibility**: Any new component or style must work in both light and dark
-  modes. Use semantic tokens (`var(--card-bg)`, `var(--text-heading)`) — never hardcoded
-  colors like `rgba(255, 255, 255, 0.98)`.
-- **Long text handling**: Cards with text content must include `overflow-wrap: break-word`
-  on title elements (especially relevant for Dutch compound words).
-- **Service count**: Currently 6 services. Homepage shows all 6. "What We Do" shows
-  all 6. They must stay aligned — don't add a service to one without the other.
-- **Map embed**: Contact page uses a real OSM iframe embed (not a placeholder).
-  Coordinates in `src/data/site.ts` (`lat`, `lon`, `bbox`).
-- **Grid columns**: Use `minmax(0, 1fr)` instead of `1fr` in grid-template-columns
-  to prevent long words from blowing out column widths.
+<!-- SITE-SPECIFIC: fonts -->
+### Typography
 
-## Dutch Translation Quality (NL i18n)
+- Heading: 
+- Body: 
+- Mono: 
+<!-- /SITE-SPECIFIC -->
 
-When adding or modifying Dutch content, apply these language conventions:
+<!-- SITE-SPECIFIC: colors -->
+### Brand Colors
 
-- **Keep English corporate terms that are standard in Dutch business**: stakeholder
-  intelligence, change management, employee engagement, talking points, playbook,
-  framework, messaging matrix, briefing packs, key messages, feedback loops,
-  milestone, regulatory narrative, monitoring dashboard, capability, recovery strategy.
-- **Never create Dutch monster-compounds**: If a translated term exceeds ~20 characters
-  as a single compound word, break it into spaced words using the English term. E.g.,
-  "Verandermanagementcommunicatie" → "Change Management Communicatie".
-- **Keep brand-specific terms in English**: "stakeholder advisory" (Duke's positioning),
-  "thought leadership", "public affairs", "crisis management".
-- **Watch for mistranslations**: "Capability" ≠ "Capaciteit" (that means capacity/volume).
-  When unsure, keep the English term.
-- **Deliverable names are product names**: Keep them in English when the Dutch translation
-  would be an awkward compound. They appear as headings/labels, not prose.
-- **Compound word spacing**: Even when keeping Dutch terms, add spaces between recognizable
-  word boundaries: "Sentimentanalyserapport" → "Sentiment Analysis Report".
+- Primary: 
+- Accent: 
+- Background: 
+<!-- /SITE-SPECIFIC -->
+
+<!-- SITE-SPECIFIC: content-collections -->
+### Content Collections
+
+Active collections: 
+<!-- /SITE-SPECIFIC -->
+
+<!-- SITE-SPECIFIC: components -->
+### Component Inventory
+
+Check `src/components/` for the current component list. Key areas:
+- `layout/` — Header/Navigation, Footer, ThemeToggle
+- `ui/` — Button, Card, Badge, Icon, ScoreLine, SectionDivider
+- `sections/` — Hero, section-level components
+- `effects/` — WaterEffect and other visual effect components
+- `content/` — Content-specific cards and layouts
+<!-- /SITE-SPECIFIC -->
 
 ---
 
 ## What This Skill Does NOT Cover
 
-- **Major structural refactors** — e.g., migrating content from `src/data/company.ts`
-  to MDX collections, extracting inline sections into components. These
-  are architectural changes; flag them to the user as out of scope.
-- **Adding a third locale (FR, DE)** — the i18n pipeline supports it but is not
-  enabled for Duke.
-- **New page creation beyond the existing 6** — possible, but think about IA and
-  navigation impact before adding.
-- **Brand redesign** — that's the `brand-builder` skill's job, operating on
-  `client-data` repo, not this repo.
-- **Component primitives** — adding new card types, layout components, icon SVGs
-  should be planned; this skill is for content and configuration work.
+- **Major structural refactors** — flag as out of scope and stop
+- **Brand redesign** — that is the `brand-builder` skill's job
+- **Adding a new locale** — architectural change, not a maintenance task
+- **Backlog management** — do not write to `BACKLOG.md` on your own initiative
