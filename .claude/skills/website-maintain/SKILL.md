@@ -283,6 +283,7 @@ Match the user's request to the appropriate workflow below.
 | "change the tagline", "update the homepage copy", "change the hero" | [Update Homepage Hero](#update-homepage-hero) |
 | "update the office address", "change the phone number", "update contact email", "update LinkedIn" | [Update Site / Contact Info](#update-site--contact-info) |
 | "update SEO", "change meta tags", "change OG image" | [Update SEO](#update-seo) |
+| "SEO audit", "SEO score", "Lighthouse SEO", "validate structured data", "rich results" | [SEO audit](#seo-audit) |
 | "refresh brand", "sync brand tokens", "colors changed", "new logo" | [Refresh Brand Tokens](#refresh-brand-tokens) |
 | "add a new image", "swap the hero video" | [Add / Replace Media](#add--replace-media) |
 | "review the design", "visual audit", "check mobile", "use vision", "screenshot the site" | [Visual Audit](#visual-audit) |
@@ -699,16 +700,60 @@ need updating.
 
 ## Update SEO
 
-- **Per-page meta** — each page passes `title` and `description` props to
-  `PageLayout` at the top of its template. Edit there.
-- **Site defaults** — `src/data/site.ts` provides `title`, `description`,
-  `footerDescription` used as fallbacks.
-- **OG image** — homepage passes `ogImage="/assets/images/Erasmusbrug_zwart.jpg"`.
-  Change per page, or set a default in `BaseLayout.astro`.
-- **Sitemap** — generated automatically by `@astrojs/sitemap` from `astro.config.mjs`.
-  The `site:` value must be the production URL (`https://dukestrategies.com`).
-- **Analytics** — Plausible, configured in `site.analytics`. The script tag is
-  injected by `BaseLayout.astro`.
+The brand-aware SEO kit lives in `src/lib/seo.ts` + `src/components/seo/{Seo,JsonLd}.astro`,
+configured from `src/data/site.ts` and wired through `BaseLayout.astro`. Full
+playbook (2026 checklist, structured-data catalog, crawler policy, hreflang):
+[`references/seo-patterns.md`](../../../references/seo-patterns.md).
+
+> **Honest ceiling.** This kit delivers crawlability + machine-parseability
+> (schema, semantic HTML, sitemap/robots, social previews, CWV). It does not
+> manufacture rankings or AI citations. Rank `llms.txt` as a hedge, not a lever,
+> and never promise GEO outcomes to a client.
+
+- **Per-page title & description** — pass `title` / `description` to `BaseLayout`
+  (which forwards them to `Seo.astro`). Duke is bilingual: `title`/`description`
+  stay Localized and `BaseLayout` resolves them per-locale before handing strings
+  to the Seo component. `Seo.astro` appends ` | <site>`; do not double-suffix.
+- **Structured data** — pass page-specific JSON-LD via the `jsonLd` prop using the
+  `src/lib/seo.ts` builders: `articleSchema` + `breadcrumbSchema` on
+  insight/case-study pages; `localBusinessSchema`/`personSchema` on the relevant
+  identity page. Identity + `WebSite` are emitted once on the homepage (`isHome`) —
+  never duplicate them per page.
+- **`noindex`** — pass `noindex={true}` to `BaseLayout`/`Seo` for thank-you,
+  search, and staging pages (the `404` already sets it). A `noindex` page still
+  self-canonicals.
+- **OG image** — `Seo.astro` always resolves `og:image` (page `image` prop →
+  `site.defaultOgImage`, currently `/assets/images/Erasmusbrug_zwart.jpg`), so no
+  page ships a blank card.
+- **Sitemap & robots** — `@astrojs/sitemap` generates `/sitemap-index.xml`;
+  `public/robots.txt` references it and carries the AI-crawler policy. Keep
+  `astro.config.mjs` `site:` equal to `src/data/site.ts` `url`
+  (`https://dukestrategies.com`) — a mismatch ships wrong canonicals.
+- **hreflang** (bilingual) — pass reciprocal `alternates` from the site's i18n
+  source; every language version lists itself + alternates.
+- **Analytics (Plausible)** — `site.analytics.provider='plausible'` +
+  `domain: 'dukestrategies.com'`; a `plausibleScriptSrc` (per-site URL from the
+  Plausible installation screen) is required for `BaseLayout` to inject a script —
+  a domain alone emits none.
+
+---
+
+## SEO audit
+
+Run when the user asks to audit SEO, check the SEO score, or validate structured
+data on a page or the whole site.
+
+1. `npm run build && npm run preview` (or use the running dev server).
+2. With the `chrome-devtools` MCP, run a **Lighthouse SEO** audit on the target
+   page(s); target score ≥ 95. (Fallback: the playwright capture snippets below.)
+3. Inspect the rendered `<head>`: one `<title>`/canonical/description, full
+   OG/Twitter set, one `application/ld+json` graph, correct `noindex` where
+   intended, and reciprocal hreflang on both locales.
+4. Validate the JSON-LD with the Schema Markup Validator (whole graph) and
+   Google's Rich Results Test (Google-supported types only — Article, Breadcrumb,
+   Organization/LocalBusiness).
+5. Report the score + a prioritized fix list, citing
+   [`references/seo-patterns.md`](../../../references/seo-patterns.md).
 
 ---
 

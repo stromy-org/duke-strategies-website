@@ -158,6 +158,28 @@ apply.
 4. Components reference `var(--brand-primary)`, `var(--brand-font-heading)`, etc.
 5. **Never edit `brand-tokens.css` or `tokens.ts` directly.**
 
+## Brand & content data
+
+Brand identity lives in `client-data/clients/dukestrategies/` (mounted as a slice via `dispatch-client-data.sh` from stromy-org). `scripts/generate-tokens.ts` reads `charter.json` and emits `src/styles/brand-tokens.css` + `src/lib/tokens.ts`. To refresh after a brand change:
+
+```bash
+bash ../../scripts/dispatch-client-data.sh    # if you're working from stromy-org
+npm run tokens                                # regenerate token outputs
+```
+
+## Agent-md & MCP rendering
+
+This repo treats `AGENTS.md` and (optionally) `.agents/mcp.json` as the only authored sources. Run:
+
+```bash
+python scripts/render-agent-md.py            # CLAUDE.md + .github/copilot-instructions.md
+python scripts/render-agent-md.py --check    # exit 1 if stale
+python scripts/render-mcp.py                 # .mcp.json + .gemini/settings.json mcpServers + .codex/config.toml + .vscode/mcp.json
+python scripts/render-mcp.py --check         # exit 1 if stale
+```
+
+**Never hand-edit** `CLAUDE.md`, `.github/copilot-instructions.md`, or any of the four per-agent MCP files — they all carry a "GENERATED FILE" banner; edits are wiped on next render.
+
 ## Conventions
 
 - **Content edits** → `src/data/company.ts`, `src/data/site.ts`, `src/data/stats.ts`,

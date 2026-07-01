@@ -1,19 +1,32 @@
 # Changes here will be overwritten by Copier; DO NOT edit manually.
-_commit: 1709439
+_commit: v1.0.0
 _src_path: gh:stromy-org/astro-website-template
+allow_ai_training: true
+analytics_provider: plausible
 author_email: william.masquelier@stromy.com.au
 author_name: William Masquelier
 azure_region: westeurope
 azure_resource_group: rg-duke-strategies-website
 client_slug: dukestrategies
 default_locale: en
+default_logo_path: /assets/logos/DukeStrategies_logo.svg
+default_og_image: /assets/images/Erasmusbrug_zwart.jpg
 deploy_target: azure-swa
 description: Duke Strategies corporate website
+enable_dynamic_og: false
+enable_site_search: false
+entity_type: Organization
 github_owner: stromy-org
 github_repo: duke-strategies-website
+linkedin_url: https://www.linkedin.com/company/duke-strategies/
+llms_full_collection: ''
 package_slug: duke-strategies-website
+plausible_domain: dukestrategies.com
+plausible_script_src: ''
+rss_collection: ''
 setup_azure: false
 site_name: Duke Strategies
-site_url: https://stromy.nl
+site_url: https://dukestrategies.com
 token_prefix: brand
 tsx_runner: tsx
+twitter_handle: ''
