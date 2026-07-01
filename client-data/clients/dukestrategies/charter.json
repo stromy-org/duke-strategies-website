@@ -44,6 +44,15 @@
       "family": "Space Mono",
       "fallback": "Courier New, monospace",
       "weight": "normal"
+    },
+    "label": {
+      "family": "Space Mono",
+      "cssName": "Space Mono",
+      "weight": "normal",
+      "case": "uppercase",
+      "tracking": "0.22em",
+      "role": "eyebrow / kicker / overline",
+      "note": "Deliberate: Space Mono reserved for data and overlines only (engineered/technical register). This is a CONSCIOUS small-title choice, not a mono default — Duke's brand-smell is the mono overline."
     }
   },
   "logo": {
@@ -994,6 +1003,15 @@
             "blend": "overlay"
           }
         }
+      }
+    },
+    "typography": {
+      "smallTitle": {
+        "face": "label",
+        "case": "uppercase",
+        "tracking": "0.22em",
+        "marker": "coral tick / rule",
+        "usage": "eyebrows/overlines/data labels — intentionally monospace (Space Mono), the engineered register"
       }
     }
   }
