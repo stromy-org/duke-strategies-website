@@ -90,12 +90,12 @@ const t = useTranslations(lang);
       <span class="label animate">{t('insights.thoughtLeadership')}</span>
       <h2 class="section-heading animate stagger-1">{t('insights.latestThinking')}</h2>
       <p class="animate stagger-2 max-w-lg" style="margin-bottom: var(--sp-6);">
-        {t('insights.thoughtLeadershipText')}
+        {t('insights.latestThinkingText')}
       </p>
 
       <div class="insights-grid">
         {insights.map((item, index) => (
-          <InsightCard badge={pickLocale(item.badge, lang)} date={item.date} author={item.author} title={pickLocale(item.title, lang)} excerpt={pickLocale(item.excerpt, lang)} href={item.href} linkLabel={pickLocale(item.linkLabel, lang)} image={item.image} imageAlt={item.imageAlt ? pickLocale(item.imageAlt, lang) : undefined} class={`animate stagger-${(index % 3) + 2}`} />
+          <InsightCard badge={pickLocale(item.badge, lang)} date={item.date} title={pickLocale(item.title, lang)} excerpt={pickLocale(item.excerpt, lang)} href={item.href} linkLabel={pickLocale(item.linkLabel, lang)} class={`animate stagger-${(index % 3) + 2}`} />
         ))}
       </div>
     </div>
