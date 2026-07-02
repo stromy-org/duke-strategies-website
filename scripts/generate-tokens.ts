@@ -29,6 +29,32 @@ for (const [role, font] of Object.entries(charter.fonts as Record<string, { fami
   cssLines.push(`  --brand-font-${role}-weight: ${font.weight};`);
 }
 
+// Visual grammar (Component W — website token bridge)
+// Emits explicit CSS custom properties authored per grammar dimension under
+// expression.visual_grammar.<dim>.cssTokens { "--name": "value" }. Reference,
+// never bind: a charter with no expression.visual_grammar — or a dimension with
+// no cssTokens map — emits nothing extra (colors + fonts only), so a brand that
+// hasn't captured grammar degrades cleanly. Names are authored verbatim (already
+// `--`-prefixed by the brand author, like a colour role), so they are emitted
+// as-is rather than re-prefixed, and validated to fail the build loudly on a
+// malformed key instead of writing broken CSS.
+const grammar = (charter.expression?.visual_grammar ?? {}) as Record<
+  string,
+  { cssTokens?: Record<string, string> }
+>;
+for (const [dim, spec] of Object.entries(grammar)) {
+  if (!spec || typeof spec !== 'object' || !spec.cssTokens) continue;
+  for (const [name, value] of Object.entries(spec.cssTokens)) {
+    if (!name.startsWith('--')) {
+      throw new Error(
+        `expression.visual_grammar.${dim}.cssTokens key "${name}" must be a CSS ` +
+        `custom property starting with "--" (got ${JSON.stringify(name)}).`
+      );
+    }
+    cssLines.push(`  ${name}: ${value};`);
+  }
+}
+
 cssLines.push('}');
 
 const cssOut = resolve(ROOT, 'src/styles/brand-tokens.css');

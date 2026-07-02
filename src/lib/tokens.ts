@@ -18,4 +18,5 @@ export const fonts = {
   heading: { family: "'Montserrat', Arial, Helvetica, sans-serif", weight: "600" },
   body: { family: "'Montserrat', Arial, Helvetica, sans-serif", weight: "normal" },
   mono: { family: "'Space Mono', Courier New, monospace", weight: "normal" },
+  label: { family: "'Space Mono', undefined", weight: "normal" },
 } as const;

@@ -17,4 +17,19 @@
   --brand-font-body-weight: normal;
   --brand-font-mono: 'Space Mono', Courier New, monospace;
   --brand-font-mono-weight: normal;
+  --brand-font-label: 'Space Mono', undefined;
+  --brand-font-label-weight: normal;
+  --bg-ink: #222222;
+  --bg-paper: #FFFFFF;
+  --bg-paper-alt: #F5F5F5;
+  --elev-sm: 0 1px 2px rgba(34,34,34,0.06);
+  --elev-card: 0 6px 20px rgba(34,34,34,0.10);
+  --radius-card: 8px;
+  --border-hairline: 1px solid rgba(34,34,34,0.12);
+  --grid-max: 72rem;
+  --grid-gutter: 2rem;
+  --grid-margin: 6vw;
+  --rule-divider: 1px solid rgba(34,34,34,0.12);
+  --motion-duration: 480ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }

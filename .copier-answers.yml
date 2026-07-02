@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; DO NOT edit manually.
-_commit: v1.0.0
+_commit: v1.0.0-2-gfd2dd98
 _src_path: gh:stromy-org/astro-website-template
 allow_ai_training: true
 analytics_provider: plausible
